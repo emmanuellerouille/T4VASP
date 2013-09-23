@@ -1,0 +1,17 @@
+package org.kermeta.spem.activityautomation.eclipse.createemptyemfproject;
+
+import org.kermeta.spem.activityautomationmanager.ActivityAutomation;
+
+public class ActivityAutomation1 implements ActivityAutomation {
+
+	public ActivityAutomation1() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void run() {
+		System.out.println("Create Empty EMF project is running!!!");
+
+	}
+
+}

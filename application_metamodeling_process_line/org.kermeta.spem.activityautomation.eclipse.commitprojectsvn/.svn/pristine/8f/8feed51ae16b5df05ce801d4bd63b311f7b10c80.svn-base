@@ -1,0 +1,62 @@
+package org.kermeta.spem.activityautomation.eclipse.commitprojectsvn;
+
+import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.activityautomationmanager.ActivityAutomation;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.processexecution.utils.model.ModelUtils;
+import org.kermeta.spem.versioncontrolsystem.SVNClient;
+import org.tigris.subversion.subclipse.ui.operations.CleanupOperation;
+import org.tigris.subversion.svnclientadapter.ISVNInfo;
+import org.tigris.subversion.svnclientadapter.ISVNStatus;
+import org.tigris.subversion.svnclientadapter.SVNStatusKind;
+
+public class CommitProjectSVNActivityAutomation implements ActivityAutomation {
+
+	public CommitProjectSVNActivityAutomation() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void run(String contextModelPath) {
+		//Get the execution context
+		ExecutionContext executionContext = ModelUtils.getExecutionContextRoot(contextModelPath);
+
+		//Get the name of the project to put under version control
+		String projectName = ModelUtils.getValueOfKey("name of the newly created project",executionContext);
+
+		//Get an SVN client
+		SVNClient svnClient = new SVNClient();
+
+		//Get the project whose name is projectName
+		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+
+		//Commit the project
+		File[] paths = new File[1];
+		paths[0] = project.getLocation().toFile();
+		svnClient.commit(paths, "Commit of "+project.getName(), true);
+		
+		//Refresh the project
+		IResource[] res = new IResource[1];
+		res[0] = project;
+		
+		try {
+			new CleanupOperation(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActivePart(), res).run();
+		} catch (InvocationTargetException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+
+}

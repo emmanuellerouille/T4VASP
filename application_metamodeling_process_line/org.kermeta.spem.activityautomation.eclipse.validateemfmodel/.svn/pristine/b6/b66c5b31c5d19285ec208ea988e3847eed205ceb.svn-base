@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1342453699513
+Build-Jdk: 1.6.0_25
+Built-By: erouille
+Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
+Bundle-Name: spem.activityautomation.eclipse.validateemfmodel
+Bundle-SymbolicName: org.kermeta.spem.activityautomation.eclipse.validat
+ eemfmodel;singleton:=true
+Bundle-Version: 1.9.9.SNAPSHOT_20120716_1748
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.kermeta.spem.activityautomation.eclipse.validateemfm
+ odel;version="1.9.9.SNAPSHOT_20120706_1102"
+Ignore-Package: org.eclipse.jface.resource,org.eclipse.ui,org.eclipse.ui
+ .plugin,org.osgi.framework,org.eclipse.swt.widgets,java.lang,org.kermet
+ a.spem.activityautomationmanager,org.eclipse.jface.dialogs
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.ui,org.eclipse.core
+ .resources,org.kermeta.spem.activityautomationmanager
+Tool: Bnd-1.50.0

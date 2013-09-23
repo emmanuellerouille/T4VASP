@@ -1,0 +1,21 @@
+package org.kermeta.spem.activityautomation.eclipse.creatextextproject.actions;
+
+import com.google.inject.Binder;
+import com.google.inject.Module;
+import com.google.inject.name.Names;
+
+public class CreateXTextProjectModule implements Module{
+	
+	private String genModelUri;
+
+	@Override
+	public void configure(Binder binder) {
+		binder.bind(String.class).annotatedWith(Names.named("genModelUri")).toInstance(genModelUri);
+		
+	}
+	
+	public void setGenModelUri(String genModelUri){
+		this.genModelUri = genModelUri;
+	}
+
+}

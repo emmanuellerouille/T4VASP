@@ -1,0 +1,19 @@
+package org.kermeta.spem.activityautomation.eclipse.createemptyemfproject;
+
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.activityautomationmanager.ActivityAutomation;
+
+public class CreateEmptyEMFProjectActivityAutomation implements
+		ActivityAutomation {
+
+	public CreateEmptyEMFProjectActivityAutomation() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void run(String contextFilePath) {
+		CreateEmptyEMFProject createEmptyEMFProject = new CreateEmptyEMFProject();
+		createEmptyEMFProject.run(PlatformUI.getWorkbench().getActiveWorkbenchWindow(), contextFilePath);
+	}
+
+}

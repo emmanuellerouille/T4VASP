@@ -1,0 +1,108 @@
+package org.kermeta.spem.activityautomation.eclipse.createtreeconcretesyntax;
+
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Map;
+
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.emf.codegen.ecore.genmodel.presentation.GenModelEditor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.presentation.EcoreModelWizard;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IObjectActionDelegate;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.executioncontext.ExecutioncontextFactory;
+import org.kermeta.spem.executioncontext.ExecutioncontextPackage;
+import org.kermeta.spem.executioncontext.Key;
+import org.kermeta.spem.executioncontext.Value;
+
+
+public class CreateTreeConcreteSyntax implements IObjectActionDelegate {
+
+	private IStructuredSelection selection;
+	private IWorkbenchPart targetPart;
+	private IContainer modelContainer;
+
+	@Override
+	public void run(IAction action) {
+	}
+
+	public void run(Shell shell, String contextModelPath){
+
+		String projectName = null;
+		String ecoreModelName = null;
+
+		//Read the project name and the ecore model name
+		// Initialize the model
+		ExecutioncontextPackage.eINSTANCE.eClass();
+
+		// Register the XMI resource factory for the .executioncontext extension
+
+		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m = reg.getExtensionToFactoryMap();
+		m.put("executioncontext", new XMIResourceFactoryImpl());
+
+		// Obtain a new resource set
+		ResourceSet resSet = new ResourceSetImpl();
+
+		// Get the resource
+		Resource resource = resSet.getResource(URI
+				.createURI(contextModelPath), true);
+		// Get the first model element and cast it to the right type, in my
+		// example everything is hierarchical included in this first node
+		ExecutionContext executionContext = (ExecutionContext) resource.getContents().get(0);
+
+		for(Key key: executionContext.getKeys()){
+			if(key.getName().equals("project name")){
+				projectName = key.getValue().getContent();
+			}
+			if(key.getName().equals("model file name")){
+				ecoreModelName = key.getValue().getContent();
+			}
+		}
+
+		//get object which represents the workspace  
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();  
+
+		//get location of workspace (java.io.File)  
+		File workspaceDirectory = workspace.getRoot().getLocation().toFile();
+
+		GenModelHelper genModelHelper = new GenModelHelper(projectName);
+		genModelHelper.createGenModel(java.net.URI.create("/"+projectName+"/model/"+ecoreModelName+".ecore"), new File(workspaceDirectory+"/"+projectName+"//model//"+ecoreModelName+".genmodel"), new File(workspaceDirectory+"/"+projectName+"//src"), new Boolean(false));
+	}
+
+	@Override
+	public void selectionChanged(IAction action, ISelection selection) {
+		this.selection =
+				selection instanceof IStructuredSelection
+				? (IStructuredSelection) selection
+						: null;
+	}
+
+	@Override
+	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
+		this.targetPart = targetPart;
+	}
+
+}

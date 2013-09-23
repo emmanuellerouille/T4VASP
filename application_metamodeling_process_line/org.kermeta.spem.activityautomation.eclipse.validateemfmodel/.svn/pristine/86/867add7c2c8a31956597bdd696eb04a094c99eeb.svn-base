@@ -1,0 +1,21 @@
+package org.kermeta.spem.activityautomation.eclipse.validateemfmodel.actions;
+
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.jface.dialogs.MessageDialog;
+
+public class ValidateEMFModel {
+
+	/**
+	 * The constructor.
+	 */
+	public ValidateEMFModel() {
+	}
+	
+	public void run(Shell shell) {
+		//TODO
+		MessageDialog.openInformation(
+			shell,
+			"ValidateEMFModel",
+			"The model is valid.");
+	}
+}

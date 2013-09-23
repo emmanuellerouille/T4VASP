@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: spem.activityautomation.eclipse.createtreeconcretesyntax
+Bundle-SymbolicName: org.kermeta.spem.activityautomation.eclipse.createtreeconcretesyntax;singleton:=true
+Bundle-Version: 1.9.9.SNAPSHOT_20120830_0914
+Bundle-Activator: org.kermeta.spem.activityautomation.eclipse.createtreeconcretesyntax.Activator
+Require-Bundle: org.eclipse.ui;bundle-version="3.7.0",
+ org.eclipse.core.runtime;bundle-version="3.7.0",
+ org.eclipse.core.resources;bundle-version="3.7.101",
+ org.kermeta.spem.executioncontext.model;bundle-version="2.0.1",
+ org.eclipse.emf.ecore.xmi;bundle-version="2.7.0",
+ org.eclipse.emf.codegen.ecore;bundle-version="2.7.0",
+ org.kermeta.spem.activityautomationmanager;bundle-version="2.0.3"
+Import-Package: org.eclipse.emf.codegen.ecore.genmodel.presentation,
+ org.eclipse.emf.ecore.presentation,
+ org.osgi.framework
+Export-Package: org.kermeta.spem.activityautomation.eclipse.createtreeconcretesyntax
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+

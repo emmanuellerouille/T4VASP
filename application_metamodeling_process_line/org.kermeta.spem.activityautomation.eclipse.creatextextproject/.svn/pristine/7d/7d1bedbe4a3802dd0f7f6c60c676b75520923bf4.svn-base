@@ -1,0 +1,49 @@
+package org.kermeta.spem.activityautomation.eclipse.creatextextproject.actions;
+
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.kermeta.spem.activityautomation.eclipse.creatextextproject.Activator;
+import org.kermeta.spem.activityautomationmanager.ActivityAutomation;
+import org.kermeta.spem.processexecution.utils.model.ModelUtils;
+
+import com.google.inject.Injector;
+
+public class CreateXtextProject implements ActivityAutomation {
+
+	@Override
+	public void run(String contextModelPath) {
+		
+		String genModelUri = ModelUtils.getGenModelUri(contextModelPath);
+		String mmProjectName = ModelUtils.getValueOfKey("project name", ModelUtils.getExecutionContextRoot(contextModelPath));
+
+		//Xtext nature to the project containing the metamodel
+		try {
+			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+			IProject myProj = root.getProject(mmProjectName);
+			IProjectDescription desc = myProj.getDescription();
+			String[] prevNatures = desc.getNatureIds();
+			String[] newNatures = new String[prevNatures.length + 1];
+			System.arraycopy(prevNatures, 0, newNatures, 0, prevNatures.length);
+			newNatures[prevNatures.length] = XtextProjectHelper.NATURE_ID;
+			desc.setNatureIds(newNatures);
+			myProj.setDescription(desc, new NullProgressMonitor());
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+
+		//Open wizard to create a new Xtext project from an Ecore metamodel
+		Injector injector = Activator.getDefault().createInjector(genModelUri);
+		NewXtextProjectFromEcoreWizard2 wizard = injector.getInstance(NewXtextProjectFromEcoreWizard2.class);
+		WizardDialog wd = new  WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), wizard);
+		wd.setTitle(wizard.getWindowTitle());
+		wd.open();
+	}
+
+}

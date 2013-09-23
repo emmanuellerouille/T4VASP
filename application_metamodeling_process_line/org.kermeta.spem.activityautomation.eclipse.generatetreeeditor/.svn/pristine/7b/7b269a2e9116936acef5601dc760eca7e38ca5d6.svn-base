@@ -1,0 +1,19 @@
+package org.kermeta.spem.activityautomation.eclipse.createtreeconcretesyntax;
+
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.activityautomationmanager.ActivityAutomation;
+
+public class CreateTreeConcreteSyntaxActivityAutomation implements
+		ActivityAutomation {
+
+	public CreateTreeConcreteSyntaxActivityAutomation() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void run(String contextModelPath) {
+		CreateTreeConcreteSyntax createTreeConcreteSyntax = new CreateTreeConcreteSyntax();
+		createTreeConcreteSyntax.run(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),contextModelPath);
+	}
+
+}

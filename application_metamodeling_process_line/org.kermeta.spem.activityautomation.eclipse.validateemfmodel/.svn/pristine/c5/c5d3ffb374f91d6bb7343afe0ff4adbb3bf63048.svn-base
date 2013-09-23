@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1351092967755
+Build-Jdk: 1.6.0_25
+Built-By: erouille
+Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
+Bundle-Name: spem.activityautomation.eclipse.validateemfmodel
+Bundle-SymbolicName: org.kermeta.spem.activityautomation.eclipse.validat
+ eemfmodel;singleton:=true
+Bundle-Version: 2.0.1.SNAPSHOT_20121024_1734
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.kermeta.spem.activityautomation.eclipse.validateemfm
+ odel;version="1.9.9.SNAPSHOT_20120706_1102"
+Ignore-Package: org.eclipse.emf.ecore.resource,org.eclipse.emf.ecore.xmi
+ .impl,org.eclipse.core.runtime,org.eclipse.jface.resource,java.util,org
+ .eclipse.emf.common.util,org.eclipse.ui,org.eclipse.ui.plugin,org.eclip
+ se.emf.ecore.resource.impl,org.kermeta.spem.activityautomationmanager,o
+ rg.eclipse.emf.ecore,org.kermeta.spem.executioncontext,org.osgi.framewo
+ rk,java.lang,org.eclipse.swt.widgets,org.eclipse.jface.dialogs
+Import-Package: org.eclipse.emf.ecore.util
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.ui,org.eclipse.core
+ .resources,org.kermeta.spem.activityautomationmanager,org.eclipse.emf.e
+ core,org.eclipse.emf.ecore.xmi,org.kermeta.spem.executioncontext.model
+Tool: Bnd-1.50.0

@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.kermeta.spem.activityautomation.eclipse.createkermetacompilerproject
+Bundle-SymbolicName: org.kermeta.spem.activityautomation.eclipse.createkermetacompilerproject; singleton:=true
+Bundle-Version: 2.0.3.SNAPSHOT_20130302_1553
+Bundle-Activator: org.kermeta.spem.activityautomation.eclipse.createkermetacompilerproject.Activator
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.resources;bundle-version="3.7.101",
+ org.eclipse.core.runtime;bundle-version="3.7.0",
+ org.eclipse.emf.ecore;bundle-version="2.7.0",
+ org.eclipse.emf.ecore.xmi;bundle-version="2.7.0",
+ org.eclipse.ui;bundle-version="3.7.0",
+ org.kermeta.spem.executioncontext.model;bundle-version="2.0.1",
+ org.kermeta.spem.processexecution.utils;bundle-version="1.0.0",
+ org.kermeta.spem.activityautomationmanager;bundle-version="2.0.3",
+ org.scala-ide.scala.library,
+ org.kermeta.kp.wizard.eclipse,
+ org.kermeta.utils.helpers,
+ org.kermeta.language.texteditor.eclipse.nature;bundle-version="2.0.2",
+ org.eclipse.emf.ecore.editor;bundle-version="2.7.0"

@@ -1,0 +1,19 @@
+package org.kermeta.spem.activityautomation.eclipse.createkermetacompilerproject;
+
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.activityautomationmanager.ActivityAutomation;
+
+public class CreateKermetaCompilerProjectActivityAutomation implements
+		ActivityAutomation {
+
+	public CreateKermetaCompilerProjectActivityAutomation() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void run(String contextModelPath) {
+		CreateKermetaCompilerProject createKermetaCompilerProject = new CreateKermetaCompilerProject();
+		createKermetaCompilerProject.run(PlatformUI.getWorkbench().getActiveWorkbenchWindow(), contextModelPath);
+	}
+
+}
