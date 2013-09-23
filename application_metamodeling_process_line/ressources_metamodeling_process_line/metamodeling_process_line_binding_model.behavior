@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <behavior:Container xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:behavior="http://behavior">
   <actions xsi:type="behavior:JavaEclipseAction" expression="CreateEmptyEMFProject" name="CreateEmptyEMFProject"/>
-  <actions xsi:type="behavior:JavaEclipseAction" expression="CreateTreeConcreteSyntax" name="CreateTreeConcreteSyntax"/>
+  <actions xsi:type="behavior:JavaEclipseAction" expression="GenerateTreeEditor" name="GenerateTreeEditor"/>
   <actions xsi:type="behavior:JavaEclipseAction" expression="ValidateEMFModel" name="ValidateEMFModel"/>
   <actions xsi:type="behavior:JavaEclipseAction" expression="CreateKermetaCompilerProject" name="CreateKermetaCompilerProject"/>
   <actions xsi:type="behavior:JavaEclipseAction" expression="CreateKermetaInterpreterProject" name="CreateKermetaInterpreterProject"/>
@@ -27,7 +27,7 @@
   </workUnitHandles>
   <aCs xsi:type="behavior:PrimitiveAC" name="Create empty EMF project" action="//@actions.0"/>
   <aCs xsi:type="behavior:PrimitiveAC" name="validate EMF model" action="//@actions.2"/>
-  <aCs xsi:type="behavior:PrimitiveAC" name="create tree concrete syntax" action="//@actions.1"/>
+  <aCs xsi:type="behavior:PrimitiveAC" name="generate tree editor" action="//@actions.1"/>
   <aCs xsi:type="behavior:PrimitiveAC" name="create Kermeta compiler" action="//@actions.3"/>
   <aCs xsi:type="behavior:PrimitiveAC" name="Create Kermeta interpreter" action="//@actions.4"/>
   <aCs xsi:type="behavior:PrimitiveAC" name="create Kermeta checker" action="//@actions.5"/>
