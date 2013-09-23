@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="ASCII"?>
+<spem:MethodLibrary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activity="http://www.thalesgroup.com/spem/2.0/activity" xmlns:spem="http://www.thalesgroup.com/spem/2.0" xmlns:uma="http://www.thalesgroup.com/spem/2.0/uma">
+  <ownedMethodPlugin name="metamodeling_process_line_base_process_model">
+    <ownedMethodContentPackage name="Method Content">
+      <ownedMethodContentMember xsi:type="uma:RoleDefinitionPackage" name="Roles"/>
+      <ownedMethodContentMember xsi:type="uma:TaskDefinitionPackage" name="Tasks">
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="tree editor definition" usedTool="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.0">
+          <ownedParameter direction="out" parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.1"/>
+          <ownedParameter parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.0"/>
+        </ownedMethodContentMember>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="interpreter definition" usedTool="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.1 //@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.2">
+          <ownedParameter parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.0"/>
+          <ownedParameter direction="out" parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.2"/>
+        </ownedMethodContentMember>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="compiler definition" usedTool="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.1">
+          <ownedParameter direction="out" parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.3"/>
+          <ownedParameter parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.0"/>
+        </ownedMethodContentMember>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="checker definition" usedTool="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.1">
+          <ownedParameter direction="out" parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.5"/>
+          <ownedParameter parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.4"/>
+          <ownedParameter parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.0"/>
+        </ownedMethodContentMember>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="task 1"/>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="task 2"/>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="task 3"/>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="task 4"/>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="task 5"/>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="task 6"/>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="task 7"/>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="task 8"/>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="textual editor definition" usedTool="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.4">
+          <ownedParameter parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.0"/>
+          <ownedParameter direction="out" parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.6"/>
+        </ownedMethodContentMember>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="EMFXText" usedTool="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.5"/>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="metamodel definition" usedTool="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.0">
+          <ownedParameter direction="out" parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.0"/>
+        </ownedMethodContentMember>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="Git" usedTool="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.3"/>
+      </ownedMethodContentMember>
+      <ownedMethodContentMember xsi:type="uma:WorkProductDefinitionPackage" name="Work Products">
+        <ownedMethodContentMember xsi:type="spem:WorkProductDefinition" name="metamodel"/>
+        <ownedMethodContentMember xsi:type="spem:WorkProductDefinition" name="tree editor"/>
+        <ownedMethodContentMember xsi:type="spem:WorkProductDefinition" name="interpreter"/>
+        <ownedMethodContentMember xsi:type="spem:WorkProductDefinition" name="compiler"/>
+        <ownedMethodContentMember xsi:type="spem:WorkProductDefinition" name="static semantics"/>
+        <ownedMethodContentMember xsi:type="spem:WorkProductDefinition" name="checker"/>
+        <ownedMethodContentMember xsi:type="spem:WorkProductDefinition" name="textual editor"/>
+        <ownedMethodContentMember xsi:type="spem:WorkProductDefinition" name="launch file"/>
+        <ownedMethodContentMember xsi:type="spem:WorkProductDefinition" name="update site"/>
+        <ownedMethodContentMember xsi:type="spem:WorkProductDefinition" name="feature"/>
+      </ownedMethodContentMember>
+      <ownedMethodContentMember xsi:type="uma:GuidancePackage" name="Guidances"/>
+      <ownedMethodContentMember xsi:type="uma:CategoryPackage" name="Standard Categories">
+        <ownedMethodContentMember xsi:type="uma:DisciplinePackage" name="Disciplines"/>
+        <ownedMethodContentMember xsi:type="uma:DomainPackage" name="Domains"/>
+        <ownedMethodContentMember xsi:type="uma:WorkProductKindPackage" name="Work Product Kinds"/>
+        <ownedMethodContentMember xsi:type="uma:QualificationPackage" name="Qualifications"/>
+        <ownedMethodContentMember xsi:type="uma:RoleSetPackage" name="Role Sets"/>
+        <ownedMethodContentMember xsi:type="uma:ToolDefinitionPackage" name="Tools">
+          <ownedMethodContentMember xsi:type="spem:ToolDefinition" name="EMF"/>
+          <ownedMethodContentMember xsi:type="spem:ToolDefinition" name="Kermeta"/>
+          <ownedMethodContentMember xsi:type="spem:ToolDefinition" name="SVN"/>
+          <ownedMethodContentMember xsi:type="spem:ToolDefinition" name="Git"/>
+          <ownedMethodContentMember xsi:type="spem:ToolDefinition" name="XText"/>
+          <ownedMethodContentMember xsi:type="spem:ToolDefinition" name="EMFText"/>
+        </ownedMethodContentMember>
+      </ownedMethodContentMember>
+      <ownedMethodContentMember xsi:type="uma:CategoryPackage" name="Custom Categories"/>
+    </ownedMethodContentPackage>
+    <ownedProcessPackage name="Processes">
+      <ownedProcessMember xsi:type="uma:CapabilityPatternPackage" name="Capability Patterns"/>
+      <ownedProcessMember xsi:type="uma:ProcessComponentPackage" name="Process Components"/>
+      <ownedProcessMember xsi:type="uma:DeliveryProcessPackage" name="Delivery Processes">
+        <ownedProcessMember xsi:type="uma:DeliveryProcess" name="metamodeling process">
+          <nestedBreakdownElement xsi:type="activity:StartNode" name="start metamodeling"/>
+          <nestedBreakdownElement xsi:type="activity:EndNode" name="end metamodeling"/>
+          <nestedBreakdownElement xsi:type="spem:Activity" name="metamodeling">
+            <nestedBreakdownElement xsi:type="activity:StartNode" name="start"/>
+            <nestedBreakdownElement xsi:type="activity:EndNode" name="end"/>
+            <nestedBreakdownElement xsi:type="spem:WorkProductUse" name="metamodel" workProduct="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.0"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="tree editor definition" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.0">
+              <ownedProcessParameter direction="out" parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.1"/>
+              <ownedProcessParameter parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.0"/>
+            </nestedBreakdownElement>
+            <nestedBreakdownElement xsi:type="spem:WorkProductUse" name="tree editor" workProduct="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.1"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="treeEditorDefinition_End" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.2/@nestedBreakdownElement.3" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.2/@nestedBreakdownElement.1"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="metamodel definition" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.14">
+              <ownedProcessParameter direction="out" parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.0"/>
+            </nestedBreakdownElement>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="metamodelDefinition_treeEditorDefinition" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.2/@nestedBreakdownElement.6" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.2/@nestedBreakdownElement.3"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="start_metamodeldefinition" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.2/@nestedBreakdownElement.0" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.2/@nestedBreakdownElement.6"/>
+          </nestedBreakdownElement>
+          <nestedBreakdownElement xsi:type="activity:Edge" name="start_metamodeling" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.0" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.2"/>
+          <nestedBreakdownElement xsi:type="activity:Edge" name="metamodeling_end" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.2" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.1"/>
+        </ownedProcessMember>
+        <ownedProcessMember xsi:type="uma:DeliveryProcess" name="external process elements">
+          <nestedBreakdownElement xsi:type="spem:Activity" name="external process elements">
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="interpreter definition" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.1">
+              <ownedProcessParameter parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.0"/>
+              <ownedProcessParameter direction="out" parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.2"/>
+            </nestedBreakdownElement>
+            <nestedBreakdownElement xsi:type="spem:WorkProductUse" name="metamodel" workProduct="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.0"/>
+            <nestedBreakdownElement xsi:type="spem:WorkProductUse" name="interpreter" workProduct="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.2"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="compiler definition" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.2">
+              <ownedProcessParameter direction="out" parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.3"/>
+              <ownedProcessParameter parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.0"/>
+            </nestedBreakdownElement>
+            <nestedBreakdownElement xsi:type="spem:WorkProductUse" name="compiler" workProduct="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.3"/>
+            <nestedBreakdownElement xsi:type="spem:WorkProductUse" name="static semantics" workProduct="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.4"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="checker definition" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.3">
+              <ownedProcessParameter direction="out" parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.5"/>
+              <ownedProcessParameter parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.4"/>
+              <ownedProcessParameter parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.0"/>
+            </nestedBreakdownElement>
+            <nestedBreakdownElement xsi:type="spem:WorkProductUse" name="checker" workProduct="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.5"/>
+            <nestedBreakdownElement xsi:type="activity:ForkNode" name="metamodeling fork"/>
+            <nestedBreakdownElement xsi:type="activity:JoinNode" name="metamodeling join"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="task 1" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.4"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="task 2" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.5"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="to interpreter creation" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.10" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.0"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="from interpreter creation" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.0" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.11"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="task 3" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.6"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="task 4" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.7"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="to compiler creation" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.14" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.3"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="from compiler creation" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.3" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.15"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="task 5" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.8"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="task 6" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.9"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="from checker creation" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.6" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.19"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="task 7" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.10"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="task 8" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.11"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="to fork" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.21" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.8"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="from join" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.9" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.22"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="toCheckerDefinition" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.18" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.6"/>
+            <nestedBreakdownElement xsi:type="spem:WorkProductUse" name="launch file" workProduct="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.7"/>
+            <nestedBreakdownElement xsi:type="spem:WorkProductUse" name="feature" workProduct="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.9"/>
+            <nestedBreakdownElement xsi:type="spem:WorkProductUse" name="update site" workProduct="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.8"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="textual editor definition" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.12">
+              <ownedProcessParameter parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.0"/>
+              <ownedProcessParameter direction="out" parameterType="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.6"/>
+            </nestedBreakdownElement>
+            <nestedBreakdownElement xsi:type="spem:WorkProductUse" name="textual editor" workProduct="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.2/@ownedMethodContentMember.6"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="task 8" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.4"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="task 7" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.10"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="to textual editor definition" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.32" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.29"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="from textual editor definition" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.29" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0/@nestedBreakdownElement.31"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="EMFXText" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.13"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="Git" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.15"/>
+          </nestedBreakdownElement>
+        </ownedProcessMember>
+      </ownedProcessMember>
+    </ownedProcessPackage>
+  </ownedMethodPlugin>
+  <configurationPackage name="Configurations"/>
+</spem:MethodLibrary>
