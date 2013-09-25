@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<behavior:Container xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:behavior="http://behavior">
+  <actions xsi:type="behavior:JavaEclipseAction" expression="installwtp" name="install wtp"/>
+  <actions xsi:type="behavior:JavaEclipseAction" expression="installsubclipse" name="install subclipse"/>
+  <actions xsi:type="behavior:JavaEclipseAction" expression="restart" name="restart"/>
+  <actions xsi:type="behavior:JavaEclipseAction" expression="newtomcatserver" name="new Tomcat server"/>
+  <actions xsi:type="behavior:JavaEclipseAction" expression="createDirectoryAndConnectToSVNRepo" name="create directory on remote repository"/>
+  <actions xsi:type="behavior:JavaEclipseAction" expression="subclipseconfiguration" name="subclipse configuration"/>
+  <actions xsi:type="behavior:JavaEclipseAction" expression="shareProjectSVN" name="share project with SVN"/>
+  <actions xsi:type="behavior:JavaEclipseAction" expression="commitProjectSVN" name="commit project with SVN"/>
+  <actions xsi:type="behavior:JavaEclipseAction" expression="commitSeveralProjectsSVN" name="commit the modified projects"/>
+  <workUnitHandles name="development" onStart="//@aCs.6">
+    <workUnit href="java_development_process_line_resolved.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3"/>
+  </workUnitHandles>
+  <workUnitHandles name="project creation" onEnd="//@aCs.9">
+    <workUnit href="java_development_process_line_resolved.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.2"/>
+  </workUnitHandles>
+  <workUnitHandles name="first project creation" onEnd="//@aCs.9">
+    <workUnit href="java_development_process_line_resolved.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.14"/>
+  </workUnitHandles>
+  <workUnitHandles name="projects modification" onEnd="//@aCs.10">
+    <workUnit href="java_development_process_line_resolved.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.3"/>
+  </workUnitHandles>
+  <aCs xsi:type="behavior:PrimitiveAC" name="subclipse configuration" action="//@actions.5"/>
+  <aCs xsi:type="behavior:PrimitiveAC" name="create directory on remote repository" action="//@actions.4"/>
+  <aCs xsi:type="behavior:PrimitiveAC" name="new Tomcat server" action="//@actions.3"/>
+  <aCs xsi:type="behavior:PrimitiveAC" name="restart" action="//@actions.2"/>
+  <aCs xsi:type="behavior:PrimitiveAC" name="install subclipse" action="//@actions.1"/>
+  <aCs xsi:type="behavior:PrimitiveAC" name="install wtp" action="//@actions.0"/>
+  <aCs xsi:type="behavior:ACL" name="development initialization" aCs="//@aCs.5 //@aCs.4 //@aCs.3 //@aCs.2 //@aCs.0 //@aCs.1"/>
+  <aCs xsi:type="behavior:PrimitiveAC" name="share project with SVN" action="//@actions.6"/>
+  <aCs xsi:type="behavior:PrimitiveAC" name="commit project with SVN" action="//@actions.7"/>
+  <aCs xsi:type="behavior:ACL" name="share and commit project with SVN" aCs="//@aCs.7 //@aCs.8"/>
+  <aCs xsi:type="behavior:PrimitiveAC" name="commit the modified projects" action="//@actions.8"/>
+</behavior:Container>

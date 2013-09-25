@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<variability:VPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:variability="http:///variability.ecore">
+  <packageElement xsi:type="variability:Choice" name="code generation"/>
+  <packageElement xsi:type="variability:LinkAssignment" name="code generation into java development process" bindingVspec="//@packageElement.0" bindingChoice="//@packageElement.0" linkEndIdentifier="nestedBreakdownElement">
+    <link name="java development process">
+      <linkOwner href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0"/>
+    </link>
+    <newEnd name="code generation">
+      <object href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0"/>
+    </newEnd>
+  </packageElement>
+  <packageElement xsi:type="variability:LinkAssignment" name="from code generation into java development process" bindingVspec="//@packageElement.0" bindingChoice="//@packageElement.0" linkEndIdentifier="nestedBreakdownElement">
+    <link name="java development process">
+      <linkOwner href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0"/>
+    </link>
+    <newEnd name="from code generation">
+      <object href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.2"/>
+    </newEnd>
+  </packageElement>
+  <packageElement xsi:type="variability:LinkAssignment" name="specifications to code generation" bindingVspec="//@packageElement.0" bindingChoice="//@packageElement.0" linkEndIdentifier="target">
+    <link name="from specifications">
+      <linkOwner href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.6"/>
+    </link>
+    <newEnd name="code generation">
+      <object href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0"/>
+    </newEnd>
+  </packageElement>
+  <packageElement xsi:type="variability:LinkAssignment" name="code generation to development" bindingVspec="//@packageElement.0" bindingChoice="//@packageElement.0" linkEndIdentifier="target">
+    <link name="from code generation">
+      <linkOwner href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.2"/>
+    </link>
+    <newEnd name="development">
+      <object href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3"/>
+    </newEnd>
+  </packageElement>
+</variability:VPackage>

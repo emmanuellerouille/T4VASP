@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ASCII"?>
+<spem:MethodLibrary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activity="http://www.thalesgroup.com/spem/2.0/activity" xmlns:spem="http://www.thalesgroup.com/spem/2.0" xmlns:uma="http://www.thalesgroup.com/spem/2.0/uma">
+  <ownedMethodPlugin name="java_development_process_line">
+    <ownedMethodContentPackage name="Method Content">
+      <ownedMethodContentMember xsi:type="uma:RoleDefinitionPackage" name="Roles"/>
+      <ownedMethodContentMember xsi:type="uma:TaskDefinitionPackage" name="Tasks">
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="project creation"/>
+        <ownedMethodContentMember xsi:type="spem:TaskDefinition" name="projects modification"/>
+      </ownedMethodContentMember>
+      <ownedMethodContentMember xsi:type="uma:WorkProductDefinitionPackage" name="Work Products"/>
+      <ownedMethodContentMember xsi:type="uma:GuidancePackage" name="Guidances"/>
+      <ownedMethodContentMember xsi:type="uma:CategoryPackage" name="Standard Categories">
+        <ownedMethodContentMember xsi:type="uma:DisciplinePackage" name="Disciplines"/>
+        <ownedMethodContentMember xsi:type="uma:DomainPackage" name="Domains"/>
+        <ownedMethodContentMember xsi:type="uma:WorkProductKindPackage" name="Work Product Kinds"/>
+        <ownedMethodContentMember xsi:type="uma:QualificationPackage" name="Qualifications"/>
+        <ownedMethodContentMember xsi:type="uma:RoleSetPackage" name="Role Sets"/>
+        <ownedMethodContentMember xsi:type="uma:ToolDefinitionPackage" name="Tools"/>
+      </ownedMethodContentMember>
+      <ownedMethodContentMember xsi:type="uma:CategoryPackage" name="Custom Categories"/>
+    </ownedMethodContentPackage>
+    <ownedProcessPackage name="Processes">
+      <ownedProcessMember xsi:type="uma:CapabilityPatternPackage" name="Capability Patterns"/>
+      <ownedProcessMember xsi:type="uma:ProcessComponentPackage" name="Process Components"/>
+      <ownedProcessMember xsi:type="uma:DeliveryProcessPackage" name="Delivery Processes">
+        <ownedProcessMember xsi:type="uma:DeliveryProcess" name="java dev process">
+          <nestedBreakdownElement xsi:type="activity:StartNode" name="start_javaDevProcess"/>
+          <nestedBreakdownElement xsi:type="activity:EndNode" name="end_javaDevProcess"/>
+          <nestedBreakdownElement xsi:type="spem:Activity" name="specifications"/>
+          <nestedBreakdownElement xsi:type="spem:Activity" name="development">
+            <nestedBreakdownElement xsi:type="activity:StartNode" name="start_development"/>
+            <nestedBreakdownElement xsi:type="activity:EndNode" name="end_development"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="project creation" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.0"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="projects modification" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.1"/>
+            <nestedBreakdownElement xsi:type="activity:DecisionNode" name="decision node development"/>
+            <nestedBreakdownElement xsi:type="activity:ForkNode" name="fork_development"/>
+            <nestedBreakdownElement xsi:type="activity:JoinNode" name="join_development"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="dev_fork_projectCreation" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.5" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.2"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="dev_fork_projectsModification" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.5" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.3"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="dev_projectCreation_join" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.2" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.6"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="dev_projectsModification_join" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.3" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.6"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="dev_join_decisionnodedevfinished" guard="Is the development finished?" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.6" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.4"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="dev_decisionNodeDevFinished_End" guard="yes" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.4" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.1"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="dev_decisionNodeDevFinished_fork" guard="no" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.4" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.5"/>
+            <nestedBreakdownElement xsi:type="spem:TaskUse" name="first project creation" task="//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.1/@ownedMethodContentMember.0"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="dev_start_firstProjectsCreation" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.0" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.14"/>
+            <nestedBreakdownElement xsi:type="activity:Edge" name="dev_firstProjectCreation_fork" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.14" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.5"/>
+          </nestedBreakdownElement>
+          <nestedBreakdownElement xsi:type="spem:Activity" name="tests"/>
+          <nestedBreakdownElement xsi:type="activity:Edge" name="start_specifications" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.0" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.2"/>
+          <nestedBreakdownElement xsi:type="activity:Edge" name="specifications_development" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.2" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3"/>
+          <nestedBreakdownElement xsi:type="activity:Edge" name="development_tests" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.4"/>
+          <nestedBreakdownElement xsi:type="activity:Edge" name="tests_end" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.4" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.1"/>
+        </ownedProcessMember>
+        <ownedProcessMember xsi:type="uma:DeliveryProcess" name="external process elements">
+          <nestedBreakdownElement xsi:type="spem:Activity" name="code generation"/>
+          <nestedBreakdownElement xsi:type="spem:Activity" name="activity 1"/>
+          <nestedBreakdownElement xsi:type="activity:Edge" name="from code generation" source="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0" target="//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.1"/>
+        </ownedProcessMember>
+      </ownedProcessMember>
+    </ownedProcessPackage>
+  </ownedMethodPlugin>
+  <configurationPackage name="Configurations"/>
+</spem:MethodLibrary>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<resolution:VPackageResolution xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:resolution="http:///resolution.ecore" xmlns:variability="http:///variability.ecore">
+  <packagedElements xsi:type="resolution:ChoiceResolution" name="code generation">
+    <resolvedVSpec xsi:type="variability:Choice" href="vam_and_vrm_java_development_process_line.variability#//@packageElement.0"/>
+    <resolvedChoice href="vam_and_vrm_java_development_process_line.variability#//@packageElement.0"/>
+  </packagedElements>
+</resolution:VPackageResolution>
