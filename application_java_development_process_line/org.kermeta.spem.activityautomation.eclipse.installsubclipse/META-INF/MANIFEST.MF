@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Installsubclipse
+Bundle-SymbolicName: org.kermeta.spem.activityautomation.eclipse.installsubclipse;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.kermeta.spem.activityautomation.eclipse.installsubclipse.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.kermeta.spem.activityautomationmanager;bundle-version="1.9.9",
+ org.kermeta.spem.activityautomation.eclipse.runcommand;bundle-version="1.0.0",
+ org.kermeta.spem.parametermanager;bundle-version="1.0.0",
+ org.kermeta.spem.processexecution.utils;bundle-version="1.0.0",
+ org.kermeta.spem.executioncontext.model;bundle-version="2.0.1"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.kermeta.spem.activityautomationmanager.activityautomationregistry">
+      <information
+            action="createDirectoryAndConnectToSVNRepo"
+            interface="org.kermeta.spem.activityautomation.eclipse.createdirectoryonsvnremoterepository.CreateDirectoryAndConnectToSVNRepoActivityAutomation">
+      </information>
+   </extension>
+   <extension
+         point="org.kermeta.spem.parametermanager.parameterregistry">
+      <parameter
+            parameter_name="url of the remote repository">
+      </parameter>
+      <parameter
+            parameter_name="name of the new directory to create on the repository">
+      </parameter>
+      <parameter
+            parameter_name="username to connect to the remote repository">
+      </parameter>
+      <confidential_parameter
+            confidential_parameter_name="password to connect to the remote repository">
+      </confidential_parameter>
+   </extension>
+
+</plugin>

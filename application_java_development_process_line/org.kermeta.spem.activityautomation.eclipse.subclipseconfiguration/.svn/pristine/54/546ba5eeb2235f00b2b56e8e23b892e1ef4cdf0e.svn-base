@@ -1,0 +1,109 @@
+/**
+ * 
+ */
+package org.kermeta.spem.activityautomation.eclipse.subclipseconfiguration.actions;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Properties;
+
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.team.core.TeamException;
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.activityautomationmanager.ActivityAutomation;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.processexecution.utils.model.ModelUtils;
+import org.tigris.subversion.subclipse.core.ISVNRepositoryLocation;
+import org.tigris.subversion.subclipse.core.SVNProviderPlugin;
+import org.tigris.subversion.subclipse.ui.Policy;
+import org.tigris.subversion.subclipse.ui.SVNUIPlugin;
+
+/**
+ * @author erouille
+ *
+ */
+public class SubclipseConfigurationActivityAutomation implements
+		ActivityAutomation {
+
+	/**
+	 * 
+	 */
+	public SubclipseConfigurationActivityAutomation() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/* (non-Javadoc)
+	 * @see org.kermeta.spem.activityautomationmanager.ActivityAutomation#run(java.lang.String)
+	 */
+	@Override
+	public void run(String contextModelPath) {
+		ExecutionContext executionContext = ModelUtils.getExecutionContextRoot(contextModelPath);
+		String username = ModelUtils.getValueOfKey("username to connect to the remote repository", executionContext);
+		String password = ModelUtils.getValueOfKey("password to connect to the remote repository", executionContext);
+		String url = ModelUtils.getValueOfKey("url of the remote repository", executionContext);
+		Properties properties = new Properties();
+		properties.setProperty("username", username);
+		properties.setProperty("password", password);
+		properties.setProperty("url", url);
+		final ISVNRepositoryLocation[] root = new ISVNRepositoryLocation[1];
+		SVNProviderPlugin provider = SVNProviderPlugin.getPlugin();
+		try {
+			root[0] = provider.getRepositories().createRepository(properties);
+			// Validate the connection info.  This process also determines the rootURL
+			try {
+				new ProgressMonitorDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell()).run(true, true, new IRunnableWithProgress() {
+					public void run(IProgressMonitor monitor) throws InvocationTargetException {
+						try {
+							root[0].validateConnection(new NullProgressMonitor());
+						} catch (TeamException e) {
+							throw new InvocationTargetException(e);
+						}
+					}
+				});
+			} catch (InterruptedException e) {
+				System.out.println(e);
+			} catch (InvocationTargetException e) {
+				Throwable t = e.getTargetException();
+				if (t instanceof TeamException) {
+					throw (TeamException)t;
+				}
+			}
+			provider.getRepositories().addOrUpdateRepository(root[0]);
+		} catch (TeamException e) {
+			if (root[0] == null) {
+				// Exception creating the root, we cannot continue
+				SVNUIPlugin.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), Policy.bind("NewLocationWizard.exception"), null, e); //$NON-NLS-1$
+			} else {
+				// Exception validating. We can continue if the user wishes.
+				IStatus error = e.getStatus();
+				if (error.isMultiStatus() && error.getChildren().length == 1) {
+					error = error.getChildren()[0];
+				}
+					
+				boolean keep = false;
+				if (error.isMultiStatus()) {
+					SVNUIPlugin.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), Policy.bind("NewLocationWizard.validationFailedTitle"), null, e); //$NON-NLS-1$
+				} else {
+					keep = MessageDialog.openQuestion(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+						Policy.bind("NewLocationWizard.validationFailedTitle"), //$NON-NLS-1$
+						Policy.bind("NewLocationWizard.validationFailedText", new Object[] {error.getMessage()})); //$NON-NLS-1$
+				}
+				try {
+					if (keep) {
+						provider.getRepositories().addOrUpdateRepository(root[0]);
+					} else {
+						provider.getRepositories().disposeRepository(root[0]);
+					}
+				} catch (TeamException e1) {
+					SVNUIPlugin.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), Policy.bind("exception"), null, e1); //$NON-NLS-1$
+				}
+			}
+		}	
+
+	}
+
+}

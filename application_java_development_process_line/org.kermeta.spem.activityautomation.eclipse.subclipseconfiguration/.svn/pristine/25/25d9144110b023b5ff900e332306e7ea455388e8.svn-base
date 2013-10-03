@@ -1,0 +1,137 @@
+package org.kermeta.spem.activityautomation.eclipse.subclipseconfiguration.actions;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Properties;
+
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.team.core.TeamException;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.IWorkbenchWindowActionDelegate;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.tigris.subversion.subclipse.core.ISVNRepositoryLocation;
+import org.tigris.subversion.subclipse.core.SVNProviderPlugin;
+import org.tigris.subversion.subclipse.ui.Policy;
+import org.tigris.subversion.subclipse.ui.SVNUIPlugin;
+
+/**
+ * Our sample action implements workbench action delegate.
+ * The action proxy will be created by the workbench and
+ * shown in the UI. When the user tries to use the action,
+ * this delegate will be created and execution will be 
+ * delegated to it.
+ * @see IWorkbenchWindowActionDelegate
+ */
+public class SubclipseConfigurationAction implements IWorkbenchWindowActionDelegate {
+	private IWorkbenchWindow window;
+	/**
+	 * The constructor.
+	 */
+	public SubclipseConfigurationAction() {
+	}
+
+	/**
+	 * The action has been activated. The argument of the
+	 * method represents the 'real' action sitting
+	 * in the workbench UI.
+	 * @see IWorkbenchWindowActionDelegate#run
+	 */
+	public void run(IAction action) {
+//		MessageDialog.openInformation(
+//			window.getShell(),
+//			"Subclipseconfiguration",
+//			"Hello, Eclipse world");
+		
+		//mainPage.finish(new NullProgressMonitor());
+		Properties properties = new Properties();
+		properties.setProperty("username", "erouille");
+		properties.setProperty("password", "");
+		properties.setProperty("url", "https://scm.gforge.inria.fr/svn/triskellexchang/trunk/dev/spem_projects");
+		final ISVNRepositoryLocation[] root = new ISVNRepositoryLocation[1];
+		SVNProviderPlugin provider = SVNProviderPlugin.getPlugin();
+		try {
+			root[0] = provider.getRepositories().createRepository(properties);
+			// Validate the connection info.  This process also determines the rootURL
+			try {
+				new ProgressMonitorDialog(window.getShell()).run(true, true, new IRunnableWithProgress() {
+					public void run(IProgressMonitor monitor) throws InvocationTargetException {
+						try {
+							root[0].validateConnection(new NullProgressMonitor());
+						} catch (TeamException e) {
+							throw new InvocationTargetException(e);
+						}
+					}
+				});
+			} catch (InterruptedException e) {
+				System.out.println(e);
+			} catch (InvocationTargetException e) {
+				Throwable t = e.getTargetException();
+				if (t instanceof TeamException) {
+					throw (TeamException)t;
+				}
+			}
+			provider.getRepositories().addOrUpdateRepository(root[0]);
+		} catch (TeamException e) {
+			if (root[0] == null) {
+				// Exception creating the root, we cannot continue
+				SVNUIPlugin.openError(window.getShell(), Policy.bind("NewLocationWizard.exception"), null, e); //$NON-NLS-1$
+			} else {
+				// Exception validating. We can continue if the user wishes.
+				IStatus error = e.getStatus();
+				if (error.isMultiStatus() && error.getChildren().length == 1) {
+					error = error.getChildren()[0];
+				}
+					
+				boolean keep = false;
+				if (error.isMultiStatus()) {
+					SVNUIPlugin.openError(window.getShell(), Policy.bind("NewLocationWizard.validationFailedTitle"), null, e); //$NON-NLS-1$
+				} else {
+					keep = MessageDialog.openQuestion(window.getShell(),
+						Policy.bind("NewLocationWizard.validationFailedTitle"), //$NON-NLS-1$
+						Policy.bind("NewLocationWizard.validationFailedText", new Object[] {error.getMessage()})); //$NON-NLS-1$
+				}
+				try {
+					if (keep) {
+						provider.getRepositories().addOrUpdateRepository(root[0]);
+					} else {
+						provider.getRepositories().disposeRepository(root[0]);
+					}
+				} catch (TeamException e1) {
+					SVNUIPlugin.openError(window.getShell(), Policy.bind("exception"), null, e1); //$NON-NLS-1$
+				}
+			}
+		}	
+	}
+
+	/**
+	 * Selection in the workbench has been changed. We 
+	 * can change the state of the 'real' action here
+	 * if we want, but this can only happen after 
+	 * the delegate has been created.
+	 * @see IWorkbenchWindowActionDelegate#selectionChanged
+	 */
+	public void selectionChanged(IAction action, ISelection selection) {
+	}
+
+	/**
+	 * We can use this method to dispose of any system
+	 * resources we previously allocated.
+	 * @see IWorkbenchWindowActionDelegate#dispose
+	 */
+	public void dispose() {
+	}
+
+	/**
+	 * We will cache window object in order to
+	 * be able to provide parent shell for the message dialog.
+	 * @see IWorkbenchWindowActionDelegate#init
+	 */
+	public void init(IWorkbenchWindow window) {
+		this.window = window;
+	}
+}
