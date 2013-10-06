@@ -1,0 +1,264 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.spem.behavior.impl;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import org.kermeta.spem.behavior.*;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model <b>Factory</b>.
+ * <!-- end-user-doc -->
+ * @generated
+ */
+public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory {
+	/**
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static BehaviorFactory init() {
+		try {
+			BehaviorFactory theBehaviorFactory = (BehaviorFactory)EPackage.Registry.INSTANCE.getEFactory("http://behavior"); 
+			if (theBehaviorFactory != null) {
+				return theBehaviorFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new BehaviorFactoryImpl();
+	}
+
+	/**
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BehaviorFactoryImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EObject create(EClass eClass) {
+		switch (eClass.getClassifierID()) {
+			case BehaviorPackage.CONTAINER: return createContainer();
+			case BehaviorPackage.AUTOMATION_COMPONENTS_PROCESS: return createAutomationComponentsProcess();
+			case BehaviorPackage.AUTOMATION_COMPONENT: return createAutomationComponent();
+			case BehaviorPackage.PRE_CONDITION: return createPreCondition();
+			case BehaviorPackage.POST_CONDITION: return createPostCondition();
+			case BehaviorPackage.CONTROL_FLOW: return createControlFlow();
+			case BehaviorPackage.INITIAL_NODE: return createInitialNode();
+			case BehaviorPackage.FINAL_NODE: return createFinalNode();
+			case BehaviorPackage.FORK_NODE: return createForkNode();
+			case BehaviorPackage.JOIN_NODE: return createJoinNode();
+			case BehaviorPackage.DECISION_NODE: return createDecisionNode();
+			case BehaviorPackage.KERMETA_ACTION: return createKermetaAction();
+			case BehaviorPackage.JAVA_ECLIPSE_ACTION: return createJavaEclipseAction();
+			case BehaviorPackage.SHELL_ACTION: return createShellAction();
+			case BehaviorPackage.GROOVY_ACTION: return createGroovyAction();
+			case BehaviorPackage.KEY: return createKey();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public org.kermeta.spem.behavior.Container createContainer() {
+		ContainerImpl container = new ContainerImpl();
+		return container;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AutomationComponentsProcess createAutomationComponentsProcess() {
+		AutomationComponentsProcessImpl automationComponentsProcess = new AutomationComponentsProcessImpl();
+		return automationComponentsProcess;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AutomationComponent createAutomationComponent() {
+		AutomationComponentImpl automationComponent = new AutomationComponentImpl();
+		return automationComponent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PreCondition createPreCondition() {
+		PreConditionImpl preCondition = new PreConditionImpl();
+		return preCondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PostCondition createPostCondition() {
+		PostConditionImpl postCondition = new PostConditionImpl();
+		return postCondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ControlFlow createControlFlow() {
+		ControlFlowImpl controlFlow = new ControlFlowImpl();
+		return controlFlow;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InitialNode createInitialNode() {
+		InitialNodeImpl initialNode = new InitialNodeImpl();
+		return initialNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FinalNode createFinalNode() {
+		FinalNodeImpl finalNode = new FinalNodeImpl();
+		return finalNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ForkNode createForkNode() {
+		ForkNodeImpl forkNode = new ForkNodeImpl();
+		return forkNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JoinNode createJoinNode() {
+		JoinNodeImpl joinNode = new JoinNodeImpl();
+		return joinNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DecisionNode createDecisionNode() {
+		DecisionNodeImpl decisionNode = new DecisionNodeImpl();
+		return decisionNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KermetaAction createKermetaAction() {
+		KermetaActionImpl kermetaAction = new KermetaActionImpl();
+		return kermetaAction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JavaEclipseAction createJavaEclipseAction() {
+		JavaEclipseActionImpl javaEclipseAction = new JavaEclipseActionImpl();
+		return javaEclipseAction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ShellAction createShellAction() {
+		ShellActionImpl shellAction = new ShellActionImpl();
+		return shellAction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GroovyAction createGroovyAction() {
+		GroovyActionImpl groovyAction = new GroovyActionImpl();
+		return groovyAction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Key createKey() {
+		KeyImpl key = new KeyImpl();
+		return key;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BehaviorPackage getBehaviorPackage() {
+		return (BehaviorPackage)getEPackage();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @deprecated
+	 * @generated
+	 */
+	@Deprecated
+	public static BehaviorPackage getPackage() {
+		return BehaviorPackage.eINSTANCE;
+	}
+
+} //BehaviorFactoryImpl

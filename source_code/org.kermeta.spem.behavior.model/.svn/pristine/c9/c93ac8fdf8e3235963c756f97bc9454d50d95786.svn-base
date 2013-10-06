@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.spem.behavior.model/src/main/java"
+    editDirectory="/org.kermeta.spem.behavior.model.edit/src/main/java" modelPluginID="org.kermeta.spem.behavior.model"
+    modelName="Behavior" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
+  <foreignModel>behavior.ecore</foreignModel>
+  <genPackages prefix="Behavior" basePackage="org.kermeta.spem" disposableProviderFactory="true"
+      ecorePackage="behavior.ecore#/">
+    <genClasses ecoreClass="behavior.ecore#//Container">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference behavior.ecore#//Container/conditions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference behavior.ecore#//Container/actions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference behavior.ecore#//Container/expressions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference behavior.ecore#//Container/workUnitHandles"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference behavior.ecore#//Container/aCs"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="behavior.ecore#//Condition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//Condition/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//Condition/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="behavior.ecore#//PreCondition"/>
+    <genClasses ecoreClass="behavior.ecore#//PostCondition"/>
+    <genClasses image="false" ecoreClass="behavior.ecore#//Action">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//Action/expression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//Action/name"/>
+    </genClasses>
+    <genClasses ecoreClass="behavior.ecore#//KermetaAction"/>
+    <genClasses ecoreClass="behavior.ecore#//JavaEclipseAction"/>
+    <genClasses ecoreClass="behavior.ecore#//ShellAction"/>
+    <genClasses ecoreClass="behavior.ecore#//GroovyAction"/>
+    <genClasses image="false" ecoreClass="behavior.ecore#//Expression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//Expression/name"/>
+    </genClasses>
+    <genClasses ecoreClass="behavior.ecore#//OCLExrpession">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//OCLExrpession/oclExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="behavior.ecore#//WorkUnitHandle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//WorkUnitHandle/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//WorkUnitHandle/workUnit"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//WorkUnitHandle/onStart"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//WorkUnitHandle/onDo"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//WorkUnitHandle/onEnd"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="behavior.ecore#//AC">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//AC/name"/>
+    </genClasses>
+    <genClasses ecoreClass="behavior.ecore#//PrimitiveAC">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//PrimitiveAC/action"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//PrimitiveAC/postConditions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//PrimitiveAC/preConditions"/>
+    </genClasses>
+    <genClasses ecoreClass="behavior.ecore#//ACL">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//ACL/aCs"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

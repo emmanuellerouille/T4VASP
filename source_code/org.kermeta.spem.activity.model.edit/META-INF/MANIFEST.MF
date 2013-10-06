@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.kermeta.spem.activity.model.edit;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.kermeta.spem.activity.provider.ActivityEditPlugin$Implementation
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.kermeta.spem.activity.provider
+Require-Bundle: org.eclipse.core.runtime,
+ org.kermeta.spem.activity.model;visibility:=reexport,
+ org.eclipse.emf.edit;visibility:=reexport,
+ spem.model;visibility:=reexport,
+ spem.model.edit;visibility:=reexport
+Bundle-ActivationPolicy: lazy

@@ -1,0 +1,133 @@
+package org.kermeta.spem.processexecution.view.actions.impl;
+
+import java.util.Map;
+
+import org.eclipse.draw2d.Label;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.behavior.BehaviorPackage;
+import org.kermeta.spem.behavior.Container;
+import org.kermeta.spem.behavior.WorkUnitHandle;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.executioncontext.Key;
+import org.kermeta.spem.executioncontext.ExecutioncontextPackage;
+import org.kermeta.spem.executioncontext.State;
+import org.kermeta.spem.processexecution.utils.model.ModelUtils;
+import org.kermeta.spem.processexecution.view.HyperlinkFigure;
+import org.kermeta.spem.processexecution.view.ProcessPart;
+import org.kermeta.spem.processexecution.view.TaskFigure;
+import org.kermeta.spem.processexecution.view.actions.ProcessAction;
+
+import spem.TaskUse;
+//import my.group.org.kermeta.spem.execution.taskuserunner.MainRunner;
+//import src.main.kmt.KerRichFactory;
+//import src.main.kmt.Main;
+
+public class DoAction extends ProcessAction{
+
+	public DoAction(boolean enabled) {
+		super(enabled);
+		// TODO Auto-generated constructor stub
+	}
+
+	public DoAction(boolean enabled, String taskUseName){
+		super(enabled, taskUseName);
+	}
+
+	public DoAction(boolean enabled, String taskUseName, String contextModelPath){
+		super(enabled, taskUseName, contextModelPath);
+	}
+
+	@Override
+	public void run() {
+		
+		String behaviorModelPath = null;
+		
+		//Get the behavior model path from the context model path
+		ExecutioncontextPackage.eINSTANCE.eClass();
+
+		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m = reg.getExtensionToFactoryMap();
+		m.put("executioncontext", new XMIResourceFactoryImpl());
+
+		ResourceSet resSet = new ResourceSetImpl();
+
+		Resource resource = resSet.getResource(URI
+				.createURI("platform:/resource"+contextModelPath), true);
+
+		ExecutionContext executionContext = (ExecutionContext) resource.getContents().get(0);
+		
+		for(Key key : executionContext.getKeys()){
+			if(key.getName().equals("behavior model path")){
+				behaviorModelPath = key.getValue().getContent();
+			}
+		}
+		
+		//Get the root of the behavior model
+		BehaviorPackage.eINSTANCE.eClass();
+
+		Resource.Factory.Registry reg2 = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m2 = reg2.getExtensionToFactoryMap();
+		m2.put("behavior", new XMIResourceFactoryImpl());
+
+		ResourceSet resSet2 = new ResourceSetImpl();
+
+		Resource resource2 = resSet2.getResource(URI
+				.createURI("platform:/resource"+behaviorModelPath), true);
+
+		Container container = (Container) resource2.getContents().get(0);
+
+		//update process view
+		ProcessPart view;
+		try {
+			view = (ProcessPart)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("ProcessExecution.views.ProcessElementsView");
+			for(TaskFigure taskFigure : view.getMediator().getView().getTaskFigures()){
+				if(taskFigure.getDescription().equals(taskUseName)){
+					for( int i = 0; i < taskFigure.getStdActionsPlate().getChildren().size(); i++){
+						Label label = (Label) taskFigure.getStdActionsPlate().getChildren().get(i);
+						if(label instanceof HyperlinkFigure){
+							HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+							
+							//Put done to true only if the execution is manual
+							if(!ModelUtils.isExecutionAutomated(taskFigure.getDescription(), container)){
+								if(hyperlinkFigure.getText() == "done"){
+									hyperlinkFigure.getAction().setEnabled(true);
+								}
+							}else{//If the execution is automated, put on end to true
+								if(hyperlinkFigure.getText() == "on end"){
+									hyperlinkFigure.getAction().setEnabled(true);
+								}
+							}
+							
+							if(hyperlinkFigure.getText() == "on do"){
+								hyperlinkFigure.getAction().setEnabled(false);
+							}
+							hyperlinkFigure.repaint();
+						}
+					}
+				}
+			}
+		} catch (PartInitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//
+//		//Execute the task
+//		String processModelPath = getProcessModelPath();
+//		String behaviorModelPath = getBehaviorModelPath();
+//
+//		ResourceSet rSet = new ResourceSetImpl();
+//		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap();
+//		MainRunner.init4eclipse();
+//		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap();
+//		MainRunner.init();
+//		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap();
+//		Main m = KerRichFactory.createMain();
+//		m.doExecution(processModelPath, behaviorModelPath, taskUseName, contextModelPath);
+	}
+}

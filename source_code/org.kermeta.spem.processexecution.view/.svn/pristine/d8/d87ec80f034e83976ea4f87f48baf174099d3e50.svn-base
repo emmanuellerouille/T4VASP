@@ -1,0 +1,109 @@
+package org.kermeta.spem.processexecution.view.actions.impl;
+
+import org.eclipse.draw2d.Label;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.executioncontext.State;
+import org.kermeta.spem.processexecution.view.HyperlinkFigure;
+import org.kermeta.spem.processexecution.view.ProcessPart;
+import org.kermeta.spem.processexecution.view.actions.ProcessAction;
+
+public class DoneAction extends ProcessAction {
+
+	public DoneAction(boolean enabled) {
+		super(enabled);
+		// TODO Auto-generated constructor stub
+	}
+
+	public DoneAction(boolean enabled, String taskUseName, String contextModelPath){
+		super(enabled, taskUseName, contextModelPath);
+	}
+
+	@Override
+	public void run() {
+		//update execution context
+		initExecutionContext();
+
+		//update process view
+		for (State state : executionContext.getStates()){
+			if(state.getTaskUse().getName().equals(taskUseName)){
+				ProcessPart view;
+				try {
+					view = (ProcessPart)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("ProcessExecution.views.ProcessElementsView");
+					if(taskUseName.equals("Metamodel creation")){
+						for( int i = 0; i < view.getMediator().getView().getAbstractSyntaxFigure().getStdActionsPlate().getChildren().size(); i++){
+							Label label = (Label) view.getMediator().getView().getAbstractSyntaxFigure().getStdActionsPlate().getChildren().get(i);
+							if(label instanceof HyperlinkFigure){
+								HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+								if(hyperlinkFigure.getText() == "done"){
+									hyperlinkFigure.getAction().setEnabled(false);
+								}
+								if(hyperlinkFigure.getText() == "on end"){
+									hyperlinkFigure.getAction().setEnabled(true);
+								}
+								hyperlinkFigure.repaint();
+							}
+						}
+					} else if(taskUseName.equals("Static semantics creation")){
+						for( int i = 0; i < view.getMediator().getView().getStaticSemanticsFigure().getStdActionsPlate().getChildren().size(); i++){
+							Label label = (Label) view.getMediator().getView().getStaticSemanticsFigure().getStdActionsPlate().getChildren().get(i);
+							if(label instanceof HyperlinkFigure){
+								HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+								if(hyperlinkFigure.getText() == "done"){
+									hyperlinkFigure.getAction().setEnabled(false);
+								}
+								hyperlinkFigure.repaint();
+							}
+						}
+						for( int i = 0; i < view.getMediator().getView().getCheckerFigure().getStdActionsPlate().getChildren().size(); i++){
+							Label label = (Label) view.getMediator().getView().getCheckerFigure().getStdActionsPlate().getChildren().get(i);
+							if(label instanceof HyperlinkFigure){
+								HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+								if(hyperlinkFigure.getText() == "on start"){
+									hyperlinkFigure.getAction().setEnabled(true);
+								}
+								hyperlinkFigure.repaint();
+							}
+						}
+					} else if(taskUseName.equals("Checker creation")){
+						for( int i = 0; i < view.getMediator().getView().getCheckerFigure().getStdActionsPlate().getChildren().size(); i++){
+							Label label = (Label) view.getMediator().getView().getCheckerFigure().getStdActionsPlate().getChildren().get(i);
+							if(label instanceof HyperlinkFigure){
+								HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+								if(hyperlinkFigure.getText() == "done"){
+									hyperlinkFigure.getAction().setEnabled(false);
+								}
+								hyperlinkFigure.repaint();
+							}
+						}
+					} else if(taskUseName.equals("Interpreter creation")) {
+						for( int i = 0; i < view.getMediator().getView().getInterpreterFigure().getStdActionsPlate().getChildren().size(); i++){
+							Label label = (Label) view.getMediator().getView().getInterpreterFigure().getStdActionsPlate().getChildren().get(i);
+							if(label instanceof HyperlinkFigure){
+								HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+								if(hyperlinkFigure.getText() == "done"){
+									hyperlinkFigure.getAction().setEnabled(false);
+								}
+								hyperlinkFigure.repaint();
+							}
+						}
+					} else /*taskUseName.equals("Compiler creation")*/{
+						for( int i = 0; i < view.getMediator().getView().getCompilerFigure().getStdActionsPlate().getChildren().size(); i++){
+							Label label = (Label) view.getMediator().getView().getCompilerFigure().getStdActionsPlate().getChildren().get(i);
+							if(label instanceof HyperlinkFigure){
+								HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+								if(hyperlinkFigure.getText() == "done"){
+									hyperlinkFigure.getAction().setEnabled(false);
+								}
+								hyperlinkFigure.repaint();
+							}
+						}
+					}
+				} catch (PartInitException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,110 @@
+package org.kermeta.cvl.requirementselicitationwizard.dialogs;
+
+import java.util.HashMap;
+
+import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.kermeta.cvl.resolution.ChoiceResolution;
+import org.kermeta.cvl.resolution.VPackageResolution;
+import org.kermeta.cvl.variability.Choice;
+import org.kermeta.cvl.variability.VPackage;
+import org.kermeta.cvl.variability.VPackageable;
+import org.kermeta.cvl.variability.VSpec;
+import org.kermeta.cvl.variability.VSpecResolution;
+
+public class ChoiceResolutionDialog extends Dialog{
+
+	private VPackageResolution vPackageResolution;
+	private VPackage vPackage;
+
+	public ChoiceResolutionDialog(Shell parentShell, VPackage vPackage, VPackageResolution vPackageResolution) {
+		super(parentShell);
+		this.vPackageResolution = vPackageResolution;
+		this.vPackage = vPackage;
+	}
+
+	protected Control createDialogArea(Composite parent) {
+
+		Composite container = (Composite) super.createDialogArea(parent);
+		final GridLayout gridLayout = new GridLayout();
+		gridLayout.numColumns = 1;
+		container.setLayout(gridLayout);
+
+		Label filterLabel = new Label(container, SWT.NONE);
+		filterLabel.setLayoutData(new GridData(GridData.BEGINNING, GridData.CENTER, false, false));
+		filterLabel.setText("Select the choices:");
+
+		for(VPackageable vSpec : vPackage.getPackageElement()){
+			if(vSpec instanceof Choice){
+				final Choice choice = (Choice) vSpec;
+				if(choice.isDefaultResolution()){
+					final Button button = new Button(container, SWT.CHECK);
+					button.setLayoutData(new GridData(GridData.BEGINNING, GridData.CENTER, false, false));
+					button.setText(choice.getName());
+					button.setEnabled(false);
+					button.setSelection(true);
+				}
+				else{
+					final Button button = new Button(container, SWT.CHECK);
+					button.setLayoutData(new GridData(GridData.BEGINNING, GridData.CENTER, false, false));
+					button.setText(choice.getName());
+					button.addSelectionListener(new SelectionAdapter(){
+						public void widgetSelected(SelectionEvent e) {
+							setResolution(choice, button.getSelection());
+						}
+					});
+				}
+				if(!choice.getChildVSpec().isEmpty()){
+					if(choice.getGroupMultiplicity().getLower() == 1 && choice.getGroupMultiplicity().getUpper() == 1){
+						for(VSpec childVSpec : choice.getChildVSpec()){
+							if(childVSpec instanceof Choice){
+								final Choice childChoice = (Choice) childVSpec;
+								final Button buttonchild = new Button(container, SWT.RADIO);
+								GridData gridData = new GridData(GridData.BEGINNING, GridData.CENTER, true, false);
+								gridData.horizontalIndent = 20;
+								buttonchild.setLayoutData(gridData);
+								buttonchild.setText(childChoice.getName());
+								buttonchild.setAlignment(SWT.CENTER);
+								buttonchild.addSelectionListener(new SelectionAdapter(){
+									public void widgetSelected(SelectionEvent e) {
+										setResolution(childChoice, buttonchild.getSelection());
+									}
+								});
+							}
+						}
+					}
+				}
+			}
+		}
+		return container;
+	}
+
+	public VPackageResolution getVPackageResolution(){
+		return vPackageResolution;
+	}
+
+	public void setResolution(Choice choice, Boolean res){
+		for(VPackageable v : vPackageResolution.getPackagedElements()){
+			if(v instanceof ChoiceResolution && v.getName().equals(choice.getName())){
+				((ChoiceResolution) v).setDecision(res);
+			}
+			else if(v instanceof ChoiceResolution && !v.getName().equals(choice.getName())){
+				ChoiceResolution choiceResolution = (ChoiceResolution) v;
+				for(VSpecResolution vSpecResolution : choiceResolution.getChildResolution()){
+					if(vSpecResolution instanceof ChoiceResolution && vSpecResolution.getName().equals(choice.getName())){
+						((ChoiceResolution) vSpecResolution).setDecision(res);
+					}
+				}
+			}
+		}
+	}
+}

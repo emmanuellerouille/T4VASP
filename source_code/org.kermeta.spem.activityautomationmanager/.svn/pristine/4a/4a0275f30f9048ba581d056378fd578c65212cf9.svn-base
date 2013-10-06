@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: spem.activityautomationmanager
+Bundle-SymbolicName: org.kermeta.spem.activityautomationmanager;singleton:=true
+Bundle-Version: 2.0.3.SNAPSHOT
+Bundle-Activator: org.kermeta.spem.activityautomationmanager.Activator
+Export-Package: org.kermeta.spem.activityautomationmanager
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

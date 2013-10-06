@@ -1,0 +1,80 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.spem.behavior;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Container</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link org.kermeta.spem.behavior.BehaviorContainer#getBehaviorProcesses <em>Behavior Processes</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.BehaviorContainer#getBehaviors <em>Behaviors</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.BehaviorContainer#getConditions <em>Conditions</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @see org.kermeta.spem.behavior.BehaviorPackage#getBehaviorContainer()
+ * @model
+ * @generated
+ */
+public interface BehaviorContainer extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Behavior Processes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.kermeta.spem.behavior.BehaviorProcess}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Behavior Processes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Behavior Processes</em>' containment reference list.
+	 * @see org.kermeta.spem.behavior.BehaviorPackage#getBehaviorContainer_BehaviorProcesses()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<BehaviorProcess> getBehaviorProcesses();
+
+	/**
+	 * Returns the value of the '<em><b>Behaviors</b></em>' containment reference list.
+	 * The list contents are of type {@link org.kermeta.spem.behavior.Behavior}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Behaviors</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Behaviors</em>' containment reference list.
+	 * @see org.kermeta.spem.behavior.BehaviorPackage#getBehaviorContainer_Behaviors()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Behavior> getBehaviors();
+
+	/**
+	 * Returns the value of the '<em><b>Conditions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.kermeta.spem.behavior.Condition}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Conditions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Conditions</em>' containment reference list.
+	 * @see org.kermeta.spem.behavior.BehaviorPackage#getBehaviorContainer_Conditions()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Condition> getConditions();
+
+} // BehaviorContainer

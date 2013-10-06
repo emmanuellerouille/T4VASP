@@ -1,0 +1,295 @@
+package org.kermeta.spem.processexecution.view;
+
+import java.util.ArrayList;
+
+import org.eclipse.draw2d.AbstractLayout;
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.Graphics;
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.MarginBorder;
+import org.eclipse.draw2d.PolygonDecoration;
+import org.eclipse.draw2d.RectangleFigure;
+import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Insets;
+import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.swt.graphics.Color;
+
+public class ProcessFigure extends RectangleFigure {
+
+	private static final int LINE_WIDTH = 6;
+
+	private static final int ARROW_LENGTH = 15;
+	
+	private static final Color MODEL_BG = ColorConstants.white;
+	
+	private static final int TEXT_GAP = LINE_WIDTH + 3;
+	
+	private static final Color METHODOLOGY_FG = new Color(null, 102, 128, 184);
+
+	private static final Color DASHBOARD_BG = ColorConstants.white;
+
+	private static final Color DASHBOARD_FG = new Color(null, 102, 128, 184);
+
+	// nodes
+	
+//	private TaskFigure abstractSyntaxFigure;
+//
+//	private TaskFigure treeConcreteSyntaxFigure;
+//	
+//	private TaskFigure staticSemanticsFigure;
+//	
+//	private TaskFigure checkerFigure;
+//	
+//	private TaskFigure interpreterFigure;
+//	
+//	private TaskFigure compilerFigure;
+	
+	private ArrayList<TaskFigure> taskFigures;
+
+	public ProcessFigure() {
+//		taskFigures = new ArrayList<TaskFigure>();
+//		add(abstractSyntaxFigure = createModelFigure("Abstract Syntax Creation"));
+//		add(treeConcreteSyntaxFigure = createModelFigure("Tree Concrete Syntax Creation"));
+//		add(staticSemanticsFigure = createModelFigure("Static Semantics Creation"));
+//		add(checkerFigure = createModelFigure("Checker Creation"));
+//		add(interpreterFigure = createModelFigure("Interpreter Creation"));
+//		add(compilerFigure = createModelFigure("Compiler Creation"));
+//		setLayoutManager(new DashboardLayout());
+//		setBorder(new MarginBorder(10));
+//		setBackgroundColor(DASHBOARD_BG);
+//		setForegroundColor(DASHBOARD_FG);
+	}
+	
+	public ProcessFigure(ArrayList<String> taskFigureNames){
+		this.taskFigures = new ArrayList<TaskFigure>();
+		//Initialization of the array of TaskFigures
+		for(String taskFigureName : taskFigureNames){
+			TaskFigure taskFigure = createModelFigure(taskFigureName); 
+			taskFigures.add(taskFigure);
+			add(taskFigure);
+		}
+
+		setLayoutManager(new DashboardLayout());
+		setBorder(new MarginBorder(10));
+		setBackgroundColor(DASHBOARD_BG);
+		setForegroundColor(DASHBOARD_FG);
+		
+	}
+	
+	public void initTaskFigures(ArrayList<String> taskFigureNames){
+		this.taskFigures = new ArrayList<TaskFigure>();
+		for(String taskFigureName : taskFigureNames){
+			TaskFigure taskFigure = createModelFigure(taskFigureName); 
+			taskFigures.add(taskFigure);
+			add(taskFigure);
+		}
+
+		setLayoutManager(new DashboardLayout());
+		setBorder(new MarginBorder(10));
+		setBackgroundColor(DASHBOARD_BG);
+		setForegroundColor(DASHBOARD_FG);
+	}
+
+//	public TaskFigure getAbstractSyntaxFigure() {
+//		return abstractSyntaxFigure;
+//	}
+//
+//	public void setAbstractSyntaxFigure(TaskFigure abstractSyntaxFigure) {
+//		this.abstractSyntaxFigure = abstractSyntaxFigure;
+//	}
+//
+//	public TaskFigure getTreeConcreteSyntaxFigure() {
+//		return treeConcreteSyntaxFigure;
+//	}
+//
+//	public void setTreeConcreteSyntaxFigure(TaskFigure treeConcreteSyntaxFigure) {
+//		this.treeConcreteSyntaxFigure = treeConcreteSyntaxFigure;
+//	}
+//
+//	public TaskFigure getStaticSemanticsFigure() {
+//		return staticSemanticsFigure;
+//	}
+//
+//	public void setStaticSemanticsFigure(TaskFigure staticSemanticsFigure) {
+//		this.staticSemanticsFigure = staticSemanticsFigure;
+//	}
+//
+//	public TaskFigure getCheckerFigure() {
+//		return checkerFigure;
+//	}
+//
+//	public void setCheckerFigure(TaskFigure checkerFigure) {
+//		this.checkerFigure = checkerFigure;
+//	}
+//
+//	public TaskFigure getInterpreterFigure() {
+//		return interpreterFigure;
+//	}
+//
+//	public void setInterpreterFigure(TaskFigure interpreterFigure) {
+//		this.interpreterFigure = interpreterFigure;
+//	}
+//
+//	public TaskFigure getCompilerFigure() {
+//		return compilerFigure;
+//	}
+//
+//	public void setCompilerFigure(TaskFigure compilerFigure) {
+//		this.compilerFigure = compilerFigure;
+//	}
+	
+	public ArrayList<TaskFigure> getTaskFigures() {
+		return taskFigures;
+	}
+
+	public void setTaskFigures(ArrayList<TaskFigure> taskFigures) {
+		this.taskFigures = taskFigures;
+	}
+
+	protected TaskFigure createModelFigure(String description) {
+		TaskFigure modelFigure = new TaskFigure();
+		modelFigure.setDescription(description);
+		modelFigure.setBackgroundColor(MODEL_BG);
+		modelFigure.setForegroundColor(METHODOLOGY_FG);
+		modelFigure.setLineWidth(LINE_WIDTH);
+		modelFigure.setSpacing(TEXT_GAP);
+		return modelFigure;
+	}
+
+	protected FlowFigure createFlowFigure(boolean directed) {
+		FlowFigure flowFigure = new FlowFigure();
+		if (directed) {
+			PolygonDecoration decoration = new PolygonDecoration();
+			PointList template = new PointList();
+			template.addPoint(0, -LINE_WIDTH / 2);
+			template.addPoint(0, LINE_WIDTH / 2);
+			template.addPoint(-ARROW_LENGTH, LINE_WIDTH / 2 + 10);
+			template.addPoint(-ARROW_LENGTH, -(LINE_WIDTH / 2 + 10));
+			decoration.setTemplate(template);
+			decoration.setScale(1, 1);
+			flowFigure.setTargetDecoration(decoration);
+		}
+		flowFigure.setForegroundColor(DASHBOARD_FG);
+		flowFigure.setLineWidth(LINE_WIDTH);
+		return flowFigure;
+	}
+
+	@Override
+	protected void outlineShape(Graphics graphics) {
+	}
+
+	private class DashboardLayout extends AbstractLayout {
+
+		private static final int MAX_BOX_WIDTH = 800;
+
+		private static final int BOX_SPACING = 20;
+		
+		public DashboardLayout(){
+			
+		}
+
+		@Override
+		protected Dimension calculatePreferredSize(IFigure container, int wHint, int hHint) {
+			Dimension d = getLayoutData().getSize();
+			Insets insets = container.getInsets();
+			d = new Dimension(d.width + insets.getWidth(), d.height + insets.getHeight());
+			return d.union(getBorderPreferredSize(container));
+		}
+
+		public void layout(IFigure container) {
+			getLayoutData().apply(container.getClientArea().getLocation());
+		}
+
+		protected LayoutData getLayoutData() {
+//			Dimension abstractSyntaxSize = abstractSyntaxFigure.getPreferredSize();
+//			abstractSyntaxSize.width = Math.min(abstractSyntaxSize.width, MAX_BOX_WIDTH);
+//			Dimension treeConcreteSyntaxSize = treeConcreteSyntaxFigure.getPreferredSize();
+//			treeConcreteSyntaxSize.width = Math.min(treeConcreteSyntaxSize.width, MAX_BOX_WIDTH);
+//			Dimension staticSemanticsSize = staticSemanticsFigure.getPreferredSize();
+//			staticSemanticsSize.width = Math.min(staticSemanticsSize.width, MAX_BOX_WIDTH);
+//			Dimension checkerSize = checkerFigure.getPreferredSize();
+//			checkerSize.width = Math.min(checkerSize.width, MAX_BOX_WIDTH);
+//			Dimension interpreterSize = interpreterFigure.getPreferredSize();
+//			interpreterSize.width = Math.min(interpreterSize.width, MAX_BOX_WIDTH);
+//			Dimension compilerSize = compilerFigure.getPreferredSize();
+//			compilerSize.width = Math.min(compilerSize.width, MAX_BOX_WIDTH);
+
+			LayoutData data = new LayoutData();
+
+			// boxes
+//			int abstractSyntaxY = BOX_SPACING;
+//			int treeConcreteSyntaxY = abstractSyntaxY +abstractSyntaxSize.height + BOX_SPACING;
+//			System.out.println("abstractSyntaxSize.height = "+abstractSyntaxSize.height);
+//			int checkerY = treeConcreteSyntaxY +treeConcreteSyntaxSize.height + BOX_SPACING;
+//			int staticSemanticsX = BOX_SPACING;
+//			int abstractSyntaxX = BOX_SPACING;
+//			int compilerX = BOX_SPACING;
+//			int interpreterX = BOX_SPACING;
+//			data.abstractSyntaxBox = new Rectangle(abstractSyntaxX, abstractSyntaxY, abstractSyntaxSize.width, abstractSyntaxSize.height);
+//			data.treeConcreteSyntaxBox = new Rectangle(0, treeConcreteSyntaxY, treeConcreteSyntaxSize.width, treeConcreteSyntaxSize.height);
+//			data.staticSemanticsBox = new Rectangle(staticSemanticsX, treeConcreteSyntaxY, staticSemanticsSize.width, staticSemanticsSize.height);
+//			data.checkerBox = new Rectangle(staticSemanticsX + 30, checkerY, checkerSize.width, checkerSize.height);
+//			data.compilerBox = new Rectangle(compilerX, treeConcreteSyntaxY, compilerSize.width, compilerSize.height);
+//			data.interpreterBox = new Rectangle(interpreterX, treeConcreteSyntaxY, interpreterSize.width, interpreterSize.height);
+			
+			for(int i = 0; i<taskFigures.size(); i++){
+				data.boxes.add(new Rectangle(BOX_SPACING, BOX_SPACING + i*(60 + BOX_SPACING) ,taskFigures.get(i).getPreferredSize().width,taskFigures.get(i).getPreferredSize().height));
+			}
+			
+			return data;
+		}
+
+		private class LayoutData {
+			
+			public ArrayList<Rectangle> boxes = new ArrayList<Rectangle>();
+			
+//			public Rectangle abstractSyntaxBox;
+//			
+//			public Rectangle treeConcreteSyntaxBox;
+//			
+//			public Rectangle staticSemanticsBox;
+//			
+//			public Rectangle checkerBox;
+//			
+//			public Rectangle interpreterBox;
+//			
+//			public Rectangle compilerBox;
+
+			public void apply(Point offset) {
+//				abstractSyntaxFigure.setBounds(abstractSyntaxBox.getTranslated(offset));
+//				treeConcreteSyntaxFigure.setBounds(treeConcreteSyntaxBox.getTranslated(offset));
+//				staticSemanticsFigure.setBounds(staticSemanticsBox.getTranslated(offset));
+//				checkerFigure.setBounds(checkerBox.getTranslated(offset));
+//				interpreterFigure.setBounds(interpreterBox.getTranslated(offset));
+//				compilerFigure.setBounds(compilerBox.getTranslated(offset));
+				
+				for(int i = 0; i < taskFigures.size(); i++){
+					taskFigures.get(i).setBounds(boxes.get(i).getTranslated(offset));
+				}
+			}
+
+			private PointList getTranslated(PointList source, Point offset) {
+				PointList target = new PointList(source.size());
+				target.addAll(source);
+				target.translate(offset);
+				return target;
+			}
+
+			public Dimension getSize() {
+//				bounds.union(abstractSyntaxBox);
+//				bounds.union(treeConcreteSyntaxBox);
+//				bounds.union(staticSemanticsBox);
+//				bounds.union(checkerBox);
+//				bounds.union(interpreterBox);
+//				bounds.union(compilerBox);
+				for(Rectangle rec : boxes){
+					bounds.union(rec);
+				}
+				return bounds.getSize();
+			}
+		}
+	}
+
+}

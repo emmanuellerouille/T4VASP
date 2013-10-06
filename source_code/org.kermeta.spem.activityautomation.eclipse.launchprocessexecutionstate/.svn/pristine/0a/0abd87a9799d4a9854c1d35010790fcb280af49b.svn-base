@@ -1,0 +1,31 @@
+import org.eclipse.ui.IStartup;
+import org.eclipse.ui.PlatformUI;
+
+
+public class LaunchProcessExecution implements IStartup {
+
+	@Override
+	public void earlyStartup() {
+		
+		if(PlatformUI.getWorkbench().getPreferenceStore().getBoolean("process execution")){
+			System.out.println("COUCOU!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("Process execution is launching!!!!!!!!!!!!");
+			System.out.println("COUCOU!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("Process execution is launching!!!!!!!!!!!!");
+			System.out.println("COUCOU!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("Process execution is launching!!!!!!!!!!!!");
+			PlatformUI.getWorkbench().getPreferenceStore().setValue("process execution", false);
+		}else{
+			System.out.println("NO PROCESS EXECUTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("NO PROCESS EXECUTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("NO PROCESS EXECUTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("NO PROCESS EXECUTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("NO PROCESS EXECUTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("NO PROCESS EXECUTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("NO PROCESS EXECUTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		}
+
+
+	}
+
+}

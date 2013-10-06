@@ -1,0 +1,55 @@
+package org.kermeta.spem.processexecution.actions;
+
+import my.group.org.kermeta.spem.execution.taskuserunner.MainRunner;
+
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IObjectActionDelegate;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.processexecution.Activator;
+import org.kermeta.spem.processexecution.model.SPEMTaskUse;
+
+import src.main.kmt.KerRichFactory;
+import src.main.kmt.Main;
+
+
+
+public class EndExecuteTask implements IObjectActionDelegate{
+	
+	private IWorkbenchPart targetPart;
+	private ISelection selection;
+	private String taskUseName;
+
+	public EndExecuteTask() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
+		this.targetPart = targetPart;	
+	}
+
+	@Override
+	public void run(IAction action) {
+		
+		if (selection instanceof StructuredSelection){
+			StructuredSelection structuredSelection = (StructuredSelection) selection;
+			if(structuredSelection.getFirstElement() instanceof SPEMTaskUse){
+				taskUseName = ((SPEMTaskUse) structuredSelection.getFirstElement()).getName();
+			}
+		}
+		
+		MainRunner.init4eclipse();
+		MainRunner.init();
+		Main m = KerRichFactory.createMain();
+		m.endExecution(Activator.getDefault().getPreferenceStore().getString("process model path"), Activator.getDefault().getPreferenceStore().getString("behavior model path"), taskUseName, Activator.getDefault().getPreferenceStore().getString("context file path"));
+	}
+
+	@Override
+	public void selectionChanged(IAction action, ISelection selection) {
+		this.selection = selection;
+	}
+
+}

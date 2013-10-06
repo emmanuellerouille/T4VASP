@@ -1,0 +1,141 @@
+package org.kermeta.spem.processexecution.actions;
+
+import java.util.ArrayList;
+import java.util.Map;
+
+import org.eclipse.core.internal.resources.File;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IObjectActionDelegate;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
+import org.eclipse.ui.model.BaseWorkbenchContentProvider;
+import org.eclipse.ui.model.WorkbenchLabelProvider;
+import org.kermeta.spem.behavior.Container;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.executioncontext.ExecutioncontextFactory;
+import org.kermeta.spem.executioncontext.ExecutioncontextPackage;
+import org.kermeta.spem.executioncontext.UnderExecution;
+import org.kermeta.spem.processexecution.Activator;
+import org.kermeta.spem.processexecution.utils.model.ModelUtils;
+import org.kermeta.spem.processexecution.view.actions.impl.Utils;
+
+import spem.Activity;
+import spem.BreakdownElement;
+import spem.MethodLibrary;
+import spem.uma.DeliveryProcess;
+
+
+
+public class ExecuteProcess implements IObjectActionDelegate{
+
+	private IWorkbenchPart targetPart;
+	private ISelection selection;
+	private File process;
+	private IFile behaviorModel;
+
+	public ExecuteProcess() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void run(IAction action) {
+
+		//Set the process attribute
+		if (selection instanceof StructuredSelection){
+			StructuredSelection structuredSelection = (StructuredSelection) selection;
+			if(structuredSelection.getFirstElement() instanceof File){
+				process = (File) structuredSelection.getFirstElement();
+			}
+		}
+
+		//Save the process model path
+		Activator.getDefault().getPreferenceStore().setValue("process model path",
+				process.getFullPath().toString());
+		PlatformUI.getWorkbench().getPreferenceStore().setValue("process model path",
+				process.getFullPath().toString());
+
+		//Ask the user to choose the behavior model
+		ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(targetPart.getSite().getShell(), new WorkbenchLabelProvider(), new BaseWorkbenchContentProvider());
+		dialog.setTitle("Behavior Model Selection");
+		dialog.setMessage("Select the behavior model:");
+		dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
+		//dialog.addFilter(new BehaviorFilter());
+		dialog.open();
+
+		//Set the behavior model attribute
+		if(dialog.getResult()[0] instanceof IFile){
+			behaviorModel = (IFile)dialog.getResult()[0];
+		}
+
+		//Save the behavior model path
+		Activator.getDefault().getPreferenceStore().setValue("behavior model path",
+				behaviorModel.getFullPath().toString());
+		PlatformUI.getWorkbench().getPreferenceStore().setValue("behavior model path",
+				behaviorModel.getFullPath().toString());
+
+		// Get the root of the behavior model
+		Container container = ModelUtils.getBehaviorModelRoot(behaviorModel.getFullPath().toString());
+
+		//Get the root of the process model
+		MethodLibrary methodLibrary = ModelUtils.getProcessModelRoot(process.getFullPath().toString());
+		
+		DeliveryProcess deliveryProcess = ModelUtils.getDeliveryProcess(methodLibrary);
+
+		//Create the context model
+		ExecutioncontextPackage.eINSTANCE.eClass();
+		Resource.Factory.Registry regContextModel = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> mContextModel = regContextModel.getExtensionToFactoryMap();
+		mContextModel.put("executioncontext", new XMIResourceFactoryImpl());
+		ResourceSet resSetContextModel = new ResourceSetImpl();
+		ExecutionContext executionContext = ExecutioncontextFactory.eINSTANCE.createExecutionContext();
+		executionContext.setName("process execution execution context");
+		
+		//Save the context model path
+				Activator.getDefault().getPreferenceStore().setValue("context model path", "platform:/resource"+process.getFullPath()+"_contextModel.executioncontext");
+				PlatformUI.getWorkbench().getPreferenceStore().setValue("context model path", "platform:/resource"+process.getFullPath()+"_contextModel.executioncontext");
+
+		//Add the work units into the context model
+		for(BreakdownElement be : deliveryProcess.getNestedBreakdownElement()){
+			if(be instanceof Activity){
+				Activity activity = (Activity) be;
+				ModelUtils.addWorkUnitIntoExecutionContextModel(executionContext, activity.getName());
+			}
+		}
+		
+		//Get the names of the future task figures
+		ArrayList<String> taskFigureNames = ModelUtils.getTaskFiguresNames(deliveryProcess);
+
+		//add the process model path into the context model
+		ModelUtils.addKeyValueIntoExecutionContextModel(executionContext, "process model path", process.getFullPath().toString());
+
+		//add the behavior model path into the context model
+		ModelUtils.addKeyValueIntoExecutionContextModel(executionContext, "behavior model path", behaviorModel.getFullPath().toString());
+
+		//add an instance of UnderExecution into the context model
+		UnderExecution underExecution = ExecutioncontextFactory.eINSTANCE.createUnderExecution();
+		executionContext.setUnderExecution(underExecution);
+		ModelUtils.saveContextModel(executionContext);
+
+		//Initialize the process view
+		Utils.initProcessView(executionContext, taskFigureNames, container, deliveryProcess);
+	}
+
+	@Override
+	public void selectionChanged(IAction action, ISelection selection) {
+		this.selection = selection;
+	}
+
+	@Override
+	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
+		this.targetPart = targetPart;
+	}
+}

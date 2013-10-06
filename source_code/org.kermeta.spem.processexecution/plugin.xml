@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="ProcessExecution.popupMenu"
+            nameFilter="*.spem"
+            objectClass="org.eclipse.core.resources.IResource">
+         <action
+               class="org.kermeta.spem.processexecution.actions.ExecuteProcess"
+               enablesFor="1"
+               id="ProcessExecution.executeProcess"
+               label="Execute Process"
+               menubarPath="additions"
+               tooltip="Executes the selected process">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

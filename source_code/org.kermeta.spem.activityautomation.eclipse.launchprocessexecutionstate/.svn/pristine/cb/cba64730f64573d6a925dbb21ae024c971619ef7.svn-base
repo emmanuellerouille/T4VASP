@@ -1,0 +1,146 @@
+import java.util.ArrayList;
+import java.util.Date;
+
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.ui.IStartup;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.progress.UIJob;
+import org.kermeta.spem.behavior.AC;
+import org.kermeta.spem.behavior.ACL;
+import org.kermeta.spem.behavior.BehaviorFactory;
+import org.kermeta.spem.behavior.Container;
+import org.kermeta.spem.behavior.WorkUnitHandle;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.executioncontext.OnWhat;
+import org.kermeta.spem.executioncontext.UnderExecution;
+import org.kermeta.spem.processexecution.acinterpreter.ACInterpreter;
+import org.kermeta.spem.processexecution.utils.model.ModelUtils;
+import org.kermeta.spem.processexecution.view.actions.impl.Utils;
+
+import spem.MethodLibrary;
+import spem.ProcessPackageableElement;
+import spem.uma.DeliveryProcess;
+
+
+public class LaunchProcessExecution implements IStartup {
+
+	@Override
+	public void earlyStartup() {
+
+		if(PlatformUI.getWorkbench().getPreferenceStore().getBoolean("process execution")){
+
+			PlatformUI.getWorkbench().getPreferenceStore().setValue("process execution", false);
+
+			UIJob uiJob = new UIJob("open process view and initialize its state"){
+
+				@Override
+				public IStatus runInUIThread(IProgressMonitor monitor) {
+
+					//Get the context model path
+					String contextModelPath = ModelUtils.getContextModelPath();
+
+					//Get the execution context
+					ExecutionContext executionContext = ModelUtils.getExecutionContextRoot(contextModelPath);
+
+					//Get the behavior model path
+					String behaviorModelPath = ModelUtils.getBehaviorModelPath(contextModelPath);
+
+					//Get the behavior model root
+					Container container = ModelUtils.getBehaviorModelRoot(behaviorModelPath);
+
+					//Launch the execution of the ACs that have not been executed because of the restart
+					UnderExecution underExecution = executionContext.getUnderExecution();
+					String workUnitHandleName = underExecution.getWorkUnitHandleName();
+					OnWhat onWhat = underExecution.getOnWhat();
+					WorkUnitHandle wuh = ModelUtils.findWorkUnitHandle(container, workUnitHandleName);
+					if(onWhat.getValue() == OnWhat.ON_START_VALUE){
+						if(wuh.getOnStart() instanceof ACL){
+							boolean lastExecutedACFound = false;
+							boolean isLastExecutedAC = false;
+							ACL followingACsToExecute = BehaviorFactory.eINSTANCE.createACL();
+							for(AC ac : ((ACL) wuh.getOnStart()).getACs()){
+								if(ac.getName().equals(underExecution.getPrimitiveACName())){
+									lastExecutedACFound = true;
+									isLastExecutedAC = true;
+								}else{
+									isLastExecutedAC = false;
+								}
+								if(lastExecutedACFound && !isLastExecutedAC){
+									followingACsToExecute.getACs().add(ac);
+								}
+							}
+							ACInterpreter.executeACL(followingACsToExecute, contextModelPath, executionContext);
+						}
+						computeTime(contextModelPath,"on start",((ProcessPackageableElement)wuh.getWorkUnit()).getName());
+					}else if(onWhat.getValue() == OnWhat.ON_DO_VALUE){
+						if(wuh.getOnDo() instanceof ACL){
+							boolean lastExecutedACFound = false;
+							boolean isLastExecutedAC = false;
+							ACL followingACsToExecute = BehaviorFactory.eINSTANCE.createACL();
+							for(AC ac : ((ACL) wuh.getOnDo()).getACs()){
+								if(ac.getName().equals(underExecution.getPrimitiveACName())){
+									lastExecutedACFound = true;
+									isLastExecutedAC = true;
+								}else{
+									isLastExecutedAC = false;
+								}
+								if(lastExecutedACFound && !isLastExecutedAC){
+									followingACsToExecute.getACs().add(ac);
+								}
+							}
+							ACInterpreter.executeACL(followingACsToExecute, contextModelPath, executionContext);
+						}
+						computeTime(contextModelPath,"on do",((ProcessPackageableElement)wuh.getWorkUnit()).getName());
+					}else if(onWhat.getValue() == OnWhat.ON_END_VALUE){
+						if(wuh.getOnEnd() instanceof ACL){
+							boolean lastExecutedACFound = false;
+							boolean isLastExecutedAC = false;
+							ACL followingACsToExecute = BehaviorFactory.eINSTANCE.createACL();
+							for(AC ac : ((ACL) wuh.getOnEnd()).getACs()){
+								if(ac.getName().equals(underExecution.getPrimitiveACName())){
+									lastExecutedACFound = true;
+									isLastExecutedAC = true;
+								}else{
+									isLastExecutedAC = false;
+								}
+								if(lastExecutedACFound && !isLastExecutedAC){
+									followingACsToExecute.getACs().add(ac);
+								}
+							}
+							ACInterpreter.executeACL(followingACsToExecute, contextModelPath, executionContext);
+						}
+						computeTime(contextModelPath,"on end",((ProcessPackageableElement)wuh.getWorkUnit()).getName());
+					}
+
+					//Get the process model path
+					String processModelPath = PlatformUI.getWorkbench().getPreferenceStore().getString("process model path");
+
+					//Get the root of the process model
+					MethodLibrary methodLibrary = ModelUtils.getProcessModelRoot(processModelPath);
+
+					//Get the delivery process
+					DeliveryProcess deliveryProcess = ModelUtils.getDeliveryProcess(methodLibrary);
+
+					//Initialize taskFigures' names
+					ArrayList<String> taskFigureNames = ModelUtils.getTaskFiguresNames(deliveryProcess);
+
+					//Open the process view and set it in the state it was before the restart
+					Utils.openProcessView(executionContext, contextModelPath, taskFigureNames, deliveryProcess);
+
+					return Status.OK_STATUS;
+				}
+
+			};
+			uiJob.run(new NullProgressMonitor());
+		}
+	}
+
+	public void computeTime(String contextModelPath, String onWhat, String workUnitName){
+		Long beginning = Long.valueOf(ModelUtils.getValueOfKey("time before restart", ModelUtils.getExecutionContextRoot(contextModelPath)));
+		Utils.computeTime(beginning, contextModelPath, workUnitName, onWhat);
+	}
+
+}

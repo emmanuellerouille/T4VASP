@@ -1,0 +1,210 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package behavior.impl;
+
+import behavior.BehaviorPackage;
+import behavior.EndBehavior;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
+import spem.TaskUse;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>End Behavior</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link behavior.impl.EndBehaviorImpl#getContent <em>Content</em>}</li>
+ *   <li>{@link behavior.impl.EndBehaviorImpl#getReferencedProcessElement <em>Referenced Process Element</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class EndBehaviorImpl extends EObjectImpl implements EndBehavior {
+	/**
+	 * The default value of the '{@link #getContent() <em>Content</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContent()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CONTENT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getContent() <em>Content</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContent()
+	 * @generated
+	 * @ordered
+	 */
+	protected String content = CONTENT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getReferencedProcessElement() <em>Referenced Process Element</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferencedProcessElement()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TaskUse> referencedProcessElement;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EndBehaviorImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return BehaviorPackage.Literals.END_BEHAVIOR;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getContent() {
+		return content;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setContent(String newContent) {
+		String oldContent = content;
+		content = newContent;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.END_BEHAVIOR__CONTENT, oldContent, content));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TaskUse> getReferencedProcessElement() {
+		if (referencedProcessElement == null) {
+			referencedProcessElement = new EObjectResolvingEList<TaskUse>(TaskUse.class, this, BehaviorPackage.END_BEHAVIOR__REFERENCED_PROCESS_ELEMENT);
+		}
+		return referencedProcessElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case BehaviorPackage.END_BEHAVIOR__CONTENT:
+				return getContent();
+			case BehaviorPackage.END_BEHAVIOR__REFERENCED_PROCESS_ELEMENT:
+				return getReferencedProcessElement();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case BehaviorPackage.END_BEHAVIOR__CONTENT:
+				setContent((String)newValue);
+				return;
+			case BehaviorPackage.END_BEHAVIOR__REFERENCED_PROCESS_ELEMENT:
+				getReferencedProcessElement().clear();
+				getReferencedProcessElement().addAll((Collection<? extends TaskUse>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.END_BEHAVIOR__CONTENT:
+				setContent(CONTENT_EDEFAULT);
+				return;
+			case BehaviorPackage.END_BEHAVIOR__REFERENCED_PROCESS_ELEMENT:
+				getReferencedProcessElement().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.END_BEHAVIOR__CONTENT:
+				return CONTENT_EDEFAULT == null ? content != null : !CONTENT_EDEFAULT.equals(content);
+			case BehaviorPackage.END_BEHAVIOR__REFERENCED_PROCESS_ELEMENT:
+				return referencedProcessElement != null && !referencedProcessElement.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (content: ");
+		result.append(content);
+		result.append(')');
+		return result.toString();
+	}
+
+} //EndBehaviorImpl

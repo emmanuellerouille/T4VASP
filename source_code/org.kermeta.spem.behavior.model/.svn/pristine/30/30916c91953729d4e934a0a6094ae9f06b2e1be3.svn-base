@@ -1,0 +1,126 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.spem.behavior;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
+
+import spem.TaskUse;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Condition</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link org.kermeta.spem.behavior.Condition#getName <em>Name</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.Condition#getExecutedTaskUses <em>Executed Task Uses</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.Condition#getNotExecutedTaskUses <em>Not Executed Task Uses</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.Condition#getExistingKeys <em>Existing Keys</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.Condition#getNonExistingKeys <em>Non Existing Keys</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @see org.kermeta.spem.behavior.BehaviorPackage#getCondition()
+ * @model interface="true" abstract="true"
+ * @generated
+ */
+public interface Condition extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.kermeta.spem.behavior.BehaviorPackage#getCondition_Name()
+	 * @model
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.spem.behavior.Condition#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Executed Task Uses</b></em>' reference list.
+	 * The list contents are of type {@link spem.TaskUse}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Executed Task Uses</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Executed Task Uses</em>' reference list.
+	 * @see org.kermeta.spem.behavior.BehaviorPackage#getCondition_ExecutedTaskUses()
+	 * @model
+	 * @generated
+	 */
+	EList<TaskUse> getExecutedTaskUses();
+
+	/**
+	 * Returns the value of the '<em><b>Not Executed Task Uses</b></em>' reference list.
+	 * The list contents are of type {@link spem.TaskUse}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Not Executed Task Uses</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Not Executed Task Uses</em>' reference list.
+	 * @see org.kermeta.spem.behavior.BehaviorPackage#getCondition_NotExecutedTaskUses()
+	 * @model
+	 * @generated
+	 */
+	EList<TaskUse> getNotExecutedTaskUses();
+
+	/**
+	 * Returns the value of the '<em><b>Existing Keys</b></em>' reference list.
+	 * The list contents are of type {@link org.kermeta.spem.behavior.Key}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Existing Keys</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Existing Keys</em>' reference list.
+	 * @see org.kermeta.spem.behavior.BehaviorPackage#getCondition_ExistingKeys()
+	 * @model
+	 * @generated
+	 */
+	EList<Key> getExistingKeys();
+
+	/**
+	 * Returns the value of the '<em><b>Non Existing Keys</b></em>' reference list.
+	 * The list contents are of type {@link org.kermeta.spem.behavior.Key}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Non Existing Keys</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Non Existing Keys</em>' reference list.
+	 * @see org.kermeta.spem.behavior.BehaviorPackage#getCondition_NonExistingKeys()
+	 * @model
+	 * @generated
+	 */
+	EList<Key> getNonExistingKeys();
+
+} // Condition

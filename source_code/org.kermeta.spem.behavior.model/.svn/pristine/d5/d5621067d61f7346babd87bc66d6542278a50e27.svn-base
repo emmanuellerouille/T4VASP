@@ -1,0 +1,244 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.spem.behavior.impl;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
+import org.kermeta.spem.behavior.Behavior;
+import org.kermeta.spem.behavior.BehaviorPackage;
+import org.kermeta.spem.behavior.StartBehaviorProcess;
+
+import spem.TaskUse;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Start Behavior Process</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.kermeta.spem.behavior.impl.StartBehaviorProcessImpl#getReferencedProcessElement <em>Referenced Process Element</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.StartBehaviorProcessImpl#getBehaviors <em>Behaviors</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.StartBehaviorProcessImpl#getName <em>Name</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class StartBehaviorProcessImpl extends EObjectImpl implements StartBehaviorProcess {
+	/**
+	 * The cached value of the '{@link #getReferencedProcessElement() <em>Referenced Process Element</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferencedProcessElement()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TaskUse> referencedProcessElement;
+
+	/**
+	 * The cached value of the '{@link #getBehaviors() <em>Behaviors</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBehaviors()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Behavior> behaviors;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StartBehaviorProcessImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return BehaviorPackage.Literals.START_BEHAVIOR_PROCESS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TaskUse> getReferencedProcessElement() {
+		if (referencedProcessElement == null) {
+			referencedProcessElement = new EObjectResolvingEList<TaskUse>(TaskUse.class, this, BehaviorPackage.START_BEHAVIOR_PROCESS__REFERENCED_PROCESS_ELEMENT);
+		}
+		return referencedProcessElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Behavior> getBehaviors() {
+		if (behaviors == null) {
+			behaviors = new EObjectResolvingEList<Behavior>(Behavior.class, this, BehaviorPackage.START_BEHAVIOR_PROCESS__BEHAVIORS);
+		}
+		return behaviors;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.START_BEHAVIOR_PROCESS__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case BehaviorPackage.START_BEHAVIOR_PROCESS__REFERENCED_PROCESS_ELEMENT:
+				return getReferencedProcessElement();
+			case BehaviorPackage.START_BEHAVIOR_PROCESS__BEHAVIORS:
+				return getBehaviors();
+			case BehaviorPackage.START_BEHAVIOR_PROCESS__NAME:
+				return getName();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case BehaviorPackage.START_BEHAVIOR_PROCESS__REFERENCED_PROCESS_ELEMENT:
+				getReferencedProcessElement().clear();
+				getReferencedProcessElement().addAll((Collection<? extends TaskUse>)newValue);
+				return;
+			case BehaviorPackage.START_BEHAVIOR_PROCESS__BEHAVIORS:
+				getBehaviors().clear();
+				getBehaviors().addAll((Collection<? extends Behavior>)newValue);
+				return;
+			case BehaviorPackage.START_BEHAVIOR_PROCESS__NAME:
+				setName((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.START_BEHAVIOR_PROCESS__REFERENCED_PROCESS_ELEMENT:
+				getReferencedProcessElement().clear();
+				return;
+			case BehaviorPackage.START_BEHAVIOR_PROCESS__BEHAVIORS:
+				getBehaviors().clear();
+				return;
+			case BehaviorPackage.START_BEHAVIOR_PROCESS__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.START_BEHAVIOR_PROCESS__REFERENCED_PROCESS_ELEMENT:
+				return referencedProcessElement != null && !referencedProcessElement.isEmpty();
+			case BehaviorPackage.START_BEHAVIOR_PROCESS__BEHAVIORS:
+				return behaviors != null && !behaviors.isEmpty();
+			case BehaviorPackage.START_BEHAVIOR_PROCESS__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
+	}
+
+} //StartBehaviorProcessImpl

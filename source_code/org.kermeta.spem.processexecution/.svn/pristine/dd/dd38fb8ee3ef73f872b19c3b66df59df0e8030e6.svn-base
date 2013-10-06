@@ -1,0 +1,9 @@
+package org.kermeta.spem.processexecution.views;
+
+public interface ProcessAction {
+
+	public boolean isEnabled();
+
+	public void run();
+
+}

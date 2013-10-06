@@ -1,0 +1,454 @@
+package org.kermeta.cvl.derivation;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.core.internal.resources.File;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EContentsEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IObjectActionDelegate;
+import org.eclipse.ui.IWorkbenchPart;
+import org.kermeta.cvl.resolution.ChoiceResolution;
+import org.kermeta.cvl.resolution.ResolutionPackage;
+import org.kermeta.cvl.resolution.VPackageResolution;
+import org.kermeta.cvl.variability.Choice;
+import org.kermeta.cvl.variability.LinkAssignment;
+import org.kermeta.cvl.variability.LinkHandle;
+import org.kermeta.cvl.variability.ObjectExistence;
+import org.kermeta.cvl.variability.ObjectHandle;
+import org.kermeta.cvl.variability.ObjectSubstitution;
+import org.kermeta.cvl.variability.VPackage;
+import org.kermeta.cvl.variability.VPackageable;
+import org.kermeta.cvl.variability.VSpecResolution;
+import org.kermeta.cvl.variability.VariabilityFactory;
+
+public class Derivation implements IObjectActionDelegate{
+
+	private IWorkbenchPart targetPart;
+	private ISelection selection;
+	private File CVLResolutionModel;
+	private String CVLResolutionModelPath;
+	private String outputModelPath;
+	private ArrayList<VPackageable> variationPointsToPerform;
+
+	public Derivation() {
+		variationPointsToPerform = new ArrayList<VPackageable>();
+	}
+
+	@Override
+	public void run(IAction action) {
+		variationPointsToPerform = new ArrayList<VPackageable>();
+		//Get the CVL resolution model file
+		if (selection instanceof StructuredSelection){
+			StructuredSelection structuredSelection = (StructuredSelection) selection;
+			if(structuredSelection.getFirstElement() instanceof File){
+				CVLResolutionModel = (File) structuredSelection.getFirstElement();
+			}
+		}
+
+		//Get the CVL resolution model path
+		CVLResolutionModelPath = CVLResolutionModel.getFullPath().toString();
+		String resolutionModelPath = "platform:/resource"+CVLResolutionModelPath;
+
+		//Get the name of the project containing the resolution model
+		String projectName = CVLResolutionModel.getProject().getName();
+
+		//Get the domain root
+		ResolutionPackage.eINSTANCE.eClass();
+
+		ResourceSet resSet = new ResourceSetImpl();
+
+		Resource resource = resSet.getResource(URI
+				.createURI(resolutionModelPath), true);
+
+		VPackageResolution vPackageResolution = (VPackageResolution) resource.getContents().get(0);
+
+		Resource vamResource = getVAMResource(vPackageResolution);
+		Resource domainResource = getDomainResource(vamResource);
+		EObject domainRoot = domainResource.getContents().get(0);
+
+		//Compute the path of the resolved model
+		String s = domainResource.getURI().lastSegment();
+		int i = s.indexOf('.');
+		String outputModelName = s.substring(0, i);
+
+		String outputModelPath = "platform:/resource/"+projectName+"/"+outputModelName+"_resolved.spem";
+
+		//Launch the derivation
+		derive(outputModelPath, domainRoot, vPackageResolution);
+
+	}
+
+	@Override
+	public void selectionChanged(IAction action, ISelection selection) {
+		this.selection = selection;		
+	}
+
+	@Override
+	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
+		this.targetPart = targetPart;	
+	}
+
+	public void derive(String outputModelPath, EObject domainRoot, VPackageResolution vPackageResolution)
+	{
+		for(VPackageable vPackageable : vPackageResolution.getPackagedElements()){
+			if(vPackageable instanceof ChoiceResolution){
+				ChoiceResolution choiceResolution = (ChoiceResolution) vPackageable; 
+				if(choiceResolution.getDecision()){
+					Choice resolvedChoice = choiceResolution.getResolvedChoice();
+
+					VPackage resolvedChoiceContainer = (VPackage) resolvedChoice.eContainer();
+					getVariationPointsToPerform(resolvedChoice, resolvedChoiceContainer,domainRoot);
+					getVariationPointsOfChildren(choiceResolution, domainRoot, resolvedChoiceContainer);	
+				}
+			}
+		}
+
+		performVariationPoints(domainRoot);
+
+		ResourceSet resSetSave = new ResourceSetImpl();
+		Resource resourceSave = resSetSave.createResource(URI.createURI(outputModelPath));
+		resourceSave.getContents().add(domainRoot);
+		try {
+			resourceSave.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void getVariationPointsOfChildren(ChoiceResolution parentChoiceResolution, EObject domainRoot, VPackage container){
+		for(VSpecResolution vSpecResolution : parentChoiceResolution.getChildResolution()){
+			if(vSpecResolution instanceof ChoiceResolution){
+				ChoiceResolution choiceResolution = (ChoiceResolution) vSpecResolution; 
+
+				if(choiceResolution.getDecision()){
+					Choice resolvedChoice = choiceResolution.getResolvedChoice();
+
+					//VPackage resolvedChoiceContainer = (VPackage) resolvedChoice.eContainer();
+					getVariationPointsToPerform(resolvedChoice, container, domainRoot);
+					getVariationPointsOfChildren(choiceResolution, domainRoot, container);	
+				}
+			}
+		}
+	}
+
+	public Resource getVAMResource(VPackageResolution vPackageResolution){
+		for(VPackageable vp : vPackageResolution.getPackagedElements()){
+			if(vp instanceof VSpecResolution)
+			{
+				VSpecResolution vsr = (VSpecResolution) vp;
+				return vsr.getResolvedVSpec().eResource();
+			}
+		}
+
+		return null;
+	}
+
+	public Resource getDomainResource(Resource vamResource){
+
+		VPackage vPackage = (VPackage) vamResource.getContents().get(0);
+		TreeIterator<EObject> ti = vPackage.eAllContents();
+		while(ti.hasNext()){
+			EObject eo = ti.next();
+			if(eo instanceof ObjectHandle)
+			{
+				ObjectHandle oh = (ObjectHandle) eo;
+				return oh.getObject().eResource();
+			}
+		}
+
+		return null;
+	}
+
+	public void getVariationPointsToPerform(Choice resolvedChoice, VPackage container, EObject domainRoot)
+	{
+		//Get the variation points to perform
+		for(VPackageable v : container.getPackageElement()){
+			if(v instanceof LinkAssignment)
+			{
+				LinkAssignment linkAssignment = (LinkAssignment) v;
+				Choice choice = linkAssignment.getBindingChoice().get(0);
+				if(linkAssignment.getBindingChoice().get(0).equals(resolvedChoice)){
+					LinkAssignment linkAssignmentToAdd = getLinkAssignmentToAdd(linkAssignment, domainRoot);
+					variationPointsToPerform.add(linkAssignmentToAdd);
+				}
+			}
+
+			if(v instanceof ObjectSubstitution)
+			{
+				ObjectSubstitution objectSubstitution = (ObjectSubstitution) v;
+				Choice choice = objectSubstitution.getBindingChoice().get(0);
+				if(objectSubstitution.getBindingChoice().get(0).equals(resolvedChoice)){
+					ObjectSubstitution objectSubstitutionToAdd = getObjectSubstitutionToAdd(objectSubstitution, domainRoot);
+					variationPointsToPerform.add(objectSubstitutionToAdd);
+				}
+			}
+			
+			if(v instanceof ObjectExistence)
+			{
+				ObjectExistence objectExistence = (ObjectExistence) v;
+				Choice choice = objectExistence.getBindingChoice().get(0);
+				if(objectExistence.getBindingChoice().get(0).equals(resolvedChoice)){
+					ObjectExistence objectExistenceToAdd = getObjectExistenceToAdd(objectExistence, domainRoot);
+					variationPointsToPerform.add(objectExistenceToAdd);
+				}
+			}
+		}
+	}
+
+	public void performVariationPoints(EObject domainRoot){
+
+		//perform the variation points
+		for(VPackageable v : variationPointsToPerform)
+		{
+			if(v instanceof LinkAssignment)
+			{
+				LinkAssignment linkAssignment = (LinkAssignment) v;
+				performLinkAssignment(linkAssignment);
+			}
+
+			if(v instanceof ObjectSubstitution)
+			{
+				ObjectSubstitution objectSubstitution = (ObjectSubstitution) v;
+				performObjectSubstitution(objectSubstitution, domainRoot);
+			}
+			
+			if(v instanceof ObjectExistence)
+			{
+				ObjectExistence objectExistence = (ObjectExistence) v;
+				performObjectExistence(objectExistence);
+			}
+		}
+	}
+
+	public void performLinkAssignment(LinkAssignment linkAssignment)
+	{
+		String linkEndIdentifier = linkAssignment.getLinkEndIdentifier();
+		EObject linkOwner = linkAssignment.getLink().getLinkOwner();
+		EObject newEnd = linkAssignment.getNewEnd().getObject(); 
+
+		EStructuralFeature link = linkOwner.eClass().getEStructuralFeature(linkEndIdentifier);
+		if(link.isMany()){
+			((EList<EObject>) linkOwner.eGet(link)).add(newEnd);
+		}else{
+			linkOwner.eSet(link, newEnd);
+		}
+	}
+
+	public void performObjectSubstitution(ObjectSubstitution objectSubstitution, EObject domainRoot)
+	{
+
+		EObject placement = objectSubstitution.getPlacementObject().getObject();
+		EObject replacement = objectSubstitution.getReplacementObject().getObject();
+
+		// Find all the entering links of the placement and redirect them to the replacement --> à implémenter sans itérateur (du coup je vais devoir faire une méthode récursive vu l'API) pour éviter le concurrent modification exception
+
+		domainRoot = redirectEnteringLinks(placement, replacement, domainRoot);
+
+		// Delete the placement
+		EcoreUtil.remove(placement);
+	}
+	
+	public void performObjectExistence(ObjectExistence objectExistence)
+	{
+
+		EObject optionalObject = objectExistence.getOptionalObject().getObject();
+		EcoreUtil.remove(optionalObject);
+	}
+	
+	public void deletePlacement(EObject placement, EObject container){
+		EObject toRemove = null;
+		for(EObject o : container.eContents()){
+			if(equal(o, placement)){
+				toRemove = o;
+				break;
+			}else{
+				deletePlacement(placement, o);
+			}
+		}
+		
+		if(toRemove != null){
+			((EContentsEList<EObject>)container.eContents()).remove(toRemove);
+		}
+	}
+
+	public EObject redirectEnteringLinks(EObject placement, EObject replacement, EObject objectToVisit){
+		for(int i = 0; i < objectToVisit.eContents().size(); i++){
+			EObject object = objectToVisit.eContents().get(i);
+			for(int j = 0; j < object.eClass().getEAllReferences().size(); j++){
+				EReference eReference = object.eClass().getEAllReferences().get(j);
+				Object ref = object.eGet(eReference);
+				if(ref != null){
+					if(ref instanceof EList<?>){
+						EList<EObject> list = (EList<EObject>) ref;
+						for(int k = 0; k < list.size(); k++){
+							EObject eObject = list.get(k);
+							if(eObject.equals(placement)){
+								list.add(replacement);
+							}
+						}
+					}else{
+						if(ref.equals(placement)){
+							object.eSet(eReference, replacement);
+						}
+					}
+				}
+			}
+
+			object = redirectEnteringLinks(placement, replacement, object);
+		}
+
+		return objectToVisit;
+	}
+
+	public LinkAssignment getLinkAssignmentToAdd(LinkAssignment linkAssignment, EObject domainRoot){
+		String linkEndIdentifier = linkAssignment.getLinkEndIdentifier();
+		EObject linkOwner = null;
+		EObject newEnd = null; 
+
+		TreeIterator<EObject> ti = domainRoot.eAllContents();
+		while (ti.hasNext() && (linkOwner == null || newEnd == null))
+		{
+			EObject eo = ti.next();
+			if(eo.equals(linkAssignment.getLink().getLinkOwner())){
+				linkOwner = eo;
+			}
+
+			if(eo.equals(linkAssignment.getNewEnd().getObject())){
+				newEnd = eo;
+			}
+		}
+
+		LinkAssignment linkAssignmentToAdd = VariabilityFactory.eINSTANCE.createLinkAssignment();
+		linkAssignmentToAdd.setName(linkAssignment.getName());
+		linkAssignmentToAdd.setLinkEndIdentifier(linkEndIdentifier);
+		LinkHandle linkHandle = VariabilityFactory.eINSTANCE.createLinkHandle();
+		linkHandle.setLinkOwner(linkOwner);
+		linkAssignmentToAdd.setLink(linkHandle);
+		ObjectHandle objectHandle = VariabilityFactory.eINSTANCE.createObjectHandle();
+		objectHandle.setObject(newEnd);
+		linkAssignmentToAdd.setNewEnd(objectHandle);
+
+		return linkAssignmentToAdd;
+	}
+
+	public ObjectSubstitution getObjectSubstitutionToAdd(ObjectSubstitution objectSubstitution, EObject domainRoot){
+
+		EObject placement = null;
+		EObject replacement = null; 
+
+		TreeIterator<EObject> ti = domainRoot.eAllContents();
+		while (ti.hasNext() && (placement == null || replacement == null))
+		{
+			EObject eo = ti.next();
+			if(eo.equals(objectSubstitution.getPlacementObject().getObject())){
+				placement = eo;
+			}
+
+			if(eo.equals(objectSubstitution.getReplacementObject().getObject())){
+				replacement = eo;
+			}
+		}
+
+		ObjectSubstitution objectSubstitutionToAdd = VariabilityFactory.eINSTANCE.createObjectSubstitution();
+		objectSubstitutionToAdd.setName(objectSubstitution.getName());
+		ObjectHandle placementObjectHandle = VariabilityFactory.eINSTANCE.createObjectHandle();
+		placementObjectHandle.setObject(placement);
+		objectSubstitutionToAdd.setPlacementObject(placementObjectHandle);
+		ObjectHandle replacementObjectHandle = VariabilityFactory.eINSTANCE.createObjectHandle();
+		replacementObjectHandle.setObject(replacement);
+		objectSubstitutionToAdd.setReplacementObject(replacementObjectHandle);
+
+		return objectSubstitutionToAdd;
+	}
+	
+	public ObjectExistence getObjectExistenceToAdd(ObjectExistence objectExistence, EObject domainRoot){
+
+		EObject optionalObject = null;
+
+		TreeIterator<EObject> ti = domainRoot.eAllContents();
+		while (ti.hasNext() && optionalObject == null)
+		{
+			EObject eo = ti.next();
+			if(eo.equals(objectExistence.getOptionalObject().getObject())){
+				optionalObject = eo;
+			}
+		}
+
+		ObjectExistence objectExistenceToAdd = VariabilityFactory.eINSTANCE.createObjectExistence();
+		objectExistenceToAdd.setName(objectExistence.getName());
+		ObjectHandle optionalObjectHandle = VariabilityFactory.eINSTANCE.createObjectHandle();
+		optionalObjectHandle.setObject(optionalObject);
+		objectExistenceToAdd.setOptionalObject(optionalObjectHandle);
+
+		return objectExistenceToAdd;
+	}
+
+	public boolean equal(EObject o1, EObject o2)
+	{	
+		if((o1 == null && o2 != null) || (o1 != null && o2 == null)){
+			return false;
+		}else if(o1 != null && o2 != null){
+			if(!o1.eClass().equals(o2.eClass())){
+				return false;
+			}
+			else
+			{
+				for(int i = 0; i < o1.eClass().getEAllAttributes().size(); i++){
+					EAttribute attribute1 = o1.eClass().getEAllAttributes().get(i);
+					EAttribute attribute2 = o1.eClass().getEAllAttributes().get(i);
+					if((o1.eGet(attribute2) != null && o2.eGet(attribute2) == null) || (o1.eGet(attribute2) == null && o2.eGet(attribute2) != null)){
+						return false;
+					}else if (o1.eGet(attribute2) != null && o2.eGet(attribute2) != null){
+						if(!o1.eGet(attribute2).equals(o2.eGet(attribute2))){
+							return false;
+						}
+					}
+				}
+
+				for(int i = 0; i < o1.eClass().getEAllReferences().size(); i++){
+					EReference reference1 = o1.eClass().getEAllReferences().get(i);
+					EReference reference2 = o1.eClass().getEAllReferences().get(i);
+					if(reference1.isMany()){
+						List<EObject> objects1 = (List<EObject>) o1.eGet(reference1);
+						List<EObject> objects2 = (List<EObject>) o2.eGet(reference2);
+						
+						if((objects1 == null && objects2 != null) || (objects1 != null && objects2 == null)){
+							return false;
+						}else if(objects1 != null && objects2 != null){
+							if(objects1.size() != objects2.size()){
+								return false;
+							}else{
+								for(int j = 0; j < objects1.size(); j++){
+									return equal(objects1.get(j), objects2.get(j));
+								}
+							}
+						}
+					}else{
+						return equal((EObject) o1.eGet(reference1), (EObject) o2.eGet(reference2));
+					}
+				}
+			}
+		}
+
+		return true;
+	}
+
+
+}

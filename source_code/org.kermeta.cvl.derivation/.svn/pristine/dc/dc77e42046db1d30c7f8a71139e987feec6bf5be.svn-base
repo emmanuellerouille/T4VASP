@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1351096930163
+Build-Jdk: 1.6.0_25
+Built-By: erouille
+Bundle-Activator: org.kermeta.cvl.derivation.Activator
+Bundle-ManifestVersion: 2
+Bundle-Name: cvl.derivation
+Bundle-SymbolicName: org.kermeta.cvl.derivation;singleton:=true
+Bundle-Version: 2.0.1.SNAPSHOT_20121024_1841
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.kermeta.cvl.derivation;version="2.0.1.SNAPSHOT_20121
+ 024_1841"
+Ignore-Package: org.eclipse.jface.action,java.io,org.eclipse.ui,org.ecli
+ pse.jface.viewers,org.eclipse.ui.plugin,org.osgi.framework,java.lang
+Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.core
+ .resources
+Tool: Bnd-1.50.0

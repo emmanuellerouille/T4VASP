@@ -1,0 +1,356 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.spem.executioncontext.impl;
+
+import org.eclipse.draw2d.Label;
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+
+import org.kermeta.spem.executioncontext.ExecutioncontextPackage;
+import org.kermeta.spem.executioncontext.State;
+import org.kermeta.spem.executioncontext.StateValue;
+import org.kermeta.spem.processexecution.view.HyperlinkFigure;
+import org.kermeta.spem.processexecution.view.ProcessAction;
+import org.kermeta.spem.processexecution.view.ProcessPart;
+
+import spem.TaskUse;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>State</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.kermeta.spem.executioncontext.impl.StateImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.kermeta.spem.executioncontext.impl.StateImpl#getTaskUse <em>Task Use</em>}</li>
+ *   <li>{@link org.kermeta.spem.executioncontext.impl.StateImpl#getCurrentState <em>Current State</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class StateImpl extends EObjectImpl implements State {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTaskUse() <em>Task Use</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTaskUse()
+	 * @generated
+	 * @ordered
+	 */
+	protected TaskUse taskUse;
+
+	/**
+	 * The default value of the '{@link #getCurrentState() <em>Current State</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCurrentState()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final StateValue CURRENT_STATE_EDEFAULT = StateValue.NOT_STARTED;
+
+	/**
+	 * The cached value of the '{@link #getCurrentState() <em>Current State</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCurrentState()
+	 * @generated
+	 * @ordered
+	 */
+	protected StateValue currentState = CURRENT_STATE_EDEFAULT;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StateImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return ExecutioncontextPackage.Literals.STATE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutioncontextPackage.STATE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TaskUse getTaskUse() {
+		if (taskUse != null && taskUse.eIsProxy()) {
+			InternalEObject oldTaskUse = (InternalEObject)taskUse;
+			taskUse = (TaskUse)eResolveProxy(oldTaskUse);
+			if (taskUse != oldTaskUse) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutioncontextPackage.STATE__TASK_USE, oldTaskUse, taskUse));
+			}
+		}
+		return taskUse;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TaskUse basicGetTaskUse() {
+		return taskUse;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTaskUse(TaskUse newTaskUse) {
+		TaskUse oldTaskUse = taskUse;
+		taskUse = newTaskUse;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutioncontextPackage.STATE__TASK_USE, oldTaskUse, taskUse));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StateValue getCurrentState() {
+		return currentState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void setCurrentState(StateValue newCurrentState) {
+		StateValue oldCurrentState = currentState;
+		currentState = newCurrentState == null ? CURRENT_STATE_EDEFAULT : newCurrentState;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutioncontextPackage.STATE__CURRENT_STATE, oldCurrentState, currentState));
+		System.out.println("appel set current state");
+		if(newCurrentState.equals(StateValue.ON_DO) && this.getTaskUse().getName().equals("Metamodel creation")){
+			ProcessPart view;
+			try {
+				view = (ProcessPart)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("ProcessExecution.views.ProcessElementsView");
+				//view.getMediator().getView().getAbstractSyntaxFigure().addAction(createLinkFigure("toto", new NullAction(false)));
+				for( int i = 0; i < view.getMediator().getView().getAbstractSyntaxFigure().getStdActionsPlate().getChildren().size(); i++){
+					Label label = (Label) view.getMediator().getView().getAbstractSyntaxFigure().getStdActionsPlate().getChildren().get(i);
+					if(label instanceof HyperlinkFigure){
+						//System.out.println("i = "+i+" label instance of hyperlinkFigure");
+						HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+						if(hyperlinkFigure.getText() == "on start"){
+							hyperlinkFigure.getAction().setEnabled(false);
+						}
+						if(hyperlinkFigure.getText() == "on do"){
+							hyperlinkFigure.getAction().setEnabled(true);
+						}
+					}
+				}
+	
+				//System.out.println("view.getMediator().getView().getAbstractSyntaxFigure().getStdActionsPlate().getChildren().get(0) = "+view.getMediator().getView().getAbstractSyntaxFigure().getStdActionsPlate().getChildren().get(0).toString());
+				//view.getMediator().getView().getAbstractSyntaxFigure().addAction(createLinkFigure("on do", new StartAction("Metamodel creation")));
+			} catch (PartInitException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	protected HyperlinkFigure createLinkFigure(String text, ProcessAction action) {
+		HyperlinkFigure linkFigure = new HyperlinkFigure(action);
+		linkFigure.setText(text);
+		return linkFigure;
+	}
+	
+	protected class StartAction extends ProcessAction
+	{
+		private String taskUseName;
+		
+		public StartAction(boolean enabled, String taskUseName){
+			super(enabled);
+			this.taskUseName = taskUseName;
+		}
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	
+	protected class NullAction extends ProcessAction
+	{
+
+		public NullAction(boolean enabled) {
+			super(enabled);
+			// TODO Auto-generated constructor stub
+		}
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case ExecutioncontextPackage.STATE__NAME:
+				return getName();
+			case ExecutioncontextPackage.STATE__TASK_USE:
+				if (resolve) return getTaskUse();
+				return basicGetTaskUse();
+			case ExecutioncontextPackage.STATE__CURRENT_STATE:
+				return getCurrentState();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case ExecutioncontextPackage.STATE__NAME:
+				setName((String)newValue);
+				return;
+			case ExecutioncontextPackage.STATE__TASK_USE:
+				setTaskUse((TaskUse)newValue);
+				return;
+			case ExecutioncontextPackage.STATE__CURRENT_STATE:
+				setCurrentState((StateValue)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case ExecutioncontextPackage.STATE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case ExecutioncontextPackage.STATE__TASK_USE:
+				setTaskUse((TaskUse)null);
+				return;
+			case ExecutioncontextPackage.STATE__CURRENT_STATE:
+				setCurrentState(CURRENT_STATE_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case ExecutioncontextPackage.STATE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ExecutioncontextPackage.STATE__TASK_USE:
+				return taskUse != null;
+			case ExecutioncontextPackage.STATE__CURRENT_STATE:
+				return currentState != CURRENT_STATE_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", currentState: ");
+		result.append(currentState);
+		result.append(')');
+		return result.toString();
+	}
+
+} //StateImpl

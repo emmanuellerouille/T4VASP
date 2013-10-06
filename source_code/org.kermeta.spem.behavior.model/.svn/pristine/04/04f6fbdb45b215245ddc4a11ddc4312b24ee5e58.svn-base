@@ -1,0 +1,280 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.spem.behavior.impl;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.kermeta.spem.behavior.BehaviorPackage;
+import org.kermeta.spem.behavior.ControlFlow;
+import org.kermeta.spem.behavior.DecisionNode;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Decision Node</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.kermeta.spem.behavior.impl.DecisionNodeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.DecisionNodeImpl#getOutgoingControlFlows <em>Outgoing Control Flows</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.DecisionNodeImpl#getIncomingControlFlows <em>Incoming Control Flows</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class DecisionNodeImpl extends EObjectImpl implements DecisionNode {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOutgoingControlFlows() <em>Outgoing Control Flows</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutgoingControlFlows()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ControlFlow> outgoingControlFlows;
+
+	/**
+	 * The cached value of the '{@link #getIncomingControlFlows() <em>Incoming Control Flows</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIncomingControlFlows()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ControlFlow> incomingControlFlows;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DecisionNodeImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return BehaviorPackage.Literals.DECISION_NODE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.DECISION_NODE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ControlFlow> getOutgoingControlFlows() {
+		if (outgoingControlFlows == null) {
+			outgoingControlFlows = new EObjectWithInverseResolvingEList<ControlFlow>(ControlFlow.class, this, BehaviorPackage.DECISION_NODE__OUTGOING_CONTROL_FLOWS, BehaviorPackage.CONTROL_FLOW__SOURCE);
+		}
+		return outgoingControlFlows;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ControlFlow> getIncomingControlFlows() {
+		if (incomingControlFlows == null) {
+			incomingControlFlows = new EObjectWithInverseResolvingEList<ControlFlow>(ControlFlow.class, this, BehaviorPackage.DECISION_NODE__INCOMING_CONTROL_FLOWS, BehaviorPackage.CONTROL_FLOW__TARGET);
+		}
+		return incomingControlFlows;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case BehaviorPackage.DECISION_NODE__OUTGOING_CONTROL_FLOWS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoingControlFlows()).basicAdd(otherEnd, msgs);
+			case BehaviorPackage.DECISION_NODE__INCOMING_CONTROL_FLOWS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingControlFlows()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case BehaviorPackage.DECISION_NODE__OUTGOING_CONTROL_FLOWS:
+				return ((InternalEList<?>)getOutgoingControlFlows()).basicRemove(otherEnd, msgs);
+			case BehaviorPackage.DECISION_NODE__INCOMING_CONTROL_FLOWS:
+				return ((InternalEList<?>)getIncomingControlFlows()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case BehaviorPackage.DECISION_NODE__NAME:
+				return getName();
+			case BehaviorPackage.DECISION_NODE__OUTGOING_CONTROL_FLOWS:
+				return getOutgoingControlFlows();
+			case BehaviorPackage.DECISION_NODE__INCOMING_CONTROL_FLOWS:
+				return getIncomingControlFlows();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case BehaviorPackage.DECISION_NODE__NAME:
+				setName((String)newValue);
+				return;
+			case BehaviorPackage.DECISION_NODE__OUTGOING_CONTROL_FLOWS:
+				getOutgoingControlFlows().clear();
+				getOutgoingControlFlows().addAll((Collection<? extends ControlFlow>)newValue);
+				return;
+			case BehaviorPackage.DECISION_NODE__INCOMING_CONTROL_FLOWS:
+				getIncomingControlFlows().clear();
+				getIncomingControlFlows().addAll((Collection<? extends ControlFlow>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.DECISION_NODE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case BehaviorPackage.DECISION_NODE__OUTGOING_CONTROL_FLOWS:
+				getOutgoingControlFlows().clear();
+				return;
+			case BehaviorPackage.DECISION_NODE__INCOMING_CONTROL_FLOWS:
+				getIncomingControlFlows().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.DECISION_NODE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case BehaviorPackage.DECISION_NODE__OUTGOING_CONTROL_FLOWS:
+				return outgoingControlFlows != null && !outgoingControlFlows.isEmpty();
+			case BehaviorPackage.DECISION_NODE__INCOMING_CONTROL_FLOWS:
+				return incomingControlFlows != null && !incomingControlFlows.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
+	}
+
+} //DecisionNodeImpl

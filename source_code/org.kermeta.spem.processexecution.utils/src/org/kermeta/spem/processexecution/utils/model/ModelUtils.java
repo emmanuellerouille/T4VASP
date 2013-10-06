@@ -1,0 +1,505 @@
+package org.kermeta.spem.processexecution.utils.model;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.behavior.AC;
+import org.kermeta.spem.behavior.BehaviorPackage;
+import org.kermeta.spem.behavior.Container;
+import org.kermeta.spem.behavior.WorkUnitHandle;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.executioncontext.ExecutioncontextFactory;
+import org.kermeta.spem.executioncontext.ExecutioncontextPackage;
+import org.kermeta.spem.executioncontext.Key;
+import org.kermeta.spem.executioncontext.OnWhat;
+import org.kermeta.spem.executioncontext.State;
+import org.kermeta.spem.executioncontext.Value;
+import org.kermeta.spem.executioncontext.WorkUnit;
+
+import spem.Activity;
+import spem.BreakdownElement;
+import spem.MethodLibrary;
+import spem.MethodPlugin;
+import spem.ProcessPackage;
+import spem.ProcessPackageableElement;
+import spem.SpemPackage;
+import spem.TaskUse;
+import spem.uma.DeliveryProcess;
+import spem.uma.DeliveryProcessPackage;
+
+public class ModelUtils {
+
+	public static ExecutionContext getExecutionContextRoot(String contextModelPath){
+
+		ExecutioncontextPackage.eINSTANCE.eClass();
+
+		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m = reg.getExtensionToFactoryMap();
+		m.put("executioncontext", new XMIResourceFactoryImpl());
+
+		ResourceSet resSet = new ResourceSetImpl();
+
+		Resource resource = resSet.getResource(URI
+				.createURI("platform:/resource"+contextModelPath), true);
+
+		ExecutionContext executionContext = (ExecutionContext) resource.getContents().get(0);
+
+		return executionContext;
+	}
+
+	public static String getBehaviorModelPath(String contextModelPath){
+
+		ExecutionContext executionContext = getExecutionContextRoot(contextModelPath);
+
+		return getValueOfKey("behavior model path", executionContext);
+	}
+	
+	public static String getGenModelUri(String contextModelPath){
+
+		ExecutionContext executionContext = getExecutionContextRoot(contextModelPath);
+
+		return "platform:/resource/"+getValueOfKey("project name", executionContext)+"/model/"+getValueOfKey("model file name", executionContext)+".genmodel";
+	}
+
+	public static String getProcessModelPath(String contextModelPath){
+
+		ExecutionContext executionContext = getExecutionContextRoot(contextModelPath);
+
+		return getValueOfKey("process model path", executionContext);
+	}
+
+	public static String getValueOfKey(String keyName, ExecutionContext executionContext){
+		for(Key key : executionContext.getKeys()){
+			if(key.getName().equals(keyName)){
+				return key.getValue().getContent();
+			}
+		}
+
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param keyName
+	 * @param executionContext
+	 * @return true if a key whose name equals keyName exists in execution context and return false otherwise
+	 */
+	public static Boolean existKey(String keyName, ExecutionContext executionContext){
+		for(Key key : executionContext.getKeys()){
+			if(key.getName().equals(keyName)){
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+	public static Container getBehaviorModelRoot(String behaviorModelPath){
+		BehaviorPackage.eINSTANCE.eClass();
+
+		Resource.Factory.Registry reg2 = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m2 = reg2.getExtensionToFactoryMap();
+		m2.put("behavior", new XMIResourceFactoryImpl());
+
+		ResourceSet resSet2 = new ResourceSetImpl();
+
+		Resource resource2 = resSet2.getResource(URI
+				.createURI("platform:/resource"+behaviorModelPath), true);
+
+		return (Container) resource2.getContents().get(0);
+	}
+	
+	public static MethodLibrary getProcessModelRoot(String processModelPath){
+		SpemPackage.eINSTANCE.eClass();
+
+		Resource.Factory.Registry reg3 = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m3 = reg3.getExtensionToFactoryMap();
+		m3.put("spem", new XMIResourceFactoryImpl());
+
+		ResourceSet resSet3 = new ResourceSetImpl();
+
+		Resource resource3 = resSet3.getResource(URI
+				.createURI("platform:/resource"+processModelPath), true);
+
+		return (MethodLibrary) resource3.getContents().get(0);
+	}
+	
+	public static boolean isInitializationAutomated(String workUnitName){
+		boolean res = false;
+		
+		String contextModelPath = getContextModelPath();
+		String behaviorModelPath = getBehaviorModelPath(contextModelPath);
+		Container container = getBehaviorModelRoot(behaviorModelPath);
+		
+		for(WorkUnitHandle wuh : container.getWorkUnitHandles()){
+			if(wuh.getWorkUnit() instanceof ProcessPackageableElement){
+				ProcessPackageableElement ppe = (ProcessPackageableElement) wuh.getWorkUnit();
+				if(ppe.getName().equals(workUnitName)){
+					if(wuh.getOnStart() != null){
+						res = true;
+					}
+				}
+			}
+		}
+		
+		return res;
+	}
+	
+	public static boolean isInitializationManual(String workUnitName){
+		boolean res = false;
+		
+		String contextModelPath = getContextModelPath();
+		String behaviorModelPath = getBehaviorModelPath(contextModelPath);
+		Container container = getBehaviorModelRoot(behaviorModelPath);
+		
+		for(WorkUnitHandle wuh : container.getWorkUnitHandles()){
+			if(wuh.getWorkUnit() instanceof ProcessPackageableElement){
+				ProcessPackageableElement ppe = (ProcessPackageableElement) wuh.getWorkUnit();
+				if(ppe.getName().equals(workUnitName)){
+					if(wuh.isManualInitialization()){
+						res = true;
+					}
+				}
+			}
+		}
+		
+		return res;
+	}
+	
+	public static boolean isFinalizationManual(String workUnitName){
+		boolean res = false;
+		
+		String contextModelPath = getContextModelPath();
+		String behaviorModelPath = getBehaviorModelPath(contextModelPath);
+		Container container = getBehaviorModelRoot(behaviorModelPath);
+		
+		for(WorkUnitHandle wuh : container.getWorkUnitHandles()){
+			if(wuh.getWorkUnit() instanceof ProcessPackageableElement){
+				ProcessPackageableElement ppe = (ProcessPackageableElement) wuh.getWorkUnit();
+				if(ppe.getName().equals(workUnitName)){
+					if(wuh.isManualFinalization()){
+						res = true;
+					}
+				}
+			}
+		}
+		
+		return res;
+	}
+	
+	public static boolean isExecutionAutomated(String workUnitName){
+		boolean res = false;
+		
+		String contextModelPath = getContextModelPath();
+		String behaviorModelPath = getBehaviorModelPath(contextModelPath);
+		Container container = getBehaviorModelRoot(behaviorModelPath);
+		
+		for(WorkUnitHandle wuh : container.getWorkUnitHandles()){
+			if(wuh.getWorkUnit() instanceof ProcessPackageableElement){
+				ProcessPackageableElement ppe = (ProcessPackageableElement) wuh.getWorkUnit();
+				if(ppe.getName().equals(workUnitName)){
+					if(wuh.getOnDo() != null){
+						res = true;
+					}
+				}
+			}
+		}
+		
+		return res;
+	}
+	
+	public static boolean isFinalizationAutomated(String workUnitName){
+		boolean res = false;
+		
+		String contextModelPath = getContextModelPath();
+		String behaviorModelPath = getBehaviorModelPath(contextModelPath);
+		Container container = getBehaviorModelRoot(behaviorModelPath);
+		
+		for(WorkUnitHandle wuh : container.getWorkUnitHandles()){
+			if(wuh.getWorkUnit() instanceof ProcessPackageableElement){
+				ProcessPackageableElement ppe = (ProcessPackageableElement) wuh.getWorkUnit();
+				if(ppe.getName().equals(workUnitName)){
+					if(wuh.getOnEnd() != null){
+						res = true;
+					}
+				}
+			}
+		}
+		
+		return res;
+	}
+	
+	public static void addKeyValueIntoExecutionContextModel(ExecutionContext executionContext, String key, String value){
+		Key k = ExecutioncontextFactory.eINSTANCE.createKey();
+		k.setName(key);
+		Value v = ExecutioncontextFactory.eINSTANCE.createValue();
+		v.setContent(value);
+		v.setKey(k);
+		k.setValue(v);
+		executionContext.getKeys().add(k);
+		executionContext.getValues().add(v);
+		saveContextModel(executionContext);
+	}
+	
+	public static void removeKeyValueFromExecutionContextModel(ExecutionContext executionContext, String key){
+		Key k = null;
+		for(Key ke : executionContext.getKeys()){
+			if(ke.getName().equals(key)){
+				k = ke;
+				break;
+			}
+		}
+		executionContext.getValues().remove(k.getValue());
+		executionContext.getKeys().remove(k);
+		saveContextModel(executionContext);
+	}
+	
+	/**
+	 * Replace the content of the value of a key
+	 * @param executionContext: contains the value and the key
+	 * @param key: the key whose value must change
+	 * @param value: the value whose content must be replaced
+	 */
+	public static void setValueOfKeyIntoExecutionContextModel(ExecutionContext executionContext, String key, String value){
+		for(Key k : executionContext.getKeys()){
+			if(k.getName().equals(key)){
+				k.getValue().setContent(value);
+			}
+		}
+		saveContextModel(executionContext);
+	}
+	
+	public static void addWorkUnitIntoExecutionContextModel(ExecutionContext executionContext, String workUnitName){
+		WorkUnit workUnit = ExecutioncontextFactory.eINSTANCE.createWorkUnit();
+		workUnit.setName(workUnitName);
+		workUnit.setState(State.NOT_STARTED);
+		executionContext.getWorkUnits().add(workUnit);
+		saveContextModel(executionContext);
+	}
+	
+	public static void changeStateWorkUnitIntoExecutionContextModel(ExecutionContext executionContext, String workUnitName, State state){
+		for(WorkUnit workUnit: executionContext.getWorkUnits()){
+			if(workUnit.getName().equals(workUnitName)){
+				workUnit.setState(state);
+			}
+		}
+		saveContextModel(executionContext);
+	}
+	
+	public static State findStateWorkUnitIntoExecutionContextModel(ExecutionContext executionContext, String workUnitName){
+		State state = State.NOT_STARTED;
+		for(WorkUnit workUnit: executionContext.getWorkUnits()){
+			if(workUnit.getName().equals(workUnitName)){
+				state = workUnit.getState();
+			}
+		}
+		return state;
+	}
+
+	public static void changeWorkUnitUnderExecution(ExecutionContext executionContext, String workUnitHandleName){
+		executionContext.getUnderExecution().setWorkUnitHandleName(workUnitHandleName);
+		saveContextModel(executionContext);
+	}
+	
+	public static void setWorkUnitNameUnderExecution(ExecutionContext executionContext, String workUnitName){
+		executionContext.getUnderExecution().setWorkUnitName(workUnitName);
+		saveContextModel(executionContext);
+	}
+	
+	public static void changeOnWhatUnderExecution(ExecutionContext executionContext, OnWhat onWhat){
+		executionContext.getUnderExecution().setOnWhat(onWhat);
+		saveContextModel(executionContext);
+	}
+	
+	/**
+	 * Change the name of the instance of PrimitiveAC which is under execution.
+	 * @param executionContext
+	 * @param primitiveACName
+	 */
+	public static void changePrimitiveACNameUnderExecution(ExecutionContext executionContext, String primitiveACName){
+		executionContext.getUnderExecution().setPrimitiveACName(primitiveACName);
+		saveContextModel(executionContext);
+	}
+	
+	/**
+	 * 
+	 * @param container
+	 * @param workUnitHandleName
+	 * @return The instance of WorkUnitHandle, form container, whose name is workUnitHandleName.
+	 */
+	public static WorkUnitHandle findWorkUnitHandle(Container container, String workUnitHandleName){
+		WorkUnitHandle workUnitHandle = null;
+		
+		for(WorkUnitHandle wuh : container.getWorkUnitHandles()){
+			if(wuh.getName().equals(workUnitHandleName)){
+				return wuh;
+			}
+		}
+		
+		return workUnitHandle;
+	}
+	
+	public static WorkUnitHandle findWorkUnitHandleForWorkUnit(Container container, String workUnitName){
+		WorkUnitHandle workUnitHandle = null;
+		
+		for(WorkUnitHandle wuh : container.getWorkUnitHandles()){
+			if(wuh.getWorkUnit() instanceof ProcessPackageableElement){
+				ProcessPackageableElement ppe = (ProcessPackageableElement) wuh.getWorkUnit();
+				if(ppe.getName().equals(workUnitName)){
+					return wuh;
+				}
+			}
+		}
+		
+		return workUnitHandle;
+	}
+	
+	/**
+	 * Save the context model.
+	 * @param executionContext
+	 */
+	public static void saveContextModel(ExecutionContext executionContext){
+		ResourceSet resSetContextModel = new ResourceSetImpl();
+		Resource resourceContextModel = resSetContextModel.createResource(URI.createURI(getContextModelPath()));
+		resourceContextModel.getContents().add(executionContext);
+		try {
+			resourceContextModel.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 
+	 * @return The path of the context model.
+	 */
+	public static String getContextModelPath(){
+		return PlatformUI.getWorkbench().getPreferenceStore().getString("context model path");
+	}
+	
+	/**
+	 * 
+	 * @param workUnitName
+	 * @param behaviorModelPath
+	 * @param onWhat
+	 * @return The AC from the behavior model that automates the initialization, execution or finalization (specified by onWhat) of the work unit whose name is workUnitName.
+	 */
+	public static AC findACForWorkUnit(String workUnitName, String behaviorModelPath, String onWhat){
+		AC ac = null;
+		
+		Container container = ModelUtils.getBehaviorModelRoot(behaviorModelPath);
+		for(WorkUnitHandle wuh : container.getWorkUnitHandles()){
+			if(wuh.getWorkUnit() instanceof ProcessPackageableElement){
+				ProcessPackageableElement t = (ProcessPackageableElement) wuh.getWorkUnit();
+				if(t.getName().equals(workUnitName)){
+					if(onWhat.equals("onStart")){
+						ac = wuh.getOnStart();
+					}else if(onWhat.equals("onDo")){
+						ac = wuh.getOnDo();
+					}else if(onWhat.equals("onEnd")){
+						ac = wuh.getOnEnd();
+					}
+				}
+			}
+		}
+		
+		return ac;
+	}
+	
+	/**
+	 * 
+	 * @param activity
+	 * @return true if activity contains tasks, else returns false 
+	 */
+	public static boolean containsTasks(Activity activity){
+		Boolean res = false;
+		for(BreakdownElement be: activity.getNestedBreakdownElement()){
+			if(be instanceof TaskUse){
+				return true;
+			}
+		}
+		return res;
+	}
+	
+	/**
+	 * 
+	 * @param methodLibrary
+	 * @return The first instance of DeliveryProcess contained by methodLibrary
+	 */
+	public static DeliveryProcess getDeliveryProcess(MethodLibrary methodLibrary){
+		MethodPlugin methodPlugin = methodLibrary.getOwnedMethodPlugin().get(0);
+		ProcessPackage processPackage = methodPlugin.getOwnedProcessPackage().get(0);		
+		DeliveryProcessPackage deliveryProcessPackage = null;
+		for(ProcessPackageableElement e : processPackage.getOwnedProcessMember()){
+			if(e instanceof DeliveryProcessPackage){
+				deliveryProcessPackage = (DeliveryProcessPackage) e;
+			}
+		}
+		return (DeliveryProcess) deliveryProcessPackage.getOwnedProcessMember().get(0);
+	}
+	
+	/**
+	 * 
+	 * @param activityName: the name of the activity to retrieve
+	 * @param contextModelPath: useful to get the process model
+	 * @return The activity whose name is activityName from the process model
+	 */
+	public static Activity findActivity(String activityName, String contextModelPath){
+		String processModelPath = getProcessModelPath(contextModelPath);
+		MethodLibrary methodLibrary = getProcessModelRoot(processModelPath);
+		DeliveryProcess deliveryProcess = getDeliveryProcess(methodLibrary);
+		for(BreakdownElement be : deliveryProcess.getNestedBreakdownElement()){
+			if(be instanceof Activity){
+				Activity a = (Activity) be;
+				if(a.getName().equals(activityName)){
+					return a;
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param name: the name of the instance of BreakdownElement to return.
+	 * @param containingActivity: where to look for the instance of BreakdownElement to return.
+	 * @return the instance of TaskUse or Activity whose name equals the parameter named "name", from the containingActivity.
+	 */
+	public static BreakdownElement findActivityOrTaskUse(String name, Activity containingActivity){
+		for(BreakdownElement be : containingActivity.getNestedBreakdownElement()){
+			if(be instanceof Activity || be instanceof TaskUse){
+				if(be.getName().equals(name)){
+					return be;
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param activity
+	 * @return the names of the work units directly contained by activity
+	 */
+	public static ArrayList<String> getTaskFiguresNames(Activity activity){
+		ArrayList<String> taskFigureNames = new ArrayList<String>();
+		for(BreakdownElement be : activity.getNestedBreakdownElement()){
+			if(be instanceof TaskUse || be instanceof Activity){
+				ProcessPackageableElement ppe = (ProcessPackageableElement) be;
+				taskFigureNames.add(ppe.getName());
+			}
+		}
+		return taskFigureNames;
+	}
+}

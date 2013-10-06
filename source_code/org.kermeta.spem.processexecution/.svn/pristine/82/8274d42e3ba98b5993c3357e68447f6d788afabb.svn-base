@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1342611438048
+Build-Jdk: 1.6.0_25
+Built-By: erouille
+Bundle-Activator: org.kermeta.spem.processexecution.Activator
+Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
+Bundle-Name: spem.processexecution
+Bundle-SymbolicName: org.kermeta.spem.processexecution;singleton:=true
+Bundle-Version: 1.9.9.SNAPSHOT_20120718_1337
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.kermeta.spem.processexecution;version="1.9.9.SNAPSHO
+ T_20120718_1033"
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.core.resources,
+ org.eclipse.emf.ecore.xmi,
+ spem.model,
+ org.kermeta.spem.activityautomationmanager,
+ ProcessExecutionLibraries;bundle-version="1.0.0"
+Tool: Bnd-1.50.0
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.eclipse.emf.edit

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.kermeta.spem.activityautomationmanager.activityautomationregistry">
+      <information
+            action="Wait for the user to perform manual tasks"
+            interface="org.kermeta.spem.activityautomation.eclipse.waitfortheusertoperformmanualtasks.actions.WaitForTheUserToPerformManualTasks">
+      </information>
+   </extension>
+
+</plugin>

@@ -1,0 +1,21 @@
+package org.kermeta.spem.processexecution.view;
+
+public abstract class ProcessAction {
+	
+	private boolean enabled;
+	
+	public ProcessAction(boolean enabled){
+		this.enabled = enabled;
+	}
+
+	public boolean isEnabled(){
+		return enabled;
+	}
+
+	public abstract void run();
+	
+	public void setEnabled(boolean enabled){
+		this.enabled = enabled;
+	}
+
+}

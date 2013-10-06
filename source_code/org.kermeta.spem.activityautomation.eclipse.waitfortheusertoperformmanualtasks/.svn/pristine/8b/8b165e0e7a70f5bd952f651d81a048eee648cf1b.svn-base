@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1345792509040
+Build-Jdk: 1.6.0_25
+Built-By: erouille
+Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
+Bundle-Name: spem.activityautomation.eclipse.waitfortheusertoperformmanu
+ altasks
+Bundle-SymbolicName: org.kermeta.spem.activityautomation.eclipse.waitfor
+ theusertoperformmanualtasks;singleton:=true
+Bundle-Version: 1.9.9.SNAPSHOT_20120824_0914
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.kermeta.spem.activityautomation.eclipse.waitfortheus
+ ertoperformmanualtasks;version="1.9.9.SNAPSHOT_20120824_0914"
+Ignore-Package: org.eclipse.ui,org.eclipse.ui.plugin,org.osgi.framework,
+ org.eclipse.swt.widgets,java.lang,org.kermeta.spem.activityautomationma
+ nager,org.eclipse.jface.dialogs
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.ui,org.eclipse.core
+ .resources,org.kermeta.spem.activityautomationmanager
+Tool: Bnd-1.50.0

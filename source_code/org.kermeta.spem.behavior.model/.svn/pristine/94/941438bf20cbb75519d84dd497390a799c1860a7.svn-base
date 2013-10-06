@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.spem.behavior.model/src/main/java"
+    modelPluginID="org.kermeta.spem.behavior.model" modelName="Behavior" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" usedGenPackages="platform:/plugin/spem.model/model/spem2.genmodel#//spem">
+  <foreignModel>behavior.ecore</foreignModel>
+  <genPackages prefix="Behavior" basePackage="org.kermeta.spem" disposableProviderFactory="true"
+      ecorePackage="behavior.ecore#/">
+    <genClasses ecoreClass="behavior.ecore#//BehaviorContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference behavior.ecore#//BehaviorContainer/behaviorProcesses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference behavior.ecore#//BehaviorContainer/behaviors"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference behavior.ecore#//BehaviorContainer/conditions"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="behavior.ecore#//BehaviorProcess">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//BehaviorProcess/referencedProcessElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//BehaviorProcess/behaviors"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//BehaviorProcess/name"/>
+    </genClasses>
+    <genClasses ecoreClass="behavior.ecore#//StartBehaviorProcess"/>
+    <genClasses ecoreClass="behavior.ecore#//EndBehaviorProcess"/>
+    <genClasses ecoreClass="behavior.ecore#//Behavior">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//Behavior/action"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//Behavior/preConditions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//Behavior/postConditions"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="behavior.ecore#//Condition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//Condition/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="behavior.ecore#//PreCondition"/>
+    <genClasses ecoreClass="behavior.ecore#//PostCondition"/>
+  </genPackages>
+</genmodel:GenModel>

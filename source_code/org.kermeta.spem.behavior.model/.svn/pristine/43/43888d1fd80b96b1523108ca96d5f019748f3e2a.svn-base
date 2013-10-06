@@ -1,0 +1,21 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.spem.behavior;
+
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Initial Node</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ *
+ * @see org.kermeta.spem.behavior.BehaviorPackage#getInitialNode()
+ * @model
+ * @generated
+ */
+public interface InitialNode extends Node {
+} // InitialNode

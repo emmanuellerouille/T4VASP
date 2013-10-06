@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1348757540717
+Build-Jdk: 1.6.0_25
+Built-By: erouille
+Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
+Bundle-Name: spem.executioncontext.model
+Bundle-SymbolicName: org.kermeta.spem.executioncontext.model;singleton:=
+ true
+Bundle-Version: 2.0.1.SNAPSHOT_20120927_1652
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.kermeta.spem.executioncontext;uses:="org.kermeta.spe
+ m.executioncontext.impl";version="2.0.1.SNAPSHOT_20120927_1652",org.ker
+ meta.spem.executioncontext.impl;uses:="org.kermeta.spem.executioncontex
+ t";version="2.0.1.SNAPSHOT_20120927_1652",org.kermeta.spem.executioncon
+ text.util;uses:="org.kermeta.spem.executioncontext";version="2.0.1.SNAP
+ SHOT_20120927_1652"
+Ignore-Package: org.eclipse.emf.ecore.resource,org.eclipse.emf.ecore.plu
+ gin,org.eclipse.emf.ecore.util,org.eclipse.emf.ecore,org.eclipse.emf.co
+ mmon.util,java.util,org.eclipse.emf.common.notify.impl,spem,org.eclipse
+ .emf.common.notify,java.lang,org.eclipse.emf.ecore.impl
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore;visibilit
+ y:=reexport,spem.model;visibility:=reexport
+Tool: Bnd-1.50.0

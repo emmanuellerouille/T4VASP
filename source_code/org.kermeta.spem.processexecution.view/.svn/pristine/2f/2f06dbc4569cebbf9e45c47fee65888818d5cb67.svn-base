@@ -1,0 +1,87 @@
+package org.kermeta.spem.processexecution.view.actions.impl;
+
+import org.eclipse.draw2d.Label;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.behavior.Container;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.executioncontext.State;
+import org.kermeta.spem.processexecution.utils.model.ModelUtils;
+import org.kermeta.spem.processexecution.view.HyperlinkFigure;
+import org.kermeta.spem.processexecution.view.ProcessPart;
+import org.kermeta.spem.processexecution.view.TaskFigure;
+import org.kermeta.spem.processexecution.view.actions.ProcessAction;
+
+import spem.Activity;
+
+public class SkipAction extends ProcessAction {
+
+	private String processModelPath = null;
+
+	public SkipAction(boolean enabled) {
+		super(enabled);
+		// TODO Auto-generated constructor stub
+	}
+
+	public SkipAction(boolean enabled, String taskUseName) {
+		super(enabled, taskUseName);
+		// TODO Auto-generated constructor stub
+	}
+
+	public SkipAction(boolean enabled, String taskUseName,
+			String contextModelPath) {
+		super(enabled, taskUseName, contextModelPath);
+		// TODO Auto-generated constructor stub
+	}
+
+	public SkipAction(boolean enabled, String taskUseName,
+			String contextModelPath, Boolean activityLevel,
+			Activity containingActivity) {
+		super(enabled, taskUseName, contextModelPath, activityLevel,
+				containingActivity);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void run() {
+		ExecutionContext executionContext = ModelUtils.getExecutionContextRoot(contextModelPath);
+
+		String behaviorModelPath = ModelUtils.getBehaviorModelPath(contextModelPath);
+		processModelPath = ModelUtils.getProcessModelPath(contextModelPath);
+
+		//Get the root of the behavior model
+		Container container = ModelUtils.getBehaviorModelRoot(behaviorModelPath);
+
+		//update process view
+		ProcessPart view;
+		try {
+			view = (ProcessPart)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("ProcessExecution.views.ProcessElementsView");
+			for(TaskFigure taskFigure : view.getMediator().getView().getTaskFigures()){
+				if(taskFigure.getDescription().equals(taskUseName)){
+					//Put all the hyperlinks of this task figure to false
+					for( int i = 0; i < taskFigure.getStdActionsPlate().getChildren().size(); i++){
+						Label label = (Label) taskFigure.getStdActionsPlate().getChildren().get(i);
+						if(label instanceof HyperlinkFigure){
+							HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+							if(hyperlinkFigure.getAction().isEnabled()){
+								hyperlinkFigure.getAction().setEnabled(false);
+							}
+							hyperlinkFigure.repaint();
+						}
+					}
+
+					//Skip the current task figure
+					taskFigure.setFinished(true);
+					ModelUtils.changeStateWorkUnitIntoExecutionContextModel(executionContext, taskUseName, State.FINISHED);
+					//Set the status of the following work units
+					Utils.setStatusFollowingWorkUnits(taskFigure.getDescription(), view, ModelUtils.getProcessModelPath(contextModelPath), executionContext, this.getContainingActivity());
+
+				}
+			}
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}

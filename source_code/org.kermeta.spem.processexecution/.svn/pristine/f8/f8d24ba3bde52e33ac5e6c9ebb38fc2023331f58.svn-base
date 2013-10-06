@@ -1,0 +1,93 @@
+package org.kermeta.spem.processexecution.views;
+
+import org.eclipse.jface.action.IMenuListener;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.ui.IWorkbenchActionConstants;
+import org.eclipse.ui.part.ViewPart;
+import org.kermeta.spem.processexecution.Activator;
+import org.kermeta.spem.processexecution.model.SPEMDeliveryProcess;
+import org.kermeta.spem.processexecution.model.SPEMTaskUse;
+import org.kermeta.spem.processexecution.model.Tree;
+import org.kermeta.spem.processexecution.providers.ProcessExecutionViewContentProvider;
+import org.kermeta.spem.processexecution.providers.ProcessExecutionViewLabelProvider;
+
+import org.kermeta.spem.processexecution.views.ProcessElementsView;
+
+
+
+public class ProcessElementsView extends ViewPart {
+	
+	private TreeViewer viewer;
+
+	public ProcessElementsView() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void createPartControl(Composite parent) {
+		//SPEMTaskUseCreator.addTaskUse();
+		this.viewer = new TreeViewer(parent);
+		this.viewer.setContentProvider(new ProcessExecutionViewContentProvider());
+		final ProcessExecutionViewLabelProvider labelProvider = new ProcessExecutionViewLabelProvider();
+		this.viewer.setLabelProvider(labelProvider);
+		//this.viewer.setInput(getInitialInput());
+		createContextMenu();
+		viewer.expandAll();
+	}
+
+	@Override
+	public void setFocus() {
+		this.viewer.getControl().setFocus();
+	}
+	
+	private void createContextMenu() {
+		MenuManager menuMgr = new MenuManager("#PopupMenu");
+		menuMgr.setRemoveAllWhenShown(true);
+		menuMgr.addMenuListener(new IMenuListener() {
+			@Override
+			public void menuAboutToShow(IMenuManager m) {
+				ProcessElementsView.this.fillContextMenu(m);
+			}
+		});
+		Menu menu = menuMgr.createContextMenu(viewer.getControl());
+		viewer.getControl().setMenu(menu);
+		getSite().registerContextMenu(menuMgr, viewer);
+	}
+
+	private void fillContextMenu(IMenuManager menuMgr) {
+		menuMgr.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
+	}
+	
+	public Tree getInitialInput() {
+		Tree myTree = null;
+		SPEMTaskUse taskUse1 = new SPEMTaskUse("Metamodel creation", Activator.getDefault().getPreferenceStore()
+				.getString("process model path"));
+		SPEMTaskUse taskUse2 = new SPEMTaskUse("Tree concrete syntax creation", Activator.getDefault().getPreferenceStore()
+				.getString("process model path"));
+		SPEMTaskUse[] taskUses = new SPEMTaskUse[2];
+		taskUses[0] = taskUse1;
+		taskUses[1] = taskUse2;
+		SPEMDeliveryProcess deliveryProcess = new SPEMDeliveryProcess("metamodeling", taskUses, Activator.getDefault().getPreferenceStore()
+				.getString("process model path"), Activator.getDefault().getPreferenceStore()
+				.getString("behavior model path"));
+		taskUse1.setDeliveryProcess(deliveryProcess);
+		taskUse2.setDeliveryProcess(deliveryProcess);
+		SPEMDeliveryProcess[] deliveryProcesses = new SPEMDeliveryProcess[1];
+		deliveryProcesses[0] = deliveryProcess;
+		myTree = new Tree("myTree", deliveryProcesses);
+		return myTree;
+	}
+
+	public TreeViewer getViewer() {
+		return viewer;
+	}
+
+	public void setViewer(TreeViewer viewer) {
+		this.viewer = viewer;
+	}
+}

@@ -1,0 +1,227 @@
+package org.kermeta.spem.processexecution.actions;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+
+import org.eclipse.core.internal.resources.File;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IObjectActionDelegate;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
+import org.eclipse.ui.model.BaseWorkbenchContentProvider;
+import org.eclipse.ui.model.WorkbenchLabelProvider;
+import org.kermeta.spem.behavior.Container;
+import org.kermeta.spem.behavior.WorkUnitHandle;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.executioncontext.ExecutioncontextFactory;
+import org.kermeta.spem.executioncontext.ExecutioncontextPackage;
+import org.kermeta.spem.executioncontext.State;
+import org.kermeta.spem.executioncontext.UnderExecution;
+import org.kermeta.spem.processexecution.Activator;
+import org.kermeta.spem.processexecution.utils.model.ModelUtils;
+import org.kermeta.spem.processexecution.view.*;
+import org.kermeta.spem.processexecution.view.actions.impl.DoAction;
+import org.kermeta.spem.processexecution.view.actions.impl.DoneAction;
+import org.kermeta.spem.processexecution.view.actions.impl.EndAction;
+import org.kermeta.spem.processexecution.view.actions.impl.StartAction;
+
+import spem.Activity;
+import spem.BreakdownElement;
+import spem.MethodLibrary;
+import spem.MethodPlugin;
+import spem.ProcessPackage;
+import spem.ProcessPackageableElement;
+import spem.TaskUse;
+import spem.uma.DeliveryProcess;
+import spem.uma.DeliveryProcessPackage;
+
+
+
+public class ExecuteProcess implements IObjectActionDelegate{
+
+	private IWorkbenchPart targetPart;
+	private ISelection selection;
+	private File process;
+	private IFile behaviorModel;
+
+	public ExecuteProcess() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void run(IAction action) {
+
+		//Set the process attribute
+		if (selection instanceof StructuredSelection){
+			StructuredSelection structuredSelection = (StructuredSelection) selection;
+			if(structuredSelection.getFirstElement() instanceof File){
+				process = (File) structuredSelection.getFirstElement();
+			}
+		}
+
+		//Save the process model path
+		Activator.getDefault().getPreferenceStore().setValue("process model path",
+				process.getFullPath().toString());
+		PlatformUI.getWorkbench().getPreferenceStore().setValue("process model path",
+				process.getFullPath().toString());
+
+		//Ask the user to choose the behavior model
+		ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(targetPart.getSite().getShell(), new WorkbenchLabelProvider(), new BaseWorkbenchContentProvider());
+		dialog.setTitle("Behavior Model Selection");
+		dialog.setMessage("Select the behavior model:");
+		dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
+		//dialog.addFilter(new BehaviorFilter());
+		dialog.open();
+
+		//Set the behavior model attribute
+		if(dialog.getResult()[0] instanceof IFile){
+			behaviorModel = (IFile)dialog.getResult()[0];
+		}
+
+		//Save the behavior model path
+		Activator.getDefault().getPreferenceStore().setValue("behavior model path",
+				behaviorModel.getFullPath().toString());
+		PlatformUI.getWorkbench().getPreferenceStore().setValue("behavior model path",
+				behaviorModel.getFullPath().toString());
+
+		// Get the root of the behavior model
+		Container container = ModelUtils.getBehaviorModelRoot(behaviorModel.getFullPath().toString());
+
+		//Get the root of the process model
+		MethodLibrary methodLibrary = ModelUtils.getProcessModelRoot(process.getFullPath().toString());
+
+		MethodPlugin methodPlugin = methodLibrary.getOwnedMethodPlugin().get(0);
+		ProcessPackage processPackage = methodPlugin.getOwnedProcessPackage().get(0);		
+		DeliveryProcessPackage deliveryProcessPackage = null;
+		for(ProcessPackageableElement e : processPackage.getOwnedProcessMember()){
+			if(e instanceof DeliveryProcessPackage){
+				deliveryProcessPackage = (DeliveryProcessPackage) e;
+			}
+		}
+		DeliveryProcess deliveryProcess = (DeliveryProcess) deliveryProcessPackage.getOwnedProcessMember().get(0);
+
+		//Create the context model
+		ExecutioncontextPackage.eINSTANCE.eClass();
+		Resource.Factory.Registry regContextModel = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> mContextModel = regContextModel.getExtensionToFactoryMap();
+		mContextModel.put("executioncontext", new XMIResourceFactoryImpl());
+		ResourceSet resSetContextModel = new ResourceSetImpl();
+		ExecutionContext executionContext = ExecutioncontextFactory.eINSTANCE.createExecutionContext();
+		executionContext.setName("process execution execution context");
+
+		ArrayList<String> taskFigureNames = new ArrayList<String>();
+
+		for(BreakdownElement be : deliveryProcess.getNestedBreakdownElement()){
+			if(be instanceof Activity){
+				Activity activity = (Activity) be;
+				for(BreakdownElement b : activity.getNestedBreakdownElement()){
+					if(b instanceof TaskUse){
+						TaskUse taskUse = (TaskUse) b;
+						taskFigureNames.add(taskUse.getName());
+
+						//add the corresponding work unit into the context model
+						ModelUtils.addWorkUnitIntoExecutionContextModel(executionContext, taskUse.getName());
+					}
+				}
+			}
+		}
+
+		//add the process model path into the context model
+		ModelUtils.addKeyValueIntoExecutionContextModel(executionContext, "process model path", process.getFullPath().toString());
+
+		//add the behavior model path into the context model
+		ModelUtils.addKeyValueIntoExecutionContextModel(executionContext, "behavior model path", behaviorModel.getFullPath().toString());
+
+		//add an instance of UnderExecution into the context model
+		UnderExecution underExecution = ExecutioncontextFactory.eINSTANCE.createUnderExecution();
+		executionContext.setUnderExecution(underExecution);
+
+		//Save the context model path
+		Activator.getDefault().getPreferenceStore().setValue("context model path", "platform:/resource"+process.getFullPath()+"_contextModel.executioncontext");
+		PlatformUI.getWorkbench().getPreferenceStore().setValue("context model path", "platform:/resource"+process.getFullPath()+"_contextModel.executioncontext");
+
+		//Save the context model
+		Resource resourceContextModel = resSetContextModel.createResource(URI.createURI(process.getFullPath()+"_contextModel.executioncontext"));
+		resourceContextModel.getContents().add(executionContext);
+		try {
+			resourceContextModel.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			ProcessPart view = (ProcessPart)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("ProcessExecution.views.ProcessElementsView");
+			view.getMediator().getView().initTaskFigures(taskFigureNames);
+			for(int i = 0; i <view.getMediator().getView().getTaskFigures().size(); i++){
+				TaskFigure taskFigure = view.getMediator().getView().getTaskFigures().get(i);
+				if(i==0){
+					boolean hasWorkUnitHandle = false;
+					for(WorkUnitHandle wuh: container.getWorkUnitHandles()){
+						if(wuh.getWorkUnit() instanceof TaskUse){
+							TaskUse taskUse = (TaskUse) wuh.getWorkUnit();
+							if(taskUse.getName().equals(taskFigure.getDescription())){
+								hasWorkUnitHandle = true;
+								if(wuh.getOnStart() != null){
+									taskFigure.addAction(new HyperlinkFigure("on start", new StartAction(true, taskFigure.getDescription(), Activator.getDefault().getPreferenceStore().getString("context model path"))));
+									taskFigure.addAction(new HyperlinkFigure("on do", new DoAction(false, taskFigure.getDescription(), Activator.getDefault().getPreferenceStore().getString("context model path"))));
+									ModelUtils.changeStateWorkUnitIntoExecutionContextModel(executionContext, taskFigure.getDescription(), State.ON_START);
+								}else{
+									taskFigure.addAction(new HyperlinkFigure("on start", new StartAction(false, taskFigure.getDescription(), Activator.getDefault().getPreferenceStore().getString("context model path"))));
+									taskFigure.addAction(new HyperlinkFigure("on do", new DoAction(true, taskFigure.getDescription(), Activator.getDefault().getPreferenceStore().getString("context model path"))));
+									ModelUtils.changeStateWorkUnitIntoExecutionContextModel(executionContext, taskFigure.getDescription(), State.ON_DO);
+								}
+							}
+						}
+					}
+					if(!hasWorkUnitHandle){
+						taskFigure.addAction(new HyperlinkFigure("on start", new StartAction(false, taskFigure.getDescription(), Activator.getDefault().getPreferenceStore().getString("context model path"))));
+						taskFigure.addAction(new HyperlinkFigure("on do", new DoAction(true, taskFigure.getDescription(), Activator.getDefault().getPreferenceStore().getString("context model path"))));
+						ModelUtils.changeStateWorkUnitIntoExecutionContextModel(executionContext, taskFigure.getDescription(), State.ON_DO);
+					}
+				}else{
+					taskFigure.addAction(new HyperlinkFigure("on start", new StartAction(false, taskFigure.getDescription(), Activator.getDefault().getPreferenceStore().getString("context model path"))));
+					taskFigure.addAction(new HyperlinkFigure("on do", new DoAction(false, taskFigure.getDescription(), Activator.getDefault().getPreferenceStore().getString("context model path"))));
+				}
+				taskFigure.addAction(new HyperlinkFigure("done", new DoneAction(false, taskFigure.getDescription(), Activator.getDefault().getPreferenceStore().getString("context model path"))));
+				taskFigure.addAction(new HyperlinkFigure("on end", new EndAction(false, taskFigure.getDescription(), Activator.getDefault().getPreferenceStore().getString("context model path"))));
+			}
+
+		} catch (PartInitException e1) {
+			e1.printStackTrace();
+		}
+
+		//Save the context model
+//		Resource resourceContextModel = resSetContextModel.createResource(URI.createURI(process.getFullPath()+"_contextModel.executioncontext"));
+//		resourceContextModel.getContents().add(executionContext);
+		try {
+			resourceContextModel.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void selectionChanged(IAction action, ISelection selection) {
+		this.selection = selection;
+	}
+
+	@Override
+	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
+		this.targetPart = targetPart;
+	}
+}

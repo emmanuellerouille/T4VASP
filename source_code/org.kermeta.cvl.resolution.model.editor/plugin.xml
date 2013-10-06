@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.kermeta.cvl.resolution.presentation.ResolutionModelWizardID"
+            name="%_UI_ResolutionModelWizard_label"
+            class="org.kermeta.cvl.resolution.presentation.ResolutionModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ResolutionModelFile.gif">
+         <description>%_UI_ResolutionModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="org.kermeta.cvl.resolution.presentation.ResolutionEditorID"
+            name="%_UI_ResolutionEditor_label"
+            icon="icons/full/obj16/ResolutionModelFile.gif"
+            extensions="resolution"
+            class="org.kermeta.cvl.resolution.presentation.ResolutionEditor"
+            contributorClass="org.kermeta.cvl.resolution.presentation.ResolutionActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

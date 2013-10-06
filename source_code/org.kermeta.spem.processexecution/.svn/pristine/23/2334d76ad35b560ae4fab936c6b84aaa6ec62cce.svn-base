@@ -1,0 +1,183 @@
+package org.kermeta.spem.processexecution.actions;
+
+import java.io.IOException;
+import java.util.Map;
+
+import org.eclipse.core.internal.resources.File;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IObjectActionDelegate;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
+import org.eclipse.ui.model.BaseWorkbenchContentProvider;
+import org.eclipse.ui.model.WorkbenchLabelProvider;
+import org.kermeta.spem.processexecution.Activator;
+import org.kermeta.spem.processexecution.model.SPEMDeliveryProcess;
+import org.kermeta.spem.processexecution.model.SPEMTaskUse;
+import org.kermeta.spem.processexecution.model.Tree;
+import org.kermeta.spem.processexecution.views.ProcessElementsView;
+
+import spem.Activity;
+import spem.BreakdownElement;
+import spem.MethodLibrary;
+import spem.MethodPlugin;
+import spem.ProcessPackage;
+import spem.ProcessPackageableElement;
+import spem.SpemPackage;
+import spem.TaskUse;
+import spem.uma.DeliveryProcess;
+import spem.uma.DeliveryProcessPackage;
+
+
+
+public class ExecuteProcess implements IObjectActionDelegate{
+	
+	private IWorkbenchPart targetPart;
+	private ISelection selection;
+	private File process;
+	private IFile behaviorModel;
+
+	public ExecuteProcess() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void run(IAction action) {
+		
+		//Set the process attribute
+		if (selection instanceof StructuredSelection){
+			StructuredSelection structuredSelection = (StructuredSelection) selection;
+			if(structuredSelection.getFirstElement() instanceof File){
+				process = (File) structuredSelection.getFirstElement();
+			}
+		}
+		
+		//Save the process model path
+		Activator.getDefault().getPreferenceStore().setValue("process model path",
+				process.getFullPath().toString());
+		
+		//Create the context file
+		java.io.File contextFile = new java.io.File(process.getParent().getLocation().toString()+"/"+process.getName()+"_context_file");
+		try {
+			contextFile.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//Save the context file path
+		Activator.getDefault().getPreferenceStore().setValue("context file path", process.getParent().getLocation().toString()+"/"+process.getName()+"_context_file");
+		
+		//Ask the user to choose the behavior model
+		ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(targetPart.getSite().getShell(), new WorkbenchLabelProvider(), new BaseWorkbenchContentProvider());
+		dialog.setTitle("Behavior Model Selection");
+		dialog.setMessage("Select the behavior model:");
+		dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
+		//dialog.addFilter(new BehaviorFilter());
+		dialog.open();
+		
+		//Set the behavior model attribute
+		if(dialog.getResult()[0] instanceof IFile){
+			behaviorModel = (IFile)dialog.getResult()[0];
+		}
+		
+		//Save the behavior model path
+		Activator.getDefault().getPreferenceStore().setValue("behavior model path",
+				behaviorModel.getFullPath().toString());
+		
+		// Initialize the model
+		SpemPackage.eINSTANCE.eClass();
+		
+		// Register the XMI resource factory for the .spem extension
+
+		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m = reg.getExtensionToFactoryMap();
+		m.put("spem", new XMIResourceFactoryImpl());
+
+		// Obtain a new resource set
+		ResourceSet resSet = new ResourceSetImpl();
+
+		// Get the resource
+		Resource resource = resSet.getResource(URI
+				.createURI("platform:/resource"+process.getFullPath()), true);
+		// Get the first model element and cast it to the right type, in my
+		// example everything is hierarchical included in this first node
+		MethodLibrary methodLibrary = (MethodLibrary) resource.getContents().get(0);
+		
+		MethodPlugin methodPlugin = methodLibrary.getOwnedMethodPlugin().get(0);
+		ProcessPackage processPackage = methodPlugin.getOwnedProcessPackage().get(0);		
+		DeliveryProcessPackage deliveryProcessPackage = null;
+		for(ProcessPackageableElement e : processPackage.getOwnedProcessMember()){
+			if(e instanceof DeliveryProcessPackage){
+				deliveryProcessPackage = (DeliveryProcessPackage) e;
+			}
+		}
+		DeliveryProcess deliveryProcess = (DeliveryProcess) deliveryProcessPackage.getOwnedProcessMember().get(0);
+		
+		try {
+			ProcessElementsView view = (ProcessElementsView)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("ProcessExecution.views.ProcessElementsView");
+			view.getViewer().setInput(getInitialInput(deliveryProcess));
+		} catch (PartInitException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	@Override
+	public void selectionChanged(IAction action, ISelection selection) {
+		this.selection = selection;
+	}
+
+	@Override
+	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
+		this.targetPart = targetPart;
+	}
+	
+	public Tree getInitialInput(DeliveryProcess deliveryProcess) {
+		Tree myTree = null;
+		int numberOfTaskUses = 0;
+		for(BreakdownElement be : deliveryProcess.getNestedBreakdownElement()){
+			if(be instanceof Activity){
+				Activity activity = (Activity) be;
+				for(BreakdownElement b : activity.getNestedBreakdownElement()){
+					if(b instanceof TaskUse){
+						numberOfTaskUses++;
+					}
+				}
+			}
+		}
+		SPEMTaskUse[] taskUses = new SPEMTaskUse[numberOfTaskUses];
+		SPEMDeliveryProcess spemDeliveryProcess = new SPEMDeliveryProcess(deliveryProcess.getName(), taskUses, Activator.getDefault().getPreferenceStore()
+				.getString("process model path"), Activator.getDefault().getPreferenceStore()
+				.getString("behavior model path"));
+		int i = 0;
+		for(BreakdownElement be : deliveryProcess.getNestedBreakdownElement()){
+			if(be instanceof Activity){
+				Activity activity = (Activity) be;
+				for(BreakdownElement b : activity.getNestedBreakdownElement()){
+					if(b instanceof TaskUse){
+						TaskUse taskUse = (TaskUse) b;
+						SPEMTaskUse spemTaskUse = new SPEMTaskUse(taskUse.getName(),Activator.getDefault().getPreferenceStore()
+								.getString("process model path"));
+						spemDeliveryProcess.getTaskUses()[i] = spemTaskUse;
+						i++;
+						spemTaskUse.setDeliveryProcess(spemDeliveryProcess);
+					}
+				}
+			}
+		}
+		SPEMDeliveryProcess[] deliveryProcesses = new SPEMDeliveryProcess[1];
+		deliveryProcesses[0] = spemDeliveryProcess;
+		myTree = new Tree("myTree", deliveryProcesses);
+		return myTree;
+	}
+
+}

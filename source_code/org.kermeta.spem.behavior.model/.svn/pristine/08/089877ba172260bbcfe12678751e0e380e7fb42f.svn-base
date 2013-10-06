@@ -1,0 +1,241 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.spem.behavior.impl;
+
+import java.util.Collection;
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.kermeta.spem.behavior.Behavior;
+import org.kermeta.spem.behavior.BehaviorPackage;
+import org.kermeta.spem.behavior.PostCondition;
+import org.kermeta.spem.behavior.PreCondition;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Behavior</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.kermeta.spem.behavior.impl.BehaviorImpl#getAction <em>Action</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.BehaviorImpl#getPreConditions <em>Pre Conditions</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.BehaviorImpl#getPostConditions <em>Post Conditions</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class BehaviorImpl extends EObjectImpl implements Behavior {
+	/**
+	 * The default value of the '{@link #getAction() <em>Action</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAction()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ACTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAction() <em>Action</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAction()
+	 * @generated
+	 * @ordered
+	 */
+	protected String action = ACTION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getPreConditions() <em>Pre Conditions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPreConditions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PreCondition> preConditions;
+
+	/**
+	 * The cached value of the '{@link #getPostConditions() <em>Post Conditions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPostConditions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PostCondition> postConditions;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BehaviorImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return BehaviorPackage.Literals.BEHAVIOR;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getAction() {
+		return action;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAction(String newAction) {
+		String oldAction = action;
+		action = newAction;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.BEHAVIOR__ACTION, oldAction, action));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<PreCondition> getPreConditions() {
+		if (preConditions == null) {
+			preConditions = new EObjectResolvingEList<PreCondition>(PreCondition.class, this, BehaviorPackage.BEHAVIOR__PRE_CONDITIONS);
+		}
+		return preConditions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<PostCondition> getPostConditions() {
+		if (postConditions == null) {
+			postConditions = new EObjectResolvingEList<PostCondition>(PostCondition.class, this, BehaviorPackage.BEHAVIOR__POST_CONDITIONS);
+		}
+		return postConditions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case BehaviorPackage.BEHAVIOR__ACTION:
+				return getAction();
+			case BehaviorPackage.BEHAVIOR__PRE_CONDITIONS:
+				return getPreConditions();
+			case BehaviorPackage.BEHAVIOR__POST_CONDITIONS:
+				return getPostConditions();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case BehaviorPackage.BEHAVIOR__ACTION:
+				setAction((String)newValue);
+				return;
+			case BehaviorPackage.BEHAVIOR__PRE_CONDITIONS:
+				getPreConditions().clear();
+				getPreConditions().addAll((Collection<? extends PreCondition>)newValue);
+				return;
+			case BehaviorPackage.BEHAVIOR__POST_CONDITIONS:
+				getPostConditions().clear();
+				getPostConditions().addAll((Collection<? extends PostCondition>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.BEHAVIOR__ACTION:
+				setAction(ACTION_EDEFAULT);
+				return;
+			case BehaviorPackage.BEHAVIOR__PRE_CONDITIONS:
+				getPreConditions().clear();
+				return;
+			case BehaviorPackage.BEHAVIOR__POST_CONDITIONS:
+				getPostConditions().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.BEHAVIOR__ACTION:
+				return ACTION_EDEFAULT == null ? action != null : !ACTION_EDEFAULT.equals(action);
+			case BehaviorPackage.BEHAVIOR__PRE_CONDITIONS:
+				return preConditions != null && !preConditions.isEmpty();
+			case BehaviorPackage.BEHAVIOR__POST_CONDITIONS:
+				return postConditions != null && !postConditions.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (action: ");
+		result.append(action);
+		result.append(')');
+		return result.toString();
+	}
+
+} //BehaviorImpl

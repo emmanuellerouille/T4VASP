@@ -1,0 +1,65 @@
+package org.kermeta.cvl.requirementselicitationwizard.dialogs;
+
+import java.util.HashMap;
+
+import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.kermeta.cvl.variability.Choice;
+
+public class ChoiceResolutionDialog extends Dialog{
+
+	private Choice choice;
+	private boolean resolution;
+	private HashMap<Choice,Boolean> choices;
+
+	public ChoiceResolutionDialog(Shell parentShell, Choice choice) {
+		super(parentShell);
+		this.choice = choice;
+	}
+	
+	public ChoiceResolutionDialog(Shell parentShell, HashMap<Choice,Boolean> choices) {
+		super(parentShell);
+		this.choices = choices;
+	}
+
+	protected Control createDialogArea(Composite parent) {
+		Composite container = (Composite) super.createDialogArea(parent);
+
+		Label filterLabel = new Label(container, SWT.NONE);
+		filterLabel.setText("Select the choices:");
+		
+		for(final Choice choice: choices.keySet()){
+			final Button button = new Button(container, SWT.CHECK);
+			button.setText(choice.getName());
+			button.addSelectionListener(new SelectionAdapter(){
+				public void widgetSelected(SelectionEvent e) {
+					choices.put(choice, button.getSelection());
+				}
+			});
+		}
+		return container;
+	}
+	
+	public boolean isResolution() {
+		return resolution;
+	}
+
+	public void setResolution(boolean resolution) {
+		this.resolution = resolution;
+	}
+
+	public HashMap<Choice, Boolean> getChoices() {
+		return choices;
+	}
+
+	public void setChoices(HashMap<Choice, Boolean> choices) {
+		this.choices = choices;
+	}
+}

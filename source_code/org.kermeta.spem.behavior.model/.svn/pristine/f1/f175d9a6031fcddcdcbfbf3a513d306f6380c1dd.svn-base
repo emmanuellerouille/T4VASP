@@ -1,0 +1,1909 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.spem.behavior;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+/**
+ * <!-- begin-user-doc -->
+ * The <b>Package</b> for the model.
+ * It contains accessors for the meta objects to represent
+ * <ul>
+ *   <li>each class,</li>
+ *   <li>each feature of each class,</li>
+ *   <li>each enum,</li>
+ *   <li>and each data type</li>
+ * </ul>
+ * <!-- end-user-doc -->
+ * @see org.kermeta.spem.behavior.BehaviorFactory
+ * @model kind="package"
+ * @generated
+ */
+public interface BehaviorPackage extends EPackage {
+	/**
+	 * The package name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eNAME = "behavior";
+
+	/**
+	 * The package namespace URI.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eNS_URI = "http://behavior";
+
+	/**
+	 * The package namespace name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eNS_PREFIX = "behavior";
+
+	/**
+	 * The singleton instance of the package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	BehaviorPackage eINSTANCE = org.kermeta.spem.behavior.impl.BehaviorPackageImpl.init();
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.ContainerImpl <em>Container</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.ContainerImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getContainer()
+	 * @generated
+	 */
+	int CONTAINER = 0;
+
+	/**
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINER__CONDITIONS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINER__ACTIONS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Keys</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINER__KEYS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Automation Components Processes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINER__AUTOMATION_COMPONENTS_PROCESSES = 3;
+
+	/**
+	 * The number of structural features of the '<em>Container</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINER_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.AutomationComponentsProcessImpl <em>Automation Components Process</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.AutomationComponentsProcessImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getAutomationComponentsProcess()
+	 * @generated
+	 */
+	int AUTOMATION_COMPONENTS_PROCESS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Started Task Uses</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUTOMATION_COMPONENTS_PROCESS__STARTED_TASK_USES = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUTOMATION_COMPONENTS_PROCESS__NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Performed Task Uses</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUTOMATION_COMPONENTS_PROCESS__PERFORMED_TASK_USES = 2;
+
+	/**
+	 * The feature id for the '<em><b>Finished Task Uses</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUTOMATION_COMPONENTS_PROCESS__FINISHED_TASK_USES = 3;
+
+	/**
+	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUTOMATION_COMPONENTS_PROCESS__ELEMENTS = 4;
+
+	/**
+	 * The number of structural features of the '<em>Automation Components Process</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUTOMATION_COMPONENTS_PROCESS_FEATURE_COUNT = 5;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.Element <em>Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.Element
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getElement()
+	 * @generated
+	 */
+	int ELEMENT = 6;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT__NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.Node <em>Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.Node
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getNode()
+	 * @generated
+	 */
+	int NODE = 8;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__NAME = ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Control Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__OUTGOING_CONTROL_FLOWS = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Control Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__INCOMING_CONTROL_FLOWS = ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.AutomationComponentImpl <em>Automation Component</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.AutomationComponentImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getAutomationComponent()
+	 * @generated
+	 */
+	int AUTOMATION_COMPONENT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUTOMATION_COMPONENT__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Control Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUTOMATION_COMPONENT__OUTGOING_CONTROL_FLOWS = NODE__OUTGOING_CONTROL_FLOWS;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Control Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUTOMATION_COMPONENT__INCOMING_CONTROL_FLOWS = NODE__INCOMING_CONTROL_FLOWS;
+
+	/**
+	 * The feature id for the '<em><b>Pre Conditions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUTOMATION_COMPONENT__PRE_CONDITIONS = NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Post Conditions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUTOMATION_COMPONENT__POST_CONDITIONS = NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Action</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUTOMATION_COMPONENT__ACTION = NODE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Automation Component</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUTOMATION_COMPONENT_FEATURE_COUNT = NODE_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.Condition <em>Condition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.Condition
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getCondition()
+	 * @generated
+	 */
+	int CONDITION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Executed Task Uses</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__EXECUTED_TASK_USES = 1;
+
+	/**
+	 * The feature id for the '<em><b>Not Executed Task Uses</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__NOT_EXECUTED_TASK_USES = 2;
+
+	/**
+	 * The feature id for the '<em><b>Existing Keys</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__EXISTING_KEYS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Non Existing Keys</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__NON_EXISTING_KEYS = 4;
+
+	/**
+	 * The number of structural features of the '<em>Condition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION_FEATURE_COUNT = 5;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.PreConditionImpl <em>Pre Condition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.PreConditionImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getPreCondition()
+	 * @generated
+	 */
+	int PRE_CONDITION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRE_CONDITION__NAME = CONDITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Executed Task Uses</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRE_CONDITION__EXECUTED_TASK_USES = CONDITION__EXECUTED_TASK_USES;
+
+	/**
+	 * The feature id for the '<em><b>Not Executed Task Uses</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRE_CONDITION__NOT_EXECUTED_TASK_USES = CONDITION__NOT_EXECUTED_TASK_USES;
+
+	/**
+	 * The feature id for the '<em><b>Existing Keys</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRE_CONDITION__EXISTING_KEYS = CONDITION__EXISTING_KEYS;
+
+	/**
+	 * The feature id for the '<em><b>Non Existing Keys</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRE_CONDITION__NON_EXISTING_KEYS = CONDITION__NON_EXISTING_KEYS;
+
+	/**
+	 * The number of structural features of the '<em>Pre Condition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRE_CONDITION_FEATURE_COUNT = CONDITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.PostConditionImpl <em>Post Condition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.PostConditionImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getPostCondition()
+	 * @generated
+	 */
+	int POST_CONDITION = 5;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POST_CONDITION__NAME = CONDITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Executed Task Uses</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POST_CONDITION__EXECUTED_TASK_USES = CONDITION__EXECUTED_TASK_USES;
+
+	/**
+	 * The feature id for the '<em><b>Not Executed Task Uses</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POST_CONDITION__NOT_EXECUTED_TASK_USES = CONDITION__NOT_EXECUTED_TASK_USES;
+
+	/**
+	 * The feature id for the '<em><b>Existing Keys</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POST_CONDITION__EXISTING_KEYS = CONDITION__EXISTING_KEYS;
+
+	/**
+	 * The feature id for the '<em><b>Non Existing Keys</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POST_CONDITION__NON_EXISTING_KEYS = CONDITION__NON_EXISTING_KEYS;
+
+	/**
+	 * The number of structural features of the '<em>Post Condition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POST_CONDITION_FEATURE_COUNT = CONDITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.ControlFlowImpl <em>Control Flow</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.ControlFlowImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getControlFlow()
+	 * @generated
+	 */
+	int CONTROL_FLOW = 7;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_FLOW__NAME = ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_FLOW__SOURCE = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_FLOW__TARGET = ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Control Flow</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROL_FLOW_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.InitialNodeImpl <em>Initial Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.InitialNodeImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getInitialNode()
+	 * @generated
+	 */
+	int INITIAL_NODE = 9;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INITIAL_NODE__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Control Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INITIAL_NODE__OUTGOING_CONTROL_FLOWS = NODE__OUTGOING_CONTROL_FLOWS;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Control Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INITIAL_NODE__INCOMING_CONTROL_FLOWS = NODE__INCOMING_CONTROL_FLOWS;
+
+	/**
+	 * The number of structural features of the '<em>Initial Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INITIAL_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.FinalNodeImpl <em>Final Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.FinalNodeImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getFinalNode()
+	 * @generated
+	 */
+	int FINAL_NODE = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL_NODE__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Control Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL_NODE__OUTGOING_CONTROL_FLOWS = NODE__OUTGOING_CONTROL_FLOWS;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Control Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL_NODE__INCOMING_CONTROL_FLOWS = NODE__INCOMING_CONTROL_FLOWS;
+
+	/**
+	 * The number of structural features of the '<em>Final Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.ForkNodeImpl <em>Fork Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.ForkNodeImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getForkNode()
+	 * @generated
+	 */
+	int FORK_NODE = 11;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK_NODE__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Control Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK_NODE__OUTGOING_CONTROL_FLOWS = NODE__OUTGOING_CONTROL_FLOWS;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Control Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK_NODE__INCOMING_CONTROL_FLOWS = NODE__INCOMING_CONTROL_FLOWS;
+
+	/**
+	 * The number of structural features of the '<em>Fork Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.JoinNodeImpl <em>Join Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.JoinNodeImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getJoinNode()
+	 * @generated
+	 */
+	int JOIN_NODE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN_NODE__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Control Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN_NODE__OUTGOING_CONTROL_FLOWS = NODE__OUTGOING_CONTROL_FLOWS;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Control Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN_NODE__INCOMING_CONTROL_FLOWS = NODE__INCOMING_CONTROL_FLOWS;
+
+	/**
+	 * The number of structural features of the '<em>Join Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOIN_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.DecisionNodeImpl <em>Decision Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.DecisionNodeImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getDecisionNode()
+	 * @generated
+	 */
+	int DECISION_NODE = 13;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_NODE__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Control Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_NODE__OUTGOING_CONTROL_FLOWS = NODE__OUTGOING_CONTROL_FLOWS;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Control Flows</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_NODE__INCOMING_CONTROL_FLOWS = NODE__INCOMING_CONTROL_FLOWS;
+
+	/**
+	 * The number of structural features of the '<em>Decision Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.Action <em>Action</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.Action
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getAction()
+	 * @generated
+	 */
+	int ACTION = 14;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__EXPRESSION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__NAME = 1;
+
+	/**
+	 * The number of structural features of the '<em>Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.KermetaActionImpl <em>Kermeta Action</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.KermetaActionImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getKermetaAction()
+	 * @generated
+	 */
+	int KERMETA_ACTION = 15;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_ACTION__EXPRESSION = ACTION__EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_ACTION__NAME = ACTION__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Kermeta Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_ACTION_FEATURE_COUNT = ACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.JavaEclipseActionImpl <em>Java Eclipse Action</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.JavaEclipseActionImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getJavaEclipseAction()
+	 * @generated
+	 */
+	int JAVA_ECLIPSE_ACTION = 16;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_ECLIPSE_ACTION__EXPRESSION = ACTION__EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_ECLIPSE_ACTION__NAME = ACTION__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Java Eclipse Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_ECLIPSE_ACTION_FEATURE_COUNT = ACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.ShellActionImpl <em>Shell Action</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.ShellActionImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getShellAction()
+	 * @generated
+	 */
+	int SHELL_ACTION = 17;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHELL_ACTION__EXPRESSION = ACTION__EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHELL_ACTION__NAME = ACTION__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Shell Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHELL_ACTION_FEATURE_COUNT = ACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.GroovyActionImpl <em>Groovy Action</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.GroovyActionImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getGroovyAction()
+	 * @generated
+	 */
+	int GROOVY_ACTION = 18;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GROOVY_ACTION__EXPRESSION = ACTION__EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GROOVY_ACTION__NAME = ACTION__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Groovy Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GROOVY_ACTION_FEATURE_COUNT = ACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.behavior.impl.KeyImpl <em>Key</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.behavior.impl.KeyImpl
+	 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getKey()
+	 * @generated
+	 */
+	int KEY = 19;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY__NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Key</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_FEATURE_COUNT = 1;
+
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.Container <em>Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Container</em>'.
+	 * @see org.kermeta.spem.behavior.Container
+	 * @generated
+	 */
+	EClass getContainer();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.spem.behavior.Container#getConditions <em>Conditions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Conditions</em>'.
+	 * @see org.kermeta.spem.behavior.Container#getConditions()
+	 * @see #getContainer()
+	 * @generated
+	 */
+	EReference getContainer_Conditions();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.spem.behavior.Container#getActions <em>Actions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Actions</em>'.
+	 * @see org.kermeta.spem.behavior.Container#getActions()
+	 * @see #getContainer()
+	 * @generated
+	 */
+	EReference getContainer_Actions();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.spem.behavior.Container#getKeys <em>Keys</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Keys</em>'.
+	 * @see org.kermeta.spem.behavior.Container#getKeys()
+	 * @see #getContainer()
+	 * @generated
+	 */
+	EReference getContainer_Keys();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.spem.behavior.Container#getAutomationComponentsProcesses <em>Automation Components Processes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Automation Components Processes</em>'.
+	 * @see org.kermeta.spem.behavior.Container#getAutomationComponentsProcesses()
+	 * @see #getContainer()
+	 * @generated
+	 */
+	EReference getContainer_AutomationComponentsProcesses();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.AutomationComponentsProcess <em>Automation Components Process</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Automation Components Process</em>'.
+	 * @see org.kermeta.spem.behavior.AutomationComponentsProcess
+	 * @generated
+	 */
+	EClass getAutomationComponentsProcess();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.spem.behavior.AutomationComponentsProcess#getStartedTaskUses <em>Started Task Uses</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Started Task Uses</em>'.
+	 * @see org.kermeta.spem.behavior.AutomationComponentsProcess#getStartedTaskUses()
+	 * @see #getAutomationComponentsProcess()
+	 * @generated
+	 */
+	EReference getAutomationComponentsProcess_StartedTaskUses();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.spem.behavior.AutomationComponentsProcess#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.kermeta.spem.behavior.AutomationComponentsProcess#getName()
+	 * @see #getAutomationComponentsProcess()
+	 * @generated
+	 */
+	EAttribute getAutomationComponentsProcess_Name();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.spem.behavior.AutomationComponentsProcess#getPerformedTaskUses <em>Performed Task Uses</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Performed Task Uses</em>'.
+	 * @see org.kermeta.spem.behavior.AutomationComponentsProcess#getPerformedTaskUses()
+	 * @see #getAutomationComponentsProcess()
+	 * @generated
+	 */
+	EReference getAutomationComponentsProcess_PerformedTaskUses();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.spem.behavior.AutomationComponentsProcess#getFinishedTaskUses <em>Finished Task Uses</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Finished Task Uses</em>'.
+	 * @see org.kermeta.spem.behavior.AutomationComponentsProcess#getFinishedTaskUses()
+	 * @see #getAutomationComponentsProcess()
+	 * @generated
+	 */
+	EReference getAutomationComponentsProcess_FinishedTaskUses();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.spem.behavior.AutomationComponentsProcess#getElements <em>Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Elements</em>'.
+	 * @see org.kermeta.spem.behavior.AutomationComponentsProcess#getElements()
+	 * @see #getAutomationComponentsProcess()
+	 * @generated
+	 */
+	EReference getAutomationComponentsProcess_Elements();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.AutomationComponent <em>Automation Component</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Automation Component</em>'.
+	 * @see org.kermeta.spem.behavior.AutomationComponent
+	 * @generated
+	 */
+	EClass getAutomationComponent();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.spem.behavior.AutomationComponent#getPreConditions <em>Pre Conditions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Pre Conditions</em>'.
+	 * @see org.kermeta.spem.behavior.AutomationComponent#getPreConditions()
+	 * @see #getAutomationComponent()
+	 * @generated
+	 */
+	EReference getAutomationComponent_PreConditions();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.spem.behavior.AutomationComponent#getPostConditions <em>Post Conditions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Post Conditions</em>'.
+	 * @see org.kermeta.spem.behavior.AutomationComponent#getPostConditions()
+	 * @see #getAutomationComponent()
+	 * @generated
+	 */
+	EReference getAutomationComponent_PostConditions();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.spem.behavior.AutomationComponent#getAction <em>Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Action</em>'.
+	 * @see org.kermeta.spem.behavior.AutomationComponent#getAction()
+	 * @see #getAutomationComponent()
+	 * @generated
+	 */
+	EReference getAutomationComponent_Action();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.Condition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Condition</em>'.
+	 * @see org.kermeta.spem.behavior.Condition
+	 * @generated
+	 */
+	EClass getCondition();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.spem.behavior.Condition#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.kermeta.spem.behavior.Condition#getName()
+	 * @see #getCondition()
+	 * @generated
+	 */
+	EAttribute getCondition_Name();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.spem.behavior.Condition#getExecutedTaskUses <em>Executed Task Uses</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Executed Task Uses</em>'.
+	 * @see org.kermeta.spem.behavior.Condition#getExecutedTaskUses()
+	 * @see #getCondition()
+	 * @generated
+	 */
+	EReference getCondition_ExecutedTaskUses();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.spem.behavior.Condition#getNotExecutedTaskUses <em>Not Executed Task Uses</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Not Executed Task Uses</em>'.
+	 * @see org.kermeta.spem.behavior.Condition#getNotExecutedTaskUses()
+	 * @see #getCondition()
+	 * @generated
+	 */
+	EReference getCondition_NotExecutedTaskUses();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.spem.behavior.Condition#getExistingKeys <em>Existing Keys</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Existing Keys</em>'.
+	 * @see org.kermeta.spem.behavior.Condition#getExistingKeys()
+	 * @see #getCondition()
+	 * @generated
+	 */
+	EReference getCondition_ExistingKeys();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.spem.behavior.Condition#getNonExistingKeys <em>Non Existing Keys</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Non Existing Keys</em>'.
+	 * @see org.kermeta.spem.behavior.Condition#getNonExistingKeys()
+	 * @see #getCondition()
+	 * @generated
+	 */
+	EReference getCondition_NonExistingKeys();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.PreCondition <em>Pre Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Pre Condition</em>'.
+	 * @see org.kermeta.spem.behavior.PreCondition
+	 * @generated
+	 */
+	EClass getPreCondition();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.PostCondition <em>Post Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Post Condition</em>'.
+	 * @see org.kermeta.spem.behavior.PostCondition
+	 * @generated
+	 */
+	EClass getPostCondition();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.Element <em>Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Element</em>'.
+	 * @see org.kermeta.spem.behavior.Element
+	 * @generated
+	 */
+	EClass getElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.spem.behavior.Element#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.kermeta.spem.behavior.Element#getName()
+	 * @see #getElement()
+	 * @generated
+	 */
+	EAttribute getElement_Name();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.ControlFlow <em>Control Flow</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Control Flow</em>'.
+	 * @see org.kermeta.spem.behavior.ControlFlow
+	 * @generated
+	 */
+	EClass getControlFlow();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.spem.behavior.ControlFlow#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Source</em>'.
+	 * @see org.kermeta.spem.behavior.ControlFlow#getSource()
+	 * @see #getControlFlow()
+	 * @generated
+	 */
+	EReference getControlFlow_Source();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.spem.behavior.ControlFlow#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target</em>'.
+	 * @see org.kermeta.spem.behavior.ControlFlow#getTarget()
+	 * @see #getControlFlow()
+	 * @generated
+	 */
+	EReference getControlFlow_Target();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.Node <em>Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Node</em>'.
+	 * @see org.kermeta.spem.behavior.Node
+	 * @generated
+	 */
+	EClass getNode();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.spem.behavior.Node#getOutgoingControlFlows <em>Outgoing Control Flows</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Outgoing Control Flows</em>'.
+	 * @see org.kermeta.spem.behavior.Node#getOutgoingControlFlows()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EReference getNode_OutgoingControlFlows();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.spem.behavior.Node#getIncomingControlFlows <em>Incoming Control Flows</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Incoming Control Flows</em>'.
+	 * @see org.kermeta.spem.behavior.Node#getIncomingControlFlows()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EReference getNode_IncomingControlFlows();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.InitialNode <em>Initial Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Initial Node</em>'.
+	 * @see org.kermeta.spem.behavior.InitialNode
+	 * @generated
+	 */
+	EClass getInitialNode();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.FinalNode <em>Final Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Final Node</em>'.
+	 * @see org.kermeta.spem.behavior.FinalNode
+	 * @generated
+	 */
+	EClass getFinalNode();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.ForkNode <em>Fork Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Fork Node</em>'.
+	 * @see org.kermeta.spem.behavior.ForkNode
+	 * @generated
+	 */
+	EClass getForkNode();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.JoinNode <em>Join Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Join Node</em>'.
+	 * @see org.kermeta.spem.behavior.JoinNode
+	 * @generated
+	 */
+	EClass getJoinNode();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.DecisionNode <em>Decision Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Decision Node</em>'.
+	 * @see org.kermeta.spem.behavior.DecisionNode
+	 * @generated
+	 */
+	EClass getDecisionNode();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.Action <em>Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Action</em>'.
+	 * @see org.kermeta.spem.behavior.Action
+	 * @generated
+	 */
+	EClass getAction();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.spem.behavior.Action#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Expression</em>'.
+	 * @see org.kermeta.spem.behavior.Action#getExpression()
+	 * @see #getAction()
+	 * @generated
+	 */
+	EAttribute getAction_Expression();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.spem.behavior.Action#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.kermeta.spem.behavior.Action#getName()
+	 * @see #getAction()
+	 * @generated
+	 */
+	EAttribute getAction_Name();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.KermetaAction <em>Kermeta Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Kermeta Action</em>'.
+	 * @see org.kermeta.spem.behavior.KermetaAction
+	 * @generated
+	 */
+	EClass getKermetaAction();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.JavaEclipseAction <em>Java Eclipse Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Java Eclipse Action</em>'.
+	 * @see org.kermeta.spem.behavior.JavaEclipseAction
+	 * @generated
+	 */
+	EClass getJavaEclipseAction();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.ShellAction <em>Shell Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Shell Action</em>'.
+	 * @see org.kermeta.spem.behavior.ShellAction
+	 * @generated
+	 */
+	EClass getShellAction();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.GroovyAction <em>Groovy Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Groovy Action</em>'.
+	 * @see org.kermeta.spem.behavior.GroovyAction
+	 * @generated
+	 */
+	EClass getGroovyAction();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.behavior.Key <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Key</em>'.
+	 * @see org.kermeta.spem.behavior.Key
+	 * @generated
+	 */
+	EClass getKey();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.spem.behavior.Key#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.kermeta.spem.behavior.Key#getName()
+	 * @see #getKey()
+	 * @generated
+	 */
+	EAttribute getKey_Name();
+
+	/**
+	 * Returns the factory that creates the instances of the model.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the factory that creates the instances of the model.
+	 * @generated
+	 */
+	BehaviorFactory getBehaviorFactory();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Defines literals for the meta objects that represent
+	 * <ul>
+	 *   <li>each class,</li>
+	 *   <li>each feature of each class,</li>
+	 *   <li>each enum,</li>
+	 *   <li>and each data type</li>
+	 * </ul>
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	interface Literals {
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.ContainerImpl <em>Container</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.ContainerImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getContainer()
+		 * @generated
+		 */
+		EClass CONTAINER = eINSTANCE.getContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Conditions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTAINER__CONDITIONS = eINSTANCE.getContainer_Conditions();
+
+		/**
+		 * The meta object literal for the '<em><b>Actions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTAINER__ACTIONS = eINSTANCE.getContainer_Actions();
+
+		/**
+		 * The meta object literal for the '<em><b>Keys</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTAINER__KEYS = eINSTANCE.getContainer_Keys();
+
+		/**
+		 * The meta object literal for the '<em><b>Automation Components Processes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTAINER__AUTOMATION_COMPONENTS_PROCESSES = eINSTANCE.getContainer_AutomationComponentsProcesses();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.AutomationComponentsProcessImpl <em>Automation Components Process</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.AutomationComponentsProcessImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getAutomationComponentsProcess()
+		 * @generated
+		 */
+		EClass AUTOMATION_COMPONENTS_PROCESS = eINSTANCE.getAutomationComponentsProcess();
+
+		/**
+		 * The meta object literal for the '<em><b>Started Task Uses</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AUTOMATION_COMPONENTS_PROCESS__STARTED_TASK_USES = eINSTANCE.getAutomationComponentsProcess_StartedTaskUses();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AUTOMATION_COMPONENTS_PROCESS__NAME = eINSTANCE.getAutomationComponentsProcess_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Performed Task Uses</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AUTOMATION_COMPONENTS_PROCESS__PERFORMED_TASK_USES = eINSTANCE.getAutomationComponentsProcess_PerformedTaskUses();
+
+		/**
+		 * The meta object literal for the '<em><b>Finished Task Uses</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AUTOMATION_COMPONENTS_PROCESS__FINISHED_TASK_USES = eINSTANCE.getAutomationComponentsProcess_FinishedTaskUses();
+
+		/**
+		 * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AUTOMATION_COMPONENTS_PROCESS__ELEMENTS = eINSTANCE.getAutomationComponentsProcess_Elements();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.AutomationComponentImpl <em>Automation Component</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.AutomationComponentImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getAutomationComponent()
+		 * @generated
+		 */
+		EClass AUTOMATION_COMPONENT = eINSTANCE.getAutomationComponent();
+
+		/**
+		 * The meta object literal for the '<em><b>Pre Conditions</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AUTOMATION_COMPONENT__PRE_CONDITIONS = eINSTANCE.getAutomationComponent_PreConditions();
+
+		/**
+		 * The meta object literal for the '<em><b>Post Conditions</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AUTOMATION_COMPONENT__POST_CONDITIONS = eINSTANCE.getAutomationComponent_PostConditions();
+
+		/**
+		 * The meta object literal for the '<em><b>Action</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AUTOMATION_COMPONENT__ACTION = eINSTANCE.getAutomationComponent_Action();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.Condition <em>Condition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.Condition
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getCondition()
+		 * @generated
+		 */
+		EClass CONDITION = eINSTANCE.getCondition();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONDITION__NAME = eINSTANCE.getCondition_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Executed Task Uses</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONDITION__EXECUTED_TASK_USES = eINSTANCE.getCondition_ExecutedTaskUses();
+
+		/**
+		 * The meta object literal for the '<em><b>Not Executed Task Uses</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONDITION__NOT_EXECUTED_TASK_USES = eINSTANCE.getCondition_NotExecutedTaskUses();
+
+		/**
+		 * The meta object literal for the '<em><b>Existing Keys</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONDITION__EXISTING_KEYS = eINSTANCE.getCondition_ExistingKeys();
+
+		/**
+		 * The meta object literal for the '<em><b>Non Existing Keys</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONDITION__NON_EXISTING_KEYS = eINSTANCE.getCondition_NonExistingKeys();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.PreConditionImpl <em>Pre Condition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.PreConditionImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getPreCondition()
+		 * @generated
+		 */
+		EClass PRE_CONDITION = eINSTANCE.getPreCondition();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.PostConditionImpl <em>Post Condition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.PostConditionImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getPostCondition()
+		 * @generated
+		 */
+		EClass POST_CONDITION = eINSTANCE.getPostCondition();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.Element <em>Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.Element
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getElement()
+		 * @generated
+		 */
+		EClass ELEMENT = eINSTANCE.getElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ELEMENT__NAME = eINSTANCE.getElement_Name();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.ControlFlowImpl <em>Control Flow</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.ControlFlowImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getControlFlow()
+		 * @generated
+		 */
+		EClass CONTROL_FLOW = eINSTANCE.getControlFlow();
+
+		/**
+		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTROL_FLOW__SOURCE = eINSTANCE.getControlFlow_Source();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTROL_FLOW__TARGET = eINSTANCE.getControlFlow_Target();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.Node <em>Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.Node
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getNode()
+		 * @generated
+		 */
+		EClass NODE = eINSTANCE.getNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Outgoing Control Flows</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NODE__OUTGOING_CONTROL_FLOWS = eINSTANCE.getNode_OutgoingControlFlows();
+
+		/**
+		 * The meta object literal for the '<em><b>Incoming Control Flows</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NODE__INCOMING_CONTROL_FLOWS = eINSTANCE.getNode_IncomingControlFlows();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.InitialNodeImpl <em>Initial Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.InitialNodeImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getInitialNode()
+		 * @generated
+		 */
+		EClass INITIAL_NODE = eINSTANCE.getInitialNode();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.FinalNodeImpl <em>Final Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.FinalNodeImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getFinalNode()
+		 * @generated
+		 */
+		EClass FINAL_NODE = eINSTANCE.getFinalNode();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.ForkNodeImpl <em>Fork Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.ForkNodeImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getForkNode()
+		 * @generated
+		 */
+		EClass FORK_NODE = eINSTANCE.getForkNode();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.JoinNodeImpl <em>Join Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.JoinNodeImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getJoinNode()
+		 * @generated
+		 */
+		EClass JOIN_NODE = eINSTANCE.getJoinNode();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.DecisionNodeImpl <em>Decision Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.DecisionNodeImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getDecisionNode()
+		 * @generated
+		 */
+		EClass DECISION_NODE = eINSTANCE.getDecisionNode();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.Action <em>Action</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.Action
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getAction()
+		 * @generated
+		 */
+		EClass ACTION = eINSTANCE.getAction();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTION__EXPRESSION = eINSTANCE.getAction_Expression();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTION__NAME = eINSTANCE.getAction_Name();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.KermetaActionImpl <em>Kermeta Action</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.KermetaActionImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getKermetaAction()
+		 * @generated
+		 */
+		EClass KERMETA_ACTION = eINSTANCE.getKermetaAction();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.JavaEclipseActionImpl <em>Java Eclipse Action</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.JavaEclipseActionImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getJavaEclipseAction()
+		 * @generated
+		 */
+		EClass JAVA_ECLIPSE_ACTION = eINSTANCE.getJavaEclipseAction();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.ShellActionImpl <em>Shell Action</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.ShellActionImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getShellAction()
+		 * @generated
+		 */
+		EClass SHELL_ACTION = eINSTANCE.getShellAction();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.GroovyActionImpl <em>Groovy Action</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.GroovyActionImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getGroovyAction()
+		 * @generated
+		 */
+		EClass GROOVY_ACTION = eINSTANCE.getGroovyAction();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.behavior.impl.KeyImpl <em>Key</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.behavior.impl.KeyImpl
+		 * @see org.kermeta.spem.behavior.impl.BehaviorPackageImpl#getKey()
+		 * @generated
+		 */
+		EClass KEY = eINSTANCE.getKey();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KEY__NAME = eINSTANCE.getKey_Name();
+
+	}
+
+} //BehaviorPackage

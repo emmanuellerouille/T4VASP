@@ -1,0 +1,171 @@
+package org.kermeta.spem.processexecution.view.actions.impl;
+
+import java.util.ArrayList;
+
+import org.eclipse.draw2d.Label;
+import org.kermeta.spem.activity.DecisionNode;
+import org.kermeta.spem.activity.Edge;
+import org.kermeta.spem.activity.ForkNode;
+import org.kermeta.spem.activity.JoinNode;
+import org.kermeta.spem.behavior.Container;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.executioncontext.State;
+import org.kermeta.spem.processexecution.utils.model.ModelUtils;
+import org.kermeta.spem.processexecution.view.HyperlinkFigure;
+import org.kermeta.spem.processexecution.view.ProcessPart;
+import org.kermeta.spem.processexecution.view.TaskFigure;
+
+import spem.Activity;
+import spem.BreakdownElement;
+import spem.MethodLibrary;
+import spem.MethodPlugin;
+import spem.ProcessPackage;
+import spem.ProcessPackageableElement;
+import spem.TaskUse;
+import spem.uma.DeliveryProcess;
+import spem.uma.DeliveryProcessPackage;
+
+public class Utils {
+	
+	public static void setStatusFollowingTasks(String taskUseName, ProcessPart view, Container container, String processModelPath, ExecutionContext executionContext){
+
+		MethodLibrary methodLibrary = ModelUtils.getProcessModelRoot(processModelPath);
+
+		MethodPlugin methodPlugin = methodLibrary.getOwnedMethodPlugin().get(0);
+		ProcessPackage processPackage = methodPlugin.getOwnedProcessPackage().get(0);		
+		DeliveryProcessPackage deliveryProcessPackage = null;
+		for(ProcessPackageableElement e : processPackage.getOwnedProcessMember()){
+			if(e instanceof DeliveryProcessPackage){
+				deliveryProcessPackage = (DeliveryProcessPackage) e;
+			}
+		}
+		DeliveryProcess deliveryProcess = (DeliveryProcess) deliveryProcessPackage.getOwnedProcessMember().get(0);
+
+		for(BreakdownElement be : deliveryProcess.getNestedBreakdownElement()){
+			if(be instanceof Activity){
+				Activity activity = (Activity) be;
+				for(BreakdownElement b : activity.getNestedBreakdownElement()){
+					if(b instanceof Edge){
+						Edge edge = (Edge) b;
+						if(edge.getSource() instanceof TaskUse){
+							TaskUse sourceTaskUse = (TaskUse) edge.getSource();
+							if(sourceTaskUse.getName().equals(taskUseName)){//we have the control flow that is pointing to the following tasks
+								if(edge.getTarget() instanceof TaskUse){
+									setStatusFollowingTasksTaskUse((TaskUse) edge.getTarget(), view, container, executionContext);
+								}
+								if(edge.getTarget() instanceof ForkNode){
+									setStatusFollowingTasksForkNode((ForkNode) edge.getTarget(), view, container, activity, executionContext);
+								}
+								if(edge.getTarget() instanceof JoinNode){
+									setStatusFollowingTasksJoinNode((JoinNode) edge.getTarget(), view, container, activity, executionContext);
+								}
+								if(edge.getTarget() instanceof DecisionNode){
+									setStatusFollowingTasksDecisionNode((DecisionNode) edge.getTarget(), view, container, executionContext);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public static void setStatusFollowingTasksTaskUse(TaskUse taskUse, ProcessPart view, Container container, ExecutionContext executionContext){
+		for(TaskFigure taskFigure : view.getMediator().getView().getTaskFigures()){
+			if(taskFigure.getDescription().equals(taskUse.getName())){
+				for( int i = 0; i < taskFigure.getStdActionsPlate().getChildren().size(); i++){
+					Label label = (Label) taskFigure.getStdActionsPlate().getChildren().get(i);
+					if(label instanceof HyperlinkFigure){
+						HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+
+						if(hyperlinkFigure.getText() == "on start"){
+							if(ModelUtils.isInitializationAutomated(taskUse.getName(), container)){
+								hyperlinkFigure.getAction().setEnabled(true);
+								ModelUtils.changeStateWorkUnitIntoExecutionContextModel(executionContext, taskUse.getName(), State.ON_START);
+							}
+						}
+						
+						if(hyperlinkFigure.getText() == "on do"){
+							if(!ModelUtils.isInitializationAutomated(taskUse.getName(), container) && ModelUtils.isExecutionAutomated(taskUse.getName(), container)){
+								hyperlinkFigure.getAction().setEnabled(true);
+								ModelUtils.changeStateWorkUnitIntoExecutionContextModel(executionContext, taskUse.getName(), State.ON_DO);
+							}
+						}
+						hyperlinkFigure.repaint();
+					}
+				}
+			}
+		}
+	}
+	
+	public static void setStatusFollowingTasksForkNode(ForkNode forkNode, ProcessPart view, Container container, Activity a, ExecutionContext executionContext){
+		//For each control flow coming from the current fork node, if its target is a task, then call the setStatusFollowingTasksTaskUse method
+		for(BreakdownElement b : a.getNestedBreakdownElement()){
+			if(b instanceof Edge){
+				Edge e = (Edge) b;
+				if(e.getSource().getName().equals(forkNode.getName())){//The current control flow comes from the current fork node
+					if(e.getTarget() instanceof TaskUse){
+						setStatusFollowingTasksTaskUse((TaskUse) e.getTarget(), view, container, executionContext);
+					}
+				}
+			}
+		}
+	}
+	
+	public static void setStatusFollowingTasksJoinNode(JoinNode joinNode, ProcessPart view, Container container, Activity a, ExecutionContext executionContext){
+		ArrayList<TaskFigure> taskFigures = getAllTasksBeforeJoinNode(joinNode, view, a);
+		if(areFinished(taskFigures)){//Modification of the status of the following tasks only if all the preceding tasks are finished
+			//For each control flow coming from the current join node, if its target is a task, then call the setStatusFollowingTasksTaskUse method, if the target is a fork node 
+			// then call the setStatusFollowingTasksForkNode method
+			for(BreakdownElement b : a.getNestedBreakdownElement()){
+				if(b instanceof Edge){
+					Edge e = (Edge) b;
+					if(e.getSource().getName().equals(joinNode.getName())){//The current control flow comes from the current join node
+						if(e.getTarget() instanceof TaskUse){
+							setStatusFollowingTasksTaskUse((TaskUse) e.getTarget(), view, container, executionContext);
+						}
+						if(e.getTarget() instanceof ForkNode){
+							setStatusFollowingTasksForkNode((ForkNode) e.getTarget(), view, container, a, executionContext);
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public static void setStatusFollowingTasksDecisionNode(DecisionNode decisionNode, ProcessPart view, Container container, ExecutionContext executionContext){
+		System.out.println("setStatusFollowingTasksDecisionNode not implemented yet");
+	}
+	
+	public static boolean areFinished(ArrayList<TaskFigure> taskFigures){
+		for(TaskFigure taskFigure : taskFigures){
+			if(!taskFigure.isFinished()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public static ArrayList<TaskFigure> getAllTasksBeforeJoinNode(JoinNode joinNode, ProcessPart view, Activity a){
+		ArrayList<TaskFigure> taskFigures = new ArrayList<TaskFigure>();
+		
+		for(BreakdownElement b : a.getNestedBreakdownElement()){
+			if(b instanceof Edge){
+				Edge e = (Edge) b;
+				if(e.getTarget().getName().equals(joinNode.getName())){
+					if(e.getSource() instanceof TaskUse){
+						TaskUse tu = (TaskUse) e.getSource();
+						for(TaskFigure taskFigure : view.getMediator().getView().getTaskFigures()){
+							if(taskFigure.getDescription().equals(tu.getName())){
+								taskFigures.add(taskFigure);
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return taskFigures;
+	}
+
+}

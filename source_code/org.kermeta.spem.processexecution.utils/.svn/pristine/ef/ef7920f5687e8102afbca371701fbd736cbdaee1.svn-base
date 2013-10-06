@@ -1,0 +1,217 @@
+package org.kermeta.spem.processexecution.utils.model;
+
+import java.util.Map;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.kermeta.spem.behavior.BehaviorPackage;
+import org.kermeta.spem.behavior.Container;
+import org.kermeta.spem.behavior.WorkUnitHandle;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.executioncontext.ExecutioncontextFactory;
+import org.kermeta.spem.executioncontext.ExecutioncontextPackage;
+import org.kermeta.spem.executioncontext.Key;
+import org.kermeta.spem.executioncontext.OnWhat;
+import org.kermeta.spem.executioncontext.State;
+import org.kermeta.spem.executioncontext.Value;
+import org.kermeta.spem.executioncontext.WorkUnit;
+
+import spem.MethodLibrary;
+import spem.SpemPackage;
+import spem.TaskUse;
+
+public class ModelUtils {
+
+	public static ExecutionContext getExecutionContextRoot(String contextModelPath){
+
+		ExecutioncontextPackage.eINSTANCE.eClass();
+
+		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m = reg.getExtensionToFactoryMap();
+		m.put("executioncontext", new XMIResourceFactoryImpl());
+
+		ResourceSet resSet = new ResourceSetImpl();
+
+		Resource resource = resSet.getResource(URI
+				.createURI("platform:/resource"+contextModelPath), true);
+
+		ExecutionContext executionContext = (ExecutionContext) resource.getContents().get(0);
+
+		return executionContext;
+	}
+
+	public static String getBehaviorModelPath(String contextModelPath){
+
+		ExecutionContext executionContext = getExecutionContextRoot(contextModelPath);
+
+		return getValueOfKey("behavior model path", executionContext);
+	}
+	
+	public static String getGenModelUri(String contextModelPath){
+
+		ExecutionContext executionContext = getExecutionContextRoot(contextModelPath);
+
+		return "platform:/resource/"+getValueOfKey("project name", executionContext)+"/model/"+getValueOfKey("model file name", executionContext)+".genmodel";
+	}
+
+	public static String getProcessModelPath(String contextModelPath){
+
+		ExecutionContext executionContext = getExecutionContextRoot(contextModelPath);
+
+		return getValueOfKey("process model path", executionContext);
+	}
+
+	public static String getValueOfKey(String keyName, ExecutionContext executionContext){
+		for(Key key : executionContext.getKeys()){
+			if(key.getName().equals(keyName)){
+				return key.getValue().getContent();
+			}
+		}
+
+		return null;
+	}
+	
+	public static Container getBehaviorModelRoot(String behaviorModelPath){
+		BehaviorPackage.eINSTANCE.eClass();
+
+		Resource.Factory.Registry reg2 = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m2 = reg2.getExtensionToFactoryMap();
+		m2.put("behavior", new XMIResourceFactoryImpl());
+
+		ResourceSet resSet2 = new ResourceSetImpl();
+
+		Resource resource2 = resSet2.getResource(URI
+				.createURI("platform:/resource"+behaviorModelPath), true);
+
+		return (Container) resource2.getContents().get(0);
+	}
+	
+	public static MethodLibrary getProcessModelRoot(String processModelPath){
+		SpemPackage.eINSTANCE.eClass();
+
+		Resource.Factory.Registry reg3 = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m3 = reg3.getExtensionToFactoryMap();
+		m3.put("spem", new XMIResourceFactoryImpl());
+
+		ResourceSet resSet3 = new ResourceSetImpl();
+
+		Resource resource3 = resSet3.getResource(URI
+				.createURI("platform:/resource"+processModelPath), true);
+
+		return (MethodLibrary) resource3.getContents().get(0);
+	}
+	
+	public static boolean isInitializationAutomated(String taskName, Container container){
+		boolean res = false;
+		
+		for(WorkUnitHandle wuh : container.getWorkUnitHandles()){
+			if(wuh.getWorkUnit() instanceof TaskUse){
+				TaskUse taskUse = (TaskUse) wuh.getWorkUnit();
+				if(taskUse.getName().equals(taskName)){
+					if(wuh.getOnStart() != null){
+						res = true;
+					}
+				}
+			}
+		}
+		
+		return res;
+	}
+	
+	public static boolean isExecutionAutomated(String taskName, Container container){
+		boolean res = false;
+		
+		for(WorkUnitHandle wuh : container.getWorkUnitHandles()){
+			if(wuh.getWorkUnit() instanceof TaskUse){
+				TaskUse taskUse = (TaskUse) wuh.getWorkUnit();
+				if(taskUse.getName().equals(taskName)){
+					if(wuh.getOnDo() != null){
+						res = true;
+					}
+				}
+			}
+		}
+		
+		return res;
+	}
+	
+	public static boolean isFinalizationAutomated(String taskName, Container container){
+		boolean res = false;
+		
+		for(WorkUnitHandle wuh : container.getWorkUnitHandles()){
+			if(wuh.getWorkUnit() instanceof TaskUse){
+				TaskUse taskUse = (TaskUse) wuh.getWorkUnit();
+				if(taskUse.getName().equals(taskName)){
+					if(wuh.getOnEnd() != null){
+						res = true;
+					}
+				}
+			}
+		}
+		
+		return res;
+	}
+	
+	public static void addKeyValueIntoExecutionContextModel(ExecutionContext executionContext, String key, String value){
+		Key k = ExecutioncontextFactory.eINSTANCE.createKey();
+		k.setName(key);
+		Value v = ExecutioncontextFactory.eINSTANCE.createValue();
+		v.setContent(value);
+		v.setKey(k);
+		k.setValue(v);
+		executionContext.getKeys().add(k);
+		executionContext.getValues().add(v);
+	}
+	
+	public static void addWorkUnitIntoExecutionContextModel(ExecutionContext executionContext, String workUnitName){
+		WorkUnit workUnit = ExecutioncontextFactory.eINSTANCE.createWorkUnit();
+		workUnit.setName(workUnitName);
+		workUnit.setState(State.NOT_STARTED);
+		executionContext.getWorkUnits().add(workUnit);
+	}
+	
+	public static void changeStateWorkUnitIntoExecutionContextModel(ExecutionContext executionContext, String workUnitName, State state){
+		for(WorkUnit workUnit: executionContext.getWorkUnits()){
+			if(workUnit.getName().equals(workUnitName)){
+				workUnit.setState(state);
+			}
+		}
+	}
+	
+	public static State findStateWorkUnitIntoExecutionContextModel(ExecutionContext executionContext, String workUnitName){
+		State state = State.NOT_STARTED;
+		for(WorkUnit workUnit: executionContext.getWorkUnits()){
+			if(workUnit.getName().equals(workUnitName)){
+				state = workUnit.getState();
+			}
+		}
+		return state;
+	}
+
+	public static void changeWorkUnitUnderExecution(ExecutionContext executionContext, String workUnitHandleName){
+		executionContext.getUnderExecution().setWorkUnitHandleName(workUnitHandleName);
+	}
+	
+	public static void changeOnWhatUnderExecution(ExecutionContext executionContext, OnWhat onWhat){
+		executionContext.getUnderExecution().setOnWhat(onWhat);
+	}
+	
+	public static void changePrimitiveACNameUnderExecution(ExecutionContext executionContext, String primitiveACName){
+		executionContext.getUnderExecution().setPrimitiveACName(primitiveACName);
+	}
+	
+	public static WorkUnitHandle findWorkUnitHandle(Container container, String workUnitHandleName){
+		WorkUnitHandle workUnitHandle = null;
+		
+		for(WorkUnitHandle wuh : container.getWorkUnitHandles()){
+			if(wuh.getName().equals(workUnitHandleName)){
+				return wuh;
+			}
+		}
+		
+		return workUnitHandle;
+	}
+}

@@ -1,0 +1,52 @@
+package org.kermeta.cvl.requirementselicitationwizard.core;
+
+import CVLMetamodelMaster.CVL.Choice;
+import CVLMetamodelMaster.CVL.VClassifier;
+
+public class Solution {
+	
+	private boolean isChoiceResolution;
+	private boolean isVSpecResolution;
+	private Choice choiceResolvedToTrue;
+	private VClassifier resolvedVClassifier;
+	
+	public Solution() {
+	}
+	
+	public Solution(boolean isChoiceResolution, boolean isVSpecResolution,
+			Choice choiceResolvedToTrue, VClassifier resolvedVClassifier) {
+		this.isChoiceResolution = isChoiceResolution;
+		this.isVSpecResolution = isVSpecResolution;
+		this.choiceResolvedToTrue = choiceResolvedToTrue;
+		this.resolvedVClassifier = resolvedVClassifier;
+	}
+
+
+	public boolean isChoiceResolution() {
+		return isChoiceResolution;
+	}
+	public void setIsChoiceResolution(boolean isChoiceResolution) {
+		this.isChoiceResolution = isChoiceResolution;
+	}
+	public boolean isVSpecResolution() {
+		return isVSpecResolution;
+	}
+	public void setIsVSpecResolution(boolean isVSpecResolution) {
+		this.isVSpecResolution = isVSpecResolution;
+	}
+	public VClassifier getResolvedVClassifier() {
+		return resolvedVClassifier;
+	}
+	public void setResolvedVClassifier(VClassifier resolvedVClassifier) {
+		this.resolvedVClassifier = resolvedVClassifier;
+	}
+
+	public Choice getChoiceResolvedToTrue() {
+		return choiceResolvedToTrue;
+	}
+
+	public void setChoiceResolvedToTrue(Choice choiceResolvedToTrue) {
+		this.choiceResolvedToTrue = choiceResolvedToTrue;
+	}
+
+}

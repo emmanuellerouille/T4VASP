@@ -1,0 +1,135 @@
+package org.kermeta.spem.processexecution.view;
+
+import org.eclipse.core.resources.IProject;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.jface.viewers.IStructuredSelection;
+
+public class ProcessMediator {
+
+	private static final boolean STRICT = true;
+
+	private ProcessFigure view;
+
+	private IProject project;
+	
+	private ProcessPart part;
+
+	public ProcessMediator(ProcessPart part) {
+		this.part = part;
+	}
+
+	public boolean isStrict() {
+		return STRICT;
+	}
+
+	public void setView(ProcessFigure view) {
+		this.view = view;
+//		view.getAbstractSyntaxFigure().addAction(createLinkFigure("on start", new StartAction("Metamodel creation")));
+//		view.getAbstractSyntaxFigure().addAction(createLinkFigure("on do", new NullAction()));
+//		view.getAbstractSyntaxFigure().addAction(createLinkFigure("done", new NullAction()));
+//		view.getAbstractSyntaxFigure().addAction(createLinkFigure("on end", new NullAction()));
+//		
+//		view.getCheckerFigure().addAction(createLinkFigure("on start", new NullAction()));
+//		view.getCheckerFigure().addAction(createLinkFigure("on do", new NullAction()));
+//		view.getCheckerFigure().addAction(createLinkFigure("done", new NullAction()));
+//		view.getCheckerFigure().addAction(createLinkFigure("on end", new NullAction()));
+//		
+//		view.getCompilerFigure().addAction(createLinkFigure("on start", new NullAction()));
+//		view.getCompilerFigure().addAction(createLinkFigure("on do", new NullAction()));
+//		view.getCompilerFigure().addAction(createLinkFigure("done", new NullAction()));
+//		view.getCompilerFigure().addAction(createLinkFigure("on end", new NullAction()));
+//		
+//		view.getInterpreterFigure().addAction(createLinkFigure("on start", new NullAction()));
+//		view.getInterpreterFigure().addAction(createLinkFigure("on do", new NullAction()));
+//		view.getInterpreterFigure().addAction(createLinkFigure("done", new NullAction()));
+//		view.getInterpreterFigure().addAction(createLinkFigure("on end", new NullAction()));
+//		
+//		view.getStaticSemanticsFigure().addAction(createLinkFigure("on start", new NullAction()));
+//		view.getStaticSemanticsFigure().addAction(createLinkFigure("on do", new NullAction()));
+//		view.getStaticSemanticsFigure().addAction(createLinkFigure("done", new NullAction()));
+//		view.getStaticSemanticsFigure().addAction(createLinkFigure("on end", new NullAction()));
+//		
+//		view.getTreeConcreteSyntaxFigure().addAction(createLinkFigure("on start", new NullAction()));
+//		view.getTreeConcreteSyntaxFigure().addAction(createLinkFigure("on do", new NullAction()));
+//		view.getTreeConcreteSyntaxFigure().addAction(createLinkFigure("done", new NullAction()));
+//		view.getTreeConcreteSyntaxFigure().addAction(createLinkFigure("on end", new NullAction()));
+	}
+	
+	public ProcessFigure getView(){
+		return view;
+	}
+
+	/**
+	 * Also initializes the action.
+	 */
+	protected HyperlinkFigure createLinkFigure(String text, ProcessAction action) {
+		HyperlinkFigure linkFigure = new HyperlinkFigure(action);
+		linkFigure.setText(text);
+		return linkFigure;
+	}
+
+	public IProject getProject() {
+		return project;
+	}
+
+	protected void setModelName(TaskFigure figure, URI uri) {
+		figure.setName(uri == null ? null : uri.lastSegment());
+		figure.setFullName(uri == null ? null : uri.toString());
+	}
+	
+//	protected class CreateSpemModelAction implements ProcessAction
+//	{
+//		private boolean enabled = true;
+//
+//		public boolean isEnabled() {
+//			// TODO Auto-generated method stub
+//			return enabled;
+//		}
+//
+//		public void run() {
+//			IStructuredSelection selection = part.getSelection();
+//			if (selection == null) return;
+//		}
+//		
+//	}
+//	
+//	protected class StartAction implements ProcessAction
+//	{
+//		private boolean enabled = true;
+//		private String taskUseName;
+//		
+//		public StartAction(String taskUseName){
+//			this.taskUseName = taskUseName;
+//		}
+//
+//		public boolean isEnabled() {
+//			// TODO Auto-generated method stub
+//			return enabled;
+//		}
+//
+//		public void run() {
+////			ExecuteTask executeTask = new ExecuteTask();
+////			executeTask.run(taskUseName);
+//		}
+//		
+//	}
+//	
+//	protected class NullAction implements ProcessAction
+//	{
+//		public boolean isEnabled() {
+//			// TODO Auto-generated method stub
+//			return false;
+//		}
+//
+//		public void run() {
+//			System.out.println("Action not implemented");
+//		}
+//		
+//	}
+//
+//	public IProject getActiveProject() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+}

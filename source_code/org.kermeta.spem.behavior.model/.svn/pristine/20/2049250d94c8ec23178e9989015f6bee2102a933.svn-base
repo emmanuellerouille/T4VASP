@@ -1,0 +1,21 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.spem.behavior;
+
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Decision Node</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ *
+ * @see org.kermeta.spem.behavior.BehaviorPackage#getDecisionNode()
+ * @model
+ * @generated
+ */
+public interface DecisionNode extends Node {
+} // DecisionNode

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="">
+  <eClassifiers xsi:type="ecore:EClass" name="AutomationComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name: EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" lowerBound="1"
+        eType="#//Action"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+        eType="#//OCLConstraint"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="startedElements" upperBound="-1"
+        eType="#//ecore%3A%3AEObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="performedElements" upperBound="-1"
+        eType="#//ecore%3A%3AEObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="finishedElements" upperBound="-1"
+        eType="#//ecore%3A%3AEObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OCLConstraint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constraint: EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ecore::EObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name: EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression: EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="KermetaAction" eSuperTypes="#//Action"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaEclipseAction" eSuperTypes="#//Action"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ShellAction" eSuperTypes="#//Action"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GroovyAction" eSuperTypes="#//Action"/>
+</ecore:EPackage>

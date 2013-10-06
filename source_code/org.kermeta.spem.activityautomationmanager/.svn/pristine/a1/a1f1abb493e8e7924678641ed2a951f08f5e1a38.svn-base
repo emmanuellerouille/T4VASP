@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1342796299684
+Build-Jdk: 1.6.0_25
+Built-By: erouille
+Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
+Bundle-Name: spem.activityautomationmanager
+Bundle-SymbolicName: org.kermeta.spem.activityautomationmanager;singleto
+ n:=true
+Bundle-Version: 1.9.9.SNAPSHOT_20120720_1658
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.kermeta.spem.activityautomationmanager;version="1.9.
+ 9.SNAPSHOT_20120712_1406"
+Ignore-Package: org.eclipse.core.runtime,java.util,org.eclipse.ui,org.ec
+ lipse.ui.plugin,org.osgi.framework,org.eclipse.swt.widgets,java.lang,or
+ g.eclipse.jface.dialogs
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.ui
+Tool: Bnd-1.50.0

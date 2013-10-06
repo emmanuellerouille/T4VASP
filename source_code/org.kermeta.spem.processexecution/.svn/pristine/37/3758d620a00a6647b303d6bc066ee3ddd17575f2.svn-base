@@ -1,0 +1,60 @@
+package org.kermeta.spem.processexecution.actions;
+
+import my.group.org.kermeta.spem.execution.taskuserunner.MainRunner;
+
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IObjectActionDelegate;
+import org.eclipse.ui.IWorkbenchPart;
+import org.kermeta.spem.processexecution.Activator;
+import org.kermeta.spem.processexecution.model.SPEMTaskUse;
+
+import src.main.kmt.KerRichFactory;
+import src.main.kmt.Main;
+
+public class OnDoAction implements IObjectActionDelegate{
+	
+	private IWorkbenchPart targetPart;
+	private ISelection selection;
+	private String taskUseName;
+
+	public OnDoAction() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void run(IAction action) {
+		if (selection instanceof StructuredSelection){
+			StructuredSelection structuredSelection = (StructuredSelection) selection;
+			if(structuredSelection.getFirstElement() instanceof SPEMTaskUse){
+				taskUseName = ((SPEMTaskUse) structuredSelection.getFirstElement()).getName();
+			}
+		}
+		
+		ResourceSet rSet = new ResourceSetImpl();
+		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap();
+		MainRunner.init4eclipse();
+		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap();
+		MainRunner.init();
+		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap();
+		Main m = KerRichFactory.createMain();
+		m.doExecution(Activator.getDefault().getPreferenceStore().getString("process model path"), Activator.getDefault().getPreferenceStore().getString("behavior model path"), taskUseName, Activator.getDefault().getPreferenceStore().getString("context file path"));
+		
+	}
+
+	@Override
+	public void selectionChanged(IAction action, ISelection selection) {
+		this.selection = selection;
+		
+	}
+
+	@Override
+	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
+		this.targetPart = targetPart;		
+		
+	}
+
+}

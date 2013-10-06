@@ -1,0 +1,122 @@
+import java.util.ArrayList;
+
+import org.eclipse.ui.IStartup;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.executioncontext.State;
+import org.kermeta.spem.processexecution.utils.model.ModelUtils;
+import org.kermeta.spem.processexecution.view.HyperlinkFigure;
+import org.kermeta.spem.processexecution.view.ProcessPart;
+import org.kermeta.spem.processexecution.view.TaskFigure;
+import org.kermeta.spem.processexecution.view.actions.impl.DoAction;
+import org.kermeta.spem.processexecution.view.actions.impl.DoneAction;
+import org.kermeta.spem.processexecution.view.actions.impl.EndAction;
+import org.kermeta.spem.processexecution.view.actions.impl.StartAction;
+
+import spem.Activity;
+import spem.BreakdownElement;
+import spem.MethodLibrary;
+import spem.MethodPlugin;
+import spem.ProcessPackage;
+import spem.ProcessPackageableElement;
+import spem.TaskUse;
+import spem.uma.DeliveryProcess;
+import spem.uma.DeliveryProcessPackage;
+
+
+public class LaunchProcessExecution implements IStartup {
+
+	@Override
+	public void earlyStartup() {
+
+		if(PlatformUI.getWorkbench().getPreferenceStore().getBoolean("process execution")){
+			System.out.println("COUCOU!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("Process execution is launching!!!!!!!!!!!!");
+			System.out.println("COUCOU!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("Process execution is launching!!!!!!!!!!!!");
+			System.out.println("COUCOU!!!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("Process execution is launching!!!!!!!!!!!!");
+			PlatformUI.getWorkbench().getPreferenceStore().setValue("process execution", false);
+			
+			//Get the process model path
+			String processModelPath = PlatformUI.getWorkbench().getPreferenceStore().getString("process model path");
+			
+			//Get the root of the process model
+			MethodLibrary methodLibrary = ModelUtils.getProcessModelRoot(processModelPath);
+
+			//Get the delivery process
+			MethodPlugin methodPlugin = methodLibrary.getOwnedMethodPlugin().get(0);
+			ProcessPackage processPackage = methodPlugin.getOwnedProcessPackage().get(0);		
+			DeliveryProcessPackage deliveryProcessPackage = null;
+			for(ProcessPackageableElement e : processPackage.getOwnedProcessMember()){
+				if(e instanceof DeliveryProcessPackage){
+					deliveryProcessPackage = (DeliveryProcessPackage) e;
+				}
+			}
+			DeliveryProcess deliveryProcess = (DeliveryProcess) deliveryProcessPackage.getOwnedProcessMember().get(0);
+			
+			//Initialize taskFigures' names
+			ArrayList<String> taskFigureNames = new ArrayList<String>();
+
+			for(BreakdownElement be : deliveryProcess.getNestedBreakdownElement()){
+				if(be instanceof Activity){
+					Activity activity = (Activity) be;
+					for(BreakdownElement b : activity.getNestedBreakdownElement()){
+						if(b instanceof TaskUse){
+							TaskUse taskUse = (TaskUse) b;
+							taskFigureNames.add(taskUse.getName());
+						}
+					}
+				}
+			}
+			
+			//Get the context model path
+			String contextModelPath = PlatformUI.getWorkbench().getPreferenceStore().getString("context model path");
+			
+			//Get the execution context
+			ExecutionContext executionContext = ModelUtils.getExecutionContextRoot(contextModelPath);
+			
+			try {
+				ProcessPart view = (ProcessPart)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("ProcessExecution.views.ProcessElementsView");
+				view.getMediator().getView().initTaskFigures(taskFigureNames);
+				for(int i = 0; i <view.getMediator().getView().getTaskFigures().size(); i++){
+					TaskFigure taskFigure = view.getMediator().getView().getTaskFigures().get(i);
+					//Find the state of the current taskFigure into the context model
+					State state = ModelUtils.findStateWorkUnitIntoExecutionContextModel(executionContext, taskFigure.getDescription());
+					
+					//Set the availability of the actions of the current taskFigure according to this state
+					if(state.getValue() == State.NOT_STARTED_VALUE || state.equals(State.FINISHED)){
+						taskFigure.addAction(new HyperlinkFigure("on start", new StartAction(false, taskFigure.getDescription(), contextModelPath)));
+						taskFigure.addAction(new HyperlinkFigure("on do", new DoAction(false, taskFigure.getDescription(), contextModelPath)));
+						taskFigure.addAction(new HyperlinkFigure("done", new DoneAction(false, taskFigure.getDescription(), contextModelPath)));
+						taskFigure.addAction(new HyperlinkFigure("on end", new EndAction(false, taskFigure.getDescription(), contextModelPath)));					
+					}else if(state.getValue() == State.ON_START_VALUE){
+						taskFigure.addAction(new HyperlinkFigure("on start", new StartAction(true, taskFigure.getDescription(), contextModelPath)));
+						taskFigure.addAction(new HyperlinkFigure("on do", new DoAction(false, taskFigure.getDescription(), contextModelPath)));
+						taskFigure.addAction(new HyperlinkFigure("done", new DoneAction(false, taskFigure.getDescription(), contextModelPath)));
+						taskFigure.addAction(new HyperlinkFigure("on end", new EndAction(false, taskFigure.getDescription(), contextModelPath)));			
+					}else if(state.getValue() == State.ON_DO_VALUE){
+						taskFigure.addAction(new HyperlinkFigure("on start", new StartAction(false, taskFigure.getDescription(), contextModelPath)));
+						taskFigure.addAction(new HyperlinkFigure("on do", new DoAction(true, taskFigure.getDescription(), contextModelPath)));
+						taskFigure.addAction(new HyperlinkFigure("done", new DoneAction(false, taskFigure.getDescription(), contextModelPath)));
+						taskFigure.addAction(new HyperlinkFigure("on end", new EndAction(false, taskFigure.getDescription(), contextModelPath)));
+					}else if(state.getValue() == State.DONE_VALUE){
+						taskFigure.addAction(new HyperlinkFigure("on start", new StartAction(false, taskFigure.getDescription(), contextModelPath)));
+						taskFigure.addAction(new HyperlinkFigure("on do", new DoAction(false, taskFigure.getDescription(), contextModelPath)));
+						taskFigure.addAction(new HyperlinkFigure("done", new DoneAction(true, taskFigure.getDescription(), contextModelPath)));
+						taskFigure.addAction(new HyperlinkFigure("on end", new EndAction(false, taskFigure.getDescription(), contextModelPath)));
+					}else if(state.getValue() == State.ON_END_VALUE){
+						taskFigure.addAction(new HyperlinkFigure("on start", new StartAction(false, taskFigure.getDescription(), contextModelPath)));
+						taskFigure.addAction(new HyperlinkFigure("on do", new DoAction(false, taskFigure.getDescription(), contextModelPath)));
+						taskFigure.addAction(new HyperlinkFigure("done", new DoneAction(false, taskFigure.getDescription(), contextModelPath)));
+						taskFigure.addAction(new HyperlinkFigure("on end", new EndAction(true, taskFigure.getDescription(), contextModelPath)));
+					}
+				}
+			} catch (PartInitException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+
+}

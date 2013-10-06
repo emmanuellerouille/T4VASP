@@ -1,0 +1,80 @@
+package org.kermeta.spem.processexecution.view;
+
+import org.eclipse.core.resources.IProject;
+import org.eclipse.emf.common.util.URI;
+import org.kermeta.spem.processexecution.view.actions.ProcessAction;
+
+public class ProcessMediator {
+
+	private static final boolean STRICT = true;
+
+	private ProcessFigure view;
+
+	private IProject project;
+	
+	private ProcessPart part;
+
+	public ProcessMediator(ProcessPart part) {
+		this.part = part;
+	}
+
+	public boolean isStrict() {
+		return STRICT;
+	}
+
+	public void setView(ProcessFigure view) {
+		this.view = view;
+//		view.getAbstractSyntaxFigure().addAction(createLinkFigure("on start", new StartAction("Metamodel creation")));
+//		view.getAbstractSyntaxFigure().addAction(createLinkFigure("on do", new NullAction()));
+//		view.getAbstractSyntaxFigure().addAction(createLinkFigure("done", new NullAction()));
+//		view.getAbstractSyntaxFigure().addAction(createLinkFigure("on end", new NullAction()));
+//		
+//		view.getCheckerFigure().addAction(createLinkFigure("on start", new NullAction()));
+//		view.getCheckerFigure().addAction(createLinkFigure("on do", new NullAction()));
+//		view.getCheckerFigure().addAction(createLinkFigure("done", new NullAction()));
+//		view.getCheckerFigure().addAction(createLinkFigure("on end", new NullAction()));
+//		
+//		view.getCompilerFigure().addAction(createLinkFigure("on start", new NullAction()));
+//		view.getCompilerFigure().addAction(createLinkFigure("on do", new NullAction()));
+//		view.getCompilerFigure().addAction(createLinkFigure("done", new NullAction()));
+//		view.getCompilerFigure().addAction(createLinkFigure("on end", new NullAction()));
+//		
+//		view.getInterpreterFigure().addAction(createLinkFigure("on start", new NullAction()));
+//		view.getInterpreterFigure().addAction(createLinkFigure("on do", new NullAction()));
+//		view.getInterpreterFigure().addAction(createLinkFigure("done", new NullAction()));
+//		view.getInterpreterFigure().addAction(createLinkFigure("on end", new NullAction()));
+//		
+//		view.getStaticSemanticsFigure().addAction(createLinkFigure("on start", new NullAction()));
+//		view.getStaticSemanticsFigure().addAction(createLinkFigure("on do", new NullAction()));
+//		view.getStaticSemanticsFigure().addAction(createLinkFigure("done", new NullAction()));
+//		view.getStaticSemanticsFigure().addAction(createLinkFigure("on end", new NullAction()));
+//		
+//		view.getTreeConcreteSyntaxFigure().addAction(createLinkFigure("on start", new NullAction()));
+//		view.getTreeConcreteSyntaxFigure().addAction(createLinkFigure("on do", new NullAction()));
+//		view.getTreeConcreteSyntaxFigure().addAction(createLinkFigure("done", new NullAction()));
+//		view.getTreeConcreteSyntaxFigure().addAction(createLinkFigure("on end", new NullAction()));
+	}
+	
+	public ProcessFigure getView(){
+		return view;
+	}
+
+	/**
+	 * Also initializes the action.
+	 */
+	protected HyperlinkFigure createLinkFigure(String text, ProcessAction action) {
+		HyperlinkFigure linkFigure = new HyperlinkFigure(action);
+		linkFigure.setText(text);
+		return linkFigure;
+	}
+
+	public IProject getProject() {
+		return project;
+	}
+
+	protected void setModelName(TaskFigure figure, URI uri) {
+		figure.setName(uri == null ? null : uri.lastSegment());
+		figure.setFullName(uri == null ? null : uri.toString());
+	}
+
+}

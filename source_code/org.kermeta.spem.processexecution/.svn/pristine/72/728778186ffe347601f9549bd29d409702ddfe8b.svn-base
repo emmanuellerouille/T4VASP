@@ -1,0 +1,415 @@
+package org.kermeta.spem.processexecution.views;
+
+import org.eclipse.draw2d.AbstractLayout;
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.Ellipse;
+import org.eclipse.draw2d.Graphics;
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.MarginBorder;
+import org.eclipse.draw2d.PolygonDecoration;
+import org.eclipse.draw2d.RectangleFigure;
+import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Insets;
+import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.swt.graphics.Color;
+
+public class ProcessFigure extends RectangleFigure {
+
+	private static final int LINE_WIDTH = 6;
+
+	private static final int ARROW_LENGTH = 15;
+	
+	private static final Color MODEL_BG = ColorConstants.white;
+	
+	private static final int TEXT_GAP = LINE_WIDTH + 3;
+	
+	private static final Color METHODOLOGY_FG = new Color(null, 102, 128, 184);
+
+	private static final Color DASHBOARD_BG = ColorConstants.white;
+
+	private static final Color DASHBOARD_FG = new Color(null, 102, 128, 184);
+
+	// nodes
+	
+	private TaskFigure abstractSyntaxFigure;
+	
+	
+
+	private TaskFigure treeConcreteSyntaxFigure;
+	
+	private TaskFigure staticSemanticsFigure;
+	
+	private TaskFigure checkerFigure;
+	
+	private TaskFigure interpreterFigure;
+	
+	private TaskFigure compilerFigure;
+	
+	private Ellipse initFigure = new Ellipse();
+	
+	private RectangleFigure endFigure = new RectangleFigure();
+	
+	private RectangleFigure forkFigure = new RectangleFigure();
+	
+	private RectangleFigure joinFigure = new RectangleFigure();
+
+	// flows
+
+	private FlowFigure init2abstractSynyaxFlow;
+
+	private FlowFigure abstractSyntax2forkFlow;
+
+	private FlowFigure join2endFlow;
+	
+	private FlowFigure fork2treeconcretesyntaxFlow;
+	
+	private FlowFigure fork2staticsemanticsFlow;
+	
+	private FlowFigure fork2compilerFlow;
+	
+	private FlowFigure fork2interpreterFlow;
+	
+	private FlowFigure staticsemantics2checkerFlow;
+	
+	private FlowFigure treeconcretesyntax2joinFlow;
+	
+	private FlowFigure checker2joinFlow;
+	
+	private FlowFigure interpreter2joinFlow;
+	
+	private FlowFigure compiler2joinFlow;
+
+	public ProcessFigure() {
+		initFigure.setSize(20,20);
+		initFigure.setBackgroundColor(DASHBOARD_FG);
+		add(initFigure);
+		forkFigure.setSize(170, 20);
+		forkFigure.setBackgroundColor(DASHBOARD_FG);
+		add(forkFigure);
+		joinFigure.setSize(170, 20);
+		joinFigure.setBackgroundColor(DASHBOARD_FG);
+		add(joinFigure);
+		add(abstractSyntaxFigure = createModelFigure("Abstract Syntax Creation"));
+		add(treeConcreteSyntaxFigure = createModelFigure("Tree Concrete Syntax Creation"));
+		add(staticSemanticsFigure = createModelFigure("Static Semantics Creation"));
+		add(checkerFigure = createModelFigure("Checker Creation"));
+		add(interpreterFigure = createModelFigure("Interpreter Creation"));
+		add(compilerFigure = createModelFigure("Compiler Creation"));
+		endFigure.setSize(20, 20);
+		endFigure.setBackgroundColor(DASHBOARD_FG);
+		add(endFigure);
+		add(init2abstractSynyaxFlow = createFlowFigure(true));
+		add(abstractSyntax2forkFlow = createFlowFigure(true));
+		add(fork2treeconcretesyntaxFlow = createFlowFigure(true));
+		add(fork2staticsemanticsFlow = createFlowFigure(true));
+		add(fork2interpreterFlow = createFlowFigure(true));
+		add(fork2compilerFlow = createFlowFigure(true));
+		add(staticsemantics2checkerFlow = createFlowFigure(true));
+		add(treeconcretesyntax2joinFlow = createFlowFigure(true));
+		add(checker2joinFlow = createFlowFigure(true));
+		add(interpreter2joinFlow = createFlowFigure(true));
+		add(compiler2joinFlow = createFlowFigure(true));
+		add(join2endFlow = createFlowFigure(true));
+		setLayoutManager(new DashboardLayout());
+		setBorder(new MarginBorder(10));
+		setBackgroundColor(DASHBOARD_BG);
+		setForegroundColor(DASHBOARD_FG);
+	}
+	
+	public TaskFigure getAbstractSyntaxFigure() {
+		return abstractSyntaxFigure;
+	}
+
+	public void setAbstractSyntaxFigure(TaskFigure abstractSyntaxFigure) {
+		this.abstractSyntaxFigure = abstractSyntaxFigure;
+	}
+
+	public TaskFigure getTreeConcreteSyntaxFigure() {
+		return treeConcreteSyntaxFigure;
+	}
+
+	public void setTreeConcreteSyntaxFigure(TaskFigure treeConcreteSyntaxFigure) {
+		this.treeConcreteSyntaxFigure = treeConcreteSyntaxFigure;
+	}
+
+	public TaskFigure getStaticSemanticsFigure() {
+		return staticSemanticsFigure;
+	}
+
+	public void setStaticSemanticsFigure(TaskFigure staticSemanticsFigure) {
+		this.staticSemanticsFigure = staticSemanticsFigure;
+	}
+
+	public TaskFigure getCheckerFigure() {
+		return checkerFigure;
+	}
+
+	public void setCheckerFigure(TaskFigure checkerFigure) {
+		this.checkerFigure = checkerFigure;
+	}
+
+	public TaskFigure getInterpreterFigure() {
+		return interpreterFigure;
+	}
+
+	public void setInterpreterFigure(TaskFigure interpreterFigure) {
+		this.interpreterFigure = interpreterFigure;
+	}
+
+	public TaskFigure getCompilerFigure() {
+		return compilerFigure;
+	}
+
+	public void setCompilerFigure(TaskFigure compilerFigure) {
+		this.compilerFigure = compilerFigure;
+	}
+	
+	protected TaskFigure createModelFigure(String description) {
+		TaskFigure modelFigure = new TaskFigure();
+		modelFigure.setDescription(description);
+		modelFigure.setBackgroundColor(MODEL_BG);
+		modelFigure.setForegroundColor(METHODOLOGY_FG);
+		modelFigure.setLineWidth(LINE_WIDTH);
+		modelFigure.setSpacing(TEXT_GAP);
+		return modelFigure;
+	}
+
+	protected FlowFigure createFlowFigure(boolean directed) {
+		FlowFigure flowFigure = new FlowFigure();
+		if (directed) {
+			PolygonDecoration decoration = new PolygonDecoration();
+			PointList template = new PointList();
+			template.addPoint(0, -LINE_WIDTH / 2);
+			template.addPoint(0, LINE_WIDTH / 2);
+			template.addPoint(-ARROW_LENGTH, LINE_WIDTH / 2 + 10);
+			template.addPoint(-ARROW_LENGTH, -(LINE_WIDTH / 2 + 10));
+			decoration.setTemplate(template);
+			decoration.setScale(1, 1);
+			flowFigure.setTargetDecoration(decoration);
+		}
+		flowFigure.setForegroundColor(DASHBOARD_FG);
+		flowFigure.setLineWidth(LINE_WIDTH);
+		return flowFigure;
+	}
+
+	@Override
+	protected void outlineShape(Graphics graphics) {
+	}
+
+	private class DashboardLayout extends AbstractLayout {
+
+		private static final int MAX_BOX_WIDTH = 800;
+
+		private static final int BOX_SPACING = 40;
+
+		@Override
+		protected Dimension calculatePreferredSize(IFigure container, int wHint, int hHint) {
+			Dimension d = getLayoutData().getSize();
+			Insets insets = container.getInsets();
+			d = new Dimension(d.width + insets.getWidth(), d.height + insets.getHeight());
+			return d.union(getBorderPreferredSize(container));
+		}
+
+		public void layout(IFigure container) {
+			getLayoutData().apply(container.getClientArea().getLocation());
+		}
+
+		protected LayoutData getLayoutData() {
+			Dimension initSize = initFigure.getPreferredSize();
+			initSize.width = Math.min(initSize.width, MAX_BOX_WIDTH);
+			Dimension abstractSyntaxSize = abstractSyntaxFigure.getPreferredSize();
+			abstractSyntaxSize.width = Math.min(abstractSyntaxSize.width, MAX_BOX_WIDTH);
+			Dimension treeConcreteSyntaxSize = treeConcreteSyntaxFigure.getPreferredSize();
+			treeConcreteSyntaxSize.width = Math.min(treeConcreteSyntaxSize.width, MAX_BOX_WIDTH);
+			Dimension staticSemanticsSize = staticSemanticsFigure.getPreferredSize();
+			staticSemanticsSize.width = Math.min(staticSemanticsSize.width, MAX_BOX_WIDTH);
+			Dimension checkerSize = checkerFigure.getPreferredSize();
+			checkerSize.width = Math.min(checkerSize.width, MAX_BOX_WIDTH);
+			Dimension interpreterSize = interpreterFigure.getPreferredSize();
+			interpreterSize.width = Math.min(interpreterSize.width, MAX_BOX_WIDTH);
+			Dimension compilerSize = compilerFigure.getPreferredSize();
+			compilerSize.width = Math.min(compilerSize.width, MAX_BOX_WIDTH);
+			Dimension endSize = endFigure.getPreferredSize();
+			endSize.width = Math.min(endSize.width, MAX_BOX_WIDTH);
+			Dimension forkSize = forkFigure.getPreferredSize();
+			forkSize.width = Math.min(forkSize.width, MAX_BOX_WIDTH);
+			Dimension joinSize = joinFigure.getPreferredSize();
+			joinSize.width = Math.min(joinSize.width, MAX_BOX_WIDTH);
+
+			LayoutData data = new LayoutData();
+
+			// boxes
+			int initY = BOX_SPACING;
+			int abstractSyntaxY = initY + initSize.height + BOX_SPACING;
+			int forkY = abstractSyntaxY +abstractSyntaxSize.height + BOX_SPACING;
+			int treeConcreteSyntaxY = forkY + forkSize.height + BOX_SPACING;
+			int checkerY = treeConcreteSyntaxY +treeConcreteSyntaxSize.height + BOX_SPACING;
+			int staticSemanticsX = treeConcreteSyntaxSize.width + BOX_SPACING;
+			int abstractSyntaxX = staticSemanticsX + staticSemanticsSize.width / 2;
+			int initX = abstractSyntaxX + abstractSyntaxSize.width / 2;
+			int compilerX = staticSemanticsX + staticSemanticsSize.width + BOX_SPACING;
+			int interpreterX = compilerX + compilerSize.width + BOX_SPACING;
+			int joinX = abstractSyntaxX;
+			int forkX = abstractSyntaxX;
+			int joinY = checkerY + checkerSize.height + BOX_SPACING;
+			int endX = initX;
+			int endY = joinY + joinSize.height + BOX_SPACING;
+			data.initBox = new Rectangle(initX, initY, initSize.width, initSize.height);
+			data.abstractSyntaxBox = new Rectangle(abstractSyntaxX, abstractSyntaxY, abstractSyntaxSize.width, abstractSyntaxSize.height);
+			data.forkBox = new Rectangle(forkX, forkY, forkSize.width, forkSize.height);
+			data.treeConcreteSyntaxBox = new Rectangle(0, treeConcreteSyntaxY, treeConcreteSyntaxSize.width, treeConcreteSyntaxSize.height);
+			data.staticSemanticsBox = new Rectangle(staticSemanticsX, treeConcreteSyntaxY, staticSemanticsSize.width, staticSemanticsSize.height);
+			data.checkerBox = new Rectangle(staticSemanticsX + 30, checkerY, checkerSize.width, checkerSize.height);
+			data.compilerBox = new Rectangle(compilerX, treeConcreteSyntaxY, compilerSize.width, compilerSize.height);
+			data.interpreterBox = new Rectangle(interpreterX, treeConcreteSyntaxY, interpreterSize.width, interpreterSize.height);
+			data.joinBox = new Rectangle(joinX, joinY, joinSize.width, joinSize.height);
+			data.endBox = new Rectangle(endX, endY, endSize.width, endSize.height);
+			// points
+			int pointH = data.initBox.x + data.initBox.width / 2;
+			data.init2abstractsyntaxPoints = new PointList(2);
+			data.init2abstractsyntaxPoints.addPoint(pointH, data.initBox.y + data.initBox.height);
+			data.init2abstractsyntaxPoints.addPoint(pointH, data.abstractSyntaxBox.y);
+			data.abstractsyntax2forkPoints = new PointList(2);
+			data.abstractsyntax2forkPoints.addPoint(pointH, data.abstractSyntaxBox.y + data.abstractSyntaxBox.height);
+			data.abstractsyntax2forkPoints.addPoint(pointH, data.forkBox.y);
+			data.join2endPoints = new PointList(2);
+			data.join2endPoints.addPoint(pointH, data.joinBox.y + data.joinBox.height);
+			data.join2endPoints.addPoint(pointH, data.endBox.y);
+			
+			data.fork2treeconcretesyntaxPoints = new PointList(2);
+			data.fork2treeconcretesyntaxPoints.addPoint(data.forkBox.x + data.forkBox.width / 2, data.forkBox.y + data.forkBox.height);
+			data.fork2treeconcretesyntaxPoints.addPoint(data.treeConcreteSyntaxBox.x + data.treeConcreteSyntaxBox.width / 2, data.treeConcreteSyntaxBox.y);
+			
+			data.fork2staticsemanticsPoints = new PointList(2);
+			data.fork2staticsemanticsPoints.addPoint(data.forkBox.x + data.forkBox.width / 2, data.forkBox.y + data.forkBox.height);
+			data.fork2staticsemanticsPoints.addPoint(data.staticSemanticsBox.x + data.staticSemanticsBox.width / 2, data.staticSemanticsBox.y);
+			
+			data.fork2compilerPoints = new PointList(2);
+			data.fork2compilerPoints.addPoint(data.forkBox.x + data.forkBox.width / 2, data.forkBox.y + data.forkBox.height);
+			data.fork2compilerPoints.addPoint(data.compilerBox.x + data.compilerBox.width / 2, data.compilerBox.y);
+			
+			data.fork2interpreterPoints = new PointList(2);
+			data.fork2interpreterPoints.addPoint(data.forkBox.x + data.forkBox.width / 2, data.forkBox.y + data.forkBox.height);
+			data.fork2interpreterPoints.addPoint(data.interpreterBox.x + data.interpreterBox.width / 2, data.interpreterBox.y);
+			
+			data.staticsemantics2checkerPoints = new PointList(2);
+			data.staticsemantics2checkerPoints.addPoint(data.staticSemanticsBox.x + data.staticSemanticsBox.width / 2, data.staticSemanticsBox.y + data.staticSemanticsBox.height);
+			data.staticsemantics2checkerPoints.addPoint(data.checkerBox.x + data.checkerBox.width / 2, data.checkerBox.y);
+			
+			data.treeconcretesyntax2joinPoints = new PointList(2);
+			data.treeconcretesyntax2joinPoints.addPoint(data.treeConcreteSyntaxBox.x + data.treeConcreteSyntaxBox.width / 2, data.treeConcreteSyntaxBox.y + data.treeConcreteSyntaxBox.height);
+			data.treeconcretesyntax2joinPoints.addPoint(data.joinBox.x + data.joinBox.width / 2, data.joinBox.y);
+			
+			data.checker2joinPoints = new PointList(2);
+			data.checker2joinPoints.addPoint(data.checkerBox.x + data.checkerBox.width / 2, data.checkerBox.y + data.checkerBox.height);
+			data.checker2joinPoints.addPoint(data.joinBox.x + data.joinBox.width / 2, data.joinBox.y);
+			
+			data.compiler2joinPoints = new PointList(2);
+			data.compiler2joinPoints.addPoint(data.compilerBox.x + data.compilerBox.width / 2, data.compilerBox.y + data.compilerBox.height);
+			data.compiler2joinPoints.addPoint(data.joinBox.x + data.joinBox.width / 2, data.joinBox.y);
+			
+			data.interpreter2joinPoints = new PointList(2);
+			data.interpreter2joinPoints.addPoint(data.interpreterBox.x + data.interpreterBox.width / 2, data.interpreterBox.y + data.interpreterBox.height);
+			data.interpreter2joinPoints.addPoint(data.joinBox.x + data.joinBox.width / 2, data.joinBox.y);
+			return data;
+		}
+
+		private class LayoutData {
+
+//			public Rectangle logoBox;
+			
+			public Rectangle abstractSyntaxBox;
+			
+			public Rectangle treeConcreteSyntaxBox;
+			
+			public Rectangle staticSemanticsBox;
+			
+			public Rectangle checkerBox;
+			
+			public Rectangle interpreterBox;
+			
+			public Rectangle compilerBox;
+
+			public Rectangle initBox;
+
+			public Rectangle endBox;
+			
+			public Rectangle forkBox;
+			
+			public Rectangle joinBox;
+
+			public PointList init2abstractsyntaxPoints;
+
+			public PointList abstractsyntax2forkPoints;
+
+			public PointList join2endPoints;
+			
+			public PointList fork2treeconcretesyntaxPoints;
+			
+			public PointList fork2staticsemanticsPoints;
+			
+			public PointList fork2interpreterPoints;
+			
+			public PointList fork2compilerPoints;
+			
+			public PointList staticsemantics2checkerPoints;
+			
+			public PointList treeconcretesyntax2joinPoints;
+			
+			public PointList checker2joinPoints;
+			
+			public PointList interpreter2joinPoints;
+			
+			public PointList compiler2joinPoints;
+
+			public void apply(Point offset) {
+				initFigure.setBounds(initBox.getTranslated(offset));
+				endFigure.setBounds(endBox.getTranslated(offset));
+				init2abstractSynyaxFlow.setPoints(getTranslated(init2abstractsyntaxPoints, offset));
+				abstractSyntax2forkFlow.setPoints(getTranslated(abstractsyntax2forkPoints, offset));
+				join2endFlow.setPoints(getTranslated(join2endPoints, offset));
+				fork2treeconcretesyntaxFlow.setPoints(getTranslated(fork2treeconcretesyntaxPoints, offset));
+				fork2staticsemanticsFlow.setPoints(getTranslated(fork2staticsemanticsPoints, offset));
+				fork2interpreterFlow.setPoints(getTranslated(fork2interpreterPoints, offset));
+				fork2compilerFlow.setPoints(getTranslated(fork2compilerPoints, offset));
+				staticsemantics2checkerFlow.setPoints(getTranslated(staticsemantics2checkerPoints, offset));
+				treeconcretesyntax2joinFlow.setPoints(getTranslated(treeconcretesyntax2joinPoints, offset));
+				checker2joinFlow.setPoints(getTranslated(checker2joinPoints, offset));
+				interpreter2joinFlow.setPoints(getTranslated(interpreter2joinPoints, offset));
+				compiler2joinFlow.setPoints(getTranslated(compiler2joinPoints, offset));
+				forkFigure.setBounds(forkBox.getTranslated(offset));
+				joinFigure.setBounds(joinBox.getTranslated(offset));
+				abstractSyntaxFigure.setBounds(abstractSyntaxBox.getTranslated(offset));
+				treeConcreteSyntaxFigure.setBounds(treeConcreteSyntaxBox.getTranslated(offset));
+				staticSemanticsFigure.setBounds(staticSemanticsBox.getTranslated(offset));
+				checkerFigure.setBounds(checkerBox.getTranslated(offset));
+				interpreterFigure.setBounds(interpreterBox.getTranslated(offset));
+				compilerFigure.setBounds(compilerBox.getTranslated(offset));
+			}
+
+			private PointList getTranslated(PointList source, Point offset) {
+				PointList target = new PointList(source.size());
+				target.addAll(source);
+				target.translate(offset);
+				return target;
+			}
+
+			public Dimension getSize() {
+				bounds.union(initBox);
+				bounds.union(endBox);
+				bounds.union(forkBox);
+				bounds.union(joinBox);
+				bounds.union(abstractSyntaxBox);
+				bounds.union(treeConcreteSyntaxBox);
+				bounds.union(staticSemanticsBox);
+				bounds.union(checkerBox);
+				bounds.union(interpreterBox);
+				bounds.union(compilerBox);
+				return bounds.getSize();
+			}
+		}
+	}
+
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.spem.executioncontext.model/src/main/java"
+    editDirectory="/org.kermeta.spem.executioncontext.model.edit/src/main/java" modelPluginID="org.kermeta.spem.executioncontext.model"
+    modelName="Executioncontext" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false" usedGenPackages="platform:/plugin/spem.model/model/spem2.genmodel#//spem">
+  <foreignModel>executioncontext.ecore</foreignModel>
+  <genPackages prefix="Executioncontext" basePackage="org.kermeta.spem" disposableProviderFactory="true"
+      ecorePackage="executioncontext.ecore#/">
+    <genClasses ecoreClass="executioncontext.ecore#//ExecutionContext">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute executioncontext.ecore#//ExecutionContext/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference executioncontext.ecore#//ExecutionContext/keys"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference executioncontext.ecore#//ExecutionContext/values"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference executioncontext.ecore#//ExecutionContext/executedTaskUses"/>
+    </genClasses>
+    <genClasses ecoreClass="executioncontext.ecore#//Key">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute executioncontext.ecore#//Key/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference executioncontext.ecore#//Key/value"/>
+    </genClasses>
+    <genClasses ecoreClass="executioncontext.ecore#//Value">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute executioncontext.ecore#//Value/content"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference executioncontext.ecore#//Value/key"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

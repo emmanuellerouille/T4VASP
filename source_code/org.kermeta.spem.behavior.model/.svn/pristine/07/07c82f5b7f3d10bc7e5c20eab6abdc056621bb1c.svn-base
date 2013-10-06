@@ -1,0 +1,412 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.spem.behavior.impl;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.kermeta.spem.behavior.Action;
+import org.kermeta.spem.behavior.AutomationComponent;
+import org.kermeta.spem.behavior.BehaviorPackage;
+import org.kermeta.spem.behavior.ControlFlow;
+import org.kermeta.spem.behavior.PostCondition;
+import org.kermeta.spem.behavior.PreCondition;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Automation Component</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.kermeta.spem.behavior.impl.AutomationComponentImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.AutomationComponentImpl#getOutgoingControlFlows <em>Outgoing Control Flows</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.AutomationComponentImpl#getIncomingControlFlows <em>Incoming Control Flows</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.AutomationComponentImpl#getPreConditions <em>Pre Conditions</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.AutomationComponentImpl#getPostConditions <em>Post Conditions</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.AutomationComponentImpl#getAction <em>Action</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class AutomationComponentImpl extends EObjectImpl implements AutomationComponent {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOutgoingControlFlows() <em>Outgoing Control Flows</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutgoingControlFlows()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ControlFlow> outgoingControlFlows;
+
+	/**
+	 * The cached value of the '{@link #getIncomingControlFlows() <em>Incoming Control Flows</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIncomingControlFlows()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ControlFlow> incomingControlFlows;
+
+	/**
+	 * The cached value of the '{@link #getPreConditions() <em>Pre Conditions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPreConditions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PreCondition> preConditions;
+
+	/**
+	 * The cached value of the '{@link #getPostConditions() <em>Post Conditions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPostConditions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PostCondition> postConditions;
+
+	/**
+	 * The cached value of the '{@link #getAction() <em>Action</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAction()
+	 * @generated
+	 * @ordered
+	 */
+	protected Action action;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AutomationComponentImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return BehaviorPackage.Literals.AUTOMATION_COMPONENT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.AUTOMATION_COMPONENT__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ControlFlow> getOutgoingControlFlows() {
+		if (outgoingControlFlows == null) {
+			outgoingControlFlows = new EObjectWithInverseResolvingEList<ControlFlow>(ControlFlow.class, this, BehaviorPackage.AUTOMATION_COMPONENT__OUTGOING_CONTROL_FLOWS, BehaviorPackage.CONTROL_FLOW__SOURCE);
+		}
+		return outgoingControlFlows;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ControlFlow> getIncomingControlFlows() {
+		if (incomingControlFlows == null) {
+			incomingControlFlows = new EObjectWithInverseResolvingEList<ControlFlow>(ControlFlow.class, this, BehaviorPackage.AUTOMATION_COMPONENT__INCOMING_CONTROL_FLOWS, BehaviorPackage.CONTROL_FLOW__TARGET);
+		}
+		return incomingControlFlows;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<PreCondition> getPreConditions() {
+		if (preConditions == null) {
+			preConditions = new EObjectResolvingEList<PreCondition>(PreCondition.class, this, BehaviorPackage.AUTOMATION_COMPONENT__PRE_CONDITIONS);
+		}
+		return preConditions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<PostCondition> getPostConditions() {
+		if (postConditions == null) {
+			postConditions = new EObjectResolvingEList<PostCondition>(PostCondition.class, this, BehaviorPackage.AUTOMATION_COMPONENT__POST_CONDITIONS);
+		}
+		return postConditions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Action getAction() {
+		if (action != null && action.eIsProxy()) {
+			InternalEObject oldAction = (InternalEObject)action;
+			action = (Action)eResolveProxy(oldAction);
+			if (action != oldAction) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.AUTOMATION_COMPONENT__ACTION, oldAction, action));
+			}
+		}
+		return action;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Action basicGetAction() {
+		return action;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAction(Action newAction) {
+		Action oldAction = action;
+		action = newAction;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.AUTOMATION_COMPONENT__ACTION, oldAction, action));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case BehaviorPackage.AUTOMATION_COMPONENT__OUTGOING_CONTROL_FLOWS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoingControlFlows()).basicAdd(otherEnd, msgs);
+			case BehaviorPackage.AUTOMATION_COMPONENT__INCOMING_CONTROL_FLOWS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingControlFlows()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case BehaviorPackage.AUTOMATION_COMPONENT__OUTGOING_CONTROL_FLOWS:
+				return ((InternalEList<?>)getOutgoingControlFlows()).basicRemove(otherEnd, msgs);
+			case BehaviorPackage.AUTOMATION_COMPONENT__INCOMING_CONTROL_FLOWS:
+				return ((InternalEList<?>)getIncomingControlFlows()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case BehaviorPackage.AUTOMATION_COMPONENT__NAME:
+				return getName();
+			case BehaviorPackage.AUTOMATION_COMPONENT__OUTGOING_CONTROL_FLOWS:
+				return getOutgoingControlFlows();
+			case BehaviorPackage.AUTOMATION_COMPONENT__INCOMING_CONTROL_FLOWS:
+				return getIncomingControlFlows();
+			case BehaviorPackage.AUTOMATION_COMPONENT__PRE_CONDITIONS:
+				return getPreConditions();
+			case BehaviorPackage.AUTOMATION_COMPONENT__POST_CONDITIONS:
+				return getPostConditions();
+			case BehaviorPackage.AUTOMATION_COMPONENT__ACTION:
+				if (resolve) return getAction();
+				return basicGetAction();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case BehaviorPackage.AUTOMATION_COMPONENT__NAME:
+				setName((String)newValue);
+				return;
+			case BehaviorPackage.AUTOMATION_COMPONENT__OUTGOING_CONTROL_FLOWS:
+				getOutgoingControlFlows().clear();
+				getOutgoingControlFlows().addAll((Collection<? extends ControlFlow>)newValue);
+				return;
+			case BehaviorPackage.AUTOMATION_COMPONENT__INCOMING_CONTROL_FLOWS:
+				getIncomingControlFlows().clear();
+				getIncomingControlFlows().addAll((Collection<? extends ControlFlow>)newValue);
+				return;
+			case BehaviorPackage.AUTOMATION_COMPONENT__PRE_CONDITIONS:
+				getPreConditions().clear();
+				getPreConditions().addAll((Collection<? extends PreCondition>)newValue);
+				return;
+			case BehaviorPackage.AUTOMATION_COMPONENT__POST_CONDITIONS:
+				getPostConditions().clear();
+				getPostConditions().addAll((Collection<? extends PostCondition>)newValue);
+				return;
+			case BehaviorPackage.AUTOMATION_COMPONENT__ACTION:
+				setAction((Action)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.AUTOMATION_COMPONENT__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case BehaviorPackage.AUTOMATION_COMPONENT__OUTGOING_CONTROL_FLOWS:
+				getOutgoingControlFlows().clear();
+				return;
+			case BehaviorPackage.AUTOMATION_COMPONENT__INCOMING_CONTROL_FLOWS:
+				getIncomingControlFlows().clear();
+				return;
+			case BehaviorPackage.AUTOMATION_COMPONENT__PRE_CONDITIONS:
+				getPreConditions().clear();
+				return;
+			case BehaviorPackage.AUTOMATION_COMPONENT__POST_CONDITIONS:
+				getPostConditions().clear();
+				return;
+			case BehaviorPackage.AUTOMATION_COMPONENT__ACTION:
+				setAction((Action)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.AUTOMATION_COMPONENT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case BehaviorPackage.AUTOMATION_COMPONENT__OUTGOING_CONTROL_FLOWS:
+				return outgoingControlFlows != null && !outgoingControlFlows.isEmpty();
+			case BehaviorPackage.AUTOMATION_COMPONENT__INCOMING_CONTROL_FLOWS:
+				return incomingControlFlows != null && !incomingControlFlows.isEmpty();
+			case BehaviorPackage.AUTOMATION_COMPONENT__PRE_CONDITIONS:
+				return preConditions != null && !preConditions.isEmpty();
+			case BehaviorPackage.AUTOMATION_COMPONENT__POST_CONDITIONS:
+				return postConditions != null && !postConditions.isEmpty();
+			case BehaviorPackage.AUTOMATION_COMPONENT__ACTION:
+				return action != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
+	}
+
+} //AutomationComponentImpl

@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Utils
+Bundle-SymbolicName: org.kermeta.spem.processexecution.utils
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.kermeta.spem.processexecution.utils.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.kermeta.spem.executioncontext.model;bundle-version="2.0.1",
+ org.eclipse.emf.ecore.xmi;bundle-version="2.7.0",
+ org.kermeta.spem.behavior.model;bundle-version="2.0.3"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.kermeta.spem.processexecution.utils.model,
+ org.kermeta.spem.processexecution.utils.string

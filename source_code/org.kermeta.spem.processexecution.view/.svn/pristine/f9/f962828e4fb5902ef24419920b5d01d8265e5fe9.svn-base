@@ -1,0 +1,249 @@
+package org.kermeta.spem.processexecution.view.actions.impl;
+
+import java.util.ArrayList;
+
+import org.eclipse.draw2d.Label;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.activity.DecisionNode;
+import org.kermeta.spem.activity.Edge;
+import org.kermeta.spem.activity.EndNode;
+import org.kermeta.spem.activity.ForkNode;
+import org.kermeta.spem.activity.JoinNode;
+import org.kermeta.spem.activity.StartNode;
+import org.kermeta.spem.behavior.Container;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.executioncontext.State;
+import org.kermeta.spem.processexecution.utils.model.ModelUtils;
+import org.kermeta.spem.processexecution.view.HyperlinkFigure;
+import org.kermeta.spem.processexecution.view.ProcessPart;
+import org.kermeta.spem.processexecution.view.TaskFigure;
+import org.kermeta.spem.processexecution.view.dialogs.DecisionNodeDialog;
+
+import spem.Activity;
+import spem.BreakdownElement;
+import spem.ProcessPackageableElement;
+import spem.TaskUse;
+import spem.uma.DeliveryProcess;
+
+public class Utils {
+
+	public static void setStatusFollowingWorkUnits(String workUnitName, ProcessPart view, String processModelPath, ExecutionContext executionContext, Activity containingActivity){
+
+		for(BreakdownElement be : containingActivity.getNestedBreakdownElement()){
+			if(be instanceof Edge){
+				Edge edge = (Edge) be;
+				if(edge.getSource() instanceof ProcessPackageableElement){
+					ProcessPackageableElement sourceWorkUnit = (ProcessPackageableElement) edge.getSource();
+					if(sourceWorkUnit.getName().equals(workUnitName)){//we have the control flow that is pointing to the following tasks
+						if(edge.getTarget() instanceof TaskUse || edge.getTarget() instanceof Activity){
+							setStatusFollowingWorkUnitsTaskUseOrActivity((ProcessPackageableElement) edge.getTarget(), view, executionContext);
+						}
+						if(edge.getTarget() instanceof ForkNode){
+							setStatusFollowingWorkUnitsForkNode((ForkNode) edge.getTarget(), view, containingActivity, executionContext);
+						}
+						if(edge.getTarget() instanceof JoinNode){
+							setStatusFollowingWorkUnitsJoinNode((JoinNode) edge.getTarget(), view, containingActivity, executionContext);
+						}
+						if(edge.getTarget() instanceof DecisionNode){
+							setStatusFollowingWorkUnitsDecisionNode((DecisionNode) edge.getTarget(), view, executionContext, containingActivity, edge);
+						}
+						if(edge.getTarget() instanceof EndNode){
+							setStatusFollowingWorkUnitsEndNode(view, executionContext, containingActivity);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public static void setStatusFollowingWorkUnitsTaskUseOrActivity(ProcessPackageableElement workUnit, ProcessPart view, ExecutionContext executionContext){
+		for(TaskFigure taskFigure : view.getMediator().getView().getTaskFigures()){
+			if(taskFigure.getDescription().equals(workUnit.getName())){
+				taskFigure.setFinished(false);
+				for( int i = 0; i < taskFigure.getStdActionsPlate().getChildren().size(); i++){
+					Label label = (Label) taskFigure.getStdActionsPlate().getChildren().get(i);
+					if(label instanceof HyperlinkFigure){
+						HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+
+						if(hyperlinkFigure.getText() == "on start"){
+							if(ModelUtils.isInitializationAutomated(workUnit.getName())){
+								hyperlinkFigure.getAction().setEnabled(true);
+								ModelUtils.changeStateWorkUnitIntoExecutionContextModel(executionContext, workUnit.getName(), State.ON_START);
+							}
+						}
+
+						if(hyperlinkFigure.getText() == "on do"){
+							if(!ModelUtils.isInitializationAutomated(workUnit.getName())){
+								hyperlinkFigure.getAction().setEnabled(true);
+								ModelUtils.changeStateWorkUnitIntoExecutionContextModel(executionContext, workUnit.getName(), State.ON_DO);
+							}
+						}
+						
+						if(hyperlinkFigure.getText() == "skip"){
+							if(workUnit instanceof BreakdownElement){
+								if(((BreakdownElement)workUnit).isIsOptional()){
+									hyperlinkFigure.getAction().setEnabled(true);
+								}	
+							}
+						}
+						hyperlinkFigure.repaint();
+					}
+				}
+			}
+		}
+	}
+
+	public static void setStatusFollowingWorkUnitsForkNode(ForkNode forkNode, ProcessPart view, Activity containingActivity, ExecutionContext executionContext){
+		//For each control flow coming from the current fork node, if its target is a task, then call the setStatusFollowingTasksTaskUse method
+		for(BreakdownElement b : containingActivity.getNestedBreakdownElement()){
+			if(b instanceof Edge){
+				Edge e = (Edge) b;
+				if(e.getSource().getName().equals(forkNode.getName())){//The current control flow comes from the current fork node
+					if(e.getTarget() instanceof TaskUse || e.getTarget() instanceof Activity){
+						setStatusFollowingWorkUnitsTaskUseOrActivity((ProcessPackageableElement) e.getTarget(), view, executionContext);
+					}
+				}
+			}
+		}
+	}
+
+	public static void setStatusFollowingWorkUnitsJoinNode(JoinNode joinNode, ProcessPart view, Activity containingActivity, ExecutionContext executionContext){
+		ArrayList<TaskFigure> taskFigures = getAllWorkUnitsBeforeJoinNode(joinNode, view, containingActivity);
+		if(areFinished(taskFigures)){//Modification of the status of the following tasks only if all the preceding tasks are finished
+			//For each control flow coming from the current join node, if its target is a task, then call the setStatusFollowingTasksTaskUse method, if the target is a fork node 
+			// then call the setStatusFollowingTasksForkNode method
+			for(BreakdownElement b : containingActivity.getNestedBreakdownElement()){
+				if(b instanceof Edge){
+					Edge e = (Edge) b;
+					if(e.getSource().getName().equals(joinNode.getName())){//The current control flow comes from the current join node
+						if(e.getTarget() instanceof TaskUse || e.getTarget() instanceof Activity){
+							setStatusFollowingWorkUnitsTaskUseOrActivity((ProcessPackageableElement) e.getTarget(), view, executionContext);
+						}
+						if(e.getTarget() instanceof ForkNode){
+							setStatusFollowingWorkUnitsForkNode((ForkNode) e.getTarget(), view, containingActivity, executionContext);
+						}
+						if(e.getTarget() instanceof DecisionNode){
+							setStatusFollowingWorkUnitsDecisionNode((DecisionNode) e.getTarget(), view, executionContext, containingActivity, e);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public static void setStatusFollowingWorkUnitsDecisionNode(DecisionNode decisionNode, ProcessPart view, ExecutionContext executionContext, Activity containingActivity, Edge enteringEdge){
+		//Initialize the list of answers
+		ArrayList<Edge> answers = new ArrayList<Edge>();
+		for(BreakdownElement be : containingActivity.getNestedBreakdownElement()){
+			if(be instanceof Edge){
+				Edge edge = (Edge) be;
+				if(edge.getSource() instanceof DecisionNode){
+					DecisionNode dn = (DecisionNode) edge.getSource();
+					if(dn.getName().equals(decisionNode.getName())){
+						answers.add(edge);
+					}
+				}
+			}
+		}
+		
+		//Ask the current process actor to answer
+		DecisionNodeDialog decisionNodeDialog = new DecisionNodeDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), enteringEdge.getGuard(), answers);
+		decisionNodeDialog.open();
+		Edge answer = decisionNodeDialog.getAnswer();
+		
+		//Set the status of the work units that follow the selected edge
+		if(answer.getTarget() instanceof TaskUse || answer.getTarget() instanceof Activity){
+			setStatusFollowingWorkUnitsTaskUseOrActivity((ProcessPackageableElement) answer.getTarget(), view, executionContext);
+		}
+		if(answer.getTarget() instanceof ForkNode){
+			setStatusFollowingWorkUnitsForkNode((ForkNode) answer.getTarget(), view, containingActivity, executionContext);
+		}
+		if(answer.getTarget() instanceof JoinNode){
+			setStatusFollowingWorkUnitsJoinNode((JoinNode) answer.getTarget(), view, containingActivity, executionContext);
+		}
+		if(answer.getTarget() instanceof DecisionNode){
+			setStatusFollowingWorkUnitsDecisionNode((DecisionNode) answer.getTarget(), view, executionContext, containingActivity, answer);
+		}		
+	}
+	
+	public static void setStatusFollowingWorkUnitsEndNode(ProcessPart view, ExecutionContext executionContext, Activity containingActivity){
+		if(!(containingActivity instanceof DeliveryProcess)){
+			//Return to the execution of the containing activity
+		}
+	}
+
+	public static boolean areFinished(ArrayList<TaskFigure> taskFigures){
+		for(TaskFigure taskFigure : taskFigures){
+			if(!taskFigure.isFinished()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static ArrayList<TaskFigure> getAllWorkUnitsBeforeJoinNode(JoinNode joinNode, ProcessPart view, Activity containingActivity){
+		ArrayList<TaskFigure> taskFigures = new ArrayList<TaskFigure>();
+
+		for(BreakdownElement b : containingActivity.getNestedBreakdownElement()){
+			if(b instanceof Edge){
+				Edge e = (Edge) b;
+				if(e.getTarget().getName().equals(joinNode.getName())){
+					if(e.getSource() instanceof TaskUse || e.getSource() instanceof Activity){
+						ProcessPackageableElement ppe = (ProcessPackageableElement) e.getSource();
+						for(TaskFigure taskFigure : view.getMediator().getView().getTaskFigures()){
+							if(taskFigure.getDescription().equals(ppe.getName())){
+								taskFigures.add(taskFigure);
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return taskFigures;
+	}
+
+	public static void initProcessView(ExecutionContext executionContext, ArrayList<String> taskFigureNames, Container container, Activity containingActivity){
+		try {
+			ProcessPart view = (ProcessPart)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("ProcessExecution.views.ProcessElementsView");
+			view.getMediator().getView().initTaskFigures(taskFigureNames);
+			//Initialize all the task figures with hyperlinks that are not enabled
+			for(int i = 0; i <view.getMediator().getView().getTaskFigures().size(); i++){
+				TaskFigure taskFigure = view.getMediator().getView().getTaskFigures().get(i);
+				taskFigure.addAction(new HyperlinkFigure("on start", new StartAction(false, taskFigure.getDescription(), PlatformUI.getWorkbench().getPreferenceStore().getString("context model path"), containingActivity)));
+				taskFigure.addAction(new HyperlinkFigure("on do", new DoAction(false, taskFigure.getDescription(), PlatformUI.getWorkbench().getPreferenceStore().getString("context model path"), containingActivity)));
+				taskFigure.addAction(new HyperlinkFigure("done", new DoneAction(false, taskFigure.getDescription(), PlatformUI.getWorkbench().getPreferenceStore().getString("context model path"), containingActivity)));
+				taskFigure.addAction(new HyperlinkFigure("on end", new EndAction(false, taskFigure.getDescription(), PlatformUI.getWorkbench().getPreferenceStore().getString("context model path"), containingActivity)));
+				taskFigure.addAction(new HyperlinkFigure("skip", new SkipAction(false, taskFigure.getDescription(), PlatformUI.getWorkbench().getPreferenceStore().getString("context model path"), containingActivity)));
+			}
+
+			//Enable the hyperlinks of the task figures that can be executed at the beginning of the execution of the process
+			enableHyperlinksForTheBeginningOfTheProcessExecution(view, containingActivity, executionContext);
+
+		} catch (PartInitException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	public static void enableHyperlinksForTheBeginningOfTheProcessExecution(ProcessPart view, Activity containingActivity, ExecutionContext executionContext){
+		//Look for the edge whose source is the start node
+		for(BreakdownElement be : containingActivity.getNestedBreakdownElement()){
+			if(be instanceof Edge){
+				Edge edge = (Edge) be;
+				if(edge.getSource() instanceof StartNode){// The edge whose source is the start node has been found
+					//Get the target of this edge and set the status of its following work units
+					if(edge.getTarget() instanceof TaskUse || edge.getTarget() instanceof Activity){
+						setStatusFollowingWorkUnitsTaskUseOrActivity((ProcessPackageableElement) edge.getTarget(), view, executionContext);
+					}
+					if(edge.getTarget() instanceof ForkNode){
+						setStatusFollowingWorkUnitsForkNode((ForkNode) edge.getTarget(), view, containingActivity, executionContext);
+					}
+					if(edge.getTarget() instanceof DecisionNode){
+						setStatusFollowingWorkUnitsDecisionNode((DecisionNode) edge.getTarget(), view, executionContext, containingActivity, edge);
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.spem.behavior.model/src/main/java"
+    modelPluginID="org.kermeta.spem.behavior.model" modelName="Behavior" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" usedGenPackages="../../spem.model/model/spem2.genmodel#//spem">
+  <foreignModel>behavior.ecore</foreignModel>
+  <genPackages prefix="Behavior" basePackage="org.kermeta.spem" disposableProviderFactory="true"
+      ecorePackage="behavior.ecore#/">
+    <genClasses ecoreClass="behavior.ecore#//StartBehavior">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//StartBehavior/content"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//StartBehavior/referencedProcessElement"/>
+    </genClasses>
+    <genClasses ecoreClass="behavior.ecore#//EndBehavior">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//EndBehavior/content"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//EndBehavior/referencedProcessElement"/>
+    </genClasses>
+    <genClasses ecoreClass="behavior.ecore#//Behavior">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference behavior.ecore#//Behavior/startBehaviors"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference behavior.ecore#//Behavior/endBehaviors"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

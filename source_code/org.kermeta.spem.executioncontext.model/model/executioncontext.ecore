@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="executioncontext"
+    nsURI="http://executioncontext" nsPrefix="executioncontext">
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="keys" upperBound="-1" eType="#//Key"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//Value" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workUnits" upperBound="-1"
+        eType="#//WorkUnit" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="underExecution" eType="#//UnderExecution"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Key">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Value"
+        eOpposite="#//Value/key"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" lowerBound="1" eType="#//Key"
+        eOpposite="#//Key/value"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="State">
+    <eLiterals name="not_started"/>
+    <eLiterals name="on_start" value="1"/>
+    <eLiterals name="end_initialization" value="2"/>
+    <eLiterals name="on_do" value="3"/>
+    <eLiterals name="done" value="4"/>
+    <eLiterals name="on_end" value="5"/>
+    <eLiterals name="end_finalization" value="6"/>
+    <eLiterals name="finished" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WorkUnit">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnderExecution">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="workUnitHandleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="onWhat" eType="#//OnWhat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primitiveACName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="workUnitName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OnWhat">
+    <eLiterals name="onStart"/>
+    <eLiterals name="onDo" value="1"/>
+    <eLiterals name="onEnd" value="2"/>
+  </eClassifiers>
+</ecore:EPackage>

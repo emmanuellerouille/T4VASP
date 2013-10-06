@@ -1,0 +1,942 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="CVLMetamodelMaster"
+    nsURI="http:///CVLMetamodelMaster.ecore" nsPrefix="CVLMetamodelMaster">
+  <eAnnotations source="com.ibm.xtools.common.ui.reduction.editingCapabilities">
+    <details key="com.ibm.xtools.activities.umlBBFragment" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBAction" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBClassTemplateParameter" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBPackageTemplateParameter" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBSequence1" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBRelationship1" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBSequence2" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBCollaborationUse" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBRelationship2" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBSubsystem" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBComment1" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBLifeLine" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBComment2" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBActivity1" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBActivity2" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBActivity3" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBFunction" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBActivityDiagram" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBCommunication" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBCollaboration" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBClass" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBInterface" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBUseCaseDiagram" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBTypes1" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBTypes2" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBComponentTemplateParameter" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBTypes3" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBTypes4" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBUseCase1" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBUseCase2" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBPackage" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBComponentDiagram" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBInterfaceTemplateParameter" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBClassDiagram" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBRealization" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBComponent" value="1"/>
+    <details key="com.ibm.xtools.activities.umlBBSequenceDiagram" value="1"/>
+  </eAnnotations>
+  <eSubpackages name="CVL" nsURI="http:///CVLMetamodelMaster/CVL.ecore" nsPrefix="CVLMetamodelMaster.CVL">
+    <eClassifiers xsi:type="ecore:EEnum" name="PrimitiveTypeEnum">
+      <eLiterals name="String"/>
+      <eLiterals name="Integer" value="1"/>
+      <eLiterals name="Float" value="2"/>
+      <eLiterals name="Boolean" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//CVL/VSpec">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;    A choice is a kind of VSpec indicating variability whose resolution requires a binary, yes/no decision. The details of&#xD;&#xA;    such variability, which could for instance be the fact that some object in the base model is optional or that some&#xD;&#xA;    substitution may be performed or not, may be specified by binding the choice to a variation point.&lt;br />&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultResolution" ordered="false"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isImpliedByParent" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&lt;p>&#xD;&#xA;    When True then resolving the parent VSpec positively implies resolving this VSpec positively. A VSpec resolution is&#xD;&#xA;    positive if it is a choice decided positively, or any classifier instantiation, or any value assignment to a&#xD;&#xA;    variable.&lt;br />&#xD;&#xA;    &lt;br />&#xD;&#xA;    For a root VSpec, True implies it must be resolved positively.&#xD;&#xA;&lt;/p>"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VSpec" abstract="true" eSuperTypes="#//CVL/VPackageable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;    A VSpec (Variability specification) indicates the existence of abstract variability, i.e. it indicate variability&#xD;&#xA;    without defining the concrete consequences on the base model. Such consequences are specified via variation points and&#xD;&#xA;    are related to variability specifications via bindings.&lt;br />&#xD;&#xA;    &lt;br />&#xD;&#xA;    VSpecs are organized as trees, representing logical constraints and guiding the materialization process. Each VSpec has&#xD;&#xA;    a group multiplicity specifying upper and lower multiplicities against its children. The meaning of this is that each&#xD;&#xA;    positive resolution against a VSpec must have a number of positive child resolutions conforming to the multiplicity&#xD;&#xA;    interval. A VSpec resolution is positive if it is a choice decided positively, or any classifier instantiation, or any&#xD;&#xA;    value assignment to a variable.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="groupMultiplicity" ordered="false"
+          eType="#//CVL/MultiplicityInterval" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&lt;p>&#xD;&#xA;    The group multiplicity of the VSpec. If the VSpec is resolved positively and has a group multiplicity then the number&#xD;&#xA;    of&lt;br />&#xD;&#xA;    its children resolved positively must conform to the specified multiplicity interval.&#xD;&#xA;&lt;/p>"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolutionTime" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&lt;p>The latest life-cycle stage at which this VSpec is expected to be resolved, e.g. &quot;Design&quot;, &quot;Link&quot;, &quot;Build&quot;, &quot;PostBuild&quot;, etc.&lt;/p>"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="childVSpec" upperBound="-1"
+          eType="#//CVL/VSpec" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&lt;p>&#xD;&#xA;    The childSpecs of a VSpec are its children in the VSpec tree, i.e. this association defines the VSpec tree structure.&#xD;&#xA;&lt;/p>"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="derivation" ordered="false"
+          eType="#//CVL/VSpecDerivation" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VPackageable" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MultiplicityInterval">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A MultiplicityInterval specifies lower and upper multiplicities."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&lt;p>&#xD;&#xA;    The upper multiplicity.&#xD;&#xA;&lt;/p>"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&lt;p>&#xD;&#xA;    The lower multiplicity.&#xD;&#xA;&lt;/p>"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VSpecDerivation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="derivedVSpec" ordered="false"
+          lowerBound="1" eType="#//CVL/VSpec"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VClassifier" eSuperTypes="#//CVL/VSpec">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;    A VClassifier (variability classifier) is a kind of VSpec indicating the existence of variability whose resolution&#xD;&#xA;    involves instantiating it zero or more times and then resolving the variability of each instance separately. A&#xD;&#xA;    classifier may be bound to an executable variation point, in which case each resolution instance will execute the&#xD;&#xA;    variation point once. Each variability classifier has an instance multiplicity which specifies lower and upper limits&#xD;&#xA;    for the number of instances created from it.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="instanceMultiplicity"
+          ordered="false" lowerBound="1" eType="#//CVL/MultiplicityInterval" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Specifies a cardinality constraint on the number of instances created from this VClassifier."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VSpecResolution" abstract="true" eSuperTypes="#//CVL/VPackageable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;    A VSpecResolution resolves a single VSpec. VSpecResolutions are organized as trees, mirroring the tree structure of the&#xD;&#xA;    VSpecs they resolve, into which inherited VSpecs have been conceptually expanded.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="resolvedVSpec" ordered="false"
+          lowerBound="1" eType="#//CVL/VSpec">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The&amp;nbsp;VSpec&amp;nbsp;this&amp;nbsp;VSpecResolution&amp;nbsp;resolves.Due to&amp;nbsp;VSpec inheritance and VClassifiers, a given VPSec&#xD;&#xA;may have several VSpecResolutions resolving it, where each resolution is in the context of its parent."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="childResolution" ordered="false"
+          upperBound="-1" eType="#//CVL/VSpecResolution" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The child resolutions of this VSpecResolution. A given VSpecResolution is interpreted in the context of its parent."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VariationPoint" abstract="true" eSuperTypes="#//CVL/VPackageable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;    A variation point is a concrete item of variability against the base model.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bindingVspec" ordered="false"
+          upperBound="-1" eType="#//CVL/VSpec">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The Vspec bound by this binding."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FragmentSubstitution" eSuperTypes="#//CVL/ChoiceVariationPoint #//CVL/RepeatableVariationPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>Fragment Substitution substitutes a placement fragment of the base model with one or more replacement fragments of the base model.&lt;/p>&lt;p>Constraints:&lt;/p>&lt;p>The boundary elements define all references going in and out of the placement fragment. The boundary elements fully define all references going in and out of the replacement fragment.&lt;/p>&lt;p>Semantics:&lt;/p>&lt;p>1. Delete the model elements defined by the PlacementFragment. The placement model elements can be found through FragmentSubstitution.placement's placementBoundaryElements that are of class ToPlacement (using the model element references called insideBoundaryElement) and the transitive closure of all references from these, where the traversal is cut off at any reference that has the same value as any of FragmentSubstitution.placement's PlacementBoundardyElement that are of class FromPlacement (using the model element references called outsideBoundaryElement).&lt;/p>&lt;p>&lt;br>2. For the replacement fragments, copy its content onto the hole made by the deletion of the placement fragment. The placement and replacement boundary elements must correspond. The content model elements can be found through FragmentSubstitution. replacement's ReplacementBoundaryElement that are of type ToReplacement (using the model element references called insideBoundaryElement) and all model elements found through the transitive closure of all references from this set of model elements, where the traversal is cut off at any reference that has the same value as any of FragmentSubstitution.replacement's ReplacementBoundaryElement that are of type FromReplacement (using the model element references called outsideBoundaryElement). &lt;/p>&lt;p>If multi is true, then a number of copies of the replacement fragment will be copied onto the placement. The resolution model will define how many.&lt;/p>&lt;p>Any substitutions addressing placements inside the given replacement fragment will be performed on the copy of the replacement fragment which is the last one generated.&lt;/p>&lt;p>3. Binding boundary elements. The placement and replacement boundary elements are connected by bindings. The bindings are given by the BoundaryElementBindings:&lt;br>1. FromBinding: fromReplacement.insideBoundaryElement.propertyName[] = fromPlacement.outsideBoundaryElement[]&lt;br>2. ToBinding: toPlacement.outsideBoundaryElement.propertyName[] = toReplacement.insideBoundaryElement[]. This definition in fact also covers attributes that have multiplicity. Such attributes may be seen as arrays or collections, and repeated reference assignments to such attributes during variability transformation will mean adding a new individual reference to the identifier collection.&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="boundaryElementBinding"
+          ordered="false" upperBound="-1" eType="#//CVL/BoundaryElementBinding" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&lt;p>&#xD;&#xA;    Specifies the binding between the placement and replacement fragments.&#xD;&#xA;&lt;/p>"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="placement" ordered="false"
+          lowerBound="1" eType="#//CVL/PlacementFragment">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&lt;p>&#xD;&#xA;    Specifies the fragment to be replaced.&#xD;&#xA;&lt;/p>"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="multi" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="replacement" ordered="false"
+          eType="#//CVL/ReplacementFragmentType"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ChoiceVariationPoint" eSuperTypes="#//CVL/VariationPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>A choice variation point is a variation point which can be applied/executed or not. It must be bound to a choice VSpec deciding whether or not it will be applied/executed.&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bindingChoice" ordered="false"
+          upperBound="-1" eType="#//CVL/Choice"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RepeatableVariationPoint" abstract="true"
+        eSuperTypes="#//CVL/VariationPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>An instantiable variation point is a variation point which can be instantiated, i.e. applied zero or more times. It must be bound to a classifier VSpec &lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bindingClassifier" ordered="false"
+          lowerBound="1" eType="#//CVL/VClassifier"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BoundaryElementBinding" abstract="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Specifies the binding between the boundary elements of the placement fragment and the replacement fragment."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PlacementFragment" eSuperTypes="#//CVL/VariationPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A PlacementFragment defines a fragment (set of model elements) of the base model that will be replaced by a&#xD;&#xA;ReplacementFragment during the variability transformation. The set of model elements of the fragment will be deleted."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="placementBoundaryElement"
+          ordered="false" upperBound="-1" eType="#//CVL/PlacementBoundaryElement"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The boundary elements captures all the relations from and to the fragment."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PlacementBoundaryElement" abstract="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Represents the boundary between a placement fragment and the rest of the base model."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ReplacementFragmentType" eSuperTypes="#//CVL/Variabletype #//CVL/VPackageable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;    Replacement&amp;nbsp;Fragment&amp;nbsp;Type&amp;nbsp;defines&amp;nbsp;a&amp;nbsp;fragment&amp;nbsp;of&amp;nbsp;the&amp;nbsp;base&amp;nbsp;model&amp;nbsp;that&amp;nbsp;will&amp;nbsp;be&amp;nbsp;used&amp;nbsp;as&amp;nbsp;replacement&amp;nbsp;for&amp;nbsp;some&amp;nbsp;placement&amp;nbsp;fragment&lt;br />&#xD;&#xA;    of&amp;nbsp;the&amp;nbsp;base&amp;nbsp;model.&#xD;&#xA;&lt;/p>&#xD;&#xA;&lt;p>&#xD;&#xA;    Constraints:&#xD;&#xA;&lt;/p>&#xD;&#xA;&lt;p>&#xD;&#xA;    The placements contained in a replacement fragments should only involve model elements which are inside the replacement&#xD;&#xA;    fragment. These placements can be used in all instances of a replacement fragment.&#xD;&#xA;&lt;/p>&#xD;&#xA;&lt;p>&#xD;&#xA;    Semantics:&#xD;&#xA;&lt;/p>&#xD;&#xA;&lt;p>&#xD;&#xA;    The semantics of Replacement Fragment Type can be found under Fragment Substitution.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="replacementBoundaryElement"
+          ordered="false" upperBound="-1" eType="#//CVL/ReplacementBoundaryElement"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The boundary elements captures all the relations from and to the fragment."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="placementFragment" ordered="false"
+          upperBound="-1" eType="#//CVL/PlacementFragment" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Set of placements contained by the replacement fragment."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Variabletype"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ReplacementBoundaryElement" abstract="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Represents the boundary between a replacement fragment and the rest of the base model."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ObjectSubstitution" eSuperTypes="#//CVL/ChoiceVariationPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>An ObjectSubstitution is choice variation point which specifies that an object of the base model, called the replacement, may be substituted for another, called the placement.&lt;br>&lt;br>The placement and replacement objects are specified via object handles identifying a base model objects.&lt;br>&lt;br>An ObjectSubstitution must be bound to a choice deciding whether or not it will be executed. It may not be bound to a VClassifier or variable.&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="placementObject" ordered="false"
+          lowerBound="1" eType="#//CVL/ObjectHandle" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The&amp;nbsp;object handle identifying the base model object&amp;nbsp;to&amp;nbsp;be&amp;nbsp;replaced&amp;nbsp;by&amp;nbsp;the replacement&#xD;&#xA;object&amp;nbsp;in&amp;nbsp;this&amp;nbsp;substitution."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="replacementObject" ordered="false"
+          lowerBound="1" eType="#//CVL/ObjectHandle" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The&amp;nbsp;object handle identifying the base model object&amp;nbsp;replacing&amp;nbsp;to&amp;nbsp;the&amp;nbsp;placement&amp;nbsp;object in this&#xD;&#xA;substitution. If no replacement is specified then the object is expected to arrive in a variable, that is the variation&#xD;&#xA;point must be bound to a variable to be acted on."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ObjectHandle" eSuperTypes="#//CVL/VPackageable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;    An object handle identifies an object of the base model. This Class abstracts over the cross-domain referencing&#xD;&#xA;    mechanism needed to refer from CVL elements to base model objects.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eOperations name="getPropertyByName" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+        <eParameters name="propertyName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eOperations name="getPropertyValue">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+          <eTypeArguments/>
+        </eGenericType>
+        <eParameters name="propertyName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="object" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Existence" abstract="true" eSuperTypes="#//CVL/ChoiceVariationPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Existence is a kind of variation point which indicates that an element of the base model may or may not exist in the&#xD;&#xA;materialized model."/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//CVL/VSpec">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;    A variable is a kind of VSpec indicating value variability, that is the fact that some externally-obtained value is to&#xD;&#xA;    be inserted into the base model. Resolving the variable means providing such value. Variables may be bound to variation&#xD;&#xA;    points which require values, for example slot value assignment.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="replacementFragmentTypesubsetstype"
+          ordered="false" eType="#//CVL/ReplacementFragmentType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="defaulValue" ordered="false"
+          eType="#//CVL/ValueSpecification" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+          lowerBound="1" eType="#//CVL/Variabletype"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ValueSpecification" abstract="true"
+        eSuperTypes="#//CVL/VPackageable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;    A ValueSpecification specifies a value which is either primitive, or an object of the base mode,&amp;nbsp;or a fragment of&#xD;&#xA;    the base model.&amp;nbsp;&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+          lowerBound="1" eType="#//CVL/Variabletype" volatile="true" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimitveType" eSuperTypes="#//CVL/Variabletype">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A type of a variable which is either String, Integer, Float, or Boolean."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" ordered="false"
+          lowerBound="1" eType="#//CVL/PrimitiveTypeEnum"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ObjectType" eSuperTypes="#//CVL/Variabletype">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A type of objects in the base model, specified as a metaclass in the metamodel of which the base model in an instance."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="theMetaClass" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The name of the metaclass in the metamodel of which the base model is an instance."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VInterface" eSuperTypes="#//CVL/VPackageable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>A VInterface is a collection of VSpecs exposed by an encapsulated configurable unit as its variability type. Each encapsulated configurable unit has exactly one variability interface through which it may be materialized. Variability interfaces are reusable, packageble elements, so a given interface may serve as the configuration interface of several units.&lt;br>&lt;br>To allow a configuration containing resolutions for a unit’s interface to materialize the unit, links must be created between its internal variation points and its interface. This may be achieved in one of two ways:&lt;br>&lt;br>(1) the internal variation points of the configurable unit may be directly bound to the VSpecs of its interface, or&lt;br>&lt;br>(2) the configurable unit may contain internal VSpecs and these are mapped to the VSpecs of its interface.&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="vSpec" ordered="false"
+          upperBound="-1" eType="#//CVL/VSpec" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&lt;p>&#xD;&#xA;    The VSpecs of the VInterface. They are in effect the configuration parameters of units typed by this interface.&#xD;&#xA;&lt;/p>"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedConstraint" ordered="false"
+          upperBound="-1" eType="#//CVL/Constraint" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Constraints&amp;nbsp;over&amp;nbsp;the&amp;nbsp;VSPecs&amp;nbsp;over&amp;nbsp;this&amp;nbsp;VInterface"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="super" ordered="false"
+          eType="#//CVL/VInterface">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&lt;p>An inherited interface. &lt;/p>"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="#//CVL/VPackageable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A&amp;nbsp;Constraint&amp;nbsp;imposes&amp;nbsp;additional&amp;nbsp;restrictions&amp;nbsp;that&amp;nbsp;cannot&amp;nbsp;be&amp;nbsp;expressed&amp;nbsp;in&amp;nbsp;the&amp;nbsp;base&amp;nbsp;language.&amp;nbsp;Each&amp;nbsp;constraint&amp;nbsp;has&amp;nbsp;associated&amp;nbsp;a&amp;nbsp;VSpec&amp;nbsp;context.&amp;nbsp;It&amp;nbsp;allows&amp;nbsp;expressing&amp;nbsp;universal&amp;nbsp;quantification&amp;nbsp;without&amp;nbsp;explicit&amp;nbsp;quantification&amp;nbsp;phrases&amp;nbsp;such&amp;nbsp;as&amp;nbsp;''for&amp;nbsp;all&amp;nbsp;elements&amp;nbsp;belonging&amp;nbsp;to...'.&amp;nbsp;Constraints&amp;nbsp;written&amp;nbsp;in&amp;nbsp;a&amp;nbsp;context&amp;nbsp;are&amp;nbsp;applied&amp;nbsp;to&amp;nbsp;each&amp;nbsp;named&amp;nbsp;VSpec&amp;nbsp;that&amp;nbsp;is&amp;nbsp;available&amp;nbsp;in&amp;nbsp;this&amp;nbsp;context.&lt;br />&#xD;&#xA;The&amp;nbsp;full&amp;nbsp;constraint&amp;nbsp;language&amp;nbsp;(with&amp;nbsp;classifiers)&amp;nbsp;has&amp;nbsp;set&amp;nbsp;semantics&amp;nbsp;for&amp;nbsp;all&amp;nbsp;non-propositional&amp;nbsp;expressions&amp;nbsp;(VSpecs,&amp;nbsp;Integers,&amp;nbsp;etc.).&amp;nbsp;The&amp;nbsp;small&amp;nbsp;language&amp;nbsp;(without&amp;nbsp;classifiers)&amp;nbsp;relies&amp;nbsp;mostly&amp;nbsp;on&amp;nbsp;propositional&amp;nbsp;formulas.&amp;nbsp;A&amp;nbsp;Constraint&amp;nbsp;contains&amp;nbsp;GeneralExpressions,&amp;nbsp;which&amp;nbsp;are&amp;nbsp;always&amp;nbsp;expected&amp;nbsp;to&amp;nbsp;evaluate&amp;nbsp;to&amp;nbsp;a&amp;nbsp;boolean&amp;nbsp;value.&amp;nbsp;In&amp;nbsp;case&amp;nbsp;of&amp;nbsp;set&amp;nbsp;semantics&amp;nbsp;GeneralExpressions&amp;nbsp;are&amp;nbsp;always&amp;nbsp;LogicalExps,&amp;nbsp;while&amp;nbsp;in&amp;nbsp;the&amp;nbsp;small&amp;nbsp;language&amp;nbsp;they&amp;nbsp;are&amp;nbsp;LogicalExps&amp;nbsp;or&amp;nbsp;VSpecReferences.&amp;nbsp;In&amp;nbsp;the&amp;nbsp;small&amp;nbsp;language&amp;nbsp;VSpecReferences&amp;nbsp;have&amp;nbsp;propositional&amp;nbsp;semantics&amp;nbsp;and&amp;nbsp;are&amp;nbsp;treated&amp;nbsp;as&amp;nbsp;Boolean&amp;nbsp;choices."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="generalExpression" ordered="false"
+          lowerBound="1" upperBound="-1" eType="#//CVL/GeneralExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="context" ordered="false"
+          eType="#//CVL/VSpec"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="constraint" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="constraintLanguage" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="GeneralExpression" abstract="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A&amp;nbsp;GeneralExpression&amp;nbsp;is&amp;nbsp;a&amp;nbsp;superclass&amp;nbsp;of&amp;nbsp;all&amp;nbsp;expressions.&amp;nbsp;In&amp;nbsp;set&amp;nbsp;semantics&amp;nbsp;it&amp;nbsp;is&amp;nbsp;always&amp;nbsp;equal&amp;nbsp;to&amp;nbsp;LogicalExp,&amp;nbsp;while&amp;nbsp;in&amp;nbsp;the&amp;nbsp;small&amp;nbsp;language&amp;nbsp;it&amp;nbsp;is&amp;nbsp;a&amp;nbsp;union&amp;nbsp;of&amp;nbsp;LogicalExp&amp;nbsp;and&amp;nbsp;VSpecReference.&amp;nbsp;GeneralExpression&amp;nbsp;always&amp;nbsp;evaluates&amp;nbsp;to&amp;nbsp;a&amp;nbsp;Boolean&amp;nbsp;value&amp;nbsp;(true&amp;nbsp;or&amp;nbsp;false)."/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SlotAssignment" eSuperTypes="#//CVL/ChoiceVariationPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>A slot assignment is a choice variation point which specifies that a value may be assigned to a particular slot in a particular object in the base model. The object is identified via an object handle pointing to the base model, and the slot is identified via a string representing a MOF property owned by the class of which the object is an instance. The value to be assigned is specified explicitly. The variation point must be bound to a choice deciding whether or not to assign the value, in order to be acted on.&lt;br>&lt;br>A slot assignment may not be bound to a VClassifer or variable.&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="slotIdentifier" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The name of the MOF Property&amp;nbsp;in the object's metaclass identifying the slot to which the value is to be assigned."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+          eType="#//CVL/ValueSpecification" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The value to be assigned."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="SlotOwner" ordered="false"
+          lowerBound="1" eType="#//CVL/ObjectHandle" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The object handle identifying the base model object to whose slot the value is to be assigned."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FixedSlotValueAssignment"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FixedObjectSubstitution"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ObjectExistence" eSuperTypes="#//CVL/Existence">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>ObjectExistence is a kind of choice variation point which indicates that an object of the base model may or may not exist in the materialized model. The object is identified via an object handle.&lt;br>&lt;br>To be acted on, an ObjectExistence variation point must be bound to a choice deciding whether or not the object will be present in the materialized model. It may not be bound to a variable or to a classifier.&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="optionalObject" ordered="false"
+          lowerBound="1" eType="#//CVL/ObjectHandle" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The&amp;nbsp;object&amp;nbsp;handle&amp;nbsp;identifying&amp;nbsp;the&amp;nbsp;base&amp;nbsp;model&amp;nbsp;object&amp;nbsp;whose&amp;nbsp;existence&amp;nbsp;is&amp;nbsp;in&amp;nbsp;question."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LinkAssignment" eSuperTypes="#//CVL/ChoiceVariationPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>A LinkAssignmet is a choice variation point which specifies that an object in the base model, called the replacement, may be substituted for another as the end of a particular link in the base model.&lt;br>&lt;br>The link-end is identified via a link handle pointing to the base model plus a string representing a MOF property owned by the association of which the link is an instance. The placement is specified via an object handle.&lt;br>The variation point must be bound to a choice deciding whether or not it will be executed to be acted on. It may not be bound to a variable or classifier.&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="link" ordered="false"
+          lowerBound="1" eType="#//CVL/LinkHandle" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="linkEndIdentifier" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The name of the MOF Property&amp;nbsp;in the object's metaclass identifying the link-end where this substitution occurs."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="newEnd" ordered="false"
+          lowerBound="1" eType="#//CVL/ObjectHandle" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The&amp;nbsp;object handle identifying the base model object&amp;nbsp;replacing&amp;nbsp;the link-end in this substitution. If no&#xD;&#xA;replacement is specified then the object is expected to arrive in a variable, that is the variation point must be bound to&#xD;&#xA;a variable to be acted on."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LinkHandle" eSuperTypes="#//CVL/VPackageable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;    A link handle identifies a link of the base model. This Class abstracts over the cross-domain referencing mecahnism&#xD;&#xA;    needed to refer from CVL elements to base model links.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eOperations name="getEnd">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+          <eTypeArguments/>
+        </eGenericType>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="linkRef" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="linkOwner" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="referencedObject" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConfigurableUnit" eSuperTypes="#//CVL/CompositeVariationPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&lt;span style=&quot;font-size:10pt;&quot;>A configurable unit (CU) represents &lt;span style=&quot;color:#000000;&quot;>a base model object which is a cohesive unit of variability, configurable as a whole&lt;/span>. The base model object is a container of other base model elements – objects and links – and the CVL configurable unit is a container of variation points defined against those elements, variability specifications, and bindings between them. For example, a configurable unit may have associated with it a UML package and contain variation points defined over elements in that package.&lt;/span>&lt;/p>&lt;p>&lt;span style=&quot;font-size:10pt;&quot;>A CU may be encapsulated or not. An encapsulated CU is black-box with respect to its internal variability. It exposes to the external world a variability interface, which is a VSpec tree or trees. The configurable unit may then be configured by providing resolutions to those VSpecs, not its internal ones. Resolutions for the internal VSpecs are derived through a variability mapping between the internal VSpecs and the VSpecs on the interface. Mappings are logical implications between VSpecs and should not be confused with bindings, which tie VSpecs to variation points. A non-encapsulated CU does not expose a variability interface and is configured via configurations which directly resolve its internal VSpecs. In any case, each CU has a derived variability type. For encapsulated CUs the variability type is the set of VSpecs in the explicitly exposed interface. For a non-encapsulated CU the variability type is the set of internal VSpecs.&lt;br>&lt;br>Conceptually, a configurable unit and the base model object associated with it are one unified entity representing a base model container with variability on its internal content. So the UML package above may be thought of as being configurable though technically it is an external CVL element referencing the object through a handle.&lt;br>&lt;br>CVL configurable units may contain other units, re-iterating the modular structure of the base model. For example, a UML package and a contained class may both be configurable, which means there will be two CVL configurable units, one for the package and one for the class, where the unit for the package contains that for the class. It may further be specified that materialization of the class is triggered by materialization of the package, using a configuration connector.&lt;br>&lt;br>&lt;/span>&lt;br>&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedVSpec" ordered="false"
+          upperBound="-1" eType="#//CVL/VSpec" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&lt;p>Internal VSpecs of the CU&lt;/p>"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedVariationPoint"
+          ordered="false" upperBound="-1" eType="#//CVL/VariationPoint" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Internal variation points against the content of the base model object referenced by the unit."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedConstraint" ordered="false"
+          upperBound="-1" eType="#//CVL/Constraint" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The constraints wrt the internal VSPecs of the unit."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="configurableContainerObject"
+          ordered="false" lowerBound="1" eType="#//CVL/ObjectHandle" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&lt;p>The container object in the base model which is configurable.&lt;/p>"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedVSpecResolution"
+          ordered="false" upperBound="-1" eType="#//CVL/VSpecResolution" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CompositeVariationPoint" eSuperTypes="#//CVL/VariationPoint">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bindingCVSpec" ordered="false"
+          lowerBound="1" eType="#//CVL/CVSpec">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&lt;p>The explicitly exposed interface of an encapsulated CU&lt;/p>"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CVSpec" eSuperTypes="#//CVL/VSpec">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="vInterface" ordered="false"
+          lowerBound="1" eType="#//CVL/VInterface"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VConfiguration" eSuperTypes="#//CVL/VSpecResolution #//CVL/VPackageable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>A Vconfiguration is a collection of variability resolutions made against a given configurable, i.e. a configurable unit or a configurable unit usage. The resolutions resolve VSpecs of the configurable's variability type (in case of a CU usage they resolve VSpecs of the variability type of the CU typing the usage).&lt;/p>&lt;p>&lt;br>A configuration C1 may have a preceding configuration C2. This indicates that C1 is meant to be applied after C2 has been applied, as part of a staged &lt;br>A configuration meant to be applied before this one as part of a staged materialization process.&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="vSpecResolution" ordered="false"
+          upperBound="-1" eType="#//CVL/VSpecResolution" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPartial" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="super" ordered="false"
+          eType="#//CVL/VConfiguration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="resolvedVIRef" ordered="false"
+          lowerBound="1" eType="#//CVL/CVSpec"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VSpec2VSpecMapping">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>A VSpec2VSpecMapping specifies how to derive resolutions for certain VSpecs from resolutions of others via constraints.&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="derivingConstraint" ordered="false"
+          upperBound="-1" eType="#//CVL/Constraint" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LinkExistence" eSuperTypes="#//CVL/Existence">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;    LinkExistence is a kind of variation point which indicates that a link of the base model may or may not exist in the&#xD;&#xA;    materialized model. The link is identified via a link handle.&lt;br />&#xD;&#xA;    &lt;br />&#xD;&#xA;    To be acted on, a LinkExistence variation point must be bound to a choice deciding whether or not the link will be&#xD;&#xA;    present in the materialized model. It may not be bound to a variable or to a classifier.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="optionalLink" ordered="false"
+          lowerBound="1" eType="#//CVL/LinkHandle" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The link handle identifying the base model link whose existence is in question"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OpaqueVariationPoint" eSuperTypes="#//CVL/VariationPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>An OpaqueVariationPoint is an executable, domain-specific variation point whose semantics is not defined by CVL. It is the responsibility of the specfic domain to execute this kind of variation point.&lt;br>&lt;br>If bound to a choice then an OpaqueVariation point will be executed upon a positive decision. If bound to a VClassifier then it will be executed once for each instance created from it. If bound to a variable then it will be executed when a value is assigned to it, also providing the value as parameter for the execution.&lt;br>&lt;/p>"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimitiveValueSpecification" abstract="true"
+        eSuperTypes="#//CVL/ValueSpecification #//CVL/Expression1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A&amp;nbsp;PrimitiveValueSpecification&amp;nbsp;specifies&amp;nbsp;a&amp;nbsp;primitive&amp;nbsp;value,&amp;nbsp;i,e,&amp;nbsp;a&amp;nbsp;particular&amp;nbsp;Integer,&amp;nbsp;or&amp;nbsp;a&amp;nbsp;Float,&amp;nbsp;or&amp;nbsp;a&amp;nbsp;Boolean,&amp;nbsp;or&amp;nbsp;a&amp;nbsp;String."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="#//CVL/GeneralExpression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="An Expression represents a variety of types of expressions: integer expressions, set expressions, etc. Semantic of Expression depends on the underlying semantics of constraints. In set semantics Expression is always a set expression, while in the small language it is an expression of a primitive type."/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ObjectSpecification" eSuperTypes="#//CVL/ValueSpecification">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="An ObjectSpecification specifies a value which is an object of the base mode through an object handle."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="object" ordered="false"
+          lowerBound="1" eType="#//CVL/ObjectHandle">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The object specified."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ReplacementFragmentSpecification"
+        eSuperTypes="#//CVL/ValueSpecification">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A value of ReplacementFragmentType"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VPackage" eSuperTypes="#//CVL/VPackageable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A VPacakge (Variability Package) is the packaging mechanism of CVL."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="packageElement" ordered="false"
+          upperBound="-1" eType="#//CVL/VPackageable" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ToBinding" eSuperTypes="#//CVL/BoundaryElementBinding">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="ToBinding defines a binding between boundary elements of kind ToPlacement/ToReplacement. The ToPlacement boundary element&#xD;&#xA;has to be bound to the ToReplacement."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="toPlacement" ordered="false"
+          lowerBound="1" eType="#//CVL/ToPlacement">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Specifies the ToPlacement boundary element that is part of the binding."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="toReplacement" ordered="false"
+          lowerBound="1" eType="#//CVL/ToReplacement">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Specifies the ToReplacement boundary element that is part of the binding."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ToPlacement" eSuperTypes="#//CVL/PlacementBoundaryElement">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;    ToPlacement is the kind of boundary element that defines the boundary between the owning placement fragment and the&#xD;&#xA;    rest of the base model. The insideBoundaryElements denote the ModelElements of owning fragment that are referred to by&#xD;&#xA;    outside model elements. The outsideBoundaryElement together with the propertyName denotes the attributes of model&#xD;&#xA;    elements on the outside of the placement fragment that refer to the inside boundary model elements.&#xD;&#xA;&lt;/p>&#xD;&#xA;&lt;p>&#xD;&#xA;    Constraints:&#xD;&#xA;&lt;/p>&#xD;&#xA;&lt;p>&#xD;&#xA;    insideBoundaryElement = outsideRef.insideBoundaryElement outsideBoundaryElement != null xor outsideRef != null&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="toReplacement" ordered="false"
+          eType="#//CVL/ToReplacement" eOpposite="#//CVL/ToReplacement/toPlacement">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Reference to a ToReplacement in a containing replacement fragment."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="propertyName" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Name of the attribute to be changed."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="insideBoundaryElement"
+          ordered="false" upperBound="-1" eType="#//CVL/ObjectHandle">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Model elements that are referred to by outside model elements. Used to distinguish miltiplicity references."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outsideBoundaryElement"
+          ordered="false" eType="#//CVL/ObjectHandle">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Outside model elements that refer model elements inside the fragment."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ToReplacement" eSuperTypes="#//CVL/ReplacementBoundaryElement">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;    ToReplacement is the kind of boundary element that defines the inwards boundary of the owning replacement fragment. The&#xD;&#xA;    insideBoundaryElement defines the starting points for the traversal to isolate the model elements that as part of a&#xD;&#xA;    fragment substitution will be copied into the placement fragment.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="insideBoundaryElement"
+          ordered="false" upperBound="-1" eType="#//CVL/ObjectHandle">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Model elements that are referred to by outside model elements."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="toPlacement" ordered="false"
+          eType="#//CVL/ToPlacement" eOpposite="#//CVL/ToPlacement/toReplacement">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Reference to a ToPlacement contained by the replacement fragment."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FromBinding" eSuperTypes="#//CVL/BoundaryElementBinding">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="FromBinding defines a binding between boundary elements of kind FromPlacement/FromReplacement. The FromPlacement boundary&#xD;&#xA;element that has to be bound to the FromPlacement."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="fromPlacement" ordered="false"
+          lowerBound="1" eType="#//CVL/FromPlacement">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Specifies the FromPlacement boundary element that is part of the binding."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="fromReplacement" ordered="false"
+          lowerBound="1" eType="#//CVL/FromReplacement">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Specifies the FromReplacement boundary element that is part of the binding."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FromPlacement" eSuperTypes="#//CVL/PlacementBoundaryElement">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="FromPlacement is the kind of boundary element that defines the outwards boundary of the owning placement fragment. The&#xD;&#xA;outsideBoundaryElement refers to the model elements on the outside of the placement fragment. In a fragment substitution&#xD;&#xA;these have to be referred by model elements within the replacement fragment."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="fromReplacement" ordered="false"
+          eType="#//CVL/FromReplacement" eOpposite="#//CVL/FromReplacement/fromPlacement">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Reference to a FromReplacement in a containing replacement fragment."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outsideBoundaryElement"
+          ordered="false" upperBound="-1" eType="#//CVL/ObjectHandle">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Outside Model Element that are referred by the model elements inside the placement fragment."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FromReplacement" eSuperTypes="#//CVL/ReplacementBoundaryElement">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="FromReplacement is the kind of boundary element that defines the outwards boundary of the owning replacement fragment.&#xD;&#xA;propertyName is the name of the reference attribute of inside boundary model element that will be changed as part of a&#xD;&#xA;fragment substitution. The insideBoundaryElements refer to the base model elements that will have their reference&#xD;&#xA;attributes updated as part of a fragment substitution. The outsideBoundaryElement refers to the model elements on the&#xD;&#xA;outside of the replacement fragment. In a fragment substitution these references are used to define the extent of the&#xD;&#xA;replacement fragment."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="propertyName" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Name of the attribute to be changed."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="insideBoundaryElement"
+          ordered="false" eType="#//CVL/ObjectHandle">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Inside model elements that refer outside model elements."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outsideBoundaryElement"
+          ordered="false" upperBound="-1" eType="#//CVL/ObjectHandle">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Outside&amp;nbsp;model&amp;nbsp;elements&amp;nbsp;that&amp;nbsp;are&amp;nbsp;referred&amp;nbsp;by&amp;nbsp;model&amp;nbsp;elements&amp;nbsp;inside&amp;nbsp;the&amp;nbsp;fragment.&amp;nbsp;Used&amp;nbsp;to&amp;nbsp;distinguish&amp;nbsp;multiplicity&lt;br />&#xD;&#xA;references."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="fromPlacement" ordered="false"
+          eType="#//CVL/FromPlacement" eOpposite="#//CVL/FromPlacement/fromReplacement">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Reference to a FromPlacement contained by the replacement fragment."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PropositionalExp" eSuperTypes="#//CVL/LogicalExp">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A PropositionalExp is a propositional formula that evaluates to either true or false. Logical operators act on propositional expressions."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicalOp" ordered="false"
+          lowerBound="1" eType="#//CVL/LogicalOp"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operand" ordered="false"
+          lowerBound="1" upperBound="3" eType="#//CVL/GeneralExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LogicalExp" abstract="true" eSuperTypes="#//CVL/GeneralExpression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A LogicalExp is a logical expression that evaluates to either true or false."/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="LogicalOp">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A LogicalOp performs boolean operation on two propositional formulas."/>
+      </eAnnotations>
+      <eLiterals name="Not"/>
+      <eLiterals name="Iff" value="1"/>
+      <eLiterals name="Implies" value="2"/>
+      <eLiterals name="Or" value="3"/>
+      <eLiterals name="Xor" value="4"/>
+      <eLiterals name="And" value="5"/>
+      <eLiterals name="ImpliesElse" value="6"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="QuantifiedSet" eSuperTypes="#//CVL/SetComprehension #//CVL/LogicalExp">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A&amp;nbsp;QuantifiedSet&amp;nbsp;is&amp;nbsp;a&amp;nbsp;logical&amp;nbsp;expression&amp;nbsp;that&amp;nbsp;requires&amp;nbsp;a&amp;nbsp;certain&amp;nbsp;number&amp;nbsp;of&amp;nbsp;elements&amp;nbsp;of&amp;nbsp;a&amp;nbsp;set&amp;nbsp;to&amp;nbsp;satisfy&amp;nbsp;a&amp;nbsp;given&amp;nbsp;predicate&amp;nbsp;constraint.&amp;nbsp;If&amp;nbsp;there&amp;nbsp;is&amp;nbsp;no&amp;nbsp;logical&amp;nbsp;constraint,&amp;nbsp;then&amp;nbsp;the&amp;nbsp;quantifier&amp;nbsp;checks&amp;nbsp;set&amp;nbsp;cardinality.&amp;nbsp;QuantifiedSet&amp;nbsp;reduces&amp;nbsp;set&amp;nbsp;semantics&amp;nbsp;to&amp;nbsp;propositional&amp;nbsp;semantics,&amp;nbsp;because&amp;nbsp;each&amp;nbsp;cardinality&amp;nbsp;constraint&amp;nbsp;transforms&amp;nbsp;set&amp;nbsp;expression&amp;nbsp;into&amp;nbsp;a&amp;nbsp;Boolean&amp;nbsp;value&amp;nbsp;(true&amp;nbsp;or&amp;nbsp;false)."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="quantifier" ordered="false"
+          lowerBound="1" eType="#//CVL/Quantifier"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SetComprehension" eSuperTypes="#//CVL/Expression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A SetComprehension represents a mathematical set comprehension. It allows for building sets from existing sets by filtering elements."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" ordered="false"
+          lowerBound="1" eType="#//CVL/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="setComprVariable" ordered="false"
+          eType="#//CVL/SetComprVariable" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="generalExpression" ordered="false"
+          upperBound="-1" eType="#//CVL/GeneralExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SetComprVariable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A SetComprVariable declares a local variable used for naming elements of a set comprehension. The named variable can then be referred to in constraints associated with set comprehensions."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Quantifier">
+      <eLiterals name="No"/>
+      <eLiterals name="Lone" value="1"/>
+      <eLiterals name="One" value="2"/>
+      <eLiterals name="Some" value="3"/>
+      <eLiterals name="All" value="4">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A Quantifier puts cardinality constraint on a number of elements in a set. ''No'' requires the set to be empty, ''lone'' requires the set to have at most one element, ''one'' -- to have precisely one element, ''some'' -- to have at least one element, and ''all'' requires all elements to satisfy the given predicate."/>
+        </eAnnotations>
+      </eLiterals>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SetComprVarReference" eSuperTypes="#//CVL/Expression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A SetComprVarReference is an Expression that points to a local variable used in SetComprehension. It can be used within logical constraints placed on the right hand side of a set comprehension."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="setComprVariable" ordered="false"
+          lowerBound="1" eType="#//CVL/SetComprVariable"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CompareExp" eSuperTypes="#//CVL/LogicalExp">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A CompareExp relates two expressions by applying one of comparison operators. The result of comparison is always a boolean value (true or false)."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="compared" ordered="false"
+          lowerBound="2" upperBound="2" eType="#//CVL/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="compareOp" ordered="false"
+          lowerBound="1" eType="#//CVL/CompareOp"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="CompareOp">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A CompareOp is a mathematical operator that acts on Expressions. It relates two expressions of the same type."/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="SetCompareOp">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A SetCompareOp relates two sets. Operators check equality, inequality, begin a subset of a set, and being a strict subset of a set."/>
+      </eAnnotations>
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="CompareOp"/>
+      </eAnnotations>
+      <eLiterals name="Eq"/>
+      <eLiterals name="NEq" value="1"/>
+      <eLiterals name="In" value="2"/>
+      <eLiterals name="StrictIn" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ArithmeticCompareOp">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="An ArithmeticCompareOp compares two numbers. It is applicable to integers and floats."/>
+      </eAnnotations>
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="CompareOp"/>
+      </eAnnotations>
+      <eLiterals name="Lt"/>
+      <eLiterals name="Gt" value="1"/>
+      <eLiterals name="LtE" value="2"/>
+      <eLiterals name="GtE" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IntegerValueSpec" eSuperTypes="#//CVL/PrimitiveValueSpecification">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="An Integer represents expression containing an integer primitive constant."/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BooleanValueSpec" eSuperTypes="#//CVL/PrimitiveValueSpecification">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A Boolean represents expression containing a boolean primitive constant. Boolean constants fit well into semantics of the small language, but make little sense in the set semantics at higher compliance levels."/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FloatValueSpec" eSuperTypes="#//CVL/PrimitiveValueSpecification">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A Float represents expression containing a float primitive constant."/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="StringValueSpec" eSuperTypes="#//CVL/PrimitiveValueSpecification">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A String represents expression containing a string primitive constant."/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Function">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A Function is a mathematical function that acts on Expressions. Expressions are either sets or primitive types."/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FunctionExp" eSuperTypes="#//CVL/Expression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A&amp;nbsp;FunctionExp&amp;nbsp;transforms&amp;nbsp;expressions&amp;nbsp;by&amp;nbsp;applying&amp;nbsp;one&amp;nbsp;of&amp;nbsp;predefined&amp;nbsp;functions.&amp;nbsp;Depending&amp;nbsp;on&amp;nbsp;the&amp;nbsp;function,&amp;nbsp;FunctionExp&amp;nbsp;can&amp;nbsp;have&#xD;&#xA;at&amp;nbsp;least&amp;nbsp;one,&amp;nbsp;and&amp;nbsp;at&amp;nbsp;most&amp;nbsp;two&amp;nbsp;arguments&amp;nbsp;(Expressions)."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="function" ordered="false"
+          lowerBound="1" eType="#//CVL/Function"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operand" ordered="false"
+          lowerBound="1" upperBound="2" eType="#//CVL/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="StringFunction">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A StringFunction acts on strings and transforms them to new strings."/>
+      </eAnnotations>
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="Function"/>
+      </eAnnotations>
+      <eLiterals name="Concatenation"/>
+      <eLiterals name="Capitalize" value="1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="SetFunction">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A SetFunction is a mathematical operator that acts on sets. The Join operator performs relational join and is usually used for navigation."/>
+      </eAnnotations>
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="Function"/>
+      </eAnnotations>
+      <eLiterals name="Union"/>
+      <eLiterals name="Difference" value="1"/>
+      <eLiterals name="Intersection" value="2"/>
+      <eLiterals name="Join" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="IntSetFunction">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="An IntSetFunction is a function that acts on a set and returns an integer value."/>
+      </eAnnotations>
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="Function"/>
+      </eAnnotations>
+      <eLiterals name="SetCardinality"/>
+      <eLiterals name="Sum" value="1"/>
+      <eLiterals name="Min" value="2"/>
+      <eLiterals name="Max" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ArithmeticFunction">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="An ArithmeticFunction is a mathematical operator that acts on numerical values (Integers, Floats)."/>
+      </eAnnotations>
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="baseType" value="Function"/>
+      </eAnnotations>
+      <eLiterals name="Negation"/>
+      <eLiterals name="Plus" value="1"/>
+      <eLiterals name="Minus" value="2"/>
+      <eLiterals name="Multiply" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VSpecReference" eSuperTypes="#//CVL/Expression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A&amp;nbsp;VSpecReference&amp;nbsp;points&amp;nbsp;to&amp;nbsp;a&amp;nbsp;VSpec&amp;nbsp;element&amp;nbsp;(choice,&amp;nbsp;variable,&amp;nbsp;classifier).&amp;nbsp;In&amp;nbsp;set&amp;nbsp;semantics,&amp;nbsp;VSpecReference&amp;nbsp;is&amp;nbsp;always&amp;nbsp;treated&amp;nbsp;as&amp;nbsp;a&amp;nbsp;set&amp;nbsp;expression;&amp;nbsp;choices&amp;nbsp;and&amp;nbsp;variables&amp;nbsp;are&amp;nbsp;modeled&amp;nbsp;as&amp;nbsp;singletons&amp;nbsp;or&amp;nbsp;empty&amp;nbsp;sets.&amp;nbsp;In&amp;nbsp;the&amp;nbsp;small&amp;nbsp;language&amp;nbsp;there&amp;nbsp;is&amp;nbsp;no&amp;nbsp;set&amp;nbsp;semantics;&amp;nbsp;VSpecReference&amp;nbsp;to&amp;nbsp;a&amp;nbsp;choice&amp;nbsp;is&amp;nbsp;then&amp;nbsp;treated&amp;nbsp;as&amp;nbsp;a&amp;nbsp;Boolean&amp;nbsp;(evaluates&amp;nbsp;to&amp;nbsp;true&amp;nbsp;or&amp;nbsp;false),&amp;nbsp;and&amp;nbsp;a&amp;nbsp;variable&amp;nbsp;reference&amp;nbsp;resolves&amp;nbsp;to&amp;nbsp;the&amp;nbsp;value&amp;nbsp;of&amp;nbsp;the&amp;nbsp;variable."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="vSpec" ordered="false"
+          lowerBound="1" eType="#//CVL/VSpec"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VSpecToConfigMapping">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>A VSpec2VSpecMapping specifies how to derive resolutions for certain VSpecs from resolutions of others by specifying that the fulfillment of a certain constraint implies an entire configuration.&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="thenConfiguration" ordered="false"
+          eType="#//CVL/VConfiguration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ifConstraint" ordered="false"
+          lowerBound="1" eType="#//CVL/Constraint" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ParametricVariationPoint" abstract="true"
+        eSuperTypes="#//CVL/VariationPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>A parametric variation point is a variation point which inserts a value into the base model. The value to be inserted is a parameter of the variation point. A parametric variation point must be bound to a VSpec of kind variable, which represents the variation point's parameter.&lt;/p>"/>
+      </eAnnotations>
+      <eOperations name="getPropertyValue">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+          <eTypeArguments/>
+        </eGenericType>
+        <eParameters name="propertyName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bindingVariable" ordered="false"
+          lowerBound="1" eType="#//CVL/Variable"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SlotValueExistence" eSuperTypes="#//CVL/Existence">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>SlotValueExistence is a kind of choice variation point which indicates that a value in a slot of some object of the base model may or may not exist in the materialized model. The object is identified via an object handle.&lt;br>&lt;br>To be acted on, an SlotValueExistence variation point must be bound to a choice deciding whether or not the object will be present in the materialized model. It may not be bound to a variable or to a classifier.&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="slotIdentifier" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="slotOwner" ordered="false"
+          lowerBound="1" eType="#//CVL/ObjectHandle" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ParametricLinkAssignment" eSuperTypes="#//CVL/ParametricVariationPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>A ParametricLinkAssignmet is a parametric variation point which specifies that an object arriving as parameter, called the replacement, will be substituted for an object of the base model as the end of a particular link in the base model.&lt;br>&lt;br>The link-end is identified via a link handle pointing to the base model plus a string representing a MOF property owned by the association of which the link is an instance.&lt;br>The variation point must be bound to a variable which provides the replacement. It may not be bound to a choice or classifier.&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="linkEndIdentifier" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="link" ordered="false"
+          lowerBound="1" eType="#//CVL/LinkHandle" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ParametricObjectSubstitution" eSuperTypes="#//CVL/ParametricVariationPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>A ParametricObjectSubstitution is a parametric variation point which specifies that an object arriving as parameter, called the replacement, will be substituted for an object of the base model, called the placement.&lt;br>&lt;br>The placement object is identified via an object handle identifying a base model object. The variation point must be bound to a variable which provides the replacement.&lt;br>&lt;br>&lt;br>An ObjectSubstitution may not be bound to a choice or VClassifier.&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="placementObject" ordered="false"
+          lowerBound="1" eType="#//CVL/ObjectHandle" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ParametricSlotAssignmet" eSuperTypes="#//CVL/ParametricVariationPoint">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>A parametric slot assignment is a parametric variation point which specifies that a value arriving as parameter will be assigned to a particular slot in a particular object in the base model. The object is identified via an object handle pointing to the base model, and the slot is identified via a string representing a MOF property owned by the class of which the object is an instance. The variation point must be bound to a variable providing the value to be assigned.&lt;br>&lt;br>A parametric slot assignment may not be bound to a VClassifer or choice.&lt;/p>"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="slotIdentifier" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="slotOwner" ordered="false"
+          lowerBound="1" eType="#//CVL/ObjectHandle" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Expression1">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="expressionLanguage" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ChoiceDerivation" eSuperTypes="#//CVL/VSpecDerivation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="derivingConstraint" ordered="false"
+          lowerBound="1" eType="#//CVL/Constraint" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VariableDerivation" eSuperTypes="#//CVL/VSpecDerivation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="derivingExpression" ordered="false"
+          lowerBound="1" eType="#//CVL/Expression1" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CVSpecDerivation" eSuperTypes="#//CVL/VSpecDerivation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="memberDerivation" ordered="false"
+          upperBound="-1" eType="#//CVL/VSpecDerivation" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConfigurableUnitUsage" eSuperTypes="#//CVL/CompositeVariationPoint">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="usedUnit" ordered="false"
+          lowerBound="1" eType="#//CVL/ConfigurableUnit"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="usageReference" ordered="false"
+          lowerBound="1" eType="#//CVL/LinkHandle" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="linkEndIdentifier" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

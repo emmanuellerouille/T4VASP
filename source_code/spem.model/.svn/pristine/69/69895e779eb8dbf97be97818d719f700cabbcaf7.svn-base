@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1345794062937
+Build-Jdk: 1.6.0_25
+Built-By: erouille
+Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
+Bundle-Name: spem.model :: SPEM MODEL
+Bundle-SymbolicName: spem.model;singleton:=true
+Bundle-Version: 1.9.9.SNAPSHOT_20120824_0940
+Created-By: Apache Maven Bundle Plugin
+Export-Package: spem.uma.util;uses:="spem.uma,spem";version="1.9.9.SNAPS
+ HOT_20120706_1357",spem.uma.impl;uses:="spem.uma,spem.impl,spem";versio
+ n="1.9.9.SNAPSHOT_20120706_1357",spem.uma;uses:="spem,spem.uma.impl";ve
+ rsion="1.9.9.SNAPSHOT_20120706_1357",spem.util;uses:=spem;version="1.9.
+ 9.SNAPSHOT_20120706_1357",spem;uses:="spem.uma,spem.impl";version="1.9.
+ 9.SNAPSHOT_20120706_1357",spem.impl;uses:="spem.uma,spem,spem.uma.impl"
+ ;version="1.9.9.SNAPSHOT_20120706_1357"
+Ignore-Package: org.eclipse.emf.ecore.resource,org.eclipse.emf.ecore.plu
+ gin,org.eclipse.emf.ecore.util,org.eclipse.emf.ecore,org.eclipse.emf.co
+ mmon.util,java.util,org.eclipse.emf.common.notify.impl,org.eclipse.emf.
+ common.notify,java.lang,org.eclipse.emf.ecore.impl
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore;visibilit
+ y:=reexport,spem.model;visibility:=reexport
+Tool: Bnd-1.50.0

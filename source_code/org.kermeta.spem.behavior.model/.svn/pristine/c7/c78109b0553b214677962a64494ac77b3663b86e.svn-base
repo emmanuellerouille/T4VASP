@@ -1,0 +1,193 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.spem.behavior.impl;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.kermeta.spem.behavior.Behavior;
+import org.kermeta.spem.behavior.BehaviorContainer;
+import org.kermeta.spem.behavior.BehaviorPackage;
+import org.kermeta.spem.behavior.BehaviorProcess;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Container</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.kermeta.spem.behavior.impl.BehaviorContainerImpl#getBehaviorProcesses <em>Behavior Processes</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.BehaviorContainerImpl#getBehaviors <em>Behaviors</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class BehaviorContainerImpl extends EObjectImpl implements BehaviorContainer {
+	/**
+	 * The cached value of the '{@link #getBehaviorProcesses() <em>Behavior Processes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBehaviorProcesses()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BehaviorProcess> behaviorProcesses;
+
+	/**
+	 * The cached value of the '{@link #getBehaviors() <em>Behaviors</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBehaviors()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Behavior> behaviors;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BehaviorContainerImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return BehaviorPackage.Literals.BEHAVIOR_CONTAINER;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<BehaviorProcess> getBehaviorProcesses() {
+		if (behaviorProcesses == null) {
+			behaviorProcesses = new EObjectContainmentEList<BehaviorProcess>(BehaviorProcess.class, this, BehaviorPackage.BEHAVIOR_CONTAINER__BEHAVIOR_PROCESSES);
+		}
+		return behaviorProcesses;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Behavior> getBehaviors() {
+		if (behaviors == null) {
+			behaviors = new EObjectContainmentEList<Behavior>(Behavior.class, this, BehaviorPackage.BEHAVIOR_CONTAINER__BEHAVIORS);
+		}
+		return behaviors;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case BehaviorPackage.BEHAVIOR_CONTAINER__BEHAVIOR_PROCESSES:
+				return ((InternalEList<?>)getBehaviorProcesses()).basicRemove(otherEnd, msgs);
+			case BehaviorPackage.BEHAVIOR_CONTAINER__BEHAVIORS:
+				return ((InternalEList<?>)getBehaviors()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case BehaviorPackage.BEHAVIOR_CONTAINER__BEHAVIOR_PROCESSES:
+				return getBehaviorProcesses();
+			case BehaviorPackage.BEHAVIOR_CONTAINER__BEHAVIORS:
+				return getBehaviors();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case BehaviorPackage.BEHAVIOR_CONTAINER__BEHAVIOR_PROCESSES:
+				getBehaviorProcesses().clear();
+				getBehaviorProcesses().addAll((Collection<? extends BehaviorProcess>)newValue);
+				return;
+			case BehaviorPackage.BEHAVIOR_CONTAINER__BEHAVIORS:
+				getBehaviors().clear();
+				getBehaviors().addAll((Collection<? extends Behavior>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.BEHAVIOR_CONTAINER__BEHAVIOR_PROCESSES:
+				getBehaviorProcesses().clear();
+				return;
+			case BehaviorPackage.BEHAVIOR_CONTAINER__BEHAVIORS:
+				getBehaviors().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.BEHAVIOR_CONTAINER__BEHAVIOR_PROCESSES:
+				return behaviorProcesses != null && !behaviorProcesses.isEmpty();
+			case BehaviorPackage.BEHAVIOR_CONTAINER__BEHAVIORS:
+				return behaviors != null && !behaviors.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+} //BehaviorContainerImpl

@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.cvl.variability.model/src/main/java"
+    editDirectory="/org.kermeta.cvl.variability.model.edit/src/main/java" editorDirectory="/org.kermeta.cvl.variability.model.editor/src/main/java"
+    modelPluginID="org.kermeta.cvl.variability.model" modelName="Variability" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>variability.ecore</foreignModel>
+  <genPackages prefix="Variability" basePackage="org.kermeta.cvl" disposableProviderFactory="true"
+      ecorePackage="variability.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="variability.ecore#//PrimitiveTypeEnum">
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//PrimitiveTypeEnum/String"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//PrimitiveTypeEnum/Integer"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//PrimitiveTypeEnum/Float"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//PrimitiveTypeEnum/Boolean"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="variability.ecore#//LogicalOp">
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//LogicalOp/Not"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//LogicalOp/Iff"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//LogicalOp/Implies"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//LogicalOp/Or"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//LogicalOp/Xor"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//LogicalOp/And"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//LogicalOp/ImpliesElse"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="variability.ecore#//Quantifier">
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//Quantifier/No"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//Quantifier/Lone"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//Quantifier/One"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//Quantifier/Some"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//Quantifier/All"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="variability.ecore#//CompareOp"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="variability.ecore#//SetCompareOp">
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//SetCompareOp/Eq"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//SetCompareOp/NEq"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//SetCompareOp/In"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//SetCompareOp/StrictIn"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="variability.ecore#//ArithmeticCompareOp">
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//ArithmeticCompareOp/Lt"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//ArithmeticCompareOp/Gt"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//ArithmeticCompareOp/LtE"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//ArithmeticCompareOp/GtE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="variability.ecore#//Function"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="variability.ecore#//StringFunction">
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//StringFunction/Concatenation"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//StringFunction/Capitalize"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="variability.ecore#//SetFunction">
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//SetFunction/Union"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//SetFunction/Difference"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//SetFunction/Intersection"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//SetFunction/Join"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="variability.ecore#//IntSetFunction">
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//IntSetFunction/SetCardinality"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//IntSetFunction/Sum"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//IntSetFunction/Min"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//IntSetFunction/Max"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="variability.ecore#//ArithmeticFunction">
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//ArithmeticFunction/Negation"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//ArithmeticFunction/Plus"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//ArithmeticFunction/Minus"/>
+      <genEnumLiterals ecoreEnumLiteral="variability.ecore#//ArithmeticFunction/Multiply"/>
+    </genEnums>
+    <genClasses ecoreClass="variability.ecore#//Choice">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//Choice/defaultResolution"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//Choice/isImpliedByParent"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="variability.ecore#//VSpec">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//VSpec/groupMultiplicity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//VSpec/resolutionTime"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//VSpec/childVSpec"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//VSpec/derivation"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="variability.ecore#//VPackageable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//VPackageable/name"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//MultiplicityInterval">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//MultiplicityInterval/upper"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//MultiplicityInterval/lower"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//VSpecDerivation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//VSpecDerivation/derivedVSpec"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//VClassifier">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//VClassifier/instanceMultiplicity"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="variability.ecore#//VSpecResolution">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//VSpecResolution/resolvedVSpec"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//VSpecResolution/childResolution"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="variability.ecore#//VariationPoint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//VariationPoint/bindingVspec"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//FragmentSubstitution">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//FragmentSubstitution/boundaryElementBinding"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//FragmentSubstitution/placement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//FragmentSubstitution/multi"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//FragmentSubstitution/replacement"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//ChoiceVariationPoint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//ChoiceVariationPoint/bindingChoice"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="variability.ecore#//RepeatableVariationPoint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//RepeatableVariationPoint/bindingClassifier"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="variability.ecore#//BoundaryElementBinding">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//BoundaryElementBinding/name"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//PlacementFragment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//PlacementFragment/placementBoundaryElement"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="variability.ecore#//PlacementBoundaryElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//PlacementBoundaryElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//ReplacementFragmentType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ReplacementFragmentType/replacementBoundaryElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ReplacementFragmentType/placementFragment"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//Variabletype"/>
+    <genClasses image="false" ecoreClass="variability.ecore#//ReplacementBoundaryElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//ReplacementBoundaryElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//ObjectSubstitution">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ObjectSubstitution/placementObject"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ObjectSubstitution/replacementObject"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//ObjectHandle">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//ObjectHandle/object"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//ObjectHandle/ref"/>
+      <genOperations ecoreOperation="variability.ecore#//ObjectHandle/getPropertyByName">
+        <genParameters ecoreParameter="variability.ecore#//ObjectHandle/getPropertyByName/propertyName"/>
+      </genOperations>
+      <genOperations ecoreOperation="variability.ecore#//ObjectHandle/getPropertyValue">
+        <genParameters ecoreParameter="variability.ecore#//ObjectHandle/getPropertyValue/propertyName"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="variability.ecore#//Existence"/>
+    <genClasses ecoreClass="variability.ecore#//Variable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//Variable/replacementFragmentTypesubsetstype"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//Variable/defaulValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//Variable/type"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="variability.ecore#//ValueSpecification">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ValueSpecification/type"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//PrimitveType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//PrimitveType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//ObjectType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//ObjectType/theMetaClass"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//VInterface">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//VInterface/vSpec"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//VInterface/ownedConstraint"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//VInterface/super"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//Constraint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//Constraint/generalExpression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//Constraint/context"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//Constraint/constraint"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//Constraint/constraintLanguage"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="variability.ecore#//GeneralExpression"/>
+    <genClasses ecoreClass="variability.ecore#//SlotAssignment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//SlotAssignment/slotIdentifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//SlotAssignment/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//SlotAssignment/SlotOwner"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//FixedSlotValueAssignment"/>
+    <genClasses ecoreClass="variability.ecore#//FixedObjectSubstitution"/>
+    <genClasses ecoreClass="variability.ecore#//ObjectExistence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ObjectExistence/optionalObject"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//LinkAssignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//LinkAssignment/link"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//LinkAssignment/linkEndIdentifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//LinkAssignment/newEnd"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//LinkHandle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//LinkHandle/linkRef"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//LinkHandle/linkOwner"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//LinkHandle/referencedObject"/>
+      <genOperations ecoreOperation="variability.ecore#//LinkHandle/getEnd"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//ConfigurableUnit">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ConfigurableUnit/ownedVSpec"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ConfigurableUnit/ownedVariationPoint"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ConfigurableUnit/ownedConstraint"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ConfigurableUnit/configurableContainerObject"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ConfigurableUnit/ownedVSpecResolution"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//CompositeVariationPoint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//CompositeVariationPoint/bindingCVSpec"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//CVSpec">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//CVSpec/vInterface"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//VConfiguration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//VConfiguration/vSpecResolution"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//VConfiguration/isPartial"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//VConfiguration/super"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//VConfiguration/resolvedVIRef"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//VSpec2VSpecMapping">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//VSpec2VSpecMapping/derivingConstraint"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//LinkExistence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//LinkExistence/optionalLink"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//OpaqueVariationPoint"/>
+    <genClasses image="false" ecoreClass="variability.ecore#//PrimitiveValueSpecification">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//PrimitiveValueSpecification/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="variability.ecore#//Expression"/>
+    <genClasses ecoreClass="variability.ecore#//ObjectSpecification">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//ObjectSpecification/object"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//ReplacementFragmentSpecification"/>
+    <genClasses ecoreClass="variability.ecore#//VPackage">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//VPackage/packageElement"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//ToBinding">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//ToBinding/toPlacement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//ToBinding/toReplacement"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//ToPlacement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//ToPlacement/toReplacement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//ToPlacement/propertyName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//ToPlacement/insideBoundaryElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//ToPlacement/outsideBoundaryElement"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//ToReplacement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//ToReplacement/insideBoundaryElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//ToReplacement/toPlacement"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//FromBinding">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//FromBinding/fromPlacement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//FromBinding/fromReplacement"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//FromPlacement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//FromPlacement/fromReplacement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//FromPlacement/outsideBoundaryElement"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//FromReplacement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//FromReplacement/propertyName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//FromReplacement/insideBoundaryElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//FromReplacement/outsideBoundaryElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//FromReplacement/fromPlacement"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//PropositionalExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//PropositionalExp/logicalOp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//PropositionalExp/operand"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="variability.ecore#//LogicalExp"/>
+    <genClasses ecoreClass="variability.ecore#//QuantifiedSet">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//QuantifiedSet/quantifier"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//SetComprehension">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//SetComprehension/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//SetComprehension/setComprVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//SetComprehension/generalExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//SetComprVariable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//SetComprVariable/name"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//SetComprVarReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//SetComprVarReference/setComprVariable"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//CompareExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//CompareExp/compared"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//CompareExp/compareOp"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//IntegerValueSpec"/>
+    <genClasses ecoreClass="variability.ecore#//BooleanValueSpec"/>
+    <genClasses ecoreClass="variability.ecore#//FloatValueSpec"/>
+    <genClasses ecoreClass="variability.ecore#//StringValueSpec"/>
+    <genClasses ecoreClass="variability.ecore#//FunctionExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//FunctionExp/function"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//FunctionExp/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//VSpecReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//VSpecReference/vSpec"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//VSpecToConfigMapping">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//VSpecToConfigMapping/thenConfiguration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//VSpecToConfigMapping/ifConstraint"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="variability.ecore#//ParametricVariationPoint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//ParametricVariationPoint/bindingVariable"/>
+      <genOperations ecoreOperation="variability.ecore#//ParametricVariationPoint/getPropertyValue">
+        <genParameters ecoreParameter="variability.ecore#//ParametricVariationPoint/getPropertyValue/propertyName"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//SlotValueExistence">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//SlotValueExistence/slotIdentifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//SlotValueExistence/slotOwner"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//ParametricLinkAssignment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//ParametricLinkAssignment/linkEndIdentifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ParametricLinkAssignment/link"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//ParametricObjectSubstitution">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ParametricObjectSubstitution/placementObject"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//ParametricSlotAssignmet">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//ParametricSlotAssignmet/slotIdentifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ParametricSlotAssignmet/slotOwner"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//Expression1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//Expression1/expression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//Expression1/expressionLanguage"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//ChoiceDerivation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ChoiceDerivation/derivingConstraint"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//VariableDerivation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//VariableDerivation/derivingExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//CVSpecDerivation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//CVSpecDerivation/memberDerivation"/>
+    </genClasses>
+    <genClasses ecoreClass="variability.ecore#//ConfigurableUnitUsage">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference variability.ecore#//ConfigurableUnitUsage/usedUnit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference variability.ecore#//ConfigurableUnitUsage/usageReference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute variability.ecore#//ConfigurableUnitUsage/linkEndIdentifier"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

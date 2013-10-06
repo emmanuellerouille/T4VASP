@@ -1,0 +1,90 @@
+package org.kermeta.spem.activityautomationmanager;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.InvalidRegistryObjectException;
+import org.eclipse.core.runtime.Platform;
+
+public class BehaviorExecution {
+
+	public static void behaviorExecution(String action, String contextFilePath){
+
+		//Find the class, among those extending the activityautomationregistry extension point, whose action equals action and execute its behavior operation
+		System.out.println("action = "+action);
+		IExtension[] extensions = Platform.getExtensionRegistry().getExtensionPoint(Activator.getDefault().PLUGIN_ID,"activityautomationregistry").getExtensions();
+		for(int i = 0; i < extensions.length; i++){
+			IConfigurationElement[] configElements = extensions[i].getConfigurationElements();
+			for(int j = 0; j < configElements.length; j++){
+				System.out.println("configElements[j].getAttribute(action) = "+configElements[j].getAttribute("action"));
+				if(configElements[j].getAttribute("action").equals(action)){
+					System.out.println("true");
+
+					ClassLoader myClassLoader = ClassLoader.getSystemClassLoader();
+
+					// Step 2: Define a class to be loaded.
+
+					String classNameToBeLoaded = configElements[j].getAttribute("class");
+
+
+					// Step 3: Load the class
+
+					Class myClass;
+					try {
+						myClass = myClassLoader.loadClass(classNameToBeLoaded);
+
+						// Step 4: create a new instance of that class
+
+						Object whatInstance = myClass.newInstance();
+
+						String methodParameter = contextFilePath;
+
+						// Step 5: get the method, with proper parameter signature.
+						// The second parameter is the parameter type.
+						// There can be multiple parameters for the method we are trying to call,
+						// hence the use of array.
+
+						Method myMethod = myClass.getMethod(configElements[j].getAttribute("operation"), new Class[] { String.class });
+
+
+						// Step 6:
+						// Calling the real method. Passing methodParameter as
+						// parameter. You can pass multiple parameters based on
+						// the signature of the method you are calling. Hence
+						// there is an array.
+
+						myMethod.invoke(whatInstance, new Object[] { methodParameter });
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InstantiationException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SecurityException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InvalidRegistryObjectException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (NoSuchMethodException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IllegalArgumentException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InvocationTargetException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+
+		}
+
+	}
+}

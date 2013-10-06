@@ -1,0 +1,66 @@
+package org.kermeta.cvl.derivation;
+
+import org.eclipse.core.internal.resources.File;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IObjectActionDelegate;
+import org.eclipse.ui.IWorkbenchPart;
+//import mainPackage.KerRichFactory;
+//import mainPackage.MainClass;
+//import my.group.org.kermeta.cvl.derivationenginerunner.MainRunner;
+
+public class Derivation implements IObjectActionDelegate{
+
+	private IWorkbenchPart targetPart;
+	private ISelection selection;
+	private File CVLResolutionModel;
+	private String CVLResolutionModelPath;
+	private String outputModelPath;
+
+	public Derivation() {
+	}
+
+	@Override
+	public void run(IAction action) {
+		System.out.println("Derivation is running!");
+		
+		//Get the CVL resolution model file
+		if (selection instanceof StructuredSelection){
+			StructuredSelection structuredSelection = (StructuredSelection) selection;
+			if(structuredSelection.getFirstElement() instanceof File){
+				CVLResolutionModel = (File) structuredSelection.getFirstElement();
+			}
+		}
+
+		//Get the CVL resolution model path
+		CVLResolutionModelPath = CVLResolutionModel.getFullPath().toString();
+		System.out.println("CVLResolutionModelPath = "+CVLResolutionModelPath);
+		System.out.println("CVLResolutionModel.getName()"+CVLResolutionModel.getName());
+		System.out.println("CVLResolutionModel.getProject().getName()"+CVLResolutionModel.getProject().getName());
+		
+		//Call to the CVL derivation engine
+//		ResourceSet rSet = new ResourceSetImpl();
+//		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap();
+//		MainRunner.init4eclipse();
+//		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap();
+//		MainRunner.init();
+//		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap();
+//		DerivationEngine2 m = KerRichFactory.createDerivationEngine2();
+//		m.main("platform:/resource"+CVLResolutionModelPath, "platform:/resource"+outputModelPath);
+
+	}
+
+	@Override
+	public void selectionChanged(IAction action, ISelection selection) {
+		this.selection = selection;		
+	}
+
+	@Override
+	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
+		this.targetPart = targetPart;	
+	}
+
+}

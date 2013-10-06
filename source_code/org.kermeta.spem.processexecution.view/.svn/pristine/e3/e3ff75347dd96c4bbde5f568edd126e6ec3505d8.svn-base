@@ -1,0 +1,85 @@
+package org.kermeta.spem.processexecution.view.actions.impl;
+
+import org.eclipse.draw2d.Label;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.activityautomationmanager.BehaviorExecution;
+import org.kermeta.spem.behavior.Container;
+import org.kermeta.spem.processexecution.acinterpreter.ACInterpreter;
+import org.kermeta.spem.processexecution.utils.model.ModelUtils;
+import org.kermeta.spem.processexecution.view.HyperlinkFigure;
+import org.kermeta.spem.processexecution.view.ProcessPart;
+import org.kermeta.spem.processexecution.view.TaskFigure;
+import org.kermeta.spem.processexecution.view.actions.ProcessAction;
+
+public class DoAction extends ProcessAction{
+
+	public DoAction(boolean enabled) {
+		super(enabled);
+		// TODO Auto-generated constructor stub
+	}
+
+	public DoAction(boolean enabled, String taskUseName){
+		super(enabled, taskUseName);
+	}
+
+	public DoAction(boolean enabled, String taskUseName, String contextModelPath){
+		super(enabled, taskUseName, contextModelPath);
+	}
+
+	@Override
+	public void run() {
+		
+		String behaviorModelPath = ModelUtils.getBehaviorModelPath(contextModelPath);
+		
+		//Get the root of the behavior model
+		Container container = ModelUtils.getBehaviorModelRoot(behaviorModelPath);
+
+		//update process view
+		ProcessPart view;
+		try {
+			view = (ProcessPart)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("ProcessExecution.views.ProcessElementsView");
+			for(TaskFigure taskFigure : view.getMediator().getView().getTaskFigures()){
+				if(taskFigure.getDescription().equals(taskUseName)){
+					for( int i = 0; i < taskFigure.getStdActionsPlate().getChildren().size(); i++){
+						Label label = (Label) taskFigure.getStdActionsPlate().getChildren().get(i);
+						if(label instanceof HyperlinkFigure){
+							HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+							
+							//Put done to true only if the execution is manual
+							if(!ModelUtils.isExecutionAutomated(taskFigure.getDescription(), container)){
+								if(hyperlinkFigure.getText() == "done"){
+									hyperlinkFigure.getAction().setEnabled(true);
+								}
+							}else{//If the execution is automated
+								if(ModelUtils.isFinalizationAutomated(taskFigure.getDescription(), container)){//if the finalization is automated put on end to true
+									if(hyperlinkFigure.getText() == "on end"){
+										hyperlinkFigure.getAction().setEnabled(true);
+									}
+								}else{//set the status of the following tasks otherwise
+									Utils.setStatusFollowingTasks(taskFigure.getDescription(), view, container, ModelUtils.getProcessModelPath(contextModelPath));
+								}
+							}
+							
+							if(hyperlinkFigure.getText() == "on do"){
+								hyperlinkFigure.getAction().setEnabled(false);
+							}
+							hyperlinkFigure.repaint();
+						}
+					}
+				}
+			}
+		} catch (PartInitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		//Execute the task
+		//If the execution is manual
+		if(!ModelUtils.isExecutionAutomated(taskUseName, container)){
+			BehaviorExecution.behaviorExecution("Wait for the user to perform manual tasks", contextModelPath);
+		}else{//If the execution is automated
+			ACInterpreter.execute(taskUseName, getBehaviorModelPath(), contextModelPath);
+		}
+	}
+}

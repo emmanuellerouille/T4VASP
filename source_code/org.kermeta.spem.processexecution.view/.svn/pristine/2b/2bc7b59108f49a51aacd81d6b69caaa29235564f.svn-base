@@ -1,0 +1,100 @@
+package org.kermeta.spem.processexecution.view.actions.impl;
+
+import java.util.ArrayList;
+import java.util.Map;
+
+import org.eclipse.draw2d.Label;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.activity.DecisionNode;
+import org.kermeta.spem.activity.Edge;
+import org.kermeta.spem.activity.ForkNode;
+import org.kermeta.spem.activity.JoinNode;
+import org.kermeta.spem.behavior.BehaviorPackage;
+import org.kermeta.spem.behavior.Container;
+import org.kermeta.spem.behavior.WorkUnitHandle;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.executioncontext.ExecutioncontextFactory;
+import org.kermeta.spem.executioncontext.ExecutioncontextPackage;
+import org.kermeta.spem.executioncontext.Key;
+import org.kermeta.spem.executioncontext.State;
+import org.kermeta.spem.executioncontext.StateValue;
+import org.kermeta.spem.processexecution.utils.model.ModelUtils;
+import org.kermeta.spem.processexecution.view.HyperlinkFigure;
+import org.kermeta.spem.processexecution.view.ProcessPart;
+import org.kermeta.spem.processexecution.view.TaskFigure;
+import org.kermeta.spem.processexecution.view.actions.ProcessAction;
+
+import spem.Activity;
+import spem.BreakdownElement;
+import spem.MethodLibrary;
+import spem.MethodPlugin;
+import spem.ProcessPackage;
+import spem.ProcessPackageableElement;
+import spem.SpemPackage;
+import spem.TaskUse;
+import spem.uma.DeliveryProcess;
+import spem.uma.DeliveryProcessPackage;
+
+public class DoneAction extends ProcessAction {
+
+	private String processModelPath = null;
+
+	public DoneAction(boolean enabled) {
+		super(enabled);
+		// TODO Auto-generated constructor stub
+	}
+
+	public DoneAction(boolean enabled, String taskUseName, String contextModelPath){
+		super(enabled, taskUseName, contextModelPath);
+	}
+
+	@Override
+	public void run() {
+
+		String behaviorModelPath = ModelUtils.getBehaviorModelPath(contextModelPath);
+		processModelPath = ModelUtils.getProcessModelPath(contextModelPath);
+
+		//Get the root of the behavior model
+		Container container = ModelUtils.getBehaviorModelRoot(behaviorModelPath);
+
+		//update process view
+		ProcessPart view;
+		try {
+			view = (ProcessPart)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("ProcessExecution.views.ProcessElementsView");
+			for(TaskFigure taskFigure : view.getMediator().getView().getTaskFigures()){
+				if(taskFigure.getDescription().equals(taskUseName)){
+					for( int i = 0; i < taskFigure.getStdActionsPlate().getChildren().size(); i++){
+						Label label = (Label) taskFigure.getStdActionsPlate().getChildren().get(i);
+						if(label instanceof HyperlinkFigure){
+							HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+
+							//If the finalization is not automated, then finish the current task figure and put the on start or on do of the following tasks to true
+							if(!ModelUtils.isFinalizationAutomated(taskFigure.getDescription(), container)){
+								taskFigure.setFinished(true);
+								Utils.setStatusFollowingTasks(taskFigure.getDescription(), view, container, processModelPath);
+							}else{//the finalization is automated, put on end to true
+								if(hyperlinkFigure.getText() == "on end"){
+									hyperlinkFigure.getAction().setEnabled(true);
+								}
+							}
+
+							//In any cases, put done to false
+							if(hyperlinkFigure.getText() == "done"){
+								hyperlinkFigure.getAction().setEnabled(false);
+							}
+							hyperlinkFigure.repaint();
+						}
+					}
+				}
+			}
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		}
+	}
+}

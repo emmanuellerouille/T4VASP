@@ -1,0 +1,228 @@
+package org.kermeta.cvl.derivation;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+
+import org.eclipse.core.internal.resources.File;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IObjectActionDelegate;
+import org.eclipse.ui.IWorkbenchPart;
+import org.kermeta.cvl.resolution.ChoiceResolution;
+import org.kermeta.cvl.resolution.ResolutionPackage;
+import org.kermeta.cvl.resolution.VPackageResolution;
+import org.kermeta.cvl.variability.Choice;
+import org.kermeta.cvl.variability.LinkAssignment;
+import org.kermeta.cvl.variability.LinkHandle;
+import org.kermeta.cvl.variability.ObjectHandle;
+import org.kermeta.cvl.variability.VPackage;
+import org.kermeta.cvl.variability.VPackageable;
+import org.kermeta.cvl.variability.VSpecResolution;
+import org.kermeta.cvl.variability.VariabilityFactory;
+
+public class Derivation implements IObjectActionDelegate{
+
+	private IWorkbenchPart targetPart;
+	private ISelection selection;
+	private File CVLResolutionModel;
+	private String CVLResolutionModelPath;
+	private String outputModelPath;
+	private ArrayList<VPackageable> variationPointsToPerform = new ArrayList<VPackageable>();
+
+	public Derivation() {
+	}
+
+	@Override
+	public void run(IAction action) {
+		//Get the CVL resolution model file
+		if (selection instanceof StructuredSelection){
+			StructuredSelection structuredSelection = (StructuredSelection) selection;
+			if(structuredSelection.getFirstElement() instanceof File){
+				CVLResolutionModel = (File) structuredSelection.getFirstElement();
+			}
+		}
+
+		//Get the CVL resolution model path
+		CVLResolutionModelPath = CVLResolutionModel.getFullPath().toString();
+		String resolutionModelPath = "platform:/resource"+CVLResolutionModelPath;
+
+		//Get the name of the project containing the resolution model
+		String projectName = CVLResolutionModel.getProject().getName();
+
+		//Get the domain root
+		ResolutionPackage.eINSTANCE.eClass();
+
+		ResourceSet resSet = new ResourceSetImpl();
+
+		Resource resource = resSet.getResource(URI
+				.createURI(resolutionModelPath), true);
+
+		VPackageResolution vPackageResolution = (VPackageResolution) resource.getContents().get(0);
+
+		Resource vamResource = getVAMResource(vPackageResolution);
+		Resource domainResource = getDomainResource(vamResource);
+		EObject domainRoot = domainResource.getContents().get(0);
+
+		//Compute the path of the resolved model
+		String s = domainResource.getURI().lastSegment();
+		int i = s.indexOf('.');
+		String outputModelName = s.substring(0, i);
+
+		String outputModelPath = "platform:/resource/"+projectName+"/"+outputModelName+"_resolved.spem";
+
+		//Launch the derivation
+		derive(outputModelPath, domainRoot, vPackageResolution);
+
+	}
+
+	@Override
+	public void selectionChanged(IAction action, ISelection selection) {
+		this.selection = selection;		
+	}
+
+	@Override
+	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
+		this.targetPart = targetPart;	
+	}
+	
+	public void derive(String outputModelPath, EObject domainRoot, VPackageResolution vPackageResolution)
+	{
+		for(VPackageable vPackageable : vPackageResolution.getPackagedElements()){
+			if(vPackageable instanceof ChoiceResolution){
+				ChoiceResolution choiceResolution = (ChoiceResolution) vPackageable; 
+
+				if(choiceResolution.getDecision()){
+					Choice resolvedChoice = choiceResolution.getResolvedChoice();
+
+					VPackage resolvedChoiceContainer = (VPackage) resolvedChoice.eContainer();
+					getVariationPointsToPerform(resolvedChoice, resolvedChoiceContainer,domainRoot);
+				}
+			}
+		}
+
+		performVariationPoints();
+
+		ResourceSet resSetSave = new ResourceSetImpl();
+		Resource resourceSave = resSetSave.createResource(URI.createURI(outputModelPath));
+		resourceSave.getContents().add(domainRoot);
+		try {
+			resourceSave.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public Resource getVAMResource(VPackageResolution vPackageResolution){
+		for(VPackageable vp : vPackageResolution.getPackagedElements()){
+			if(vp instanceof VSpecResolution)
+			{
+				VSpecResolution vsr = (VSpecResolution) vp;
+				return vsr.getResolvedVSpec().eResource();
+			}
+		}
+
+		return null;
+	}
+
+	public Resource getDomainResource(Resource vamResource){
+
+		VPackage vPackage = (VPackage) vamResource.getContents().get(0);
+		TreeIterator<EObject> ti = vPackage.eAllContents();
+		while(ti.hasNext()){
+			EObject eo = ti.next();
+			if(eo instanceof ObjectHandle)
+			{
+				ObjectHandle oh = (ObjectHandle) eo;
+				return oh.getObject().eResource();
+			}
+		}
+
+		return null;
+	}
+
+	public void getVariationPointsToPerform(Choice resolvedChoice, VPackage container, EObject domainRoot)
+	{
+		//Get the variation points to perform
+		for(VPackageable v : container.getPackageElement()){
+			if(v instanceof LinkAssignment)
+			{
+				LinkAssignment linkAssignment = (LinkAssignment) v;
+				if(linkAssignment.getBindingChoice().get(0).equals(resolvedChoice)){
+					LinkAssignment linkAssignmentToAdd = getLinkAssignmentToAdd(linkAssignment, domainRoot);
+					variationPointsToPerform.add(linkAssignmentToAdd);
+				}
+			}
+		}
+	}
+
+	public void performVariationPoints(){
+
+		//perform the variation points
+		for(VPackageable v : variationPointsToPerform)
+		{
+			if(v instanceof LinkAssignment)
+			{
+				LinkAssignment linkAssignment = (LinkAssignment) v;
+				performLinkAssignment(linkAssignment);
+			}
+		}
+	}
+
+	public void performLinkAssignment(LinkAssignment linkAssignment)
+	{
+		String linkEndIdentifier = linkAssignment.getLinkEndIdentifier();
+		EObject linkOwner = linkAssignment.getLink().getLinkOwner();
+		EObject newEnd = linkAssignment.getNewEnd().getObject(); 
+
+		EStructuralFeature link = linkOwner.eClass().getEStructuralFeature(linkEndIdentifier);
+		if(link.isMany()){
+			((EList<EObject>) linkOwner.eGet(link)).add(newEnd);
+		}else{
+			linkOwner.eSet(link, newEnd);
+		}
+	}
+
+	public LinkAssignment getLinkAssignmentToAdd(LinkAssignment linkAssignment, EObject domainRoot){
+		String linkEndIdentifier = linkAssignment.getLinkEndIdentifier();
+		EObject linkOwner = null;
+		EObject newEnd = null; 
+
+		TreeIterator<EObject> ti = domainRoot.eAllContents();
+		while (ti.hasNext() && (linkOwner == null || newEnd == null))
+		{
+			EObject eo = ti.next();
+			if(eo.equals(linkAssignment.getLink().getLinkOwner())){
+				linkOwner = eo;
+			}
+
+			if(eo.equals(linkAssignment.getNewEnd().getObject())){
+				newEnd = eo;
+			}
+		}
+
+		LinkAssignment linkAssignmentToAdd = VariabilityFactory.eINSTANCE.createLinkAssignment();
+		linkAssignmentToAdd.setName(linkAssignment.getName());
+		linkAssignmentToAdd.setLinkEndIdentifier(linkEndIdentifier);
+		LinkHandle linkHandle = VariabilityFactory.eINSTANCE.createLinkHandle();
+		linkHandle.setLinkOwner(linkOwner);
+		linkAssignmentToAdd.setLink(linkHandle);
+		ObjectHandle objectHandle = VariabilityFactory.eINSTANCE.createObjectHandle();
+		objectHandle.setObject(newEnd);
+		linkAssignmentToAdd.setNewEnd(objectHandle);
+
+		return linkAssignmentToAdd;
+	}
+
+
+}

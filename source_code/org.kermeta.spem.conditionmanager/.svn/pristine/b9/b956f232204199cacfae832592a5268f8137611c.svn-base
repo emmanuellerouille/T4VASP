@@ -1,0 +1,7 @@
+package org.kermeta.spem.conditionmanager;
+
+public interface ConditionManager {
+	
+	public boolean run(String contextFilePath);
+
+}

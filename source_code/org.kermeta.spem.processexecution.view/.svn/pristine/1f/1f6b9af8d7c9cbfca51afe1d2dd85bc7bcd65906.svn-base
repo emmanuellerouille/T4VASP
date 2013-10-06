@@ -1,0 +1,40 @@
+package org.kermeta.spem.processexecution.view.actions.impl;
+
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.kermeta.spem.processexecution.view.actions.ProcessAction;
+import my.group.org.kermeta.spem.execution.taskuserunner.MainRunner;
+import src.main.kmt.KerRichFactory;
+import src.main.kmt.Main;
+
+public class EndAction extends ProcessAction {
+
+	public EndAction(boolean enabled) {
+		super(enabled);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public EndAction(boolean enabled, String taskUseName){
+		super(enabled, taskUseName);
+	}
+
+	public EndAction(boolean enabled, String taskUseName, String contextModelPath){
+		super(enabled, taskUseName, contextModelPath);
+	}
+
+	@Override
+	public void run() {
+		String processModelPath = getProcessModelPath();
+		String behaviorModelPath = getBehaviorModelPath();
+
+		ResourceSet rSet = new ResourceSetImpl();
+		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap();
+		MainRunner.init4eclipse();
+		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap();
+		MainRunner.init();
+		rSet.getResourceFactoryRegistry().getExtensionToFactoryMap();
+		Main m = KerRichFactory.createMain();
+		m.endExecution(processModelPath, behaviorModelPath, taskUseName, contextModelPath);
+	}
+
+}

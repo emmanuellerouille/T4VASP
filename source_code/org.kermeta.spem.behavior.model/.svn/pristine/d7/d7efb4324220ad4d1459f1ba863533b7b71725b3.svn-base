@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1362056614205
+Build-Jdk: 1.6.0_25
+Built-By: erouille
+Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
+Bundle-Name: spem.behavior.model
+Bundle-SymbolicName: org.kermeta.spem.behavior.model;singleton:=true
+Bundle-Version: 2.0.3.SNAPSHOT_20130228_1403
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.kermeta.spem.behavior;uses:="org.kermeta.spem.behavi
+ or.impl";version="1.9.9.SNAPSHOT_20120706_1553",org.kermeta.spem.behavi
+ or.util;uses:="org.kermeta.spem.behavior";version="1.9.9.SNAPSHOT_20120
+ 706_1553",org.kermeta.spem.behavior.impl;uses:="org.kermeta.spem.behavi
+ or";version="1.9.9.SNAPSHOT_20120706_1553"
+Ignore-Package: org.eclipse.emf.ecore.resource,org.eclipse.emf.ecore.plu
+ gin,org.eclipse.emf.ecore.util,org.eclipse.emf.ecore,org.eclipse.emf.co
+ mmon.util,java.util,org.eclipse.emf.common.notify.impl,spem,org.eclipse
+ .emf.common.notify,java.lang,org.eclipse.emf.ecore.impl
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore;visibilit
+ y:=reexport,spem.model;visibility:=reexport
+Tool: Bnd-1.50.0

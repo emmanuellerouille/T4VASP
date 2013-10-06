@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1343033047090
+Build-Jdk: 1.6.0_25
+Built-By: erouille
+Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
+Bundle-Name: spem.conditionmanager
+Bundle-SymbolicName: org.kermeta.spem.conditionmanager;singleton:=true
+Bundle-Version: 1.9.9.SNAPSHOT_20120723_1043
+Created-By: Apache Maven Bundle Plugin
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.ui
+Tool: Bnd-1.50.0

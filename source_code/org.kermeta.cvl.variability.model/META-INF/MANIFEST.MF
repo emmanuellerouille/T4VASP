@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1349772309259
+Build-Jdk: 1.6.0_25
+Built-By: erouille
+Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
+Bundle-Name: cvl.variability.model
+Bundle-SymbolicName: org.kermeta.cvl.variability.model;singleton:=true
+Bundle-Version: 2.0.1.SNAPSHOT_20121009_1044
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.kermeta.cvl.variability.impl;uses:="org.kermeta.cvl.
+ variability";version="2.0.1.SNAPSHOT_20121009_1044",org.kermeta.cvl.var
+ iability;uses:="org.kermeta.cvl.variability.impl";version="2.0.1.SNAPSH
+ OT_20121009_1044",org.kermeta.cvl.variability.util;uses:="org.kermeta.c
+ vl.variability";version="2.0.1.SNAPSHOT_20121009_1044"
+Ignore-Package: org.eclipse.emf.ecore.resource,org.eclipse.emf.ecore.plu
+ gin,org.eclipse.emf.ecore.util,org.eclipse.emf.ecore,org.eclipse.emf.co
+ mmon.util,java.util,org.eclipse.emf.common.notify.impl,org.eclipse.emf.
+ common.notify,java.lang,org.eclipse.emf.ecore.impl
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore;visibilit
+ y:=reexport
+Tool: Bnd-1.50.0

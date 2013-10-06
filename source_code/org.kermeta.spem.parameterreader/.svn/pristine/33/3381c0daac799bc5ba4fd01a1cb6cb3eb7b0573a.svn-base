@@ -1,0 +1,49 @@
+package org.kermeta.spem.parameterreader.dialogs;
+
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+
+public class ParameterDialog extends Dialog{
+
+	private Map<String,String> parameters;
+
+	public ParameterDialog(Shell parentShell, Map<String,String> parameters) {
+		super(parentShell);
+		this.parameters = parameters;
+	}
+
+	protected Control createDialogArea(Composite parent) {
+
+		Composite container = (Composite) super.createDialogArea(parent);
+		for(final Entry<String, String> entry : parameters.entrySet()){
+			Label parameterName = new Label(container, SWT.NONE);
+			parameterName.setText(entry.getKey()+":");
+			Text parameterValue = new Text(container, SWT.NONE);
+			parameterValue.addModifyListener(new ModifyListener(){
+
+				@Override
+				public void modifyText(ModifyEvent e) {
+					Text text = (Text) e.widget;
+					parameters.put(entry.getKey(), text.getText());				
+				}
+
+			});
+		}
+		return container;
+	}
+
+	public Map<String, String> getParameters(){
+		return parameters;
+	}
+
+}

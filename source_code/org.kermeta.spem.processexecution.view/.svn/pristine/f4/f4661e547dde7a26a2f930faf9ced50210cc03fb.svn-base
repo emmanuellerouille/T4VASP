@@ -1,0 +1,272 @@
+package org.kermeta.spem.processexecution.view.actions.impl;
+
+import java.util.ArrayList;
+import java.util.Map;
+
+import org.eclipse.draw2d.Label;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.activity.DecisionNode;
+import org.kermeta.spem.activity.Edge;
+import org.kermeta.spem.activity.ForkNode;
+import org.kermeta.spem.activity.JoinNode;
+import org.kermeta.spem.behavior.BehaviorPackage;
+import org.kermeta.spem.behavior.Container;
+import org.kermeta.spem.behavior.WorkUnitHandle;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.executioncontext.ExecutioncontextFactory;
+import org.kermeta.spem.executioncontext.ExecutioncontextPackage;
+import org.kermeta.spem.executioncontext.Key;
+import org.kermeta.spem.executioncontext.State;
+import org.kermeta.spem.executioncontext.StateValue;
+import org.kermeta.spem.processexecution.utils.model.ModelUtils;
+import org.kermeta.spem.processexecution.view.HyperlinkFigure;
+import org.kermeta.spem.processexecution.view.ProcessPart;
+import org.kermeta.spem.processexecution.view.TaskFigure;
+import org.kermeta.spem.processexecution.view.actions.ProcessAction;
+
+import spem.Activity;
+import spem.BreakdownElement;
+import spem.MethodLibrary;
+import spem.MethodPlugin;
+import spem.ProcessPackage;
+import spem.ProcessPackageableElement;
+import spem.SpemPackage;
+import spem.TaskUse;
+import spem.uma.DeliveryProcess;
+import spem.uma.DeliveryProcessPackage;
+
+public class DoneAction extends ProcessAction {
+
+	private String processModelPath = null;
+
+	public DoneAction(boolean enabled) {
+		super(enabled);
+		// TODO Auto-generated constructor stub
+	}
+
+	public DoneAction(boolean enabled, String taskUseName, String contextModelPath){
+		super(enabled, taskUseName, contextModelPath);
+	}
+
+	@Override
+	public void run() {
+
+		String behaviorModelPath = ModelUtils.getBehaviorModelPath(processModelPath);
+		processModelPath = ModelUtils.getProcessModelPath(processModelPath);
+
+		//Get the root of the behavior model
+		Container container = ModelUtils.getBehaviorModelRoot(behaviorModelPath);
+
+		//update process view
+		ProcessPart view;
+		try {
+			view = (ProcessPart)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("ProcessExecution.views.ProcessElementsView");
+			for(TaskFigure taskFigure : view.getMediator().getView().getTaskFigures()){
+				if(taskFigure.getDescription().equals(taskUseName)){
+					for( int i = 0; i < taskFigure.getStdActionsPlate().getChildren().size(); i++){
+						Label label = (Label) taskFigure.getStdActionsPlate().getChildren().get(i);
+						if(label instanceof HyperlinkFigure){
+							HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+
+							for(WorkUnitHandle wuh : container.getWorkUnitHandles()){
+								if(wuh.getWorkUnit() instanceof TaskUse){
+									TaskUse taskUse = (TaskUse) wuh.getWorkUnit();
+									if(taskUse.getName().equals(taskFigure.getDescription())){
+										//If the finalization is not automated, put the on start of the following tasks to true or their on do if their initialization is not automated
+										if(wuh.getOnEnd() == null){
+											//Find the tasks that follow the current one
+
+
+
+											if(hyperlinkFigure.getText() == "done"){
+												hyperlinkFigure.getAction().setEnabled(true);
+											}
+										}else{
+											//put on end to true only if the finalization is automated
+											if(hyperlinkFigure.getText() == "on end"){
+												hyperlinkFigure.getAction().setEnabled(true);
+											}
+										}
+									}
+								}
+							}
+							if(hyperlinkFigure.getText() == "done"){
+								hyperlinkFigure.getAction().setEnabled(false);
+							}
+							hyperlinkFigure.repaint();
+						}
+					}
+				}
+			}
+			//			if(taskUseName.equals("Metamodel creation")){
+			//				for( int i = 0; i < view.getMediator().getView().getAbstractSyntaxFigure().getStdActionsPlate().getChildren().size(); i++){
+			//					Label label = (Label) view.getMediator().getView().getAbstractSyntaxFigure().getStdActionsPlate().getChildren().get(i);
+			//					if(label instanceof HyperlinkFigure){
+			//						HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+			//						if(hyperlinkFigure.getText() == "done"){
+			//							hyperlinkFigure.getAction().setEnabled(false);
+			//						}
+			//						if(hyperlinkFigure.getText() == "on end"){
+			//							hyperlinkFigure.getAction().setEnabled(true);
+			//						}
+			//						hyperlinkFigure.repaint();
+			//					}
+			//				}
+			//			} else if(taskUseName.equals("Static semantics creation")){
+			//				for( int i = 0; i < view.getMediator().getView().getStaticSemanticsFigure().getStdActionsPlate().getChildren().size(); i++){
+			//					Label label = (Label) view.getMediator().getView().getStaticSemanticsFigure().getStdActionsPlate().getChildren().get(i);
+			//					if(label instanceof HyperlinkFigure){
+			//						HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+			//						if(hyperlinkFigure.getText() == "done"){
+			//							hyperlinkFigure.getAction().setEnabled(false);
+			//						}
+			//						hyperlinkFigure.repaint();
+			//					}
+			//				}
+			//				for( int i = 0; i < view.getMediator().getView().getCheckerFigure().getStdActionsPlate().getChildren().size(); i++){
+			//					Label label = (Label) view.getMediator().getView().getCheckerFigure().getStdActionsPlate().getChildren().get(i);
+			//					if(label instanceof HyperlinkFigure){
+			//						HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+			//						if(hyperlinkFigure.getText() == "on start"){
+			//							hyperlinkFigure.getAction().setEnabled(true);
+			//						}
+			//						hyperlinkFigure.repaint();
+			//					}
+			//				}
+			//			} else if(taskUseName.equals("Checker creation")){
+			//				for( int i = 0; i < view.getMediator().getView().getCheckerFigure().getStdActionsPlate().getChildren().size(); i++){
+			//					Label label = (Label) view.getMediator().getView().getCheckerFigure().getStdActionsPlate().getChildren().get(i);
+			//					if(label instanceof HyperlinkFigure){
+			//						HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+			//						if(hyperlinkFigure.getText() == "done"){
+			//							hyperlinkFigure.getAction().setEnabled(false);
+			//						}
+			//						hyperlinkFigure.repaint();
+			//					}
+			//				}
+			//			} else if(taskUseName.equals("Interpreter creation")) {
+			//				for( int i = 0; i < view.getMediator().getView().getInterpreterFigure().getStdActionsPlate().getChildren().size(); i++){
+			//					Label label = (Label) view.getMediator().getView().getInterpreterFigure().getStdActionsPlate().getChildren().get(i);
+			//					if(label instanceof HyperlinkFigure){
+			//						HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+			//						if(hyperlinkFigure.getText() == "done"){
+			//							hyperlinkFigure.getAction().setEnabled(false);
+			//						}
+			//						hyperlinkFigure.repaint();
+			//					}
+			//				}
+			//			} else /*taskUseName.equals("Compiler creation")*/{
+			//				for( int i = 0; i < view.getMediator().getView().getCompilerFigure().getStdActionsPlate().getChildren().size(); i++){
+			//					Label label = (Label) view.getMediator().getView().getCompilerFigure().getStdActionsPlate().getChildren().get(i);
+			//					if(label instanceof HyperlinkFigure){
+			//						HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+			//						if(hyperlinkFigure.getText() == "done"){
+			//							hyperlinkFigure.getAction().setEnabled(false);
+			//						}
+			//						hyperlinkFigure.repaint();
+			//					}
+			//				}
+			//			}
+		} catch (PartInitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public ArrayList<String> findFollowingTasks(TaskUse taskUse){
+		ArrayList<String> followingTasksNames = new ArrayList<String>();
+
+		
+
+		MethodLibrary methodLibrary = ModelUtils.getProcessModelRoot(processModelPath);
+
+		MethodPlugin methodPlugin = methodLibrary.getOwnedMethodPlugin().get(0);
+		ProcessPackage processPackage = methodPlugin.getOwnedProcessPackage().get(0);		
+		DeliveryProcessPackage deliveryProcessPackage = null;
+		for(ProcessPackageableElement e : processPackage.getOwnedProcessMember()){
+			if(e instanceof DeliveryProcessPackage){
+				deliveryProcessPackage = (DeliveryProcessPackage) e;
+			}
+		}
+		DeliveryProcess deliveryProcess = (DeliveryProcess) deliveryProcessPackage.getOwnedProcessMember().get(0);
+
+		for(BreakdownElement be : deliveryProcess.getNestedBreakdownElement()){
+			if(be instanceof Activity){
+				Activity activity = (Activity) be;
+				for(BreakdownElement b : activity.getNestedBreakdownElement()){
+					if(b instanceof Edge){
+						Edge edge = (Edge) b;
+						if(edge.getSource() instanceof TaskUse){
+							TaskUse sourceTaskUse = (TaskUse) edge.getSource();
+							if(sourceTaskUse.getName().equals(taskUse.getName())){
+								if(edge.getTarget() instanceof TaskUse){
+									followingTasksNames.add(((TaskUse) edge.getTarget()).getName());
+								}
+								if(edge.getTarget() instanceof ForkNode){
+									followingTasksNames = getFollowingTasksForkNode((ForkNode) edge.getTarget(), followingTasksNames, activity, edge);
+								}
+								if(edge.getTarget() instanceof JoinNode){
+									followingTasksNames = getFollowingTasksJoinNode((JoinNode) edge.getTarget(), followingTasksNames, activity, edge);
+								}
+								if(edge.getTarget() instanceof DecisionNode){
+									followingTasksNames = getFollowingTasksDecisionNode((DecisionNode) edge.getTarget(), followingTasksNames, activity);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return followingTasksNames;
+	}
+
+	public ArrayList<String> getFollowingTasksForkNode(ForkNode forkNode, ArrayList<String> followingTasksNames, Activity a, Edge entryEdge){
+
+		for(BreakdownElement b : a.getNestedBreakdownElement()){
+			if(b instanceof Edge){
+				Edge e = (Edge) b;
+				if(e.getSource().getName().equals(entryEdge.getTarget().getName())){
+					if(e.getTarget() instanceof TaskUse){
+						followingTasksNames.add(((TaskUse) e.getTarget()).getName());
+					}
+					if(e.getTarget() instanceof ForkNode){
+						followingTasksNames = getFollowingTasksForkNode((ForkNode) e.getTarget(), followingTasksNames, a, e);
+					}
+				}
+			}
+		}
+
+		return followingTasksNames;
+	}
+
+	public ArrayList<String> getFollowingTasksJoinNode(JoinNode joinNode, ArrayList<String> followingTasksNames, Activity a, Edge entryEdge){
+		
+		for(BreakdownElement b : a.getNestedBreakdownElement()){
+			if(b instanceof Edge){
+				Edge e = (Edge) b;
+				if(e.getSource().getName().equals(entryEdge.getTarget().getName())){
+					if(e.getTarget() instanceof TaskUse){
+						followingTasksNames.add(((TaskUse) e.getTarget()).getName());
+					}
+					if(e.getTarget() instanceof ForkNode){
+						followingTasksNames = getFollowingTasksForkNode((ForkNode) e.getTarget(), followingTasksNames, a, e);
+					}
+				}
+			}
+		}
+		
+		return followingTasksNames;
+	}
+
+	public ArrayList<String> getFollowingTasksDecisionNode(DecisionNode decisionNode, ArrayList<String> followingTasksNames, Activity a){
+		System.out.println("getFollowingTasksDecisionNode not yet implemented");
+		return followingTasksNames;
+	}
+}

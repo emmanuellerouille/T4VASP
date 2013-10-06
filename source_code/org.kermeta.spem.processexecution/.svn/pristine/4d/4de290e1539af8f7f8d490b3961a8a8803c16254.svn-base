@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ProcessExecution
+Bundle-SymbolicName: org.kermeta.spem.processexecution;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.kermeta.spem.processexecution.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ ProcessExecutionLibraries,
+ org.eclipse.emf.ecore.xmi,
+ spem.model,
+ org.kermeta.spem.activityautomationmanager;bundle-version="1.9.9"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.eclipse.emf.edit
+

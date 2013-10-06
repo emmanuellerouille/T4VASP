@@ -1,0 +1,77 @@
+package org.kermeta.spem.processexecution.view.actions.impl;
+
+import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.RectangleFigure;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.kermeta.spem.behavior.AC;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.executioncontext.State;
+import org.kermeta.spem.parameterreader.ParameterReader;
+import org.kermeta.spem.processexecution.acinterpreter.ACInterpreter;
+import org.kermeta.spem.processexecution.utils.model.ModelUtils;
+import org.kermeta.spem.processexecution.view.HyperlinkFigure;
+import org.kermeta.spem.processexecution.view.ProcessPart;
+import org.kermeta.spem.processexecution.view.actions.ProcessAction;
+import org.kermeta.spem.processexecution.view.TaskFigure;
+
+
+public class StartAction extends ProcessAction {
+
+	public StartAction(boolean enabled) {
+		super(enabled);
+		// TODO Auto-generated constructor stub
+	}
+
+	public StartAction(boolean enabled, String taskUseName){
+		super(enabled, taskUseName);
+	}
+
+	public StartAction(boolean enabled, String taskUseName, String contextModelPath){
+		super(enabled, taskUseName, contextModelPath);
+	}
+	
+	public StartAction(boolean enabled, String taskUseName, String contextModelPath, Boolean activityLevel, String activityName){
+		super(enabled, taskUseName, contextModelPath, activityLevel, activityName);
+	}
+
+	@Override
+	public void run() {
+		
+		ExecutionContext executionContext = ModelUtils.getExecutionContextRoot(contextModelPath);
+
+		//update process view
+		ProcessPart view;
+		try {
+			view = (ProcessPart)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("ProcessExecution.views.ProcessElementsView");
+			for(TaskFigure taskFigure : view.getMediator().getView().getTaskFigures()){
+				if(taskFigure.getDescription().equals(taskUseName)){
+					for( int i = 0; i < taskFigure.getStdActionsPlate().getChildren().size(); i++){
+						Label label = (Label) taskFigure.getStdActionsPlate().getChildren().get(i);
+						if(label instanceof HyperlinkFigure){
+							HyperlinkFigure hyperlinkFigure = (HyperlinkFigure) label;
+							if(hyperlinkFigure.getText() == "on start"){
+								hyperlinkFigure.getAction().setEnabled(false);
+							}
+							if(hyperlinkFigure.getText() == "on do"){
+								hyperlinkFigure.getAction().setEnabled(true);
+							}
+							ModelUtils.changeStateWorkUnitIntoExecutionContextModel(executionContext, taskUseName, State.ON_DO);
+							hyperlinkFigure.repaint();
+						}
+					}
+				}
+			}
+		} catch (PartInitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//Ask for needed parameters
+		AC ac = ModelUtils.findACForWorkUnit(taskUseName, getBehaviorModelPath(), "onStart");
+		ParameterReader.readParameters(ac, contextModelPath);
+		
+		//Execute the task
+		ACInterpreter.initialize(taskUseName, getBehaviorModelPath(), contextModelPath);
+	}
+}

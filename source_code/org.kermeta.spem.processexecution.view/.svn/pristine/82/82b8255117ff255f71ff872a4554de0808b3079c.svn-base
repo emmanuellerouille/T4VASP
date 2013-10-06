@@ -1,0 +1,18 @@
+package org.kermeta.spem.processexecution.view.actions.impl;
+
+import org.kermeta.spem.processexecution.view.actions.ProcessAction;
+
+public class NullAction extends ProcessAction {
+
+	public NullAction(boolean enabled) {
+		super(enabled);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

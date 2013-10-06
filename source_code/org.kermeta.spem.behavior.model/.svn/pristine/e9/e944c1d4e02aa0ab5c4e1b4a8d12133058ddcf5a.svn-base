@@ -1,0 +1,65 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.spem.behavior;
+
+import org.eclipse.emf.common.util.EList;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Node</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link org.kermeta.spem.behavior.Node#getOutgoingControlFlows <em>Outgoing Control Flows</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.Node#getIncomingControlFlows <em>Incoming Control Flows</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @see org.kermeta.spem.behavior.BehaviorPackage#getNode()
+ * @model interface="true" abstract="true"
+ * @generated
+ */
+public interface Node extends Element {
+	/**
+	 * Returns the value of the '<em><b>Outgoing Control Flows</b></em>' reference list.
+	 * The list contents are of type {@link org.kermeta.spem.behavior.ControlFlow}.
+	 * It is bidirectional and its opposite is '{@link org.kermeta.spem.behavior.ControlFlow#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Outgoing Control Flows</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Outgoing Control Flows</em>' reference list.
+	 * @see org.kermeta.spem.behavior.BehaviorPackage#getNode_OutgoingControlFlows()
+	 * @see org.kermeta.spem.behavior.ControlFlow#getSource
+	 * @model opposite="source"
+	 * @generated
+	 */
+	EList<ControlFlow> getOutgoingControlFlows();
+
+	/**
+	 * Returns the value of the '<em><b>Incoming Control Flows</b></em>' reference list.
+	 * The list contents are of type {@link org.kermeta.spem.behavior.ControlFlow}.
+	 * It is bidirectional and its opposite is '{@link org.kermeta.spem.behavior.ControlFlow#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Incoming Control Flows</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Incoming Control Flows</em>' reference list.
+	 * @see org.kermeta.spem.behavior.BehaviorPackage#getNode_IncomingControlFlows()
+	 * @see org.kermeta.spem.behavior.ControlFlow#getTarget
+	 * @model opposite="target"
+	 * @generated
+	 */
+	EList<ControlFlow> getIncomingControlFlows();
+
+} // Node

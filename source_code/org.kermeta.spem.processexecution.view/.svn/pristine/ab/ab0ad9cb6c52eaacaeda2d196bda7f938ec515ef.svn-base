@@ -1,0 +1,125 @@
+package org.kermeta.spem.processexecution.view.actions;
+
+import java.util.Map;
+
+import org.eclipse.draw2d.RectangleFigure;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.kermeta.spem.executioncontext.ExecutionContext;
+import org.kermeta.spem.executioncontext.ExecutioncontextPackage;
+import org.kermeta.spem.executioncontext.Key;
+
+public abstract class ProcessAction {
+
+	protected boolean enabled;
+	protected String taskUseName;
+	protected String contextModelPath;
+	protected ExecutionContext executionContext;
+	protected boolean activityLevel;
+	protected String activityName;
+
+	public ProcessAction(boolean enabled){
+		this.enabled = enabled;
+	}
+
+	public ProcessAction(boolean enabled, String taskUseName){
+		this.enabled = enabled;
+		this.taskUseName = taskUseName;
+	}
+
+	public ProcessAction(boolean enabled, String taskUseName, String contextModelPath){
+		this.enabled = enabled;
+		this.taskUseName = taskUseName;
+		this.contextModelPath = contextModelPath;
+		initExecutionContext();
+	}
+	
+	public ProcessAction(boolean enabled, String taskUseName, String contextModelPath, Boolean activityLevel, String activityName){
+		this.enabled = enabled;
+		this.taskUseName = taskUseName;
+		this.contextModelPath = contextModelPath;
+		this.activityLevel = activityLevel;
+		this.activityName = activityName;
+		initExecutionContext();
+	}
+
+	public boolean isEnabled(){
+		return enabled;
+	}
+
+	public abstract void run();
+
+	public void setEnabled(boolean enabled){
+		this.enabled = enabled;
+	}
+
+	public String getTaskUseName() {
+		return taskUseName;
+	}
+
+	public void setTaskUseName(String taskUseName) {
+		this.taskUseName = taskUseName;
+	}
+
+	public String getContextModelPath() {
+		return contextModelPath;
+	}
+
+	public void setContextModelPath(String contextModelPath) {
+		this.contextModelPath = contextModelPath;
+	}
+
+	public ExecutionContext getExecutionContext() {
+		return executionContext;
+	}
+
+	public void setExecutionContext(ExecutionContext executionContext) {
+		this.executionContext = executionContext;
+	}
+
+	public String getProcessModelPath(){
+		String res = null;
+		for(Key key: executionContext.getKeys()){
+			if(key.getName().equals("process model path")){
+				res = key.getValue().getContent();
+			}
+		}
+		return res;
+	}
+
+	public String getBehaviorModelPath(){
+		String res = null;
+		for(Key key: executionContext.getKeys()){
+			if(key.getName().equals("behavior model path")){
+				res = key.getValue().getContent();
+			}
+		}
+		return res;
+	}
+
+	public void initExecutionContext(){
+		// Initialize the model
+		ExecutioncontextPackage.eINSTANCE.eClass();
+
+		// Register the XMI resource factory for the .executioncontext extension
+
+		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m = reg.getExtensionToFactoryMap();
+		m.put("executioncontext", new XMIResourceFactoryImpl());
+
+		// Obtain a new resource set
+		ResourceSet resSet = new ResourceSetImpl();
+
+		// Get the resource
+		Resource resource = resSet.getResource(URI
+				.createURI(contextModelPath), true);
+
+		// Get the first model element and cast it to the right type, in my
+		// example everything is hierarchical included in this first node
+		executionContext = (ExecutionContext) resource.getContents().get(0);
+	}
+
+}

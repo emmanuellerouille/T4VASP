@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="spem.presentation.SpemModelWizardID"
+            name="%_UI_SpemModelWizard_label"
+            class="spem.presentation.SpemModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/SpemModelFile.gif">
+         <description>%_UI_SpemModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="spem.presentation.SpemEditorID"
+            name="%_UI_SpemEditor_label"
+            icon="icons/full/obj16/SpemModelFile.gif"
+            extensions="spem"
+            class="spem.presentation.SpemEditor"
+            contributorClass="spem.presentation.SpemActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="spem.uma.presentation.UmaModelWizardID"
+            name="%_UI_UmaModelWizard_label"
+            class="spem.uma.presentation.UmaModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/UmaModelFile.gif">
+         <description>%_UI_UmaModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="spem.uma.presentation.UmaEditorID"
+            name="%_UI_UmaEditor_label"
+            icon="icons/full/obj16/UmaModelFile.gif"
+            extensions="uma"
+            class="spem.uma.presentation.UmaEditor"
+            contributorClass="spem.uma.presentation.UmaActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

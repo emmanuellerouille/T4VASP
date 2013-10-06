@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="executioncontext"
+    nsURI="http://executioncontext" nsPrefix="executioncontext">
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="keys" upperBound="-1" eType="#//Key"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//Value" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
+        eType="#//State" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Key">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Value"
+        eOpposite="#//Value/key"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" lowerBound="1" eType="#//Key"
+        eOpposite="#//Key/value"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="taskUse" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/spem.model/model/spem2.ecore#//TaskUse"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="currentState" eType="#//StateValue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="StateValue">
+    <eLiterals name="not_started"/>
+    <eLiterals name="on_start" value="1"/>
+    <eLiterals name="on_do" value="2"/>
+    <eLiterals name="done" value="3"/>
+    <eLiterals name="on_end" value="4"/>
+    <eLiterals name="finished" value="5"/>
+  </eClassifiers>
+</ecore:EPackage>

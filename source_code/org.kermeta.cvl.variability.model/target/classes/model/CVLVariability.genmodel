@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.cvl.variability.model/src/main/java"
+    editDirectory="/org.kermeta.cvl.variability.model.edit/src/main/java" editorDirectory="/org.kermeta.cvl.variability.model.editor/src/main/java"
+    modelPluginID="org.kermeta.cvl.variability.model" modelName="CVLVariability" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>CVLVariability.ecore</foreignModel>
+  <genPackages prefix="CVLMetamodelMaster" disposableProviderFactory="true" ecorePackage="CVLVariability.ecore#/">
+    <nestedGenPackages prefix="CVL" disposableProviderFactory="true" ecorePackage="CVLVariability.ecore#//CVL">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="CVLVariability.ecore#//CVL/PrimitiveTypeEnum">
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/PrimitiveTypeEnum/String"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/PrimitiveTypeEnum/Integer"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/PrimitiveTypeEnum/Float"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/PrimitiveTypeEnum/Boolean"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="CVLVariability.ecore#//CVL/LogicalOp">
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/LogicalOp/Not"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/LogicalOp/Iff"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/LogicalOp/Implies"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/LogicalOp/Or"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/LogicalOp/Xor"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/LogicalOp/And"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/LogicalOp/ImpliesElse"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="CVLVariability.ecore#//CVL/Quantifier">
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/Quantifier/No"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/Quantifier/Lone"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/Quantifier/One"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/Quantifier/Some"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/Quantifier/All"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="CVLVariability.ecore#//CVL/CompareOp"/>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="CVLVariability.ecore#//CVL/SetCompareOp">
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/SetCompareOp/Eq"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/SetCompareOp/NEq"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/SetCompareOp/In"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/SetCompareOp/StrictIn"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="CVLVariability.ecore#//CVL/ArithmeticCompareOp">
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/ArithmeticCompareOp/Lt"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/ArithmeticCompareOp/Gt"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/ArithmeticCompareOp/LtE"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/ArithmeticCompareOp/GtE"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="CVLVariability.ecore#//CVL/Function"/>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="CVLVariability.ecore#//CVL/StringFunction">
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/StringFunction/Concatenation"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/StringFunction/Capitalize"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="CVLVariability.ecore#//CVL/SetFunction">
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/SetFunction/Union"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/SetFunction/Difference"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/SetFunction/Intersection"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/SetFunction/Join"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="CVLVariability.ecore#//CVL/IntSetFunction">
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/IntSetFunction/SetCardinality"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/IntSetFunction/Sum"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/IntSetFunction/Min"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/IntSetFunction/Max"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="CVLVariability.ecore#//CVL/ArithmeticFunction">
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/ArithmeticFunction/Negation"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/ArithmeticFunction/Plus"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/ArithmeticFunction/Minus"/>
+        <genEnumLiterals ecoreEnumLiteral="CVLVariability.ecore#//CVL/ArithmeticFunction/Multiply"/>
+      </genEnums>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/Choice">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/Choice/defaultResolution"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/Choice/isImpliedByParent"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="CVLVariability.ecore#//CVL/VSpec">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VSpec/groupMultiplicity"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/VSpec/resolutionTime"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VSpec/childVSpec"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VSpec/derivation"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="CVLVariability.ecore#//CVL/VPackageable">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/VPackageable/name"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/MultiplicityInterval">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/MultiplicityInterval/upper"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/MultiplicityInterval/lower"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/VSpecDerivation">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VSpecDerivation/derivedVSpec"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/VClassifier">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VClassifier/instanceMultiplicity"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="CVLVariability.ecore#//CVL/VSpecResolution">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VSpecResolution/resolvedVSpec"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VSpecResolution/childResolution"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="CVLVariability.ecore#//CVL/VariationPoint">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VariationPoint/bindingVspec"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/FragmentSubstitution">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/FragmentSubstitution/boundaryElementBinding"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/FragmentSubstitution/placement"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/FragmentSubstitution/multi"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/FragmentSubstitution/replacement"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ChoiceVariationPoint">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ChoiceVariationPoint/bindingChoice"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="CVLVariability.ecore#//CVL/RepeatableVariationPoint">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/RepeatableVariationPoint/bindingClassifier"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="CVLVariability.ecore#//CVL/BoundaryElementBinding">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/BoundaryElementBinding/name"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/PlacementFragment">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/PlacementFragment/placementBoundaryElement"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="CVLVariability.ecore#//CVL/PlacementBoundaryElement">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/PlacementBoundaryElement/name"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ReplacementFragmentType">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ReplacementFragmentType/replacementBoundaryElement"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ReplacementFragmentType/placementFragment"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/Variabletype"/>
+      <genClasses image="false" ecoreClass="CVLVariability.ecore#//CVL/ReplacementBoundaryElement">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/ReplacementBoundaryElement/name"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ObjectSubstitution">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ObjectSubstitution/placementObject"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ObjectSubstitution/replacementObject"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ObjectHandle">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ObjectHandle/object"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/ObjectHandle/ref"/>
+        <genOperations ecoreOperation="CVLVariability.ecore#//CVL/ObjectHandle/getPropertyByName">
+          <genParameters ecoreParameter="CVLVariability.ecore#//CVL/ObjectHandle/getPropertyByName/propertyName"/>
+        </genOperations>
+        <genOperations ecoreOperation="CVLVariability.ecore#//CVL/ObjectHandle/getPropertyValue">
+          <genParameters ecoreParameter="CVLVariability.ecore#//CVL/ObjectHandle/getPropertyValue/propertyName"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="CVLVariability.ecore#//CVL/Existence"/>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/Variable">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/Variable/replacementFragmentTypesubsetstype"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/Variable/defaulValue"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/Variable/type"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="CVLVariability.ecore#//CVL/ValueSpecification">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ValueSpecification/type"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/PrimitveType">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/PrimitveType/type"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ObjectType">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/ObjectType/theMetaClass"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/VInterface">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VInterface/vSpec"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VInterface/ownedConstraint"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VInterface/super"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/Constraint">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/Constraint/generalExpression"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/Constraint/context"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/Constraint/constraint"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/Constraint/constraintLanguage"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="CVLVariability.ecore#//CVL/GeneralExpression"/>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/SlotAssignment">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/SlotAssignment/slotIdentifier"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/SlotAssignment/value"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/SlotAssignment/SlotOwner"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/FixedSlotValueAssignment"/>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/FixedObjectSubstitution"/>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ObjectExistence">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ObjectExistence/optionalObject"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/LinkAssignment">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/LinkAssignment/link"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/LinkAssignment/linkEndIdentifier"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/LinkAssignment/newEnd"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/LinkHandle">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/LinkHandle/linkRef"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/LinkHandle/linkOwner"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/LinkHandle/referencedObject"/>
+        <genOperations ecoreOperation="CVLVariability.ecore#//CVL/LinkHandle/getEnd"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ConfigurableUnit">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ConfigurableUnit/ownedVSpec"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ConfigurableUnit/ownedVariationPoint"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ConfigurableUnit/ownedConstraint"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ConfigurableUnit/configurableContainerObject"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ConfigurableUnit/ownedVSpecResolution"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/CompositeVariationPoint">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/CompositeVariationPoint/bindingCVSpec"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/CVSpec">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/CVSpec/vInterface"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/VConfiguration">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VConfiguration/vSpecResolution"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/VConfiguration/isPartial"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VConfiguration/super"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VConfiguration/resolvedVIRef"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/VSpec2VSpecMapping">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VSpec2VSpecMapping/derivingConstraint"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/LinkExistence">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/LinkExistence/optionalLink"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/OpaqueVariationPoint"/>
+      <genClasses image="false" ecoreClass="CVLVariability.ecore#//CVL/PrimitiveValueSpecification">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/PrimitiveValueSpecification/value"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="CVLVariability.ecore#//CVL/Expression"/>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ObjectSpecification">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ObjectSpecification/object"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ReplacementFragmentSpecification"/>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/VPackage">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VPackage/packageElement"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ToBinding">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ToBinding/toPlacement"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ToBinding/toReplacement"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ToPlacement">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ToPlacement/toReplacement"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/ToPlacement/propertyName"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ToPlacement/insideBoundaryElement"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ToPlacement/outsideBoundaryElement"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ToReplacement">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ToReplacement/insideBoundaryElement"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ToReplacement/toPlacement"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/FromBinding">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/FromBinding/fromPlacement"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/FromBinding/fromReplacement"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/FromPlacement">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/FromPlacement/fromReplacement"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/FromPlacement/outsideBoundaryElement"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/FromReplacement">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/FromReplacement/propertyName"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/FromReplacement/insideBoundaryElement"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/FromReplacement/outsideBoundaryElement"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/FromReplacement/fromPlacement"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/PropositionalExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/PropositionalExp/logicalOp"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/PropositionalExp/operand"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="CVLVariability.ecore#//CVL/LogicalExp"/>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/QuantifiedSet">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/QuantifiedSet/quantifier"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/SetComprehension">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/SetComprehension/expression"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/SetComprehension/setComprVariable"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/SetComprehension/generalExpression"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/SetComprVariable">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/SetComprVariable/name"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/SetComprVarReference">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/SetComprVarReference/setComprVariable"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/CompareExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/CompareExp/compared"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/CompareExp/compareOp"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/IntegerValueSpec"/>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/BooleanValueSpec"/>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/FloatValueSpec"/>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/StringValueSpec"/>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/FunctionExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/FunctionExp/function"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/FunctionExp/operand"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/VSpecReference">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VSpecReference/vSpec"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/VSpecToConfigMapping">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VSpecToConfigMapping/thenConfiguration"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VSpecToConfigMapping/ifConstraint"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="CVLVariability.ecore#//CVL/ParametricVariationPoint">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ParametricVariationPoint/bindingVariable"/>
+        <genOperations ecoreOperation="CVLVariability.ecore#//CVL/ParametricVariationPoint/getPropertyValue">
+          <genParameters ecoreParameter="CVLVariability.ecore#//CVL/ParametricVariationPoint/getPropertyValue/propertyName"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/SlotValueExistence">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/SlotValueExistence/slotIdentifier"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/SlotValueExistence/slotOwner"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ParametricLinkAssignment">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/ParametricLinkAssignment/linkEndIdentifier"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ParametricLinkAssignment/link"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ParametricObjectSubstitution">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ParametricObjectSubstitution/placementObject"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ParametricSlotAssignmet">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/ParametricSlotAssignmet/slotIdentifier"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ParametricSlotAssignmet/slotOwner"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/Expression1">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/Expression1/expression"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/Expression1/expressionLanguage"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ChoiceDerivation">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ChoiceDerivation/derivingConstraint"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/VariableDerivation">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/VariableDerivation/derivingExpression"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/CVSpecDerivation">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/CVSpecDerivation/memberDerivation"/>
+      </genClasses>
+      <genClasses ecoreClass="CVLVariability.ecore#//CVL/ConfigurableUnitUsage">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ConfigurableUnitUsage/usedUnit"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CVLVariability.ecore#//CVL/ConfigurableUnitUsage/usageReference"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CVLVariability.ecore#//CVL/ConfigurableUnitUsage/linkEndIdentifier"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

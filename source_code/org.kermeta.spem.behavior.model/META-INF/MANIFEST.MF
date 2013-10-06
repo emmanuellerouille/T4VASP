@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: spem.behavior.model
+Bundle-SymbolicName: org.kermeta.spem.behavior.model;singleton:=true
+Bundle-Version: 2.0.3.SNAPSHOT_20130228_1606
+Export-Package: org.kermeta.spem.behavior;uses:="org.kermeta.spem.behavior.impl";version="1.9.9.SNAPSHOT_20120706_1553",
+ org.kermeta.spem.behavior.util;uses:="org.kermeta.spem.behavior";version="1.9.9.SNAPSHOT_20120706_1553",
+ org.kermeta.spem.behavior.impl;uses:="org.kermeta.spem.behavior";version="1.9.9.SNAPSHOT_20120706_1553"
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ spem.model;visibility:=reexport

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.spem.behavior.model/src/main/java"
+    modelPluginID="org.kermeta.spem.behavior.model" modelName="Behavior" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" usedGenPackages="platform:/plugin/spem.model/model/spem2.genmodel#//spem">
+  <foreignModel>behavior.ecore</foreignModel>
+  <genPackages prefix="Behavior" basePackage="org.kermeta.spem" disposableProviderFactory="true"
+      ecorePackage="behavior.ecore#/">
+    <genClasses ecoreClass="behavior.ecore#//Container">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference behavior.ecore#//Container/conditions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference behavior.ecore#//Container/actions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference behavior.ecore#//Container/keys"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference behavior.ecore#//Container/automationComponentsProcesses"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="behavior.ecore#//AutomationComponentsProcess">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//AutomationComponentsProcess/startedTaskUses"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//AutomationComponentsProcess/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//AutomationComponentsProcess/performedTaskUses"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//AutomationComponentsProcess/finishedTaskUses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference behavior.ecore#//AutomationComponentsProcess/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="behavior.ecore#//AutomationComponent">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//AutomationComponent/preConditions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//AutomationComponent/postConditions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//AutomationComponent/action"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="behavior.ecore#//Condition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//Condition/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//Condition/executedTaskUses"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//Condition/notExecutedTaskUses"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//Condition/existingKeys"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//Condition/nonExistingKeys"/>
+    </genClasses>
+    <genClasses ecoreClass="behavior.ecore#//PreCondition"/>
+    <genClasses ecoreClass="behavior.ecore#//PostCondition"/>
+    <genClasses image="false" ecoreClass="behavior.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//Element/name"/>
+    </genClasses>
+    <genClasses ecoreClass="behavior.ecore#//ControlFlow">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//ControlFlow/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//ControlFlow/target"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="behavior.ecore#//Node">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//Node/outgoingControlFlows"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference behavior.ecore#//Node/incomingControlFlows"/>
+    </genClasses>
+    <genClasses ecoreClass="behavior.ecore#//InitialNode"/>
+    <genClasses ecoreClass="behavior.ecore#//FinalNode"/>
+    <genClasses ecoreClass="behavior.ecore#//ForkNode"/>
+    <genClasses ecoreClass="behavior.ecore#//JoinNode"/>
+    <genClasses ecoreClass="behavior.ecore#//DecisionNode"/>
+    <genClasses image="false" ecoreClass="behavior.ecore#//Action">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//Action/expression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//Action/name"/>
+    </genClasses>
+    <genClasses ecoreClass="behavior.ecore#//KermetaAction"/>
+    <genClasses ecoreClass="behavior.ecore#//JavaEclipseAction"/>
+    <genClasses ecoreClass="behavior.ecore#//ShellAction"/>
+    <genClasses ecoreClass="behavior.ecore#//GroovyAction"/>
+    <genClasses ecoreClass="behavior.ecore#//Key">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute behavior.ecore#//Key/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,735 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.spem.executioncontext;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+/**
+ * <!-- begin-user-doc -->
+ * The <b>Package</b> for the model.
+ * It contains accessors for the meta objects to represent
+ * <ul>
+ *   <li>each class,</li>
+ *   <li>each feature of each class,</li>
+ *   <li>each enum,</li>
+ *   <li>and each data type</li>
+ * </ul>
+ * <!-- end-user-doc -->
+ * @see org.kermeta.spem.executioncontext.ExecutioncontextFactory
+ * @model kind="package"
+ * @generated
+ */
+public interface ExecutioncontextPackage extends EPackage {
+	/**
+	 * The package name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eNAME = "executioncontext";
+
+	/**
+	 * The package namespace URI.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eNS_URI = "http://executioncontext";
+
+	/**
+	 * The package namespace name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eNS_PREFIX = "executioncontext";
+
+	/**
+	 * The singleton instance of the package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	ExecutioncontextPackage eINSTANCE = org.kermeta.spem.executioncontext.impl.ExecutioncontextPackageImpl.init();
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.executioncontext.impl.ExecutionContextImpl <em>Execution Context</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.executioncontext.impl.ExecutionContextImpl
+	 * @see org.kermeta.spem.executioncontext.impl.ExecutioncontextPackageImpl#getExecutionContext()
+	 * @generated
+	 */
+	int EXECUTION_CONTEXT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CONTEXT__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Keys</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CONTEXT__KEYS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CONTEXT__VALUES = 2;
+
+	/**
+	 * The feature id for the '<em><b>Work Units</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CONTEXT__WORK_UNITS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Under Execution</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CONTEXT__UNDER_EXECUTION = 4;
+
+	/**
+	 * The number of structural features of the '<em>Execution Context</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CONTEXT_FEATURE_COUNT = 5;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.executioncontext.impl.KeyImpl <em>Key</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.executioncontext.impl.KeyImpl
+	 * @see org.kermeta.spem.executioncontext.impl.ExecutioncontextPackageImpl#getKey()
+	 * @generated
+	 */
+	int KEY = 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Key</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.executioncontext.impl.ValueImpl <em>Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.executioncontext.impl.ValueImpl
+	 * @see org.kermeta.spem.executioncontext.impl.ExecutioncontextPackageImpl#getValue()
+	 * @generated
+	 */
+	int VALUE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE__CONTENT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE__KEY = 1;
+
+	/**
+	 * The number of structural features of the '<em>Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.executioncontext.impl.WorkUnitImpl <em>Work Unit</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.executioncontext.impl.WorkUnitImpl
+	 * @see org.kermeta.spem.executioncontext.impl.ExecutioncontextPackageImpl#getWorkUnit()
+	 * @generated
+	 */
+	int WORK_UNIT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORK_UNIT__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORK_UNIT__STATE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Work Unit</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORK_UNIT_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.executioncontext.impl.UnderExecutionImpl <em>Under Execution</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.executioncontext.impl.UnderExecutionImpl
+	 * @see org.kermeta.spem.executioncontext.impl.ExecutioncontextPackageImpl#getUnderExecution()
+	 * @generated
+	 */
+	int UNDER_EXECUTION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Work Unit Handle Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNDER_EXECUTION__WORK_UNIT_HANDLE_NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>On What</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNDER_EXECUTION__ON_WHAT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Primitive AC Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNDER_EXECUTION__PRIMITIVE_AC_NAME = 2;
+
+	/**
+	 * The number of structural features of the '<em>Under Execution</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNDER_EXECUTION_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.executioncontext.State <em>State</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.executioncontext.State
+	 * @see org.kermeta.spem.executioncontext.impl.ExecutioncontextPackageImpl#getState()
+	 * @generated
+	 */
+	int STATE = 5;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.spem.executioncontext.OnWhat <em>On What</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.spem.executioncontext.OnWhat
+	 * @see org.kermeta.spem.executioncontext.impl.ExecutioncontextPackageImpl#getOnWhat()
+	 * @generated
+	 */
+	int ON_WHAT = 6;
+
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.executioncontext.ExecutionContext <em>Execution Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Execution Context</em>'.
+	 * @see org.kermeta.spem.executioncontext.ExecutionContext
+	 * @generated
+	 */
+	EClass getExecutionContext();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.spem.executioncontext.ExecutionContext#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.kermeta.spem.executioncontext.ExecutionContext#getName()
+	 * @see #getExecutionContext()
+	 * @generated
+	 */
+	EAttribute getExecutionContext_Name();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.spem.executioncontext.ExecutionContext#getKeys <em>Keys</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Keys</em>'.
+	 * @see org.kermeta.spem.executioncontext.ExecutionContext#getKeys()
+	 * @see #getExecutionContext()
+	 * @generated
+	 */
+	EReference getExecutionContext_Keys();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.spem.executioncontext.ExecutionContext#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Values</em>'.
+	 * @see org.kermeta.spem.executioncontext.ExecutionContext#getValues()
+	 * @see #getExecutionContext()
+	 * @generated
+	 */
+	EReference getExecutionContext_Values();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.spem.executioncontext.ExecutionContext#getWorkUnits <em>Work Units</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Work Units</em>'.
+	 * @see org.kermeta.spem.executioncontext.ExecutionContext#getWorkUnits()
+	 * @see #getExecutionContext()
+	 * @generated
+	 */
+	EReference getExecutionContext_WorkUnits();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.kermeta.spem.executioncontext.ExecutionContext#getUnderExecution <em>Under Execution</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Under Execution</em>'.
+	 * @see org.kermeta.spem.executioncontext.ExecutionContext#getUnderExecution()
+	 * @see #getExecutionContext()
+	 * @generated
+	 */
+	EReference getExecutionContext_UnderExecution();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.executioncontext.Key <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Key</em>'.
+	 * @see org.kermeta.spem.executioncontext.Key
+	 * @generated
+	 */
+	EClass getKey();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.spem.executioncontext.Key#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.kermeta.spem.executioncontext.Key#getName()
+	 * @see #getKey()
+	 * @generated
+	 */
+	EAttribute getKey_Name();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.spem.executioncontext.Key#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Value</em>'.
+	 * @see org.kermeta.spem.executioncontext.Key#getValue()
+	 * @see #getKey()
+	 * @generated
+	 */
+	EReference getKey_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.executioncontext.Value <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Value</em>'.
+	 * @see org.kermeta.spem.executioncontext.Value
+	 * @generated
+	 */
+	EClass getValue();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.spem.executioncontext.Value#getContent <em>Content</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Content</em>'.
+	 * @see org.kermeta.spem.executioncontext.Value#getContent()
+	 * @see #getValue()
+	 * @generated
+	 */
+	EAttribute getValue_Content();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.spem.executioncontext.Value#getKey <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Key</em>'.
+	 * @see org.kermeta.spem.executioncontext.Value#getKey()
+	 * @see #getValue()
+	 * @generated
+	 */
+	EReference getValue_Key();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.executioncontext.WorkUnit <em>Work Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Work Unit</em>'.
+	 * @see org.kermeta.spem.executioncontext.WorkUnit
+	 * @generated
+	 */
+	EClass getWorkUnit();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.spem.executioncontext.WorkUnit#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.kermeta.spem.executioncontext.WorkUnit#getName()
+	 * @see #getWorkUnit()
+	 * @generated
+	 */
+	EAttribute getWorkUnit_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.spem.executioncontext.WorkUnit#getState <em>State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>State</em>'.
+	 * @see org.kermeta.spem.executioncontext.WorkUnit#getState()
+	 * @see #getWorkUnit()
+	 * @generated
+	 */
+	EAttribute getWorkUnit_State();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.spem.executioncontext.UnderExecution <em>Under Execution</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Under Execution</em>'.
+	 * @see org.kermeta.spem.executioncontext.UnderExecution
+	 * @generated
+	 */
+	EClass getUnderExecution();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.spem.executioncontext.UnderExecution#getWorkUnitHandleName <em>Work Unit Handle Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Work Unit Handle Name</em>'.
+	 * @see org.kermeta.spem.executioncontext.UnderExecution#getWorkUnitHandleName()
+	 * @see #getUnderExecution()
+	 * @generated
+	 */
+	EAttribute getUnderExecution_WorkUnitHandleName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.spem.executioncontext.UnderExecution#getOnWhat <em>On What</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>On What</em>'.
+	 * @see org.kermeta.spem.executioncontext.UnderExecution#getOnWhat()
+	 * @see #getUnderExecution()
+	 * @generated
+	 */
+	EAttribute getUnderExecution_OnWhat();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.spem.executioncontext.UnderExecution#getPrimitiveACName <em>Primitive AC Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primitive AC Name</em>'.
+	 * @see org.kermeta.spem.executioncontext.UnderExecution#getPrimitiveACName()
+	 * @see #getUnderExecution()
+	 * @generated
+	 */
+	EAttribute getUnderExecution_PrimitiveACName();
+
+	/**
+	 * Returns the meta object for enum '{@link org.kermeta.spem.executioncontext.State <em>State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>State</em>'.
+	 * @see org.kermeta.spem.executioncontext.State
+	 * @generated
+	 */
+	EEnum getState();
+
+	/**
+	 * Returns the meta object for enum '{@link org.kermeta.spem.executioncontext.OnWhat <em>On What</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>On What</em>'.
+	 * @see org.kermeta.spem.executioncontext.OnWhat
+	 * @generated
+	 */
+	EEnum getOnWhat();
+
+	/**
+	 * Returns the factory that creates the instances of the model.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the factory that creates the instances of the model.
+	 * @generated
+	 */
+	ExecutioncontextFactory getExecutioncontextFactory();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Defines literals for the meta objects that represent
+	 * <ul>
+	 *   <li>each class,</li>
+	 *   <li>each feature of each class,</li>
+	 *   <li>each enum,</li>
+	 *   <li>and each data type</li>
+	 * </ul>
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	interface Literals {
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.executioncontext.impl.ExecutionContextImpl <em>Execution Context</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.executioncontext.impl.ExecutionContextImpl
+		 * @see org.kermeta.spem.executioncontext.impl.ExecutioncontextPackageImpl#getExecutionContext()
+		 * @generated
+		 */
+		EClass EXECUTION_CONTEXT = eINSTANCE.getExecutionContext();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXECUTION_CONTEXT__NAME = eINSTANCE.getExecutionContext_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Keys</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_CONTEXT__KEYS = eINSTANCE.getExecutionContext_Keys();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_CONTEXT__VALUES = eINSTANCE.getExecutionContext_Values();
+
+		/**
+		 * The meta object literal for the '<em><b>Work Units</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_CONTEXT__WORK_UNITS = eINSTANCE.getExecutionContext_WorkUnits();
+
+		/**
+		 * The meta object literal for the '<em><b>Under Execution</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_CONTEXT__UNDER_EXECUTION = eINSTANCE.getExecutionContext_UnderExecution();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.executioncontext.impl.KeyImpl <em>Key</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.executioncontext.impl.KeyImpl
+		 * @see org.kermeta.spem.executioncontext.impl.ExecutioncontextPackageImpl#getKey()
+		 * @generated
+		 */
+		EClass KEY = eINSTANCE.getKey();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KEY__NAME = eINSTANCE.getKey_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KEY__VALUE = eINSTANCE.getKey_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.executioncontext.impl.ValueImpl <em>Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.executioncontext.impl.ValueImpl
+		 * @see org.kermeta.spem.executioncontext.impl.ExecutioncontextPackageImpl#getValue()
+		 * @generated
+		 */
+		EClass VALUE = eINSTANCE.getValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Content</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VALUE__CONTENT = eINSTANCE.getValue_Content();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VALUE__KEY = eINSTANCE.getValue_Key();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.executioncontext.impl.WorkUnitImpl <em>Work Unit</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.executioncontext.impl.WorkUnitImpl
+		 * @see org.kermeta.spem.executioncontext.impl.ExecutioncontextPackageImpl#getWorkUnit()
+		 * @generated
+		 */
+		EClass WORK_UNIT = eINSTANCE.getWorkUnit();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WORK_UNIT__NAME = eINSTANCE.getWorkUnit_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>State</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WORK_UNIT__STATE = eINSTANCE.getWorkUnit_State();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.executioncontext.impl.UnderExecutionImpl <em>Under Execution</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.executioncontext.impl.UnderExecutionImpl
+		 * @see org.kermeta.spem.executioncontext.impl.ExecutioncontextPackageImpl#getUnderExecution()
+		 * @generated
+		 */
+		EClass UNDER_EXECUTION = eINSTANCE.getUnderExecution();
+
+		/**
+		 * The meta object literal for the '<em><b>Work Unit Handle Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNDER_EXECUTION__WORK_UNIT_HANDLE_NAME = eINSTANCE.getUnderExecution_WorkUnitHandleName();
+
+		/**
+		 * The meta object literal for the '<em><b>On What</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNDER_EXECUTION__ON_WHAT = eINSTANCE.getUnderExecution_OnWhat();
+
+		/**
+		 * The meta object literal for the '<em><b>Primitive AC Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNDER_EXECUTION__PRIMITIVE_AC_NAME = eINSTANCE.getUnderExecution_PrimitiveACName();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.executioncontext.State <em>State</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.executioncontext.State
+		 * @see org.kermeta.spem.executioncontext.impl.ExecutioncontextPackageImpl#getState()
+		 * @generated
+		 */
+		EEnum STATE = eINSTANCE.getState();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.spem.executioncontext.OnWhat <em>On What</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.spem.executioncontext.OnWhat
+		 * @see org.kermeta.spem.executioncontext.impl.ExecutioncontextPackageImpl#getOnWhat()
+		 * @generated
+		 */
+		EEnum ON_WHAT = eINSTANCE.getOnWhat();
+
+	}
+
+} //ExecutioncontextPackage

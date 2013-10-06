@@ -1,0 +1,313 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.kermeta.spem.behavior.impl;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
+import org.kermeta.spem.behavior.BehaviorPackage;
+import org.kermeta.spem.behavior.Key;
+import org.kermeta.spem.behavior.PostCondition;
+
+import spem.TaskUse;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Post Condition</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.kermeta.spem.behavior.impl.PostConditionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.PostConditionImpl#getExecutedTaskUses <em>Executed Task Uses</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.PostConditionImpl#getNotExecutedTaskUses <em>Not Executed Task Uses</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.PostConditionImpl#getExistingKeys <em>Existing Keys</em>}</li>
+ *   <li>{@link org.kermeta.spem.behavior.impl.PostConditionImpl#getNonExistingKeys <em>Non Existing Keys</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class PostConditionImpl extends EObjectImpl implements PostCondition {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getExecutedTaskUses() <em>Executed Task Uses</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExecutedTaskUses()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TaskUse> executedTaskUses;
+
+	/**
+	 * The cached value of the '{@link #getNotExecutedTaskUses() <em>Not Executed Task Uses</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNotExecutedTaskUses()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TaskUse> notExecutedTaskUses;
+
+	/**
+	 * The cached value of the '{@link #getExistingKeys() <em>Existing Keys</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExistingKeys()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Key> existingKeys;
+
+	/**
+	 * The cached value of the '{@link #getNonExistingKeys() <em>Non Existing Keys</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNonExistingKeys()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Key> nonExistingKeys;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PostConditionImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return BehaviorPackage.Literals.POST_CONDITION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.POST_CONDITION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TaskUse> getExecutedTaskUses() {
+		if (executedTaskUses == null) {
+			executedTaskUses = new EObjectResolvingEList<TaskUse>(TaskUse.class, this, BehaviorPackage.POST_CONDITION__EXECUTED_TASK_USES);
+		}
+		return executedTaskUses;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TaskUse> getNotExecutedTaskUses() {
+		if (notExecutedTaskUses == null) {
+			notExecutedTaskUses = new EObjectResolvingEList<TaskUse>(TaskUse.class, this, BehaviorPackage.POST_CONDITION__NOT_EXECUTED_TASK_USES);
+		}
+		return notExecutedTaskUses;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Key> getExistingKeys() {
+		if (existingKeys == null) {
+			existingKeys = new EObjectResolvingEList<Key>(Key.class, this, BehaviorPackage.POST_CONDITION__EXISTING_KEYS);
+		}
+		return existingKeys;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Key> getNonExistingKeys() {
+		if (nonExistingKeys == null) {
+			nonExistingKeys = new EObjectResolvingEList<Key>(Key.class, this, BehaviorPackage.POST_CONDITION__NON_EXISTING_KEYS);
+		}
+		return nonExistingKeys;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case BehaviorPackage.POST_CONDITION__NAME:
+				return getName();
+			case BehaviorPackage.POST_CONDITION__EXECUTED_TASK_USES:
+				return getExecutedTaskUses();
+			case BehaviorPackage.POST_CONDITION__NOT_EXECUTED_TASK_USES:
+				return getNotExecutedTaskUses();
+			case BehaviorPackage.POST_CONDITION__EXISTING_KEYS:
+				return getExistingKeys();
+			case BehaviorPackage.POST_CONDITION__NON_EXISTING_KEYS:
+				return getNonExistingKeys();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case BehaviorPackage.POST_CONDITION__NAME:
+				setName((String)newValue);
+				return;
+			case BehaviorPackage.POST_CONDITION__EXECUTED_TASK_USES:
+				getExecutedTaskUses().clear();
+				getExecutedTaskUses().addAll((Collection<? extends TaskUse>)newValue);
+				return;
+			case BehaviorPackage.POST_CONDITION__NOT_EXECUTED_TASK_USES:
+				getNotExecutedTaskUses().clear();
+				getNotExecutedTaskUses().addAll((Collection<? extends TaskUse>)newValue);
+				return;
+			case BehaviorPackage.POST_CONDITION__EXISTING_KEYS:
+				getExistingKeys().clear();
+				getExistingKeys().addAll((Collection<? extends Key>)newValue);
+				return;
+			case BehaviorPackage.POST_CONDITION__NON_EXISTING_KEYS:
+				getNonExistingKeys().clear();
+				getNonExistingKeys().addAll((Collection<? extends Key>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.POST_CONDITION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case BehaviorPackage.POST_CONDITION__EXECUTED_TASK_USES:
+				getExecutedTaskUses().clear();
+				return;
+			case BehaviorPackage.POST_CONDITION__NOT_EXECUTED_TASK_USES:
+				getNotExecutedTaskUses().clear();
+				return;
+			case BehaviorPackage.POST_CONDITION__EXISTING_KEYS:
+				getExistingKeys().clear();
+				return;
+			case BehaviorPackage.POST_CONDITION__NON_EXISTING_KEYS:
+				getNonExistingKeys().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.POST_CONDITION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case BehaviorPackage.POST_CONDITION__EXECUTED_TASK_USES:
+				return executedTaskUses != null && !executedTaskUses.isEmpty();
+			case BehaviorPackage.POST_CONDITION__NOT_EXECUTED_TASK_USES:
+				return notExecutedTaskUses != null && !notExecutedTaskUses.isEmpty();
+			case BehaviorPackage.POST_CONDITION__EXISTING_KEYS:
+				return existingKeys != null && !existingKeys.isEmpty();
+			case BehaviorPackage.POST_CONDITION__NON_EXISTING_KEYS:
+				return nonExistingKeys != null && !nonExistingKeys.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
+	}
+
+} //PostConditionImpl
