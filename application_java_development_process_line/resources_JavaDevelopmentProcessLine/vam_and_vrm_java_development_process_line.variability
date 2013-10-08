@@ -1,36 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <variability:VPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:variability="http:///variability.ecore">
+  <packageElement xsi:type="variability:Choice" name="SCV" defaultResolution="true" isImpliedByParent="true">
+    <groupMultiplicity upper="1" lower="1"/>
+    <childVSpec xsi:type="variability:Choice" name="SVN"/>
+    <childVSpec xsi:type="variability:Choice" name="Git"/>
+  </packageElement>
+  <packageElement xsi:type="variability:Choice" name="BDD">
+    <groupMultiplicity upper="1" lower="1"/>
+    <childVSpec xsi:type="variability:Choice" name="Oracle"/>
+    <childVSpec xsi:type="variability:Choice" name="MySQL"/>
+    <childVSpec xsi:type="variability:Choice" name="Postgresql"/>
+  </packageElement>
+  <packageElement xsi:type="variability:Choice" name="GUI framework" defaultResolution="true" isImpliedByParent="true">
+    <groupMultiplicity upper="1" lower="1"/>
+    <childVSpec xsi:type="variability:Choice" name="Struts"/>
+    <childVSpec xsi:type="variability:Choice" name="JSF"/>
+    <childVSpec xsi:type="variability:Choice" name="Flex"/>
+    <childVSpec xsi:type="variability:Choice" name="GWT"/>
+  </packageElement>
+  <packageElement xsi:type="variability:Choice" name="build tool" defaultResolution="true" isImpliedByParent="true">
+    <groupMultiplicity upper="1" lower="1"/>
+    <childVSpec xsi:type="variability:Choice" name="Maven"/>
+    <childVSpec xsi:type="variability:Choice" name="Ant"/>
+  </packageElement>
   <packageElement xsi:type="variability:Choice" name="code generation"/>
-  <packageElement xsi:type="variability:LinkAssignment" name="code generation into java development process" bindingVspec="//@packageElement.0" bindingChoice="//@packageElement.0" linkEndIdentifier="nestedBreakdownElement">
+  <packageElement xsi:type="variability:Choice" name="delivery" defaultResolution="true" isImpliedByParent="true">
+    <groupMultiplicity upper="1" lower="1"/>
+    <childVSpec xsi:type="variability:Choice" name="source code delivery"/>
+    <childVSpec xsi:type="variability:Choice" name="build code delivery"/>
+    <childVSpec xsi:type="variability:Choice" name="source code and build code delivery"/>
+    <childVSpec xsi:type="variability:Choice" name="manual installation"/>
+  </packageElement>
+  <packageElement xsi:type="variability:ObjectSubstitution" name="SVN replaced by Git" bindingVspec="//@packageElement.0/@childVSpec.1" bindingChoice="//@packageElement.0/@childVSpec.1">
+    <placementObject name="SVN">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.0"/>
+    </placementObject>
+    <replacementObject name="Git">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.3"/>
+    </replacementObject>
+  </packageElement>
+  <packageElement xsi:type="variability:ObjectExistence" name="MySQL" bindingVspec="//@packageElement.1" bindingChoice="//@packageElement.1">
+    <optionalObject name="MySQL">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.4"/>
+    </optionalObject>
+  </packageElement>
+  <packageElement xsi:type="variability:ObjectSubstitution" name="MySQL replaced by Oracle" bindingVspec="//@packageElement.1/@childVSpec.0" bindingChoice="//@packageElement.1/@childVSpec.0">
+    <placementObject name="MySQL">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.4"/>
+    </placementObject>
+    <replacementObject name="Oracle">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.5"/>
+    </replacementObject>
+  </packageElement>
+  <packageElement xsi:type="variability:ObjectSubstitution" name="MySQL replaced by Postgresql" bindingVspec="//@packageElement.1/@childVSpec.2" bindingChoice="//@packageElement.1/@childVSpec.2">
+    <placementObject name="MySQL">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.4"/>
+    </placementObject>
+    <replacementObject name="Postgresql">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.6"/>
+    </replacementObject>
+  </packageElement>
+  <packageElement xsi:type="variability:ObjectSubstitution" name="Struts replaced by JSF" bindingVspec="//@packageElement.2/@childVSpec.1" bindingChoice="//@packageElement.2/@childVSpec.1">
+    <placementObject name="Struts">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.7"/>
+    </placementObject>
+    <replacementObject name="JSF">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.8"/>
+    </replacementObject>
+  </packageElement>
+  <packageElement xsi:type="variability:ObjectSubstitution" name="Struts replaced by Flex" bindingVspec="//@packageElement.2/@childVSpec.2" bindingChoice="//@packageElement.2/@childVSpec.2">
+    <placementObject name="Struts">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.7"/>
+    </placementObject>
+    <replacementObject name="Flex">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.9"/>
+    </replacementObject>
+  </packageElement>
+  <packageElement xsi:type="variability:ObjectSubstitution" name="Struts replaced by GWT" bindingVspec="//@packageElement.2/@childVSpec.3" bindingChoice="//@packageElement.2/@childVSpec.3">
+    <placementObject name="Struts">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.7"/>
+    </placementObject>
+    <replacementObject name="GWT">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.10"/>
+    </replacementObject>
+  </packageElement>
+  <packageElement xsi:type="variability:ObjectSubstitution" name="Maven replaced by Ant" bindingVspec="//@packageElement.3/@childVSpec.1" bindingChoice="//@packageElement.3/@childVSpec.1">
+    <placementObject name="Maven">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.11"/>
+    </placementObject>
+    <replacementObject name="Ant">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedMethodContentPackage.0/@ownedMethodContentMember.4/@ownedMethodContentMember.5/@ownedMethodContentMember.12"/>
+    </replacementObject>
+  </packageElement>
+  <packageElement xsi:type="variability:LinkAssignment" name="code generation into java development process" bindingVspec="//@packageElement.4" bindingChoice="//@packageElement.4" linkEndIdentifier="nestedBreakdownElement">
     <link name="java development process">
-      <linkOwner href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0"/>
+      <linkOwner href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0"/>
     </link>
     <newEnd name="code generation">
-      <object href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0"/>
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0"/>
     </newEnd>
   </packageElement>
-  <packageElement xsi:type="variability:LinkAssignment" name="from code generation into java development process" bindingVspec="//@packageElement.0" bindingChoice="//@packageElement.0" linkEndIdentifier="nestedBreakdownElement">
+  <packageElement xsi:type="variability:LinkAssignment" name="from code generation into java development process" bindingVspec="//@packageElement.4" bindingChoice="//@packageElement.4" linkEndIdentifier="nestedBreakdownElement">
     <link name="java development process">
-      <linkOwner href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0"/>
+      <linkOwner href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0"/>
     </link>
     <newEnd name="from code generation">
-      <object href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.2"/>
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.2"/>
     </newEnd>
   </packageElement>
-  <packageElement xsi:type="variability:LinkAssignment" name="specifications to code generation" bindingVspec="//@packageElement.0" bindingChoice="//@packageElement.0" linkEndIdentifier="target">
+  <packageElement xsi:type="variability:LinkAssignment" name="specifications to code generation" bindingVspec="//@packageElement.4" bindingChoice="//@packageElement.4" linkEndIdentifier="target">
     <link name="from specifications">
-      <linkOwner href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.6"/>
+      <linkOwner href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.6"/>
     </link>
     <newEnd name="code generation">
-      <object href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0"/>
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.0"/>
     </newEnd>
   </packageElement>
-  <packageElement xsi:type="variability:LinkAssignment" name="code generation to development" bindingVspec="//@packageElement.0" bindingChoice="//@packageElement.0" linkEndIdentifier="target">
+  <packageElement xsi:type="variability:LinkAssignment" name="code generation to development" bindingVspec="//@packageElement.4" bindingChoice="//@packageElement.4" linkEndIdentifier="target">
     <link name="from code generation">
-      <linkOwner href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.2"/>
+      <linkOwner href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.2"/>
     </link>
     <newEnd name="development">
-      <object href="java_development_process_line.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3"/>
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3"/>
     </newEnd>
+  </packageElement>
+  <packageElement xsi:type="variability:ObjectSubstitution" name="source code and build code delivery replaced by source code delivery" bindingVspec="//@packageElement.5/@childVSpec.0" bindingChoice="//@packageElement.5/@childVSpec.0">
+    <placementObject name="source code and build code delivery">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.8/@nestedBreakdownElement.2"/>
+    </placementObject>
+    <replacementObject name="source code delivery" ref="">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.3/@nestedBreakdownElement.0"/>
+    </replacementObject>
+  </packageElement>
+  <packageElement xsi:type="variability:ObjectSubstitution" name="source code and build code delivery replaced by build code delivery" bindingVspec="//@packageElement.5/@childVSpec.1" bindingChoice="//@packageElement.5/@childVSpec.1">
+    <placementObject name="source code and build code delivery ">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.8/@nestedBreakdownElement.2"/>
+    </placementObject>
+    <replacementObject name="build code delivery">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.3/@nestedBreakdownElement.1"/>
+    </replacementObject>
+  </packageElement>
+  <packageElement xsi:type="variability:ObjectSubstitution" name="source code and build code delivery replaced by manual installation" bindingVspec="//@packageElement.5/@childVSpec.3" bindingChoice="//@packageElement.5/@childVSpec.3">
+    <placementObject name="source code and build code delivery">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.8/@nestedBreakdownElement.2"/>
+    </placementObject>
+    <replacementObject name="manual installation">
+      <object href="famille_processus_dev_java_web.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.1/@nestedBreakdownElement.3/@nestedBreakdownElement.2"/>
+    </replacementObject>
   </packageElement>
 </variability:VPackage>

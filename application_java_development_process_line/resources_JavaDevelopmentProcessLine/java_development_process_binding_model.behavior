@@ -10,16 +10,16 @@
   <actions xsi:type="behavior:JavaEclipseAction" expression="commitProjectSVN" name="commit project with SVN"/>
   <actions xsi:type="behavior:JavaEclipseAction" expression="commitSeveralProjectsSVN" name="commit the modified projects"/>
   <workUnitHandles name="development" onStart="//@aCs.6">
-    <workUnit href="java_development_process_line_resolved.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3"/>
+    <workUnit href="famille_processus_dev_java_web_resolved.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3"/>
   </workUnitHandles>
   <workUnitHandles name="project creation" onEnd="//@aCs.9">
-    <workUnit href="java_development_process_line_resolved.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.8"/>
+    <workUnit href="famille_processus_dev_java_web_resolved.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.8"/>
   </workUnitHandles>
   <workUnitHandles name="first project creation" onEnd="//@aCs.9">
-    <workUnit href="java_development_process_line_resolved.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.10"/>
+    <workUnit href="famille_processus_dev_java_web_resolved.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.10"/>
   </workUnitHandles>
   <workUnitHandles name="projects modification" onEnd="//@aCs.10">
-    <workUnit href="java_development_process_line_resolved.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.11"/>
+    <workUnit href="famille_processus_dev_java_web_resolved.spem#//@ownedMethodPlugin.0/@ownedProcessPackage.0/@ownedProcessMember.2/@ownedProcessMember.0/@nestedBreakdownElement.3/@nestedBreakdownElement.11"/>
   </workUnitHandles>
   <aCs xsi:type="behavior:PrimitiveAC" name="subclipse configuration" action="//@actions.5"/>
   <aCs xsi:type="behavior:PrimitiveAC" name="create directory on remote repository" action="//@actions.4"/>

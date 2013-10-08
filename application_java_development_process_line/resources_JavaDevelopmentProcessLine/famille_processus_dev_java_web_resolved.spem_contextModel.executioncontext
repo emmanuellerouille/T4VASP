@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ASCII"?>
+<executioncontext:ExecutionContext xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:executioncontext="http://executioncontext" name="process execution execution context">
+  <keys name="process model path" value="//@values.0"/>
+  <keys name="behavior model path" value="//@values.1"/>
+  <keys name="accumulated time" value="//@values.2"/>
+  <keys name="time before restart" value="//@values.3"/>
+  <keys name="time specifications on do" value="//@values.4"/>
+  <keys name="local path of the current Eclipse application" value="//@values.5"/>
+  <keys name="url of the remote repository" value="//@values.6"/>
+  <keys name="username to connect to the remote repository" value="//@values.7"/>
+  <keys name="password to connect to the remote repository" value="//@values.8"/>
+  <keys name="name of the new directory to create on the repository" value="//@values.9"/>
+  <keys name="time development on start" value="//@values.10"/>
+  <keys name="begining date development on do" value="//@values.11"/>
+  <keys name="time first project creation on do" value="//@values.12"/>
+  <keys name="name of the newly created project" value="//@values.13"/>
+  <keys name="time first project creation on end" value="//@values.14"/>
+  <keys name="time project creation on do" value="//@values.15"/>
+  <keys name="time project creation on end" value="//@values.16"/>
+  <keys name="time projects modification on do" value="//@values.17"/>
+  <keys name="time projects modification on end" value="//@values.18"/>
+  <keys name="begining date tests on do" value="//@values.19"/>
+  <keys name="time tests creation on do" value="//@values.20"/>
+  <keys name="time tests execution on do" value="//@values.21"/>
+  <keys name="begining date production on do" value="//@values.22"/>
+  <keys name="time source code and build code delivery on do" value="//@values.23"/>
+  <values content="/resources_JavaDevelopmentProcessLine/famille_processus_dev_java_web_resolved.spem" key="//@keys.0"/>
+  <values content="/resources_JavaDevelopmentProcessLine/java_development_process_binding_model.behavior" key="//@keys.1"/>
+  <values content="567251" key="//@keys.2"/>
+  <values content="1381251895686" key="//@keys.3"/>
+  <values content="3749" key="//@keys.4"/>
+  <values content="C:\Eclipse\eclipse37k206\eclipse\eclipse.exe" key="//@keys.5"/>
+  <values content="file:///C:/Users/erouille/depotsvn/projet_dev_java" key="//@keys.6"/>
+  <values key="//@keys.7"/>
+  <values key="//@keys.8"/>
+  <values content="projet_dev_java" key="//@keys.9"/>
+  <values content="472032" key="//@keys.10"/>
+  <values content="1381251734259" key="//@keys.11"/>
+  <values content="21222" key="//@keys.12"/>
+  <values content="secondproject" key="//@keys.13"/>
+  <values content="11837" key="//@keys.14"/>
+  <values content="15511" key="//@keys.15"/>
+  <values content="8606" key="//@keys.16"/>
+  <values content="22834" key="//@keys.17"/>
+  <values content="3563" key="//@keys.18"/>
+  <values content="1381251838540" key="//@keys.19"/>
+  <values content="2586" key="//@keys.20"/>
+  <values content="2695" key="//@keys.21"/>
+  <values content="1381251892416" key="//@keys.22"/>
+  <values content="2616" key="//@keys.23"/>
+  <workUnits name="specifications" state="finished"/>
+  <workUnits name="development" state="finished"/>
+  <workUnits name="tests" state="finished"/>
+  <workUnits name="production" state="finished"/>
+  <underExecution workUnitHandleName="projects modification" onWhat="onEnd" primitiveACName="commit the modified projects" workUnitName="source code and build code delivery"/>
+</executioncontext:ExecutionContext>
